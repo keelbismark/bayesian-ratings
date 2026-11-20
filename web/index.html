@@ -40,13 +40,11 @@
         id="mainVideo"
         controls
         autoplay
-        loop
         playsinline
         poster="scene1.png"
         class="w-full h-full object-contain bg-black"
       >
         <source src="video.mp4" type="video/mp4" />
-        <source src="scene1_preview.mp4" type="video/mp4" />
         Ваш браузер не поддерживает встроенное видео.
       </video>
     </div>
@@ -57,13 +55,13 @@
       <a
         id="downloadVideoBtn"
         href="video.mp4"
-        download="bayesian_ratings_video.mp4"
+        download="bayesian_ratings_5min.mp4"
         class="inline-flex items-center gap-2.5 px-6 py-3.5 rounded-xl font-semibold text-sm bg-[#4EA8DE] text-[#0D1B2A] hover:bg-[#4EA8DE]/90 transition shadow-[0_0_25px_rgba(78,168,222,0.4)]"
       >
         <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
         </svg>
-        Скачать видео (MP4)
+        Скачать полное видео 5:00 (MP4, 50 MB)
       </a>
 
       <!-- Download Audio MP3 -->
@@ -76,18 +74,6 @@
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2z" />
         </svg>
         Скачать саундтрек (MP3)
-      </a>
-
-      <!-- Download 4K Frames -->
-      <a
-        href="scene1.png"
-        download="scene1_4k.png"
-        class="inline-flex items-center gap-2 px-5 py-3.5 rounded-xl font-medium text-sm bg-[#132238] hover:bg-[#1B2E4B] border border-white/15 text-slate-300 transition"
-      >
-        <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
-        </svg>
-        Скачать 4K кадр (PNG)
       </a>
     </div>
   </main>
@@ -105,16 +91,5 @@
       <span>Фураев Никита</span>
     </div>
   </footer>
-
-  <script>
-    // Fallback if video.mp4 is still rendering
-    const video = document.getElementById('mainVideo');
-    video.onerror = function() {
-      if (video.currentSrc.endsWith('video.mp4')) {
-        video.src = 'scene1_preview.mp4';
-        video.play();
-      }
-    };
-  </script>
 </body>
 </html>
