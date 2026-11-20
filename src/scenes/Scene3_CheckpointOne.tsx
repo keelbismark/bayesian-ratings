@@ -45,7 +45,7 @@ export const Scene3_CheckpointOne: React.FC = () => {
       {isPausedCheckpoint && (
         <WaitingFrame
           durationInFrames={150}
-          title="КОНТРОЛЬНАЯ ТОЧКА 1 // КАК ОБЪЕДИНИТЬ ПРОШЛЫЙ ОПЫТ И СВЕЖИЕ ДАННЫЕ?"
+          title="Контрольная точка 1: как объединить опыт и наблюдения?"
         />
       )}
 
@@ -64,8 +64,8 @@ export const Scene3_CheckpointOne: React.FC = () => {
       >
         {/* Top Header */}
         <div style={{ textAlign: 'center', marginBottom: 40 }}>
-          <div style={{ fontSize: 13, fontFamily: 'JetBrains Mono, monospace', color: THEME.colors.textMuted, letterSpacing: 2 }}>
-            SECTION 03 // THREE PILLARS OF BAYESIAN INFERENCE
+          <div style={{ fontSize: 13, color: THEME.colors.textSecondary, fontWeight: 500 }}>
+            Фундамент байесовского анализа
           </div>
           <div style={{ fontSize: 36, fontWeight: 700, color: THEME.colors.textPrimary, letterSpacing: -0.5, marginTop: 6 }}>
             Три шага байесовского обновления
@@ -101,17 +101,16 @@ export const Scene3_CheckpointOne: React.FC = () => {
               <span
                 style={{
                   fontSize: 12,
-                  fontFamily: 'JetBrains Mono, monospace',
                   padding: '4px 10px',
                   borderRadius: 4,
                   backgroundColor: 'rgba(255, 255, 255, 0.05)',
-                  color: THEME.colors.textMuted,
+                  color: THEME.colors.textSecondary,
                   fontWeight: 600,
                 }}
               >
-                ШАГ 01 // ПРЕДЫСТОРИЯ
+                Шаг 1: Априор
               </span>
-              <span style={{ fontSize: 13, fontFamily: 'JetBrains Mono, monospace', color: THEME.colors.textMuted }}>
+              <span style={{ fontSize: 13, fontFamily: 'JetBrains Mono, monospace', color: THEME.colors.textSecondary, fontWeight: 600 }}>
                 P(θ)
               </span>
             </div>
@@ -153,7 +152,6 @@ export const Scene3_CheckpointOne: React.FC = () => {
               <span
                 style={{
                   fontSize: 12,
-                  fontFamily: 'JetBrains Mono, monospace',
                   padding: '4px 10px',
                   borderRadius: 4,
                   backgroundColor: 'rgba(249, 115, 22, 0.1)',
@@ -161,9 +159,9 @@ export const Scene3_CheckpointOne: React.FC = () => {
                   fontWeight: 600,
                 }}
               >
-                ШАГ 02 // СВЕЖИЙ СИГНАЛ
+                Шаг 2: Правдоподобие
               </span>
-              <span style={{ fontSize: 13, fontFamily: 'JetBrains Mono, monospace', color: THEME.colors.amber }}>
+              <span style={{ fontSize: 13, fontFamily: 'JetBrains Mono, monospace', color: THEME.colors.amber, fontWeight: 600 }}>
                 P(D | θ)
               </span>
             </div>
@@ -207,7 +205,6 @@ export const Scene3_CheckpointOne: React.FC = () => {
               <span
                 style={{
                   fontSize: 12,
-                  fontFamily: 'JetBrains Mono, monospace',
                   padding: '4px 10px',
                   borderRadius: 4,
                   backgroundColor: 'rgba(56, 189, 248, 0.12)',
@@ -215,14 +212,14 @@ export const Scene3_CheckpointOne: React.FC = () => {
                   fontWeight: 600,
                 }}
               >
-                ШАГ 03 // ИТОГОВЫЙ ВЫВОД
+                Шаг 3: Апостериор
               </span>
-              <span style={{ fontSize: 13, fontFamily: 'JetBrains Mono, monospace', color: THEME.colors.cobalt }}>
+              <span style={{ fontSize: 13, fontFamily: 'JetBrains Mono, monospace', color: THEME.colors.cobalt, fontWeight: 600 }}>
                 P(θ | D)
               </span>
             </div>
             <div style={{ fontSize: 22, fontWeight: 700, color: THEME.colors.textPrimary, marginTop: 14 }}>
-              Апостериорная вероятность
+              Апостериорная оценка
             </div>
             <div style={{ fontSize: 14, color: THEME.colors.textSecondary, marginTop: 6, lineHeight: 1.4 }}>
               Обновлённая узкая кривая: неопределённость снизилась, рейтинг скорректирован с учётом данных.

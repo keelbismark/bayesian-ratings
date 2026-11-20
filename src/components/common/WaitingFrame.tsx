@@ -9,7 +9,7 @@ interface WaitingFrameProps {
 
 export const WaitingFrame: React.FC<WaitingFrameProps> = ({
   durationInFrames = 150,
-  title = 'ИНТЕРАКТИВНАЯ ПАУЗА ДЛЯ РАЗМЫШЛЕНИЯ',
+  title = 'Контрольная точка для осмысления',
 }) => {
   const frame = useCurrentFrame();
 
@@ -85,9 +85,8 @@ export const WaitingFrame: React.FC<WaitingFrameProps> = ({
           style={{
             fontSize: 14,
             fontWeight: 600,
-            letterSpacing: 2,
+            letterSpacing: 0.5,
             color: THEME.colors.textPrimary,
-            textTransform: 'uppercase',
           }}
         >
           {title}

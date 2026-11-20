@@ -70,8 +70,8 @@ export const Scene2_TwoTraps: React.FC = () => {
       >
         {/* Top Editorial Scene Header */}
         <div style={{ textAlign: 'center', marginBottom: 40 }}>
-          <div style={{ fontSize: 13, fontFamily: 'JetBrains Mono, monospace', color: THEME.colors.textMuted, letterSpacing: 2 }}>
-            SECTION 02 // METHODOLOGICAL DILEMMA
+          <div style={{ fontSize: 13, color: THEME.colors.textSecondary, fontWeight: 500 }}>
+            Методологическая дилемма
           </div>
           <div style={{ fontSize: 36, fontWeight: 700, color: THEME.colors.textPrimary, letterSpacing: -0.5, marginTop: 6 }}>
             Две ловушки оценки данных в прямом эфире
@@ -108,14 +108,13 @@ export const Scene2_TwoTraps: React.FC = () => {
                     borderRadius: 6,
                     backgroundColor: 'rgba(249, 115, 22, 0.12)',
                     color: THEME.colors.amber,
-                    fontFamily: 'JetBrains Mono, monospace',
                     fontSize: 13,
                     fontWeight: 600,
                   }}
                 >
-                  ЛОВУШКА 1: ПАНИКА НА ШУМЕ
+                  Ловушка 1: Паника на шуме
                 </span>
-                <span style={{ fontSize: 28, color: THEME.colors.amber, fontWeight: 800 }}>✗</span>
+                <span style={{ fontSize: 13, color: THEME.colors.amber, fontWeight: 600 }}>Ошибка гиперреакции</span>
               </div>
               <div style={{ fontSize: 24, fontWeight: 700, color: THEME.colors.textPrimary, marginTop: 16 }}>
                 Слепо верить первым 5 оценкам
@@ -146,12 +145,12 @@ export const Scene2_TwoTraps: React.FC = () => {
                 backgroundColor: 'rgba(249, 115, 22, 0.08)',
                 border: '1px solid rgba(249, 115, 22, 0.2)',
                 fontSize: 14,
-                fontFamily: 'JetBrains Mono, monospace',
                 color: THEME.colors.amber,
                 textAlign: 'center',
+                fontWeight: 500,
               }}
             >
-              РИСК: ЛОЖНЫЕ ТРЕВОГИ И РЕЗКИЕ СКАЧКИ
+              Риск: ложные тревоги и резкие скачки рейтинга
             </div>
           </div>
 
@@ -175,15 +174,14 @@ export const Scene2_TwoTraps: React.FC = () => {
                     padding: '6px 14px',
                     borderRadius: 6,
                     backgroundColor: 'rgba(255, 255, 255, 0.05)',
-                    color: THEME.colors.textMuted,
-                    fontFamily: 'JetBrains Mono, monospace',
+                    color: THEME.colors.textSecondary,
                     fontSize: 13,
                     fontWeight: 600,
                   }}
                 >
-                  ЛОВУШКА 2: ИНЕРЦИЯ И ЗАПОЗДАНИЕ
+                  Ловушка 2: Запоздание реакции
                 </span>
-                <span style={{ fontSize: 28, color: THEME.colors.textMuted, fontWeight: 800 }}>✗</span>
+                <span style={{ fontSize: 13, color: THEME.colors.textSecondary, fontWeight: 600 }}>Ошибка инерции</span>
               </div>
               <div style={{ fontSize: 24, fontWeight: 700, color: THEME.colors.textPrimary, marginTop: 16 }}>
                 Игнорировать свежие сигналы
@@ -221,12 +219,12 @@ export const Scene2_TwoTraps: React.FC = () => {
                 backgroundColor: 'rgba(255, 255, 255, 0.04)',
                 border: '1px solid rgba(255, 255, 255, 0.08)',
                 fontSize: 14,
-                fontFamily: 'JetBrains Mono, monospace',
-                color: THEME.colors.textMuted,
+                color: THEME.colors.textSecondary,
                 textAlign: 'center',
+                fontWeight: 500,
               }}
             >
-              РИСК: ЗАПОЗДАЛАЯ РЕАКЦИЯ И ПОТЕРЯ СИГНАЛА
+              Риск: потеря сигнала и запоздалая реакция
             </div>
           </div>
         </div>
@@ -264,14 +262,13 @@ export const Scene2_TwoTraps: React.FC = () => {
                 backgroundColor: 'rgba(56, 189, 248, 0.12)',
                 color: THEME.colors.cobalt,
                 fontSize: 12,
-                fontFamily: 'JetBrains Mono, monospace',
                 fontWeight: 600,
               }}
             >
-              РЕШЕНИЕ: БАЙЕСОВСКИЙ БАЛАНС
+              Байесовский баланс
             </span>
             <div style={{ fontSize: 24, fontWeight: 700, color: THEME.colors.textPrimary, marginTop: 8 }}>
-              Взвешивание: Априорный опыт + Поток данных
+              Взвешивание: накопленный опыт + текущие наблюдения
             </div>
           </div>
 
@@ -304,12 +301,13 @@ export const Scene2_TwoTraps: React.FC = () => {
                 borderRadius: 10,
                 backgroundColor: 'rgba(56, 189, 248, 0.08)',
                 border: '1px solid rgba(56, 189, 248, 0.25)',
-                fontFamily: 'JetBrains Mono, monospace',
+                fontFamily: 'Inter, system-ui, sans-serif',
                 fontSize: 14,
+                fontWeight: 600,
                 color: THEME.colors.cobalt,
               }}
             >
-              АПРИОРНЫЙ ВЕС (СТАРЫЙ)
+              Априорный вес (опыт)
             </div>
             <span style={{ fontSize: 24, color: THEME.colors.textMuted, fontWeight: 700 }}>+</span>
             <div
@@ -318,12 +316,13 @@ export const Scene2_TwoTraps: React.FC = () => {
                 borderRadius: 10,
                 backgroundColor: 'rgba(249, 115, 22, 0.08)',
                 border: '1px solid rgba(249, 115, 22, 0.25)',
-                fontFamily: 'JetBrains Mono, monospace',
+                fontFamily: 'Inter, system-ui, sans-serif',
                 fontSize: 14,
+                fontWeight: 600,
                 color: THEME.colors.amber,
               }}
             >
-              ТЕКУЩИЕ ДАННЫЕ (НОВЫЙ)
+              Текущие наблюдения (данные)
             </div>
           </div>
         </div>

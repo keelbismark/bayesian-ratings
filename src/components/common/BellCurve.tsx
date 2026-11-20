@@ -227,10 +227,9 @@ export const BellCurve: React.FC<BellCurveProps> = ({
             left: '50%',
             transform: 'translateX(-50%)',
             fontSize: 12,
-            fontFamily: 'JetBrains Mono, monospace',
+            fontFamily: 'Inter, system-ui, sans-serif',
             color: THEME.colors.textSecondary,
-            letterSpacing: 1,
-            textTransform: 'uppercase',
+            fontWeight: 500,
           }}
         >
           {label}

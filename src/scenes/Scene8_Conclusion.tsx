@@ -56,8 +56,8 @@ export const Scene8_Conclusion: React.FC = () => {
             }}
           >
             <div style={{ textAlign: 'center', marginBottom: 44 }}>
-              <div style={{ fontSize: 13, fontFamily: 'JetBrains Mono, monospace', color: THEME.colors.amber, letterSpacing: 2 }}>
-                SECTION 08 // PRODUCTION HARDENING
+              <div style={{ fontSize: 13, color: THEME.colors.amber, fontWeight: 500 }}>
+                Раздел 8 · Инженерные нюансы внедрения
               </div>
               <div style={{ fontSize: 36, fontWeight: 700, color: THEME.colors.textPrimary, letterSpacing: -0.5, marginTop: 6 }}>
                 Три предостережения при внедрении
@@ -73,8 +73,8 @@ export const Scene8_Conclusion: React.FC = () => {
               }}
             >
               <div style={{ padding: '36px 32px', borderRadius: 16, backgroundColor: 'rgba(21, 29, 46, 0.8)', border: '1px solid rgba(249, 115, 22, 0.3)' }}>
-                <span style={{ fontSize: 12, fontFamily: 'JetBrains Mono, monospace', color: THEME.colors.amber, fontWeight: 700 }}>
-                  РИСК 01
+                <span style={{ fontSize: 12, fontFamily: 'Inter, system-ui, sans-serif', color: THEME.colors.amber, fontWeight: 700 }}>
+                  Риск 1
                 </span>
                 <div style={{ fontSize: 20, fontWeight: 700, color: THEME.colors.textPrimary, marginTop: 12 }}>
                   Слишком жёсткий априор
@@ -85,8 +85,8 @@ export const Scene8_Conclusion: React.FC = () => {
               </div>
 
               <div style={{ padding: '36px 32px', borderRadius: 16, backgroundColor: 'rgba(21, 29, 46, 0.8)', border: '1px solid rgba(249, 115, 22, 0.3)' }}>
-                <span style={{ fontSize: 12, fontFamily: 'JetBrains Mono, monospace', color: THEME.colors.amber, fontWeight: 700 }}>
-                  РИСК 02
+                <span style={{ fontSize: 12, fontFamily: 'Inter, system-ui, sans-serif', color: THEME.colors.amber, fontWeight: 700 }}>
+                  Риск 2
                 </span>
                 <div style={{ fontSize: 20, fontWeight: 700, color: THEME.colors.textPrimary, marginTop: 12 }}>
                   Коррелированные боты
@@ -97,8 +97,8 @@ export const Scene8_Conclusion: React.FC = () => {
               </div>
 
               <div style={{ padding: '36px 32px', borderRadius: 16, backgroundColor: 'rgba(21, 29, 46, 0.8)', border: '1px solid rgba(249, 115, 22, 0.3)' }}>
-                <span style={{ fontSize: 12, fontFamily: 'JetBrains Mono, monospace', color: THEME.colors.amber, fontWeight: 700 }}>
-                  РИСК 03
+                <span style={{ fontSize: 12, fontFamily: 'Inter, system-ui, sans-serif', color: THEME.colors.amber, fontWeight: 700 }}>
+                  Риск 3
                 </span>
                 <div style={{ fontSize: 20, fontWeight: 700, color: THEME.colors.textPrimary, marginTop: 12 }}>
                   Сдвиг тренда стрима
@@ -131,13 +131,13 @@ export const Scene8_Conclusion: React.FC = () => {
                 backgroundColor: 'rgba(56, 189, 248, 0.1)',
                 border: '1px solid rgba(56, 189, 248, 0.3)',
                 fontSize: 13,
-                fontFamily: 'JetBrains Mono, monospace',
+                fontFamily: 'Inter, system-ui, sans-serif',
+                fontWeight: 600,
                 color: THEME.colors.cobalt,
-                letterSpacing: 2,
                 marginBottom: 20,
               }}
             >
-              SUMMARY // ЗАКЛЮЧЕНИЕ
+              Итог исследования
             </div>
 
             <div style={{ fontSize: 44, fontWeight: 800, color: THEME.colors.textPrimary, letterSpacing: -1, maxWidth: 1400, lineHeight: 1.25 }}>
@@ -170,8 +170,8 @@ export const Scene8_Conclusion: React.FC = () => {
                 maxWidth: 1200,
               }}
             >
-              <div style={{ fontSize: 12, fontFamily: 'JetBrains Mono, monospace', color: THEME.colors.textMuted, letterSpacing: 2 }}>
-                НАД ПРОЕКТОМ РАБОТАЛИ
+              <div style={{ fontSize: 13, color: THEME.colors.textSecondary, fontWeight: 500 }}>
+                Авторы исследования
               </div>
               <div style={{ display: 'flex', justifyContent: 'center', gap: 32, marginTop: 14, flexWrap: 'wrap' }}>
                 {authors.map((auth, idx) => (

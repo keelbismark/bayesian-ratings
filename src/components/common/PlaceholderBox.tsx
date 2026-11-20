@@ -1,5 +1,4 @@
 import React from 'react';
-import { THEME } from '../../theme';
 
 interface PlaceholderBoxProps {
   width: number | string;

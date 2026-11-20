@@ -43,7 +43,7 @@ export const Scene7_CheckpointThree: React.FC = () => {
       {isPausedCheckpoint && (
         <WaitingFrame
           durationInFrames={150}
-          title="КОНТРОЛЬНАЯ ТОЧКА 3 // ЧТО ВИДИТ ЗРИТЕЛЬ: ДИКИЕ СКАЧКИ ИЛИ СТАБИЛЬНЫЙ РЕЙТИНГ?"
+          title="Контрольная точка 3: что видит зритель — скачки или устойчивый рейтинг?"
         />
       )}
 
@@ -61,8 +61,8 @@ export const Scene7_CheckpointThree: React.FC = () => {
       >
         {/* Top Header */}
         <div style={{ textAlign: 'center', marginBottom: 36 }}>
-          <div style={{ fontSize: 13, fontFamily: 'JetBrains Mono, monospace', color: THEME.colors.textMuted, letterSpacing: 2 }}>
-            SECTION 07 // EMPIRICAL PRODUCTION BENCHMARK
+          <div style={{ fontSize: 13, color: THEME.colors.textSecondary, fontWeight: 500 }}>
+            Раздел 7 · Практическое сравнение алгоритмов
           </div>
           <div style={{ fontSize: 36, fontWeight: 700, color: THEME.colors.textPrimary, letterSpacing: -0.5, marginTop: 6 }}>
             Практический результат на реальном эфире
@@ -83,22 +83,22 @@ export const Scene7_CheckpointThree: React.FC = () => {
         >
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 20 }}>
             <div>
-              <div style={{ fontSize: 13, fontFamily: 'JetBrains Mono, monospace', color: THEME.colors.textMuted }}>
-                LIVE COMPARISON DUAL-TRACK (40 MIN BROADCAST)
+              <div style={{ fontSize: 13, color: THEME.colors.textSecondary, fontWeight: 500 }}>
+                Сравнение алгоритмов на 40-минутной трансляции
               </div>
               <div style={{ fontSize: 22, fontWeight: 700, color: THEME.colors.textPrimary, marginTop: 4 }}>
-                Сырое среднее (оранжевый) против Байесовской оценки (синий)
+                Сырое среднее против байесовской оценки
               </div>
             </div>
 
             <div style={{ display: 'flex', gap: 24 }}>
-              <div style={{ display: 'flex', alignItems: 'center', gap: 8, fontSize: 13, color: THEME.colors.amber, fontFamily: 'JetBrains Mono, monospace' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: 8, fontSize: 13, color: THEME.colors.amber, fontWeight: 600 }}>
                 <span style={{ width: 14, height: 3, backgroundColor: THEME.colors.amber }} />
-                СЫРОЕ СРЕДНЕЕ (ДИКИЕ СКАЧКИ)
+                Сырое среднее (шум и скачки)
               </div>
-              <div style={{ display: 'flex', alignItems: 'center', gap: 8, fontSize: 13, color: THEME.colors.cobalt, fontFamily: 'JetBrains Mono, monospace' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: 8, fontSize: 13, color: THEME.colors.cobalt, fontWeight: 600 }}>
                 <span style={{ width: 14, height: 3, backgroundColor: THEME.colors.cobalt }} />
-                БАЙЕСОВСКИЙ РЕЙТИНГ (СТАБИЛЬНЫЙ)
+                Байесовский рейтинг (устойчивая оценка)
               </div>
             </div>
           </div>

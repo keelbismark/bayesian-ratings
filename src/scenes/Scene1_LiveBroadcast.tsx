@@ -2,7 +2,6 @@ import React, { useMemo } from 'react';
 import { interpolate, useCurrentFrame, Easing } from 'remotion';
 import { THEME } from '../theme';
 import { BackgroundGrid } from '../components/common/BackgroundGrid';
-import { PlaceholderBox } from '../components/common/PlaceholderBox';
 
 export const Scene1_LiveBroadcast: React.FC = () => {
   const frame = useCurrentFrame();
@@ -135,12 +134,11 @@ export const Scene1_LiveBroadcast: React.FC = () => {
             <div
               style={{
                 fontSize: 14,
-                fontFamily: 'JetBrains Mono, monospace',
-                color: THEME.colors.textMuted,
-                letterSpacing: 1,
+                fontFamily: 'Inter, system-ui, sans-serif',
+                color: THEME.colors.textSecondary,
               }}
             >
-              STREAM TELEMETRY // TIMECODE: <span style={{ color: THEME.colors.cobalt }}>{timecode}</span>
+              Время эфира: <span style={{ color: THEME.colors.cobalt, fontFamily: 'JetBrains Mono, monospace', fontWeight: 600 }}>{timecode}</span>
             </div>
           </div>
 
@@ -153,11 +151,11 @@ export const Scene1_LiveBroadcast: React.FC = () => {
                 backgroundColor: 'rgba(255, 255, 255, 0.03)',
                 border: '1px solid rgba(255, 255, 255, 0.06)',
                 fontSize: 13,
-                fontFamily: 'JetBrains Mono, monospace',
+                fontFamily: 'Inter, system-ui, sans-serif',
                 color: THEME.colors.textSecondary,
               }}
             >
-              METRICS: <span style={{ color: THEME.colors.textPrimary }}>REAL-TIME VOTE INGEST</span>
+              Входящие оценки: <span style={{ color: THEME.colors.textPrimary, fontWeight: 600 }}>прямой поток</span>
             </div>
             <div
               style={{
@@ -166,11 +164,12 @@ export const Scene1_LiveBroadcast: React.FC = () => {
                 backgroundColor: 'rgba(56, 189, 248, 0.08)',
                 border: '1px solid rgba(56, 189, 248, 0.2)',
                 fontSize: 13,
-                fontFamily: 'JetBrains Mono, monospace',
+                fontFamily: 'Inter, system-ui, sans-serif',
+                fontWeight: 600,
                 color: THEME.colors.cobalt,
               }}
             >
-              MODEL: BAYESIAN UPDATER
+              Модель: фильтр Байеса
             </div>
           </div>
         </div>
@@ -188,11 +187,11 @@ export const Scene1_LiveBroadcast: React.FC = () => {
         >
           {/* Main Visual Heading (Editorial) */}
           <div style={{ position: 'absolute', top: 10, left: 10, zIndex: 5 }}>
-            <div style={{ fontSize: 13, fontFamily: 'JetBrains Mono, monospace', color: THEME.colors.textMuted, letterSpacing: 2 }}>
-              RATINGS CONVERGENCE TRAJECTORY
-            </div>
-            <div style={{ fontSize: 32, fontWeight: 700, color: THEME.colors.textPrimary, letterSpacing: -0.5, marginTop: 4 }}>
+            <div style={{ fontSize: 32, fontWeight: 700, color: THEME.colors.textPrimary, letterSpacing: -0.5 }}>
               Оценка рейтинга в прямом эфире
+            </div>
+            <div style={{ fontSize: 14, color: THEME.colors.textSecondary, marginTop: 4 }}>
+              Сглаживание случайных выбросов зрительского голосования
             </div>
           </div>
 
@@ -269,15 +268,15 @@ export const Scene1_LiveBroadcast: React.FC = () => {
                 border: '1px solid rgba(255, 255, 255, 0.08)',
               }}
             >
-              <div style={{ fontSize: 13, fontFamily: 'JetBrains Mono, monospace', color: THEME.colors.textMuted }}>
-                RAW SAMPLE MEAN // ВЫБОРКА
+              <div style={{ fontSize: 13, color: THEME.colors.textSecondary, fontWeight: 500 }}>
+                Сырая средняя оценка
               </div>
               <div style={{ display: 'flex', alignItems: 'baseline', gap: 12, marginTop: 8 }}>
                 <span style={{ fontSize: 44, fontWeight: 700, color: THEME.colors.textPrimary, fontFamily: 'Inter, sans-serif' }}>
                   ★ 4.85
                 </span>
-                <span style={{ fontSize: 14, color: THEME.colors.amber, fontFamily: 'JetBrains Mono, monospace' }}>
-                  [ВЫСОКИЙ ШУМ]
+                <span style={{ fontSize: 13, color: THEME.colors.amber, fontWeight: 600 }}>
+                  Высокий шум
                 </span>
               </div>
               <div style={{ width: '100%', height: 4, borderRadius: 2, backgroundColor: 'rgba(255,255,255,0.06)', marginTop: 14 }}>
@@ -295,15 +294,15 @@ export const Scene1_LiveBroadcast: React.FC = () => {
                 border: '1px solid rgba(255, 255, 255, 0.08)',
               }}
             >
-              <div style={{ fontSize: 13, fontFamily: 'JetBrains Mono, monospace', color: THEME.colors.textMuted }}>
-                INCOMING VOTES // ЧИСЛО ГОЛОСОВ
+              <div style={{ fontSize: 13, color: THEME.colors.textSecondary, fontWeight: 500 }}>
+                Число голосов
               </div>
               <div style={{ display: 'flex', alignItems: 'baseline', gap: 12, marginTop: 8 }}>
                 <span style={{ fontSize: 44, fontWeight: 700, color: THEME.colors.textPrimary, fontFamily: 'JetBrains Mono, monospace' }}>
                   {Math.floor(curveProgress * 3420)}
                 </span>
-                <span style={{ fontSize: 14, color: THEME.colors.textSecondary, fontFamily: 'JetBrains Mono, monospace' }}>
-                  голосов
+                <span style={{ fontSize: 14, color: THEME.colors.textSecondary }}>
+                  оценок
                 </span>
               </div>
               <div style={{ width: '100%', height: 4, borderRadius: 2, backgroundColor: 'rgba(255,255,255,0.06)', marginTop: 14 }}>
@@ -321,8 +320,8 @@ export const Scene1_LiveBroadcast: React.FC = () => {
                 border: '1px solid rgba(56, 189, 248, 0.3)',
               }}
             >
-              <div style={{ fontSize: 13, fontFamily: 'JetBrains Mono, monospace', color: THEME.colors.cobalt }}>
-                BAYESIAN ESTIMATE // ИСТИННЫЙ РЕЙТИНГ
+              <div style={{ fontSize: 13, color: THEME.colors.cobalt, fontWeight: 600 }}>
+                Байесовская оценка
               </div>
               <div style={{ display: 'flex', alignItems: 'baseline', gap: 12, marginTop: 8 }}>
                 <span style={{ fontSize: 44, fontWeight: 700, color: THEME.colors.cobalt, fontFamily: 'Inter, sans-serif' }}>
@@ -347,13 +346,13 @@ export const Scene1_LiveBroadcast: React.FC = () => {
               justifyContent: 'space-between',
               marginBottom: 8,
               fontSize: 12,
-              fontFamily: 'JetBrains Mono, monospace',
-              color: THEME.colors.textMuted,
+              fontFamily: 'Inter, system-ui, sans-serif',
+              color: THEME.colors.textSecondary,
             }}
           >
-            <span>START 00:00</span>
-            <span>LIVE SESSION PROGRESS: {Math.round(timelineProgress * 100)}%</span>
-            <span>END 05:00</span>
+            <span>00:00</span>
+            <span>Прогресс эфира: {Math.round(timelineProgress * 100)}%</span>
+            <span>05:00</span>
           </div>
           <div
             style={{

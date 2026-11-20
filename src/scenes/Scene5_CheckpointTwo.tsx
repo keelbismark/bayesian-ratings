@@ -32,7 +32,7 @@ export const Scene5_CheckpointTwo: React.FC = () => {
       {isPausedCheckpoint && (
         <WaitingFrame
           durationInFrames={150}
-          title="КОНТРОЛЬНАЯ ТОЧКА 2 // СКОЛЬКО ГОЛОСОВ НУЖНО, ЧТОБЫ ПЕРЕВЕСИТЬ АПРИОРНЫЙ ОПЫТ?"
+          title="Контрольная точка 2: сколько голосов нужно, чтобы перевесить априорный опыт?"
         />
       )}
 
@@ -50,8 +50,8 @@ export const Scene5_CheckpointTwo: React.FC = () => {
       >
         {/* Top Header */}
         <div style={{ textAlign: 'center', marginBottom: 40 }}>
-          <div style={{ fontSize: 13, fontFamily: 'JetBrains Mono, monospace', color: THEME.colors.textMuted, letterSpacing: 2 }}>
-            SECTION 05 // EVIDENCE WEIGHT & SAMPLE SCALE
+          <div style={{ fontSize: 13, color: THEME.colors.textSecondary, fontWeight: 500 }}>
+            Раздел 5 · Масштаб выборки и вес данных
           </div>
           <div style={{ fontSize: 36, fontWeight: 700, color: THEME.colors.textPrimary, letterSpacing: -0.5, marginTop: 6 }}>
             Автоматическое взвешивание объёма данных
@@ -86,7 +86,7 @@ export const Scene5_CheckpointTwo: React.FC = () => {
               <span
                 style={{
                   fontSize: 12,
-                  fontFamily: 'JetBrains Mono, monospace',
+                  fontFamily: 'Inter, system-ui, sans-serif',
                   padding: '4px 10px',
                   borderRadius: 4,
                   backgroundColor: 'rgba(249, 115, 22, 0.1)',
@@ -94,10 +94,10 @@ export const Scene5_CheckpointTwo: React.FC = () => {
                   fontWeight: 600,
                 }}
               >
-                СЦЕНАРИЙ А // МАЛАЯ ВЫБОРКА
+                Сценарий А: малая выборка
               </span>
               <span style={{ fontSize: 14, fontFamily: 'JetBrains Mono, monospace', color: THEME.colors.amber, fontWeight: 700 }}>
-                N = 10 ГОЛОСОВ
+                N = 10 голосов
               </span>
             </div>
 
@@ -117,7 +117,7 @@ export const Scene5_CheckpointTwo: React.FC = () => {
                 color={THEME.colors.amber}
                 priorOutline={{ mean: 0.5, stdDev: 0.22 }}
                 showConfidenceInterval
-                label="Широкий доверительный интервал // Вес данных мал"
+                label="Широкий интервал: вес данных мал"
               />
             </div>
           </div>
@@ -138,7 +138,7 @@ export const Scene5_CheckpointTwo: React.FC = () => {
               <span
                 style={{
                   fontSize: 12,
-                  fontFamily: 'JetBrains Mono, monospace',
+                  fontFamily: 'Inter, system-ui, sans-serif',
                   padding: '4px 10px',
                   borderRadius: 4,
                   backgroundColor: 'rgba(56, 189, 248, 0.12)',
@@ -146,10 +146,10 @@ export const Scene5_CheckpointTwo: React.FC = () => {
                   fontWeight: 600,
                 }}
               >
-                СЦЕНАРИЙ Б // МАССОВЫЙ ЭФИР
+                Сценарий Б: массовый эфир
               </span>
               <span style={{ fontSize: 14, fontFamily: 'JetBrains Mono, monospace', color: THEME.colors.cobalt, fontWeight: 700 }}>
-                N = 10 000 ГОЛОСОВ
+                N = 10 000 голосов
               </span>
             </div>
 
@@ -169,7 +169,7 @@ export const Scene5_CheckpointTwo: React.FC = () => {
                 color={THEME.colors.cobalt}
                 priorOutline={{ mean: 0.5, stdDev: 0.22 }}
                 showConfidenceInterval
-                label="Узкий доверительный интервал // Максимальная точность"
+                label="Узкий интервал: высокая точность"
               />
             </div>
           </div>

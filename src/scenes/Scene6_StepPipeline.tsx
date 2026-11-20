@@ -16,10 +16,10 @@ export const Scene6_StepPipeline: React.FC = () => {
   const currentMean = 0.48 + (cycleCount * 0.03) + (cycleFrame / 300) * 0.03;
 
   const stages = [
-    { num: '01', title: 'ИНИЦИАЛИЗАЦИЯ', desc: 'Загрузка априорного профиля стрима' },
-    { num: '02', title: 'ОКНО НАБЛЮДЕНИЙ', desc: 'Батч входящих оценок за последние 30 сек' },
-    { num: '03', title: 'БАЙЕСОВСКИЙ РАСЧЕТ', desc: 'Аналитическое обновление формулы Гаусса' },
-    { num: '04', title: 'ВЫДАЧА В ЭФИР', desc: 'Публикация сглаженного рейтинга в плеер' },
+    { num: '01', title: 'Инициализация', desc: 'Загрузка априорного профиля стрима' },
+    { num: '02', title: 'Окно наблюдений', desc: 'Батч входящих оценок за последние 30 сек' },
+    { num: '03', title: 'Байесовский расчет', desc: 'Аналитическое обновление формулы Гаусса' },
+    { num: '04', title: 'Выдача в эфир', desc: 'Публикация сглаженного рейтинга в плеер' },
   ];
 
   return (
@@ -47,8 +47,8 @@ export const Scene6_StepPipeline: React.FC = () => {
       >
         {/* Top Header */}
         <div style={{ textAlign: 'center', marginBottom: 40 }}>
-          <div style={{ fontSize: 13, fontFamily: 'JetBrains Mono, monospace', color: THEME.colors.textMuted, letterSpacing: 2 }}>
-            SECTION 06 // CONTINUOUS EXECUTION PIPELINE
+          <div style={{ fontSize: 13, color: THEME.colors.textSecondary, fontWeight: 500 }}>
+            Раздел 6 · Непрерывный конвейер вычислений
           </div>
           <div style={{ fontSize: 36, fontWeight: 700, color: THEME.colors.textPrimary, letterSpacing: -0.5, marginTop: 6 }}>
             Пошаговый конвейер обновления в реальном времени
@@ -84,16 +84,16 @@ export const Scene6_StepPipeline: React.FC = () => {
                   <span
                     style={{
                       fontSize: 12,
-                      fontFamily: 'JetBrains Mono, monospace',
+                      fontFamily: 'Inter, system-ui, sans-serif',
                       color: isActive ? THEME.colors.cobalt : THEME.colors.textMuted,
                       fontWeight: 700,
                     }}
                   >
-                    ЭТАП {st.num}
+                    Этап {st.num}
                   </span>
                   {isActive && (
-                    <span style={{ fontSize: 11, fontFamily: 'JetBrains Mono, monospace', color: THEME.colors.cobalt, padding: '2px 8px', borderRadius: 4, backgroundColor: 'rgba(56, 189, 248, 0.15)' }}>
-                      В ПРОЦЕССЕ
+                    <span style={{ fontSize: 11, fontFamily: 'Inter, system-ui, sans-serif', color: THEME.colors.cobalt, padding: '2px 8px', borderRadius: 4, backgroundColor: 'rgba(56, 189, 248, 0.15)', fontWeight: 600 }}>
+                      Выполняется
                     </span>
                   )}
                 </div>
@@ -124,8 +124,8 @@ export const Scene6_StepPipeline: React.FC = () => {
           }}
         >
           <div>
-            <div style={{ fontSize: 12, fontFamily: 'JetBrains Mono, monospace', color: THEME.colors.cobalt }}>
-              ITERATIVE CONVERGENCE SIMULATION // ИТЕРАЦИЯ #{cycleCount + 1}
+            <div style={{ fontSize: 12, color: THEME.colors.cobalt, fontWeight: 600 }}>
+              Итеративная сходимость · Цикл #{cycleCount + 1}
             </div>
             <div style={{ fontSize: 24, fontWeight: 700, color: THEME.colors.textPrimary, marginTop: 6 }}>
               С каждым циклом дисперсия уменьшается
