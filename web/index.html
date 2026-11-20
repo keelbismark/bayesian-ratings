@@ -41,40 +41,48 @@
         controls
         autoplay
         playsinline
+        preload="auto"
         poster="scene1.png"
         class="w-full h-full object-contain bg-black"
       >
-        <source src="video.mp4" type="video/mp4" />
+        <source src="bayesian_5min.mp4?v=final5min" type="video/mp4" />
+        <source src="video.mp4?v=final5min" type="video/mp4" />
         Ваш браузер не поддерживает встроенное видео.
       </video>
     </div>
 
-    <!-- DOWNLOAD BUTTONS -->
-    <div class="w-full flex flex-wrap items-center justify-center gap-4 pt-2">
-      <!-- Download Video MP4 -->
-      <a
-        id="downloadVideoBtn"
-        href="video.mp4"
-        download="bayesian_ratings_5min.mp4"
-        class="inline-flex items-center gap-2.5 px-6 py-3.5 rounded-xl font-semibold text-sm bg-[#4EA8DE] text-[#0D1B2A] hover:bg-[#4EA8DE]/90 transition shadow-[0_0_25px_rgba(78,168,222,0.4)]"
-      >
-        <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
-        </svg>
-        Скачать полное видео 5:00 (MP4, 50 MB)
-      </a>
+    <!-- STATUS & DOWNLOAD BUTTONS -->
+    <div class="w-full flex flex-col items-center gap-3 pt-2">
+      <div id="videoInfo" class="text-xs font-mono text-slate-300 bg-[#132238] px-3.5 py-1.5 rounded-lg border border-[#4EA8DE]/30">
+        ⏱ Хронометраж: <span id="durationDisplay" class="text-[#4EA8DE] font-semibold">05:00 мин</span> (9000 кадров • 30 fps)
+      </div>
 
-      <!-- Download Audio MP3 -->
-      <a
-        href="ambient.mp3"
-        download="bayesian_ambient_soundtrack.mp3"
-        class="inline-flex items-center gap-2 px-5 py-3.5 rounded-xl font-medium text-sm bg-[#132238] hover:bg-[#1B2E4B] border border-[#FF7B54]/40 text-[#FF7B54] transition"
-      >
-        <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2z" />
-        </svg>
-        Скачать саундтрек (MP3)
-      </a>
+      <div class="flex flex-wrap items-center justify-center gap-4">
+        <!-- Download Video MP4 -->
+        <a
+          id="downloadVideoBtn"
+          href="bayesian_5min.mp4?v=final5min"
+          download="bayesian_ratings_5min.mp4"
+          class="inline-flex items-center gap-2.5 px-6 py-3.5 rounded-xl font-semibold text-sm bg-[#4EA8DE] text-[#0D1B2A] hover:bg-[#4EA8DE]/90 transition shadow-[0_0_25px_rgba(78,168,222,0.4)]"
+        >
+          <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+          </svg>
+          Скачать полное видео 5:00 (MP4, 50 MB)
+        </a>
+
+        <!-- Download Audio MP3 -->
+        <a
+          href="ambient.mp3"
+          download="bayesian_ambient_soundtrack.mp3"
+          class="inline-flex items-center gap-2 px-5 py-3.5 rounded-xl font-medium text-sm bg-[#132238] hover:bg-[#1B2E4B] border border-[#FF7B54]/40 text-[#FF7B54] transition"
+        >
+          <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2z" />
+          </svg>
+          Скачать саундтрек (MP3)
+        </a>
+      </div>
     </div>
   </main>
 
@@ -91,5 +99,17 @@
       <span>Фураев Никита</span>
     </div>
   </footer>
+
+  <script>
+    const v = document.getElementById('mainVideo');
+    const d = document.getElementById('durationDisplay');
+    v.addEventListener('loadedmetadata', () => {
+      if (v.duration && !isNaN(v.duration)) {
+        const mins = Math.floor(v.duration / 60);
+        const secs = Math.floor(v.duration % 60);
+        d.textContent = `${String(mins).padStart(2, '0')}:${String(secs).padStart(2, '0')} мин (${Math.round(v.duration)} сек)`;
+      }
+    });
+  </script>
 </body>
 </html>

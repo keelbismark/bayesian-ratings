@@ -11,10 +11,15 @@ RUN echo 'server { \
     index index.html; \
     client_max_body_size 100M; \
     location / { \
+        add_header Cache-Control "no-cache, must-revalidate"; \
         try_files $uri $uri/ /index.html; \
     } \
-    location ~* \.(mp4|mp3|png|jpg|jpeg|gif|svg|ico)$ { \
-        expires 7d; \
+    location ~* \.(mp4|mp3)$ { \
+        add_header Cache-Control "no-cache, must-revalidate"; \
+        add_header Accept-Ranges bytes; \
+    } \
+    location ~* \.(png|jpg|jpeg|gif|svg|ico)$ { \
+        expires 1d; \
         add_header Cache-Control "public, no-transform"; \
     } \
 }' > /etc/nginx/conf.d/default.conf
