@@ -10,8 +10,8 @@ export const Scene5_CheckpointTwo: React.FC = () => {
 
   const isPausedCheckpoint = frame < 150;
 
-  // Comparison animation progression
-  const comparisonEntrance = interpolate(frame, [150, 210], [0, 1], {
+  // Comparison animation entrance
+  const comparisonEntrance = interpolate(frame, [150, 200], [0, 1], {
     extrapolateLeft: 'clamp',
     extrapolateRight: 'clamp',
     easing: Easing.bezier(0.16, 1, 0.3, 1),
@@ -24,6 +24,8 @@ export const Scene5_CheckpointTwo: React.FC = () => {
         inset: 0,
         backgroundColor: THEME.colors.bg,
         overflow: 'hidden',
+        width: 1920,
+        height: 1080,
       }}
     >
       <BackgroundGrid intensity={1} />
@@ -33,149 +35,277 @@ export const Scene5_CheckpointTwo: React.FC = () => {
         <WaitingFrame
           durationInFrames={150}
           title="Контрольная точка 2: сколько голосов нужно, чтобы перевесить априорный опыт?"
+          subtitle="Подумайте, нужен ли искусственный порог или математика регулирует баланс сама"
         />
       )}
 
+      {/* UNBOXED COMPARISON CANVAS */}
       <div
         style={{
           position: 'absolute',
           inset: 0,
           display: 'flex',
           flexDirection: 'column',
-          alignItems: 'center',
-          justifyContent: 'center',
-          padding: '40px 60px',
+          justifyContent: 'space-between',
+          padding: '48px 80px 40px 80px',
           boxSizing: 'border-box',
-          width: 1920,
-          height: 1080,
-          overflow: 'hidden',
         }}
       >
-        {/* Top Header */}
-        <div style={{ textAlign: 'center', marginBottom: 32 }}>
-          <div style={{ fontSize: 13, color: THEME.colors.textSecondary, fontWeight: 500 }}>
-            Раздел 5 · Масштаб выборки и вес данных
+        {/* MASTHEAD HEADER */}
+        <header
+          style={{
+            display: 'flex',
+            justifyContent: 'space-between',
+            alignItems: 'flex-start',
+            borderBottom: `1px solid ${THEME.colors.border}`,
+            paddingBottom: 20,
+          }}
+        >
+          <div>
+            <div
+              style={{
+                fontSize: 12,
+                fontFamily: 'Inter, system-ui, sans-serif',
+                fontWeight: 600,
+                letterSpacing: 2,
+                textTransform: 'uppercase',
+                color: THEME.colors.cobalt,
+                marginBottom: 8,
+              }}
+            >
+              05 / МАСШТАБ ВЫБОРКИ · САМОРЕГУЛЯЦИЯ БАЙЕСА
+            </div>
+            <h1
+              style={{
+                fontSize: 34,
+                fontWeight: 700,
+                color: THEME.colors.textPrimary,
+                letterSpacing: -0.8,
+                margin: 0,
+                lineHeight: 1.2,
+                fontFamily: 'Inter, system-ui, sans-serif',
+              }}
+            >
+              Автоматическое взвешивание объёма данных
+            </h1>
+            <p
+              style={{
+                fontSize: 15,
+                color: THEME.colors.textSecondary,
+                margin: '6px 0 0 0',
+                fontFamily: 'Inter, system-ui, sans-serif',
+              }}
+            >
+              Плавный самонастраивающийся переход от защиты от шума к полной демократии данных
+            </p>
           </div>
-          <div style={{ fontSize: 34, fontWeight: 700, color: THEME.colors.textPrimary, letterSpacing: -0.5, marginTop: 6 }}>
-            Автоматическое взвешивание объёма данных
-          </div>
-        </div>
 
-        {/* 2 Scenarios Split Screen: N = 10 vs N = 10,000 */}
+          <div
+            style={{
+              padding: '6px 16px',
+              borderRadius: 6,
+              border: `1px solid ${THEME.colors.border}`,
+              fontSize: 12,
+              fontFamily: 'JetBrains Mono, monospace',
+              color: THEME.colors.textMuted,
+            }}
+          >
+            N = 10 vs N = 10 000
+          </div>
+        </header>
+
+        {/* 2 OPEN COLUMNS COMPARISON (UNBOXED) */}
         <div
           style={{
             opacity: comparisonEntrance,
             transform: `translateY(${(1 - comparisonEntrance) * 20}px)`,
-            width: '100%',
-            maxWidth: 1760,
+            flex: 1,
             display: 'grid',
             gridTemplateColumns: '1fr 1fr',
-            gap: 36,
+            gap: 80,
+            alignItems: 'center',
+            position: 'relative',
+            margin: '20px 0',
           }}
         >
-          {/* SCENARIO A: SMALL SAMPLE N = 10 */}
+          {/* Vertical Divider Line */}
           <div
             style={{
-              borderRadius: 18,
-              backgroundColor: 'rgba(21, 29, 46, 0.8)',
-              border: '1px solid rgba(249, 115, 22, 0.3)',
-              padding: '28px 32px',
-              display: 'flex',
-              flexDirection: 'column',
-              boxShadow: '0 20px 40px rgba(0,0,0,0.4)',
+              position: 'absolute',
+              top: '5%',
+              bottom: '5%',
+              left: '50%',
+              width: 1,
+              backgroundColor: THEME.colors.border,
             }}
-          >
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-              <span
+          />
+
+          {/* SCENARIO A: SMALL SAMPLE N = 10 */}
+          <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between', height: '100%', paddingRight: 20 }}>
+            <div>
+              <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+                <span
+                  style={{
+                    fontSize: 12,
+                    fontWeight: 700,
+                    letterSpacing: 1.5,
+                    textTransform: 'uppercase',
+                    color: THEME.colors.amber,
+                    fontFamily: 'Inter, system-ui, sans-serif',
+                  }}
+                >
+                  Сценарий А · Малая выборка
+                </span>
+                <span style={{ fontSize: 13, color: THEME.colors.textMuted, fontFamily: 'JetBrains Mono, monospace' }}>
+                  N = 10
+                </span>
+              </div>
+              <h2
                 style={{
-                  fontSize: 12,
+                  fontSize: 24,
+                  fontWeight: 700,
+                  color: THEME.colors.textPrimary,
+                  marginTop: 10,
                   fontFamily: 'Inter, system-ui, sans-serif',
-                  padding: '4px 10px',
-                  borderRadius: 4,
-                  backgroundColor: 'rgba(249, 115, 22, 0.1)',
-                  color: THEME.colors.amber,
-                  fontWeight: 600,
+                  letterSpacing: -0.5,
                 }}
               >
-                Сценарий А: малая выборка
-              </span>
-              <span style={{ fontSize: 14, fontFamily: 'JetBrains Mono, monospace', color: THEME.colors.amber, fontWeight: 700 }}>
-                N = 10 голосов
-              </span>
+                Априор удерживает центр тяжести
+              </h2>
+              <p
+                style={{
+                  fontSize: 14,
+                  color: THEME.colors.textSecondary,
+                  lineHeight: 1.5,
+                  marginTop: 6,
+                  fontFamily: 'Inter, system-ui, sans-serif',
+                }}
+              >
+                10 случайных оценок не могут разрушить исторический ориентир. Рейтинг смещается аккуратно, оберегая зрителей от волатильности.
+              </p>
             </div>
 
-            <div style={{ fontSize: 20, fontWeight: 700, color: THEME.colors.textPrimary, marginTop: 14 }}>
-              Доминирует априорная оценка (85%)
-            </div>
-            <div style={{ fontSize: 14, color: THEME.colors.textSecondary, marginTop: 6, lineHeight: 1.5 }}>
-              Случайные 10 оценок не могут разрушить репутацию трансляции. Система страхует от локального троллинга и скачков.
-            </div>
-
-            <div style={{ marginTop: 20, display: 'flex', justifyContent: 'center' }}>
+            <div style={{ width: '100%', height: 260 }}>
               <BellCurve
-                width={680}
-                height={210}
-                mean={0.52}
-                stdDev={0.21}
+                width={700}
+                height={260}
+                mean={0.44}
+                stdDev={0.18}
                 color={THEME.colors.amber}
-                priorOutline={{ mean: 0.5, stdDev: 0.22 }}
-                showConfidenceInterval
-                label="Широкий интервал: вес данных мал"
+                priorOutline={{ mean: 0.40, stdDev: 0.22 }}
+                showConfidenceInterval={true}
+                label="Апостериор (μ = 4.12) привязан к априору (μ₀ = 4.0)"
               />
+            </div>
+
+            <div
+              style={{
+                display: 'flex',
+                justifyContent: 'space-between',
+                borderTop: `1px solid ${THEME.colors.borderSubtle}`,
+                paddingTop: 12,
+                fontSize: 12,
+                fontFamily: 'JetBrains Mono, monospace',
+              }}
+            >
+              <span style={{ color: THEME.colors.textMuted }}>ВЕС АПРИОРА: 82%</span>
+              <span style={{ color: THEME.colors.amber }}>ВЕС ДАННЫХ: 18%</span>
             </div>
           </div>
 
           {/* SCENARIO B: LARGE SAMPLE N = 10,000 */}
-          <div
-            style={{
-              borderRadius: 18,
-              backgroundColor: 'rgba(21, 29, 46, 0.8)',
-              border: '1px solid rgba(56, 189, 248, 0.4)',
-              padding: '28px 32px',
-              display: 'flex',
-              flexDirection: 'column',
-              boxShadow: '0 20px 40px rgba(0,0,0,0.4)',
-            }}
-          >
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-              <span
+          <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between', height: '100%', paddingLeft: 20 }}>
+            <div>
+              <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+                <span
+                  style={{
+                    fontSize: 12,
+                    fontWeight: 700,
+                    letterSpacing: 1.5,
+                    textTransform: 'uppercase',
+                    color: THEME.colors.emerald,
+                    fontFamily: 'Inter, system-ui, sans-serif',
+                  }}
+                >
+                  Сценарий Б · Массовая выборка
+                </span>
+                <span style={{ fontSize: 13, color: THEME.colors.textMuted, fontFamily: 'JetBrains Mono, monospace' }}>
+                  N = 10 000
+                </span>
+              </div>
+              <h2
                 style={{
-                  fontSize: 12,
+                  fontSize: 24,
+                  fontWeight: 700,
+                  color: THEME.colors.textPrimary,
+                  marginTop: 10,
                   fontFamily: 'Inter, system-ui, sans-serif',
-                  padding: '4px 10px',
-                  borderRadius: 4,
-                  backgroundColor: 'rgba(56, 189, 248, 0.12)',
-                  color: THEME.colors.cobalt,
-                  fontWeight: 600,
+                  letterSpacing: -0.5,
                 }}
               >
-                Сценарий Б: массовый эфир
-              </span>
-              <span style={{ fontSize: 14, fontFamily: 'JetBrains Mono, monospace', color: THEME.colors.cobalt, fontWeight: 700 }}>
-                N = 10 000 голосов
-              </span>
+                Данные полностью подчиняют себе модель
+              </h2>
+              <p
+                style={{
+                  fontSize: 14,
+                  color: THEME.colors.textSecondary,
+                  lineHeight: 1.5,
+                  marginTop: 6,
+                  fontFamily: 'Inter, system-ui, sans-serif',
+                }}
+              >
+                Когда голосуют тысячи, влияние начального априора стремится к нулю. Дисперсия сжимается в тончайшую иглу точной истины.
+              </p>
             </div>
 
-            <div style={{ fontSize: 20, fontWeight: 700, color: THEME.colors.textPrimary, marginTop: 14 }}>
-              Доминируют свежие данные (98%)
-            </div>
-            <div style={{ fontSize: 14, color: THEME.colors.textSecondary, marginTop: 6, lineHeight: 1.5 }}>
-              Огромная масса наблюдений сжимает неопределённость до минимума. Рейтинг точно следует за мнением многотысячной аудитории.
-            </div>
-
-            <div style={{ marginTop: 20, display: 'flex', justifyContent: 'center' }}>
+            <div style={{ width: '100%', height: 260 }}>
               <BellCurve
-                width={680}
-                height={210}
-                mean={0.68}
-                stdDev={0.06}
-                color={THEME.colors.cobalt}
-                priorOutline={{ mean: 0.5, stdDev: 0.22 }}
-                showConfidenceInterval
-                label="Узкий интервал: высокая точность"
+                width={700}
+                height={260}
+                mean={0.72}
+                stdDev={0.045}
+                color={THEME.colors.emerald}
+                priorOutline={{ mean: 0.40, stdDev: 0.22 }}
+                showConfidenceInterval={true}
+                label="Игольчатый апостериор: μ = 4.82 ± 0.02"
               />
             </div>
+
+            <div
+              style={{
+                display: 'flex',
+                justifyContent: 'space-between',
+                borderTop: `1px solid ${THEME.colors.borderSubtle}`,
+                paddingTop: 12,
+                fontSize: 12,
+                fontFamily: 'JetBrains Mono, monospace',
+              }}
+            >
+              <span style={{ color: THEME.colors.textMuted }}>ВЕС АПРИОРА: 0.1%</span>
+              <span style={{ color: THEME.colors.emerald }}>ВЕС ДАННЫХ: 99.9%</span>
+            </div>
           </div>
+        </div>
+
+        {/* BOTTOM INSIGHT FOOTER */}
+        <div
+          style={{
+            borderTop: `1px solid ${THEME.colors.border}`,
+            paddingTop: 20,
+            display: 'flex',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+            fontSize: 13,
+            color: THEME.colors.textSecondary,
+            fontFamily: 'Inter, system-ui, sans-serif',
+          }}
+        >
+          <span>
+            Разработчику не требуется писать условные конструкции `if (count &lt; 50)`. Математика выполняет непрерывное взвешивание автоматически.
+          </span>
+          <span style={{ fontFamily: 'JetBrains Mono, monospace', color: THEME.colors.emerald }}>
+            САМОНАСТРАИВАЕМЫЙ ВЕС ✓
+          </span>
         </div>
       </div>
     </div>

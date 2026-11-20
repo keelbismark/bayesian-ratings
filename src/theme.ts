@@ -1,27 +1,28 @@
 export const THEME = {
   colors: {
-    // High-end Editorial Data Design Palette (Stripe / Bloomberg / 3Blue1Brown)
-    bg: '#0A0E17', // Deep obsidian slate
-    bgElevated: '#111726', // Subtle elevated surface
-    bgCard: '#151D2E', // Crisp matte card background
-    border: 'rgba(255, 255, 255, 0.08)',
+    // Pure Editorial Obsidian Palette (Stripe Press / Bloomberg / 3Blue1Brown)
+    bg: '#08090C', // Deep matte velvet obsidian (zero generic blue SaaS hue)
+    bgElevated: '#0E1015', // Subtle architectural surface
+    bgCard: 'rgba(255, 255, 255, 0.02)', // Whisper surface, unboxed by default
+    border: 'rgba(255, 255, 255, 0.07)', // Hairline coordinate rule
     borderSubtle: 'rgba(255, 255, 255, 0.04)',
-    borderActive: 'rgba(56, 189, 248, 0.4)',
+    borderActive: 'rgba(56, 189, 248, 0.5)',
     
-    // Semantic Accents (Matte, no neon bloom)
-    cobalt: '#38BDF8', // Precision Sky Blue for Bayesian models & posterior
-    cobaltSubtle: 'rgba(56, 189, 248, 0.12)',
-    amber: '#F97316', // Warm Amber / Orange for raw noisy observations & alerts
-    amberSubtle: 'rgba(249, 115, 22, 0.12)',
-    emerald: '#10B981', // Muted green for validated convergence
+    // Semantic Accents (Matte precision, zero radioactive neon)
+    cobalt: '#38BDF8', // Precision technical cyan/sky blue for Bayesian model
+    cobaltSubtle: 'rgba(56, 189, 248, 0.10)',
+    amber: '#F59E0B', // Warm amber / ochre for incoming noise & raw observations
+    amberSubtle: 'rgba(245, 158, 11, 0.10)',
+    emerald: '#10B981', // Natural emerald for convergence & mathematical proof
+    emeraldSubtle: 'rgba(16, 185, 129, 0.10)',
     
-    // Typography & Ink
-    textPrimary: '#F8FAFC', // Slate 50
-    textSecondary: '#94A3B8', // Slate 400
-    textMuted: '#64748B', // Slate 500
-    textDim: '#334155', // Slate 700
+    // Typography & Ink Hierarchy
+    textPrimary: '#F8FAFC', // Crisp white (Slate 50)
+    textSecondary: '#94A3B8', // Clear technical commentary (Slate 400)
+    textMuted: '#64748B', // Metadata & axes labels (Slate 500)
+    textDim: '#334155', // Hairlines & subtle markers
     
-    gridDot: 'rgba(255, 255, 255, 0.05)',
+    gridDot: 'rgba(255, 255, 255, 0.035)',
   },
   dimensions: {
     width: 3840,

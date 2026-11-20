@@ -5,11 +5,13 @@ import { THEME } from '../../theme';
 interface WaitingFrameProps {
   durationInFrames?: number; // default 5 seconds (150 frames at 30 fps)
   title?: string;
+  subtitle?: string;
 }
 
 export const WaitingFrame: React.FC<WaitingFrameProps> = ({
   durationInFrames = 150,
   title = 'Контрольная точка для осмысления',
+  subtitle = 'Попробуйте сформулировать ответ до продолжения разбора',
 }) => {
   const frame = useCurrentFrame();
 
@@ -30,7 +32,7 @@ export const WaitingFrame: React.FC<WaitingFrameProps> = ({
     extrapolateRight: 'clamp',
   });
 
-  const secondsLeft = Math.max(1, Math.ceil(((durationInFrames - frame) / 30)));
+  const secondsLeft = Math.max(1, Math.ceil((durationInFrames - frame) / 30));
 
   return (
     <div
@@ -40,92 +42,122 @@ export const WaitingFrame: React.FC<WaitingFrameProps> = ({
         pointerEvents: 'none',
         zIndex: 50,
         opacity,
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'space-between',
+        padding: '50px 80px',
+        boxSizing: 'border-box',
+        backgroundColor: 'rgba(8, 9, 12, 0.94)',
+        backdropFilter: 'blur(16px)',
       }}
     >
-      {/* Precision hairline frame around canvas */}
+      {/* Top Editorial Kicker & Countdown */}
       <div
         style={{
-          position: 'absolute',
-          inset: 36,
-          borderRadius: 20,
-          border: '1px solid rgba(56, 189, 248, 0.3)',
-          boxShadow: 'inset 0 0 40px rgba(0, 0, 0, 0.4)',
-        }}
-      />
-
-      {/* Top Editorial Status Pill */}
-      <div
-        style={{
-          position: 'absolute',
-          top: 56,
-          left: '50%',
-          transform: 'translateX(-50%)',
           display: 'flex',
           alignItems: 'center',
-          gap: 18,
-          padding: '10px 24px',
-          borderRadius: 9999,
-          backgroundColor: '#0F1626',
-          border: '1px solid rgba(255, 255, 255, 0.12)',
-          boxShadow: '0 8px 30px rgba(0, 0, 0, 0.5)',
-          fontFamily: 'Inter, system-ui, sans-serif',
+          justifyContent: 'space-between',
+          borderBottom: `1px solid ${THEME.colors.border}`,
+          paddingBottom: 24,
         }}
       >
-        {/* Pulsing subtle dot */}
-        <div
-          style={{
-            width: 8,
-            height: 8,
-            borderRadius: '50%',
-            backgroundColor: THEME.colors.amber,
-          }}
-        />
+        <div style={{ display: 'flex', alignItems: 'center', gap: 16 }}>
+          <div
+            style={{
+              width: 8,
+              height: 8,
+              borderRadius: '50%',
+              backgroundColor: THEME.colors.amber,
+            }}
+          />
+          <span
+            style={{
+              fontSize: 13,
+              fontWeight: 600,
+              letterSpacing: 2,
+              textTransform: 'uppercase',
+              fontFamily: 'Inter, system-ui, sans-serif',
+              color: THEME.colors.textSecondary,
+            }}
+          >
+            Контрольная точка · Вопрос зрителю
+          </span>
+        </div>
 
-        <span
+        <div style={{ display: 'flex', alignItems: 'center', gap: 16 }}>
+          <span
+            style={{
+              fontSize: 14,
+              fontFamily: 'JetBrains Mono, monospace',
+              color: THEME.colors.cobalt,
+              fontWeight: 600,
+              fontVariantNumeric: 'tabular-nums',
+            }}
+          >
+            0{secondsLeft}s
+          </span>
+          <div
+            style={{
+              width: 120,
+              height: 2,
+              backgroundColor: 'rgba(255, 255, 255, 0.08)',
+              overflow: 'hidden',
+            }}
+          >
+            <div
+              style={{
+                width: `${remaining * 100}%`,
+                height: '100%',
+                backgroundColor: THEME.colors.cobalt,
+                transition: 'width 0.05s linear',
+              }}
+            />
+          </div>
+        </div>
+      </div>
+
+      {/* Center Question Typography */}
+      <div style={{ maxWidth: 1200, margin: '0 auto', textAlign: 'center' }}>
+        <h2
           style={{
-            fontSize: 14,
-            fontWeight: 600,
-            letterSpacing: 0.5,
+            fontSize: 44,
+            fontWeight: 700,
+            lineHeight: 1.25,
             color: THEME.colors.textPrimary,
+            letterSpacing: -0.8,
+            fontFamily: 'Inter, system-ui, sans-serif',
+            marginBottom: 20,
           }}
         >
           {title}
-        </span>
-
-        {/* Seconds countdown badge */}
-        <span
+        </h2>
+        <p
           style={{
-            fontSize: 13,
-            fontWeight: 700,
-            color: THEME.colors.cobalt,
-            fontFamily: 'JetBrains Mono, monospace',
-            padding: '2px 8px',
-            borderRadius: 6,
-            backgroundColor: 'rgba(56, 189, 248, 0.12)',
-            border: '1px solid rgba(56, 189, 248, 0.25)',
+            fontSize: 18,
+            color: THEME.colors.textSecondary,
+            lineHeight: 1.6,
+            fontFamily: 'Inter, system-ui, sans-serif',
           }}
         >
-          0{secondsLeft}s
-        </span>
+          {subtitle}
+        </p>
+      </div>
 
-        {/* Progress line */}
-        <div
-          style={{
-            width: 100,
-            height: 4,
-            borderRadius: 2,
-            backgroundColor: 'rgba(255, 255, 255, 0.1)',
-            overflow: 'hidden',
-          }}
-        >
-          <div
-            style={{
-              width: `${remaining * 100}%`,
-              height: '100%',
-              backgroundColor: THEME.colors.cobalt,
-            }}
-          />
-        </div>
+      {/* Bottom Hint */}
+      <div
+        style={{
+          borderTop: `1px solid ${THEME.colors.border}`,
+          paddingTop: 20,
+          display: 'flex',
+          justifyContent: 'space-between',
+          alignItems: 'center',
+          fontSize: 12,
+          color: THEME.colors.textMuted,
+          fontFamily: 'Inter, system-ui, sans-serif',
+        }}
+      >
+        <span>Автоматическое возобновление через 5 секунд</span>
+        <span style={{ fontFamily: 'JetBrains Mono, monospace' }}>ПРОДОЛЖЕНИЕ РАЗБОРА →</span>
       </div>
     </div>
   );

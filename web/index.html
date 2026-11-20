@@ -8,210 +8,348 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
+    :root {
+      --bg: #08090C;
+      --surface: #0E1015;
+      --border: rgba(255, 255, 255, 0.08);
+      --border-subtle: rgba(255, 255, 255, 0.04);
+      --cobalt: #38BDF8;
+      --amber: #F59E0B;
+      --emerald: #10B981;
+    }
     body {
-      background-color: #0A0E17;
+      background-color: var(--bg);
       color: #F8FAFC;
-      font-family: 'Inter', system-ui, sans-serif;
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      background-image: 
+        radial-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+      background-size: 32px 32px;
+    }
+    .font-mono-num {
+      font-family: 'JetBrains Mono', monospace;
+      font-variant-numeric: tabular-nums;
     }
     .player-frame {
-      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.7), 0 0 0 1px rgba(255, 255, 255, 0.08);
+      box-shadow: 0 30px 80px rgba(0, 0, 0, 0.8), 0 0 0 1px var(--border);
+    }
+    .chapter-pill:hover {
+      background-color: rgba(56, 189, 248, 0.12);
+      border-color: rgba(56, 189, 248, 0.4);
+      color: #38BDF8;
     }
   </style>
 </head>
-<body class="min-h-screen flex flex-col items-center justify-between p-4 sm:p-8 antialiased selection:bg-[#38BDF8] selection:text-[#0A0E17]">
+<body class="min-h-screen flex flex-col items-center justify-between p-4 sm:p-8 antialiased selection:bg-[#38BDF8] selection:text-[#08090C]">
 
-  <!-- EDITORIAL HEADER -->
-  <header class="w-full max-w-5xl text-center space-y-3 pt-2 pb-6">
-    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-[#111726] border border-white/10 text-xs font-mono text-[#38BDF8]">
-      <span class="w-2 h-2 rounded-full bg-[#F97316]"></span>
-      Швейцарский моушн-дизайн · 1080p · 05:00 мин
+  <!-- EDITORIAL MASTHEAD HEADER -->
+  <header class="w-full max-w-5xl space-y-4 pt-4 pb-8 border-b border-white/[0.07]">
+    <div class="flex flex-wrap items-center justify-between gap-3 text-xs font-mono-num text-slate-400">
+      <div class="inline-flex items-center gap-2">
+        <span class="w-2 h-2 rounded-full bg-[#F59E0B]"></span>
+        <span class="tracking-widest uppercase font-semibold text-slate-300">Исследовательский проект · 2026</span>
+      </div>
+      <div class="text-slate-500">1080p · 30 FPS · 05:00 мин · h.264 BT.709</div>
     </div>
-    <h1 class="text-xl sm:text-3xl font-bold text-white tracking-tight">
-      Байесовское обновление для оценки рейтингов в прямом эфире
-    </h1>
-    <p class="text-xs sm:text-sm text-slate-400 font-mono">
-      Математическая модель фильтрации шума и взвешивания оценок в реальном времени
-    </p>
+
+    <div class="space-y-2">
+      <h1 class="text-2xl sm:text-4xl font-bold text-white tracking-tight leading-tight">
+        Байесовское обновление для оценки рейтингов в прямом эфире
+      </h1>
+      <p class="text-sm sm:text-base text-slate-400 max-w-3xl leading-relaxed">
+        Математическая модель непрерывного взвешивания оценок аудитории: фильтрация случайного шума на старте и точная сходимость к истинному качеству трансляции.
+      </p>
+    </div>
   </header>
 
-  <!-- MAIN VIDEO PLAYER -->
-  <main class="w-full max-w-5xl flex flex-col items-center space-y-6">
+  <!-- MAIN VIDEO EXPERIENCE -->
+  <main class="w-full max-w-5xl flex flex-col items-center space-y-6 pt-6">
+    <!-- VIDEO PLAYER -->
     <div class="w-full aspect-video rounded-xl overflow-hidden bg-black player-frame relative group">
       <video
         id="mainVideo"
         controls
-        autoplay
         playsinline
         preload="auto"
-        poster="scene1.png"
+        poster="frame_scene1.png"
         class="w-full h-full object-contain bg-black"
       >
-        <source src="bayesian_5min.mp4?v=editorial_clean_v5" type="video/mp4" />
-        <source src="video.mp4?v=editorial_clean_v5" type="video/mp4" />
+        <source src="bayesian_5min.mp4?v=unboxed_v6" type="video/mp4" />
+        <source src="video.mp4?v=unboxed_v6" type="video/mp4" />
         Ваш браузер не поддерживает встроенное видео.
       </video>
     </div>
 
-    <!-- STATUS & DOWNLOAD BUTTONS -->
-    <div class="w-full flex flex-col items-center gap-4 pt-2">
-      <div id="videoInfo" class="text-xs font-mono text-slate-400 bg-[#111726] px-4 py-2 rounded-lg border border-white/10">
-        ⏱ Хронометраж: <span id="durationDisplay" class="text-[#38BDF8] font-semibold">05:00 мин</span> • 9000 кадров • 30 fps
+    <!-- CHAPTER JUMP NAVIGATION BAR -->
+    <div class="w-full flex flex-col gap-3">
+      <div class="flex items-center justify-between text-xs font-mono-num text-slate-400 px-1">
+        <span>НАВИГАЦИЯ ПО ГЛАВАМ (КЛИК ДЛЯ ПЕРЕМОТКИ):</span>
+        <span id="currentTimeDisplay" class="text-[#38BDF8]">00:00 / 05:00</span>
+      </div>
+      <div class="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-8 gap-2">
+        <button onclick="seekTo(0)" class="chapter-pill px-3 py-2 rounded-lg bg-[#0E1015] border border-white/[0.07] text-left transition">
+          <div class="text-[10px] font-mono-num text-[#38BDF8]">00:00</div>
+          <div class="text-xs font-medium text-slate-200 truncate">01. Эфир</div>
+        </button>
+        <button onclick="seekTo(40)" class="chapter-pill px-3 py-2 rounded-lg bg-[#0E1015] border border-white/[0.07] text-left transition">
+          <div class="text-[10px] font-mono-num text-[#F59E0B]">00:40</div>
+          <div class="text-xs font-medium text-slate-200 truncate">02. Ловушки</div>
+        </button>
+        <button onclick="seekTo(80)" class="chapter-pill px-3 py-2 rounded-lg bg-[#0E1015] border border-white/[0.07] text-left transition">
+          <div class="text-[10px] font-mono-num text-[#38BDF8]">01:20</div>
+          <div class="text-xs font-medium text-slate-200 truncate">03. Три шага</div>
+        </button>
+        <button onclick="seekTo(120)" class="chapter-pill px-3 py-2 rounded-lg bg-[#0E1015] border border-white/[0.07] text-left transition">
+          <div class="text-[10px] font-mono-num text-[#38BDF8]">02:00</div>
+          <div class="text-xs font-medium text-slate-200 truncate">04. Формула</div>
+        </button>
+        <button onclick="seekTo(155)" class="chapter-pill px-3 py-2 rounded-lg bg-[#0E1015] border border-white/[0.07] text-left transition">
+          <div class="text-[10px] font-mono-num text-[#38BDF8]">02:35</div>
+          <div class="text-xs font-medium text-slate-200 truncate">05. Выборка</div>
+        </button>
+        <button onclick="seekTo(180)" class="chapter-pill px-3 py-2 rounded-lg bg-[#0E1015] border border-white/[0.07] text-left transition">
+          <div class="text-[10px] font-mono-num text-[#38BDF8]">03:00</div>
+          <div class="text-xs font-medium text-slate-200 truncate">06. Конвейер</div>
+        </button>
+        <button onclick="seekTo(225)" class="chapter-pill px-3 py-2 rounded-lg bg-[#0E1015] border border-white/[0.07] text-left transition">
+          <div class="text-[10px] font-mono-num text-[#38BDF8]">03:45</div>
+          <div class="text-xs font-medium text-slate-200 truncate">07. Практика</div>
+        </button>
+        <button onclick="seekTo(270)" class="chapter-pill px-3 py-2 rounded-lg bg-[#0E1015] border border-white/[0.07] text-left transition">
+          <div class="text-[10px] font-mono-num text-[#10B981]">04:30</div>
+          <div class="text-xs font-medium text-slate-200 truncate">08. Финал</div>
+        </button>
+      </div>
+    </div>
+
+    <!-- ACTION DOWNLOADS -->
+    <div class="w-full flex flex-wrap items-center justify-between gap-4 py-4 border-y border-white/[0.07]">
+      <div class="flex items-center gap-3 text-xs font-mono-num text-slate-400">
+        <span class="inline-block w-2 h-2 rounded-full bg-[#10B981]"></span>
+        <span>Файл готов к скачиванию · 14.9 МБ · MP4 1080p</span>
       </div>
 
-      <div class="flex flex-wrap items-center justify-center gap-4">
+      <div class="flex flex-wrap items-center gap-3">
         <!-- Download Video MP4 -->
         <a
           id="downloadVideoBtn"
-          href="bayesian_5min.mp4?v=editorial_clean_v5"
+          href="bayesian_5min.mp4?v=unboxed_v6"
           download="bayesian_ratings_5min.mp4"
-          class="inline-flex items-center gap-2.5 px-6 py-3 rounded-lg font-semibold text-sm bg-[#38BDF8] text-[#0A0E17] hover:bg-[#38BDF8]/90 transition"
+          class="inline-flex items-center gap-2.5 px-5 py-2.5 rounded-lg font-semibold text-xs bg-[#38BDF8] text-[#08090C] hover:bg-[#38BDF8]/90 transition"
         >
-          <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
           </svg>
-          Скачать видео (MP4, 5:00)
+          Скачать фильм (MP4, 5:00)
         </a>
 
         <!-- Download Audio MP3 -->
         <a
           href="ambient.mp3"
           download="bayesian_ambient_soundtrack.mp3"
-          class="inline-flex items-center gap-2 px-5 py-3 rounded-lg font-medium text-sm bg-[#111726] hover:bg-[#162033] border border-white/10 text-slate-300 transition"
+          class="inline-flex items-center gap-2 px-4 py-2.5 rounded-lg font-medium text-xs bg-[#0E1015] hover:bg-white/[0.05] border border-white/[0.08] text-slate-300 transition"
         >
-          <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2z" />
           </svg>
-          Скачать саундтрек (MP3)
+          Саундтрек (MP3)
         </a>
       </div>
     </div>
 
     <!-- KEY EDITORIAL FRAMES SHOWCASE -->
-    <section class="w-full max-w-5xl pt-10 space-y-4">
-      <div class="flex items-center justify-between border-b border-white/10 pb-3">
-        <div class="space-y-1">
-          <div class="text-xs font-mono text-[#38BDF8] uppercase tracking-wider">Галерея сцен</div>
-          <h2 class="text-lg sm:text-xl font-bold text-white tracking-tight">Ключевые кадры оформления без ИИ-слопа</h2>
+    <section class="w-full space-y-6 pt-6">
+      <div class="flex items-center justify-between border-b border-white/[0.07] pb-3">
+        <div>
+          <div class="text-xs font-mono-num text-[#38BDF8] uppercase tracking-wider">Структура работы</div>
+          <h2 class="text-lg sm:text-xl font-bold text-white tracking-tight mt-0.5">Ключевые сцены фильма (High-Data-Ink)</h2>
         </div>
-        <div class="text-xs font-mono text-slate-400">8 глав фильма</div>
+        <div class="text-xs font-mono-num text-slate-500">8 глав · без ИИ-слопа</div>
       </div>
 
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-5 pt-2">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
         <!-- Frame 1 -->
-        <div class="rounded-xl overflow-hidden bg-[#111726] border border-white/10 group shadow-lg">
-          <div class="aspect-video relative overflow-hidden bg-black">
-            <img src="frame_scene1.png" alt="Сцена 1: Пульт управления" class="w-full h-full object-cover group-hover:scale-105 transition duration-300" />
+        <div onclick="seekTo(0)" class="cursor-pointer group space-y-3">
+          <div class="aspect-video rounded-lg overflow-hidden bg-black border border-white/[0.07] group-hover:border-[#38BDF8]/50 transition duration-200">
+            <img src="frame_scene1.png" alt="Сцена 1" class="w-full h-full object-cover group-hover:scale-102 transition duration-300" />
           </div>
-          <div class="p-4 space-y-1">
-            <div class="text-xs font-mono text-[#38BDF8]">Сцена 1 (00:00 – 00:40)</div>
-            <div class="text-sm font-semibold text-white">Пульт аналитики прямого эфира и сходимость траектории</div>
+          <div>
+            <div class="flex items-center justify-between text-xs font-mono-num text-slate-400">
+              <span class="text-[#38BDF8]">01 · ПРЯМОЙ ЭФИР</span>
+              <span>00:00 – 00:40</span>
+            </div>
+            <div class="text-sm font-semibold text-white mt-1 group-hover:text-[#38BDF8] transition">Эволюция зрительского рейтинга в прямом эфире</div>
+            <div class="text-xs text-slate-400 mt-1">Непрерывный байесовский пересчет отсекает ложные всплески на старте эфира.</div>
           </div>
         </div>
 
         <!-- Frame 2 -->
-        <div class="rounded-xl overflow-hidden bg-[#111726] border border-white/10 group shadow-lg">
-          <div class="aspect-video relative overflow-hidden bg-black">
-            <img src="frame_scene2.png" alt="Сцена 2: Две ловушки" class="w-full h-full object-cover group-hover:scale-105 transition duration-300" />
+        <div onclick="seekTo(40)" class="cursor-pointer group space-y-3">
+          <div class="aspect-video rounded-lg overflow-hidden bg-black border border-white/[0.07] group-hover:border-[#F59E0B]/50 transition duration-200">
+            <img src="frame_scene2.png" alt="Сцена 2" class="w-full h-full object-cover group-hover:scale-102 transition duration-300" />
           </div>
-          <div class="p-4 space-y-1">
-            <div class="text-xs font-mono text-[#F97316]">Сцена 2 (00:40 – 01:20)</div>
-            <div class="text-sm font-semibold text-white">Две ловушки: паника на шуме против слепой инерции</div>
+          <div>
+            <div class="flex items-center justify-between text-xs font-mono-num text-slate-400">
+              <span class="text-[#F59E0B]">02 · МЕТОДОЛОГИЯ</span>
+              <span>00:40 – 01:20</span>
+            </div>
+            <div class="text-sm font-semibold text-white mt-1 group-hover:text-[#F59E0B] transition">Две ловушки оценки данных в прямом эфире</div>
+            <div class="text-xs text-slate-400 mt-1">Паника от случайного шума первых 5 откликов против слепой инерции накопленной массы.</div>
           </div>
         </div>
 
         <!-- Frame 3 -->
-        <div class="rounded-xl overflow-hidden bg-[#111726] border border-white/10 group shadow-lg">
-          <div class="aspect-video relative overflow-hidden bg-black">
-            <img src="frame_scene3.png" alt="Сцена 3: Три шага" class="w-full h-full object-cover group-hover:scale-105 transition duration-300" />
+        <div onclick="seekTo(80)" class="cursor-pointer group space-y-3">
+          <div class="aspect-video rounded-lg overflow-hidden bg-black border border-white/[0.07] group-hover:border-[#38BDF8]/50 transition duration-200">
+            <img src="frame_scene3.png" alt="Сцена 3" class="w-full h-full object-cover group-hover:scale-102 transition duration-300" />
           </div>
-          <div class="p-4 space-y-1">
-            <div class="text-xs font-mono text-[#38BDF8]">Сцена 3 (01:20 – 02:00)</div>
-            <div class="text-sm font-semibold text-white">Три шага: Априор → Правдоподобие → Апостериор</div>
+          <div>
+            <div class="flex items-center justify-between text-xs font-mono-num text-slate-400">
+              <span class="text-[#38BDF8]">03 · СИНТЕЗ</span>
+              <span>01:20 – 02:00</span>
+            </div>
+            <div class="text-sm font-semibold text-white mt-1 group-hover:text-[#38BDF8] transition">Три шага байесовского обновления</div>
+            <div class="text-xs text-slate-400 mt-1">Априор P(θ) + Правдоподобие P(D|θ) ⇒ Сжатый апостериорный пик P(θ|D).</div>
           </div>
         </div>
 
         <!-- Frame 4 -->
-        <div class="rounded-xl overflow-hidden bg-[#111726] border border-white/10 group shadow-lg">
-          <div class="aspect-video relative overflow-hidden bg-black">
-            <img src="frame_scene4.png" alt="Сцена 4: Формула" class="w-full h-full object-cover group-hover:scale-105 transition duration-300" />
+        <div onclick="seekTo(120)" class="cursor-pointer group space-y-3">
+          <div class="aspect-video rounded-lg overflow-hidden bg-black border border-white/[0.07] group-hover:border-[#38BDF8]/50 transition duration-200">
+            <img src="frame_scene4.png" alt="Сцена 4" class="w-full h-full object-cover group-hover:scale-102 transition duration-300" />
           </div>
-          <div class="p-4 space-y-1">
-            <div class="text-xs font-mono text-[#38BDF8]">Сцена 4 (02:00 – 02:35)</div>
-            <div class="text-sm font-semibold text-white">Математическая формула байесовского взвешивания</div>
+          <div>
+            <div class="flex items-center justify-between text-xs font-mono-num text-slate-400">
+              <span class="text-[#38BDF8]">04 · ФОРМУЛА</span>
+              <span>02:00 – 02:35</span>
+            </div>
+            <div class="text-sm font-semibold text-white mt-1 group-hover:text-[#38BDF8] transition">Формула байесовского взвешивания</div>
+            <div class="text-xs text-slate-400 mt-1">Гауссовское аналитическое решение O(1): каждый источник голосует своим весом 1/σ².</div>
           </div>
         </div>
 
         <!-- Frame 5 -->
-        <div class="rounded-xl overflow-hidden bg-[#111726] border border-white/10 group shadow-lg">
-          <div class="aspect-video relative overflow-hidden bg-black">
-            <img src="frame_scene5.png" alt="Сцена 5: Масштаб выборки" class="w-full h-full object-cover group-hover:scale-105 transition duration-300" />
+        <div onclick="seekTo(155)" class="cursor-pointer group space-y-3">
+          <div class="aspect-video rounded-lg overflow-hidden bg-black border border-white/[0.07] group-hover:border-[#38BDF8]/50 transition duration-200">
+            <img src="frame_scene5.png" alt="Сцена 5" class="w-full h-full object-cover group-hover:scale-102 transition duration-300" />
           </div>
-          <div class="p-4 space-y-1">
-            <div class="text-xs font-mono text-[#38BDF8]">Сцена 5 (02:35 – 03:00)</div>
-            <div class="text-sm font-semibold text-white">Автоматическое взвешивание: N = 10 против N = 10 000</div>
+          <div>
+            <div class="flex items-center justify-between text-xs font-mono-num text-slate-400">
+              <span class="text-[#38BDF8]">05 · МАСШТАБ ВЫБОРКИ</span>
+              <span>02:35 – 03:00</span>
+            </div>
+            <div class="text-sm font-semibold text-white mt-1 group-hover:text-[#38BDF8] transition">Автоматическое взвешивание объёма данных</div>
+            <div class="text-xs text-slate-400 mt-1">При N = 10 априор держит центр; при N = 10 000 данные полностью правят бал.</div>
           </div>
         </div>
 
         <!-- Frame 6 -->
-        <div class="rounded-xl overflow-hidden bg-[#111726] border border-white/10 group shadow-lg">
-          <div class="aspect-video relative overflow-hidden bg-black">
-            <img src="frame_scene6.png" alt="Сцена 6: Конвейер" class="w-full h-full object-cover group-hover:scale-105 transition duration-300" />
+        <div onclick="seekTo(180)" class="cursor-pointer group space-y-3">
+          <div class="aspect-video rounded-lg overflow-hidden bg-black border border-white/[0.07] group-hover:border-[#38BDF8]/50 transition duration-200">
+            <img src="frame_scene6.png" alt="Сцена 6" class="w-full h-full object-cover group-hover:scale-102 transition duration-300" />
           </div>
-          <div class="p-4 space-y-1">
-            <div class="text-xs font-mono text-[#38BDF8]">Сцена 6 (03:00 – 03:45)</div>
-            <div class="text-sm font-semibold text-white">Непрерывный конвейер вычислений и сжатие дисперсии</div>
+          <div>
+            <div class="flex items-center justify-between text-xs font-mono-num text-slate-400">
+              <span class="text-[#38BDF8]">06 · КОНВЕЙЕР</span>
+              <span>03:00 – 03:45</span>
+            </div>
+            <div class="text-sm font-semibold text-white mt-1 group-hover:text-[#38BDF8] transition">Непрерывный конвейер вычислений</div>
+            <div class="text-xs text-slate-400 mt-1">Входящий поток → Окно наблюдений → Формула Гаусса → Выдача в плеер за 0.05 мс.</div>
           </div>
         </div>
 
         <!-- Frame 7 -->
-        <div class="rounded-xl overflow-hidden bg-[#111726] border border-white/10 group shadow-lg">
-          <div class="aspect-video relative overflow-hidden bg-black">
-            <img src="frame_scene7.png" alt="Сцена 7: Практика" class="w-full h-full object-cover group-hover:scale-105 transition duration-300" />
+        <div onclick="seekTo(225)" class="cursor-pointer group space-y-3">
+          <div class="aspect-video rounded-lg overflow-hidden bg-black border border-white/[0.07] group-hover:border-[#38BDF8]/50 transition duration-200">
+            <img src="frame_scene7.png" alt="Сцена 7" class="w-full h-full object-cover group-hover:scale-102 transition duration-300" />
           </div>
-          <div class="p-4 space-y-1">
-            <div class="text-xs font-mono text-[#38BDF8]">Сцена 7 (03:45 – 04:30)</div>
-            <div class="text-sm font-semibold text-white">Практический результат: стабильный коридор рейтинга</div>
+          <div>
+            <div class="flex items-center justify-between text-xs font-mono-num text-slate-400">
+              <span class="text-[#38BDF8]">07 · ТЕСТИРОВАНИЕ</span>
+              <span>03:45 – 04:30</span>
+            </div>
+            <div class="text-sm font-semibold text-white mt-1 group-hover:text-[#38BDF8] transition">Сравнение на реальном 40-минутном эфире</div>
+            <div class="text-xs text-slate-400 mt-1">Иммунитет к всплескам троллей и мгновенная фиксация реального обрыва трансляции.</div>
           </div>
         </div>
 
         <!-- Frame 8 -->
-        <div class="rounded-xl overflow-hidden bg-[#111726] border border-white/10 group shadow-lg">
-          <div class="aspect-video relative overflow-hidden bg-black">
-            <img src="frame_scene8.png" alt="Сцена 8: Финал" class="w-full h-full object-cover group-hover:scale-105 transition duration-300" />
+        <div onclick="seekTo(270)" class="cursor-pointer group space-y-3">
+          <div class="aspect-video rounded-lg overflow-hidden bg-black border border-white/[0.07] group-hover:border-[#10B981]/50 transition duration-200">
+            <img src="frame_scene8.png" alt="Сцена 8" class="w-full h-full object-cover group-hover:scale-102 transition duration-300" />
           </div>
-          <div class="p-4 space-y-1">
-            <div class="text-xs font-mono text-[#38BDF8]">Сцена 8 (04:30 – 05:00)</div>
-            <div class="text-sm font-semibold text-white">Итоговое заключение и титры авторов</div>
+          <div>
+            <div class="flex items-center justify-between text-xs font-mono-num text-slate-400">
+              <span class="text-[#10B981]">08 · ФИНАЛ</span>
+              <span>04:30 – 05:00</span>
+            </div>
+            <div class="text-sm font-semibold text-white mt-1 group-hover:text-[#10B981] transition">Предостережения развертывания и титры</div>
+            <div class="text-xs text-slate-400 mt-1">Три инженерных правила внедрения в production и авторский состав.</div>
           </div>
         </div>
       </div>
     </section>
   </main>
 
-  <!-- FOOTER CREDITS -->
-  <footer class="w-full max-w-5xl pt-8 pb-4 border-t border-white/10 text-center space-y-2 mt-8">
-    <div class="text-xs font-mono uppercase tracking-wider text-slate-400">Над проектом работали</div>
-    <div class="text-sm font-semibold text-white flex flex-wrap justify-center gap-4">
-      <span>Голомидова Женя</span>
-      <span class="text-[#38BDF8]">•</span>
-      <span>Селиванов Илья</span>
-      <span class="text-[#38BDF8]">•</span>
-      <span>Константин Толов</span>
-      <span class="text-[#38BDF8]">•</span>
-      <span>Фураев Никита</span>
+  <!-- EDITORIAL FOOTER CREDITS -->
+  <footer class="w-full max-w-5xl pt-10 pb-6 border-t border-white/[0.07] text-left space-y-4 mt-12">
+    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+      <div>
+        <div class="text-xs font-mono-num uppercase tracking-wider text-slate-500">Авторы проекта</div>
+        <div class="text-sm font-semibold text-white flex flex-wrap gap-x-4 gap-y-1 mt-1">
+          <span>Голомидова Женя</span>
+          <span class="text-slate-600">/</span>
+          <span>Селиванов Илья</span>
+          <span class="text-slate-600">/</span>
+          <span>Константин Толов</span>
+          <span class="text-slate-600">/</span>
+          <span>Фураев Никита</span>
+        </div>
+      </div>
+
+      <div class="text-xs font-mono-num text-slate-500">
+        Google Antigravity & Remotion · 2026
+      </div>
     </div>
   </footer>
 
   <script>
     const v = document.getElementById('mainVideo');
-    const d = document.getElementById('durationDisplay');
-    v.addEventListener('loadedmetadata', () => {
-      if (v.duration && !isNaN(v.duration)) {
-        const mins = Math.floor(v.duration / 60);
-        const secs = Math.floor(v.duration % 60);
-        d.textContent = `${String(mins).padStart(2, '0')}:${String(secs).padStart(2, '0')} мин (${Math.round(v.duration)} сек)`;
+    const timeDisplay = document.getElementById('currentTimeDisplay');
+
+    function seekTo(seconds) {
+      if (v) {
+        v.currentTime = seconds;
+        v.play().catch(() => {});
+        window.scrollTo({ top: v.offsetTop - 40, behavior: 'smooth' });
+      }
+    }
+
+    if (v && timeDisplay) {
+      v.addEventListener('timeupdate', () => {
+        const curM = Math.floor(v.currentTime / 60);
+        const curS = Math.floor(v.currentTime % 60);
+        const durM = Math.floor((v.duration || 300) / 60);
+        const durS = Math.floor((v.duration || 300) % 60);
+        timeDisplay.textContent = `${String(curM).padStart(2, '0')}:${String(curS).padStart(2, '0')} / ${String(durM).padStart(2, '0')}:${String(durS).padStart(2, '0')}`;
+      });
+    }
+
+    // Keyboard controls: Space (play/pause), F (fullscreen), M (mute)
+    window.addEventListener('keydown', (e) => {
+      if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+      if (e.code === 'Space') {
+        e.preventDefault();
+        if (v.paused) v.play(); else v.pause();
+      } else if (e.code === 'KeyF') {
+        if (!document.fullscreenElement) {
+          v.requestFullscreen().catch(() => {});
+        } else {
+          document.exitFullscreen().catch(() => {});
+        }
+      } else if (e.code === 'KeyM') {
+        v.muted = !v.muted;
       }
     });
   </script>

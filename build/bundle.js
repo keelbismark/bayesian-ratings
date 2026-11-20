@@ -20190,7 +20190,7 @@ if (true) {
 
 
 },
-9839(__unused_rspack_module, __unused_rspack___webpack_exports__, __webpack_require__) {
+5206(__unused_rspack_module, __unused_rspack___webpack_exports__, __webpack_require__) {
 
 // EXTERNAL MODULE: ./node_modules/remotion/dist/esm/index.mjs
 var esm = __webpack_require__(3947);
@@ -20201,19 +20201,26 @@ var react = __webpack_require__(6540);
 ;// CONCATENATED MODULE: ./src/theme.ts
 const THEME = {
     colors: {
-        bg: '#0D1B2A',
-        bgCard: '#132238',
-        bgCardHighlight: '#1B2E4B',
-        electricBlue: '#4EA8DE',
-        electricBlueGlow: 'rgba(78, 168, 222, 0.4)',
-        electricBlueSubtle: 'rgba(78, 168, 222, 0.15)',
-        warmCoral: '#FF7B54',
-        warmCoralGlow: 'rgba(255, 123, 84, 0.4)',
-        warmCoralSubtle: 'rgba(255, 123, 84, 0.15)',
-        gridLine: 'rgba(255, 255, 255, 0.04)',
-        wireframe: 'rgba(78, 168, 222, 0.5)',
-        textMuted: '#6C8299',
-        white: '#FFFFFF'
+        // Pure Editorial Obsidian Palette (Stripe Press / Bloomberg / 3Blue1Brown)
+        bg: '#08090C',
+        bgElevated: '#0E1015',
+        bgCard: 'rgba(255, 255, 255, 0.02)',
+        border: 'rgba(255, 255, 255, 0.07)',
+        borderSubtle: 'rgba(255, 255, 255, 0.04)',
+        borderActive: 'rgba(56, 189, 248, 0.5)',
+        // Semantic Accents (Matte precision, zero radioactive neon)
+        cobalt: '#38BDF8',
+        cobaltSubtle: 'rgba(56, 189, 248, 0.10)',
+        amber: '#F59E0B',
+        amberSubtle: 'rgba(245, 158, 11, 0.10)',
+        emerald: '#10B981',
+        emeraldSubtle: 'rgba(16, 185, 129, 0.10)',
+        // Typography & Ink Hierarchy
+        textPrimary: '#F8FAFC',
+        textSecondary: '#94A3B8',
+        textMuted: '#64748B',
+        textDim: '#334155',
+        gridDot: 'rgba(255, 255, 255, 0.035)'
     },
     dimensions: {
         width: 3840,
@@ -20261,31 +20268,8 @@ const THEME = {
 
 
 
-
 const BackgroundGrid = ({ intensity = 1 })=>{
-    const frame = (0,esm/* .useCurrentFrame */.UC)();
-    // Deterministic floating ambient particles
-    const particles = (0,react.useMemo)(()=>{
-        return Array.from({
-            length: 45
-        }).map((_, i)=>({
-                id: i,
-                x: i * 137.5 % 100,
-                y: i * 223.3 % 100,
-                size: i % 3 * 2 + 2,
-                speed: 0.15 + i % 5 * 0.08,
-                baseOpacity: 0.15 + i % 4 * 0.1
-            }));
-    }, []);
-    // Subtle ambient breathing light
-    const ambientPulse = (0,esm/* .interpolate */.GW)(Math.sin(frame / 60), [
-        -1,
-        1
-    ], [
-        0.85,
-        1.15
-    ]);
-    return /*#__PURE__*/ (0,jsx_runtime.jsxs)("div", {
+    return /*#__PURE__*/ (0,jsx_runtime.jsx)("div", {
         style: {
             position: 'absolute',
             inset: 0,
@@ -20293,234 +20277,57 @@ const BackgroundGrid = ({ intensity = 1 })=>{
             overflow: 'hidden',
             pointerEvents: 'none'
         },
-        children: [
-            /*#__PURE__*/ (0,jsx_runtime.jsx)("div", {
-                style: {
-                    position: 'absolute',
-                    top: '20%',
-                    left: '25%',
-                    width: '50vw',
-                    height: '50vh',
-                    borderRadius: '50%',
-                    background: `radial-gradient(circle, ${THEME.colors.electricBlueGlow} 0%, rgba(13, 27, 42, 0) 70%)`,
-                    filter: 'blur(120px)',
-                    opacity: 0.35 * intensity * ambientPulse,
-                    transform: `scale(${ambientPulse})`
-                }
-            }),
-            /*#__PURE__*/ (0,jsx_runtime.jsx)("div", {
-                style: {
-                    position: 'absolute',
-                    bottom: '15%',
-                    right: '20%',
-                    width: '45vw',
-                    height: '45vh',
-                    borderRadius: '50%',
-                    background: `radial-gradient(circle, ${THEME.colors.warmCoralGlow} 0%, rgba(13, 27, 42, 0) 70%)`,
-                    filter: 'blur(140px)',
-                    opacity: 0.2 * intensity
-                }
-            }),
-            /*#__PURE__*/ (0,jsx_runtime.jsxs)("svg", {
-                width: "100%",
-                height: "100%",
-                style: {
-                    position: 'absolute',
-                    inset: 0,
-                    opacity: 0.7 * intensity
-                },
-                children: [
-                    /*#__PURE__*/ (0,jsx_runtime.jsxs)("defs", {
-                        children: [
-                            /*#__PURE__*/ (0,jsx_runtime.jsx)("pattern", {
-                                id: "dense-grid",
-                                width: "80",
-                                height: "80",
-                                patternUnits: "userSpaceOnUse",
-                                children: /*#__PURE__*/ (0,jsx_runtime.jsx)("path", {
-                                    d: "M 80 0 L 0 0 0 80",
-                                    fill: "none",
-                                    stroke: THEME.colors.gridLine,
-                                    strokeWidth: "1.5"
-                                })
-                            }),
-                            /*#__PURE__*/ (0,jsx_runtime.jsxs)("pattern", {
-                                id: "major-grid",
-                                width: "320",
-                                height: "320",
-                                patternUnits: "userSpaceOnUse",
-                                children: [
-                                    /*#__PURE__*/ (0,jsx_runtime.jsx)("rect", {
-                                        width: "320",
-                                        height: "320",
-                                        fill: "url(#dense-grid)"
-                                    }),
-                                    /*#__PURE__*/ (0,jsx_runtime.jsx)("path", {
-                                        d: "M 320 0 L 0 0 0 320",
-                                        fill: "none",
-                                        stroke: "rgba(78, 168, 222, 0.08)",
-                                        strokeWidth: "2.5"
-                                    })
-                                ]
+        children: /*#__PURE__*/ (0,jsx_runtime.jsxs)("svg", {
+            width: "100%",
+            height: "100%",
+            style: {
+                position: 'absolute',
+                inset: 0,
+                opacity: 0.5 * intensity
+            },
+            children: [
+                /*#__PURE__*/ (0,jsx_runtime.jsxs)("defs", {
+                    children: [
+                        /*#__PURE__*/ (0,jsx_runtime.jsx)("pattern", {
+                            id: "clean-dot-grid",
+                            width: "64",
+                            height: "64",
+                            patternUnits: "userSpaceOnUse",
+                            children: /*#__PURE__*/ (0,jsx_runtime.jsx)("circle", {
+                                cx: "32",
+                                cy: "32",
+                                r: "1.0",
+                                fill: THEME.colors.gridDot
                             })
-                        ]
-                    }),
-                    /*#__PURE__*/ (0,jsx_runtime.jsx)("rect", {
-                        width: "100%",
-                        height: "100%",
-                        fill: "url(#major-grid)"
-                    })
-                ]
-            }),
-            particles.map((p)=>{
-                const floatY = (p.y - frame * p.speed * 0.05) % 100;
-                const currentY = floatY < 0 ? floatY + 100 : floatY;
-                const pulse = (0,esm/* .interpolate */.GW)(Math.sin(frame * 0.05 + p.id), [
-                    -1,
-                    1
-                ], [
-                    0.6,
-                    1.2
-                ]);
-                return /*#__PURE__*/ (0,jsx_runtime.jsx)("div", {
-                    style: {
-                        position: 'absolute',
-                        left: `${p.x}%`,
-                        top: `${currentY}%`,
-                        width: p.size * 2,
-                        height: p.size * 2,
-                        borderRadius: '50%',
-                        backgroundColor: p.id % 2 === 0 ? THEME.colors.electricBlue : THEME.colors.warmCoral,
-                        opacity: p.baseOpacity * pulse * intensity,
-                        boxShadow: `0 0 10px ${p.id % 2 === 0 ? THEME.colors.electricBlueGlow : THEME.colors.warmCoralGlow}`
-                    }
-                }, p.id);
-            }),
-            /*#__PURE__*/ (0,jsx_runtime.jsx)("div", {
-                style: {
-                    position: 'absolute',
-                    inset: 0,
-                    background: 'radial-gradient(circle at center, transparent 40%, rgba(5, 10, 18, 0.85) 100%)'
-                }
-            })
-        ]
-    });
-};
-
-;// CONCATENATED MODULE: ./src/components/common/PlaceholderBox.tsx
-
-
-
-
-const PlaceholderBox = ({ width, height, variant = 'card', accent = 'blue', pulse = false, glow = false, cornerMarks = false, children, style = {} })=>{
-    const frame = (0,esm/* .useCurrentFrame */.UC)();
-    const accentColor = accent === 'coral' ? THEME.colors.warmCoral : accent === 'neutral' ? 'rgba(255, 255, 255, 0.4)' : THEME.colors.electricBlue;
-    const accentGlow = accent === 'coral' ? THEME.colors.warmCoralGlow : THEME.colors.electricBlueGlow;
-    const pulseOpacity = pulse ? (0,esm/* .interpolate */.GW)(Math.sin(frame * 0.1), [
-        -1,
-        1
-    ], [
-        0.65,
-        1
-    ]) : 1;
-    const pulseScale = pulse ? (0,esm/* .interpolate */.GW)(Math.sin(frame * 0.1), [
-        -1,
-        1
-    ], [
-        0.99,
-        1.01
-    ]) : 1;
-    const getBorder = ()=>{
-        if (variant === 'dashed') return `3px dashed ${accentColor}`;
-        if (variant === 'outline') return `3px solid ${accentColor}`;
-        return `2px solid ${accentColor}55`;
-    };
-    const getBackground = ()=>{
-        if (variant === 'outline' || variant === 'dashed') return 'transparent';
-        if (variant === 'number') return 'rgba(19, 34, 56, 0.85)';
-        return 'rgba(19, 34, 56, 0.7)';
-    };
-    const borderRadius = variant === 'pill' ? 9999 : 16;
-    return /*#__PURE__*/ (0,jsx_runtime.jsxs)("div", {
-        style: {
-            position: 'relative',
-            width,
-            height,
-            borderRadius,
-            border: getBorder(),
-            backgroundColor: getBackground(),
-            backdropFilter: 'blur(12px)',
-            boxShadow: glow ? `0 0 35px ${accentGlow}, inset 0 0 20px ${accentGlow}` : '0 12px 32px rgba(0, 0, 0, 0.35)',
-            opacity: pulseOpacity,
-            transform: `scale(${pulseScale})`,
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            overflow: 'hidden',
-            boxSizing: 'border-box',
-            ...style
-        },
-        children: [
-            cornerMarks && /*#__PURE__*/ (0,jsx_runtime.jsxs)(jsx_runtime.Fragment, {
-                children: [
-                    /*#__PURE__*/ (0,jsx_runtime.jsx)("div", {
-                        style: {
-                            position: 'absolute',
-                            top: 6,
-                            left: 6,
-                            width: 12,
-                            height: 12,
-                            borderTop: `2px solid ${accentColor}`,
-                            borderLeft: `2px solid ${accentColor}`
-                        }
-                    }),
-                    /*#__PURE__*/ (0,jsx_runtime.jsx)("div", {
-                        style: {
-                            position: 'absolute',
-                            top: 6,
-                            right: 6,
-                            width: 12,
-                            height: 12,
-                            borderTop: `2px solid ${accentColor}`,
-                            borderRight: `2px solid ${accentColor}`
-                        }
-                    }),
-                    /*#__PURE__*/ (0,jsx_runtime.jsx)("div", {
-                        style: {
-                            position: 'absolute',
-                            bottom: 6,
-                            left: 6,
-                            width: 12,
-                            height: 12,
-                            borderBottom: `2px solid ${accentColor}`,
-                            borderLeft: `2px solid ${accentColor}`
-                        }
-                    }),
-                    /*#__PURE__*/ (0,jsx_runtime.jsx)("div", {
-                        style: {
-                            position: 'absolute',
-                            bottom: 6,
-                            right: 6,
-                            width: 12,
-                            height: 12,
-                            borderBottom: `2px solid ${accentColor}`,
-                            borderRight: `2px solid ${accentColor}`
-                        }
-                    })
-                ]
-            }),
-            !children && /*#__PURE__*/ (0,jsx_runtime.jsx)("div", {
-                style: {
-                    width: '60%',
-                    height: '18%',
-                    minHeight: 8,
-                    maxHeight: 18,
-                    borderRadius: 6,
-                    background: `linear-gradient(90deg, ${accentColor}22 0%, ${accentColor}55 50%, ${accentColor}22 100%)`
-                }
-            }),
-            children
-        ]
+                        }),
+                        /*#__PURE__*/ (0,jsx_runtime.jsxs)("pattern", {
+                            id: "precision-grid",
+                            width: "240",
+                            height: "240",
+                            patternUnits: "userSpaceOnUse",
+                            children: [
+                                /*#__PURE__*/ (0,jsx_runtime.jsx)("rect", {
+                                    width: "240",
+                                    height: "240",
+                                    fill: "url(#clean-dot-grid)"
+                                }),
+                                /*#__PURE__*/ (0,jsx_runtime.jsx)("path", {
+                                    d: "M 240 0 L 0 0 0 240",
+                                    fill: "none",
+                                    stroke: "rgba(255, 255, 255, 0.02)",
+                                    strokeWidth: "1"
+                                })
+                            ]
+                        })
+                    ]
+                }),
+                /*#__PURE__*/ (0,jsx_runtime.jsx)("rect", {
+                    width: "100%",
+                    height: "100%",
+                    fill: "url(#precision-grid)"
+                })
+            ]
+        })
     });
 };
 
@@ -20530,208 +20337,190 @@ const PlaceholderBox = ({ width, height, variant = 'card', accent = 'blue', puls
 
 
 
-
 const Scene1_LiveBroadcast = ()=>{
     const frame = (0,esm/* .useCurrentFrame */.UC)();
-    // Smooth camera zoom-in over 40 seconds
-    const cameraScale = (0,esm/* .interpolate */.GW)(frame, [
-        0,
-        1200
-    ], [
-        1.0,
-        1.12
-    ], {
-        easing: esm/* .Easing.bezier */.GS.bezier(0.25, 0.1, 0.25, 1),
-        extrapolateRight: 'clamp'
-    });
-    // Timeline progress filling up second by second
-    const timelineProgress = (0,esm/* .interpolate */.GW)(frame, [
-        0,
-        1200
-    ], [
-        0,
-        1
-    ], {
-        extrapolateRight: 'clamp'
-    });
-    // Engagement curve dynamic wave growth
-    const curvePoints = (0,react.useMemo)(()=>{
-        return Array.from({
-            length: 24
+    // High-precision smooth engagement curve data across 1760px
+    const fullCurveData = (0,react.useMemo)(()=>{
+        const pointsCount = 200;
+        const pts = Array.from({
+            length: pointsCount
         }).map((_, i)=>{
-            const x = i / 23 * 1600;
-            const baseGrowth = Math.pow(i / 23, 0.85);
-            const wave = Math.sin(i * 0.7) * 45;
-            const y = 500 - (baseGrowth * 340 + wave);
+            const t = i / (pointsCount - 1);
+            const x = 80 + t * 1600;
+            // Realistic live broadcast audience score: starts with early noise, settles into steady 4.62
+            const baseTrend = 420 - Math.pow(t, 0.7) * 230;
+            const smoothWave = Math.sin(t * 11) * 22 * (1 - t * 0.65);
+            const y = baseTrend - smoothWave;
             return {
                 x,
-                y
+                y,
+                t
             };
         });
+        const d = pts.reduce((acc, pt, idx)=>idx === 0 ? `M ${pt.x.toFixed(1)} ${pt.y.toFixed(1)}` : `${acc} L ${pt.x.toFixed(1)} ${pt.y.toFixed(1)}`, '');
+        let len = 0;
+        for(let i = 1; i < pts.length; i++){
+            const dx = pts[i].x - pts[i - 1].x;
+            const dy = pts[i].y - pts[i - 1].y;
+            len += Math.sqrt(dx * dx + dy * dy);
+        }
+        return {
+            pts,
+            d,
+            len
+        };
     }, []);
     // Curve draw progression
     const curveProgress = (0,esm/* .interpolate */.GW)(frame, [
-        60,
-        900
+        30,
+        950
     ], [
         0,
         1
     ], {
         extrapolateLeft: 'clamp',
         extrapolateRight: 'clamp',
-        easing: esm/* .Easing.bezier */.GS.bezier(0.16, 1, 0.3, 1)
+        easing: esm/* .Easing.bezier */.GS.bezier(0.2, 0.8, 0.2, 1)
     });
-    const visibleCurveLength = Math.max(2, Math.floor(curvePoints.length * curveProgress));
-    const activeCurvePoints = curvePoints.slice(0, visibleCurveLength);
-    const curvePath = activeCurvePoints.reduce((acc, pt, idx)=>{
-        return idx === 0 ? `M ${pt.x} ${pt.y}` : `${acc} L ${pt.x} ${pt.y}`;
-    }, '');
-    // Pulsing live indicator
-    const livePulse = (0,esm/* .interpolate */.GW)(Math.sin(frame * Math.PI * 2 / 25), [
-        -1,
-        1
-    ], [
-        0.8,
-        1.2
-    ]);
-    // Question mark glow and floating animation
-    const questionFloat = (0,esm/* .interpolate */.GW)(Math.sin(frame * 0.06), [
-        -1,
-        1
-    ], [
-        -12,
-        12
-    ]);
-    const questionOpacity = (0,esm/* .interpolate */.GW)(frame, [
-        150,
-        240
-    ], [
-        0,
-        1
-    ], {
-        extrapolateLeft: 'clamp',
-        extrapolateRight: 'clamp'
-    });
+    const currentIdx = Math.min(fullCurveData.pts.length - 1, Math.floor(curveProgress * (fullCurveData.pts.length - 1)));
+    const currentPt = fullCurveData.pts[currentIdx];
+    const currentVotes = Math.floor(curveProgress * 3420);
+    const seconds = Math.floor(frame / 30);
+    const timecode = `00:${String(seconds).padStart(2, '0')}:00`;
     return /*#__PURE__*/ (0,jsx_runtime.jsxs)("div", {
         style: {
             position: 'absolute',
             inset: 0,
             backgroundColor: THEME.colors.bg,
             overflow: 'hidden',
-            transform: `scale(${cameraScale})`,
-            transformOrigin: 'center center'
+            width: 1920,
+            height: 1080
         },
         children: [
             /*#__PURE__*/ (0,jsx_runtime.jsx)(BackgroundGrid, {
-                intensity: 1.1
+                intensity: 1
             }),
             /*#__PURE__*/ (0,jsx_runtime.jsxs)("div", {
                 style: {
                     position: 'absolute',
-                    top: '50%',
-                    left: '50%',
-                    transform: 'translate(-50%, -50%)',
-                    width: 2400,
-                    height: 1400,
-                    borderRadius: 24,
-                    backgroundColor: 'rgba(15, 29, 48, 0.75)',
-                    border: `3px solid rgba(78, 168, 222, 0.35)`,
-                    boxShadow: '0 24px 80px rgba(0, 0, 0, 0.6), 0 0 40px rgba(78, 168, 222, 0.15)',
-                    backdropFilter: 'blur(20px)',
+                    inset: 0,
                     display: 'flex',
                     flexDirection: 'column',
-                    padding: 48,
+                    justifyContent: 'space-between',
+                    padding: '48px 80px 40px 80px',
                     boxSizing: 'border-box'
                 },
                 children: [
-                    /*#__PURE__*/ (0,jsx_runtime.jsxs)("div", {
+                    /*#__PURE__*/ (0,jsx_runtime.jsxs)("header", {
                         style: {
                             display: 'flex',
-                            alignItems: 'center',
                             justifyContent: 'space-between',
-                            borderBottom: '2px solid rgba(255, 255, 255, 0.08)',
-                            paddingBottom: 24
+                            alignItems: 'flex-start',
+                            borderBottom: `1px solid ${THEME.colors.border}`,
+                            paddingBottom: 20
                         },
                         children: [
                             /*#__PURE__*/ (0,jsx_runtime.jsxs)("div", {
-                                style: {
-                                    display: 'flex',
-                                    alignItems: 'center',
-                                    gap: 16,
-                                    padding: '10px 24px',
-                                    borderRadius: 9999,
-                                    backgroundColor: 'rgba(255, 123, 84, 0.15)',
-                                    border: `2px solid ${THEME.colors.warmCoral}`,
-                                    boxShadow: `0 0 24px ${THEME.colors.warmCoralGlow}`
-                                },
                                 children: [
-                                    /*#__PURE__*/ (0,jsx_runtime.jsx)("div", {
+                                    /*#__PURE__*/ (0,jsx_runtime.jsxs)("div", {
                                         style: {
-                                            width: 14,
-                                            height: 14,
-                                            borderRadius: '50%',
-                                            backgroundColor: THEME.colors.warmCoral,
-                                            transform: `scale(${livePulse})`,
-                                            boxShadow: `0 0 12px ${THEME.colors.warmCoral}`
-                                        }
-                                    }),
-                                    /*#__PURE__*/ (0,jsx_runtime.jsx)("span", {
-                                        style: {
-                                            color: THEME.colors.white,
-                                            fontSize: 22,
-                                            fontWeight: 700,
-                                            letterSpacing: 3,
-                                            fontFamily: 'system-ui, sans-serif'
+                                            display: 'flex',
+                                            alignItems: 'center',
+                                            gap: 12,
+                                            fontSize: 12,
+                                            fontFamily: 'Inter, system-ui, sans-serif',
+                                            fontWeight: 600,
+                                            letterSpacing: 2,
+                                            textTransform: 'uppercase',
+                                            color: THEME.colors.textSecondary,
+                                            marginBottom: 8
                                         },
-                                        children: "LIVE ● В ЭФИРЕ"
+                                        children: [
+                                            /*#__PURE__*/ (0,jsx_runtime.jsx)("span", {
+                                                style: {
+                                                    width: 8,
+                                                    height: 8,
+                                                    borderRadius: '50%',
+                                                    backgroundColor: THEME.colors.amber,
+                                                    boxShadow: '0 0 10px rgba(245, 158, 11, 0.5)'
+                                                }
+                                            }),
+                                            /*#__PURE__*/ (0,jsx_runtime.jsx)("span", {
+                                                children: "01 / ПРЯМОЙ ЭФИР \xb7 МОДЕЛЬ ОЦЕНКИ В РЕАЛЬНОМ ВРЕМЕНИ"
+                                            })
+                                        ]
+                                    }),
+                                    /*#__PURE__*/ (0,jsx_runtime.jsx)("h1", {
+                                        style: {
+                                            fontSize: 34,
+                                            fontWeight: 700,
+                                            color: THEME.colors.textPrimary,
+                                            letterSpacing: -0.8,
+                                            margin: 0,
+                                            lineHeight: 1.2,
+                                            fontFamily: 'Inter, system-ui, sans-serif'
+                                        },
+                                        children: "Эволюция зрительского рейтинга в прямом эфире"
+                                    }),
+                                    /*#__PURE__*/ (0,jsx_runtime.jsx)("p", {
+                                        style: {
+                                            fontSize: 15,
+                                            color: THEME.colors.textSecondary,
+                                            margin: '6px 0 0 0',
+                                            fontFamily: 'Inter, system-ui, sans-serif'
+                                        },
+                                        children: "Непрерывный байесовский пересчет отсекает ложные колебания на старте эфира"
                                     })
                                 ]
                             }),
                             /*#__PURE__*/ (0,jsx_runtime.jsxs)("div", {
                                 style: {
                                     display: 'flex',
-                                    gap: 20
+                                    flexDirection: 'column',
+                                    alignItems: 'flex-end',
+                                    gap: 6
                                 },
                                 children: [
-                                    /*#__PURE__*/ (0,jsx_runtime.jsx)(PlaceholderBox, {
-                                        width: 140,
-                                        height: 42,
-                                        variant: "pill",
-                                        accent: "neutral"
+                                    /*#__PURE__*/ (0,jsx_runtime.jsx)("div", {
+                                        style: {
+                                            fontSize: 14,
+                                            fontFamily: 'JetBrains Mono, monospace',
+                                            color: THEME.colors.cobalt,
+                                            fontWeight: 600,
+                                            fontVariantNumeric: 'tabular-nums'
+                                        },
+                                        children: timecode
                                     }),
-                                    /*#__PURE__*/ (0,jsx_runtime.jsx)(PlaceholderBox, {
-                                        width: 100,
-                                        height: 42,
-                                        variant: "pill",
-                                        accent: "neutral"
+                                    /*#__PURE__*/ (0,jsx_runtime.jsx)("div", {
+                                        style: {
+                                            fontSize: 12,
+                                            color: THEME.colors.textMuted,
+                                            fontFamily: 'Inter, system-ui, sans-serif'
+                                        },
+                                        children: "Частота обновления: 30 кадров/с"
                                     })
                                 ]
                             })
                         ]
                     }),
-                    /*#__PURE__*/ (0,jsx_runtime.jsxs)("div", {
+                    /*#__PURE__*/ (0,jsx_runtime.jsx)("div", {
                         style: {
-                            flex: 1,
                             position: 'relative',
-                            display: 'flex',
-                            alignItems: 'center',
-                            justifyContent: 'center',
-                            margin: '30px 0'
+                            width: '100%',
+                            height: 460
                         },
-                        children: [
-                            /*#__PURE__*/ (0,jsx_runtime.jsxs)("svg", {
-                                width: "100%",
-                                height: "100%",
-                                viewBox: "0 0 1600 600",
-                                style: {
-                                    position: 'absolute',
-                                    inset: 0,
-                                    overflow: 'visible'
-                                },
-                                children: [
-                                    /*#__PURE__*/ (0,jsx_runtime.jsx)("defs", {
-                                        children: /*#__PURE__*/ (0,jsx_runtime.jsxs)("linearGradient", {
-                                            id: "curve-gradient",
+                        children: /*#__PURE__*/ (0,jsx_runtime.jsxs)("svg", {
+                            width: "100%",
+                            height: "100%",
+                            viewBox: "0 0 1760 460",
+                            style: {
+                                overflow: 'visible'
+                            },
+                            children: [
+                                /*#__PURE__*/ (0,jsx_runtime.jsxs)("defs", {
+                                    children: [
+                                        /*#__PURE__*/ (0,jsx_runtime.jsxs)("linearGradient", {
+                                            id: "editorial-gradient-fill",
                                             x1: "0%",
                                             y1: "0%",
                                             x2: "0%",
@@ -20739,195 +20528,393 @@ const Scene1_LiveBroadcast = ()=>{
                                             children: [
                                                 /*#__PURE__*/ (0,jsx_runtime.jsx)("stop", {
                                                     offset: "0%",
-                                                    stopColor: THEME.colors.electricBlue,
-                                                    stopOpacity: "0.4"
+                                                    stopColor: THEME.colors.cobalt,
+                                                    stopOpacity: "0.12"
                                                 }),
                                                 /*#__PURE__*/ (0,jsx_runtime.jsx)("stop", {
                                                     offset: "100%",
-                                                    stopColor: THEME.colors.electricBlue,
+                                                    stopColor: THEME.colors.cobalt,
                                                     stopOpacity: "0.0"
                                                 })
                                             ]
+                                        }),
+                                        /*#__PURE__*/ (0,jsx_runtime.jsx)("clipPath", {
+                                            id: "editorial-curve-clip",
+                                            children: /*#__PURE__*/ (0,jsx_runtime.jsx)("rect", {
+                                                x: "0",
+                                                y: "0",
+                                                width: currentPt.x,
+                                                height: "460"
+                                            })
                                         })
-                                    }),
-                                    /*#__PURE__*/ (0,jsx_runtime.jsx)("line", {
-                                        x1: "0",
-                                        y1: "500",
-                                        x2: "1600",
-                                        y2: "500",
-                                        stroke: "rgba(255,255,255,0.1)",
-                                        strokeWidth: "2"
-                                    }),
-                                    /*#__PURE__*/ (0,jsx_runtime.jsx)("line", {
-                                        x1: "0",
-                                        y1: "350",
-                                        x2: "1600",
-                                        y2: "350",
-                                        stroke: "rgba(255,255,255,0.05)",
-                                        strokeDasharray: "6 6"
-                                    }),
-                                    /*#__PURE__*/ (0,jsx_runtime.jsx)("line", {
-                                        x1: "0",
-                                        y1: "200",
-                                        x2: "1600",
-                                        y2: "200",
-                                        stroke: "rgba(255,255,255,0.05)",
-                                        strokeDasharray: "6 6"
-                                    }),
-                                    curvePath && /*#__PURE__*/ (0,jsx_runtime.jsxs)(jsx_runtime.Fragment, {
+                                    ]
+                                }),
+                                [
+                                    {
+                                        val: '5.0 ★',
+                                        y: 80
+                                    },
+                                    {
+                                        val: '4.5 ★',
+                                        y: 160
+                                    },
+                                    {
+                                        val: '4.0 ★',
+                                        y: 240
+                                    },
+                                    {
+                                        val: '3.5 ★',
+                                        y: 320
+                                    },
+                                    {
+                                        val: '3.0 ★',
+                                        y: 400
+                                    }
+                                ].map((grid, idx)=>/*#__PURE__*/ (0,jsx_runtime.jsxs)("g", {
                                         children: [
-                                            /*#__PURE__*/ (0,jsx_runtime.jsx)("path", {
-                                                d: `${curvePath} L ${activeCurvePoints[activeCurvePoints.length - 1].x} 500 L 0 500 Z`,
-                                                fill: "url(#curve-gradient)"
+                                            /*#__PURE__*/ (0,jsx_runtime.jsx)("line", {
+                                                x1: "80",
+                                                y1: grid.y,
+                                                x2: "1720",
+                                                y2: grid.y,
+                                                stroke: THEME.colors.borderSubtle,
+                                                strokeWidth: "1"
                                             }),
-                                            /*#__PURE__*/ (0,jsx_runtime.jsx)("path", {
-                                                d: curvePath,
-                                                fill: "none",
-                                                stroke: THEME.colors.electricBlue,
-                                                strokeWidth: "5",
-                                                strokeLinecap: "round"
-                                            }),
-                                            /*#__PURE__*/ (0,jsx_runtime.jsx)("circle", {
-                                                cx: activeCurvePoints[activeCurvePoints.length - 1].x,
-                                                cy: activeCurvePoints[activeCurvePoints.length - 1].y,
-                                                r: 9,
-                                                fill: THEME.colors.white,
-                                                stroke: THEME.colors.electricBlue,
-                                                strokeWidth: "4",
-                                                filter: "drop-shadow(0 0 12px #4EA8DE)"
+                                            /*#__PURE__*/ (0,jsx_runtime.jsx)("text", {
+                                                x: "65",
+                                                y: grid.y + 4,
+                                                textAnchor: "end",
+                                                fill: THEME.colors.textMuted,
+                                                fontSize: "12",
+                                                fontFamily: "Inter, system-ui, sans-serif",
+                                                children: grid.val
                                             })
                                         ]
-                                    })
-                                ]
-                            }),
-                            /*#__PURE__*/ (0,jsx_runtime.jsx)("div", {
-                                style: {
-                                    position: 'absolute',
-                                    top: '18%',
-                                    display: 'flex',
-                                    flexDirection: 'column',
-                                    alignItems: 'center',
-                                    transform: `translateY(${questionFloat}px)`,
-                                    opacity: questionOpacity,
-                                    zIndex: 10
-                                },
-                                children: /*#__PURE__*/ (0,jsx_runtime.jsx)("div", {
-                                    style: {
-                                        fontSize: 160,
-                                        fontWeight: 900,
-                                        color: THEME.colors.white,
-                                        lineHeight: 1,
-                                        fontFamily: 'system-ui, sans-serif',
-                                        textShadow: `0 0 35px ${THEME.colors.electricBlue}, 0 0 70px ${THEME.colors.electricBlueGlow}`
-                                    },
-                                    children: "?"
+                                    }, idx)),
+                                /*#__PURE__*/ (0,jsx_runtime.jsx)("line", {
+                                    x1: "80",
+                                    y1: "410",
+                                    x2: "1720",
+                                    y2: "410",
+                                    stroke: THEME.colors.border,
+                                    strokeWidth: "1"
+                                }),
+                                [
+                                    '00:00',
+                                    '10:00',
+                                    '20:00',
+                                    '30:00',
+                                    '40:00 (Конец трансляции)'
+                                ].map((label, idx)=>{
+                                    const xPos = 80 + idx * 410;
+                                    return /*#__PURE__*/ (0,jsx_runtime.jsxs)("g", {
+                                        children: [
+                                            /*#__PURE__*/ (0,jsx_runtime.jsx)("line", {
+                                                x1: xPos,
+                                                y1: "410",
+                                                x2: xPos,
+                                                y2: "418",
+                                                stroke: THEME.colors.border,
+                                                strokeWidth: "1"
+                                            }),
+                                            /*#__PURE__*/ (0,jsx_runtime.jsx)("text", {
+                                                x: xPos,
+                                                y: "436",
+                                                textAnchor: idx === 4 ? 'end' : idx === 0 ? 'start' : 'middle',
+                                                fill: THEME.colors.textMuted,
+                                                fontSize: "11",
+                                                fontFamily: "JetBrains Mono, monospace",
+                                                children: label
+                                            })
+                                        ]
+                                    }, idx);
+                                }),
+                                curveProgress > 0 && /*#__PURE__*/ (0,jsx_runtime.jsx)("path", {
+                                    d: fullCurveData.pts.reduce((acc, pt, i)=>{
+                                        const spread = 40 * (1 - pt.t * 0.7);
+                                        return `${acc} ${i === 0 ? 'M' : 'L'} ${pt.x.toFixed(1)} ${(pt.y - spread).toFixed(1)}`;
+                                    }, '') + fullCurveData.pts.slice().reverse().reduce((acc, pt)=>{
+                                        const spread = 40 * (1 - pt.t * 0.7);
+                                        return `${acc} L ${pt.x.toFixed(1)} ${(pt.y + spread).toFixed(1)}`;
+                                    }, '') + ' Z',
+                                    fill: "rgba(56, 189, 248, 0.05)",
+                                    clipPath: "url(#editorial-curve-clip)"
+                                }),
+                                Array.from({
+                                    length: 60
+                                }).map((_, i)=>{
+                                    const ptT = i / 59;
+                                    if (ptT > curveProgress) return null;
+                                    const x = 80 + ptT * 1600;
+                                    const noiseY = 240 + Math.sin(i * 3.7) * 90 + (i % 7 === 0 ? 80 : i % 5 === 0 ? -70 : 0);
+                                    const isSpike = Math.abs(noiseY - 240) > 60;
+                                    return /*#__PURE__*/ (0,jsx_runtime.jsx)("circle", {
+                                        cx: x,
+                                        cy: noiseY,
+                                        r: isSpike ? 3.5 : 2.5,
+                                        fill: isSpike ? THEME.colors.amber : THEME.colors.cobalt,
+                                        opacity: isSpike ? 0.75 : 0.4
+                                    }, i);
+                                }),
+                                curveProgress > 0 && /*#__PURE__*/ (0,jsx_runtime.jsxs)(jsx_runtime.Fragment, {
+                                    children: [
+                                        /*#__PURE__*/ (0,jsx_runtime.jsx)("path", {
+                                            d: `${fullCurveData.d} L ${currentPt.x} 410 L 80 410 Z`,
+                                            fill: "url(#editorial-gradient-fill)",
+                                            clipPath: "url(#editorial-curve-clip)"
+                                        }),
+                                        /*#__PURE__*/ (0,jsx_runtime.jsx)("path", {
+                                            d: fullCurveData.d,
+                                            fill: "none",
+                                            stroke: THEME.colors.cobalt,
+                                            strokeWidth: "2.5",
+                                            strokeLinecap: "round",
+                                            strokeDasharray: fullCurveData.len,
+                                            strokeDashoffset: fullCurveData.len * (1 - curveProgress)
+                                        }),
+                                        /*#__PURE__*/ (0,jsx_runtime.jsx)("circle", {
+                                            cx: currentPt.x,
+                                            cy: currentPt.y,
+                                            r: 5,
+                                            fill: THEME.colors.textPrimary,
+                                            stroke: THEME.colors.cobalt,
+                                            strokeWidth: "2.5"
+                                        }),
+                                        /*#__PURE__*/ (0,jsx_runtime.jsxs)("g", {
+                                            transform: `translate(${Math.min(1560, currentPt.x + 16)}, ${currentPt.y - 14})`,
+                                            children: [
+                                                /*#__PURE__*/ (0,jsx_runtime.jsx)("rect", {
+                                                    x: "0",
+                                                    y: "-18",
+                                                    width: "130",
+                                                    height: "28",
+                                                    fill: "#0D1017",
+                                                    stroke: THEME.colors.border,
+                                                    rx: "4"
+                                                }),
+                                                /*#__PURE__*/ (0,jsx_runtime.jsx)("text", {
+                                                    x: "10",
+                                                    y: "1",
+                                                    fill: THEME.colors.textPrimary,
+                                                    fontSize: "12",
+                                                    fontWeight: "600",
+                                                    fontFamily: "JetBrains Mono, monospace",
+                                                    children: "★ 4.62 \xb1 0.12"
+                                                })
+                                            ]
+                                        })
+                                    ]
                                 })
-                            }),
-                            /*#__PURE__*/ (0,jsx_runtime.jsxs)("div", {
-                                style: {
-                                    position: 'absolute',
-                                    bottom: 20,
-                                    width: '100%',
-                                    display: 'flex',
-                                    justifyContent: 'center',
-                                    gap: 40
-                                },
-                                children: [
-                                    /*#__PURE__*/ (0,jsx_runtime.jsx)(PlaceholderBox, {
-                                        width: 340,
-                                        height: 110,
-                                        variant: "card",
-                                        cornerMarks: true,
-                                        glow: true,
-                                        pulse: true,
-                                        children: /*#__PURE__*/ (0,jsx_runtime.jsx)("div", {
-                                            style: {
-                                                width: '70%',
-                                                height: 22,
-                                                backgroundColor: 'rgba(78, 168, 222, 0.3)',
-                                                borderRadius: 6
-                                            }
-                                        })
-                                    }),
-                                    /*#__PURE__*/ (0,jsx_runtime.jsx)(PlaceholderBox, {
-                                        width: 340,
-                                        height: 110,
-                                        variant: "card",
-                                        cornerMarks: true,
-                                        glow: true,
-                                        pulse: true,
-                                        children: /*#__PURE__*/ (0,jsx_runtime.jsx)("div", {
-                                            style: {
-                                                width: '55%',
-                                                height: 22,
-                                                backgroundColor: 'rgba(78, 168, 222, 0.3)',
-                                                borderRadius: 6
-                                            }
-                                        })
-                                    }),
-                                    /*#__PURE__*/ (0,jsx_runtime.jsx)(PlaceholderBox, {
-                                        width: 340,
-                                        height: 110,
-                                        variant: "card",
-                                        cornerMarks: true,
-                                        glow: true,
-                                        pulse: true,
-                                        children: /*#__PURE__*/ (0,jsx_runtime.jsx)("div", {
-                                            style: {
-                                                width: '80%',
-                                                height: 22,
-                                                backgroundColor: 'rgba(78, 168, 222, 0.3)',
-                                                borderRadius: 6
-                                            }
-                                        })
-                                    })
-                                ]
-                            })
-                        ]
+                            ]
+                        })
                     }),
                     /*#__PURE__*/ (0,jsx_runtime.jsxs)("div", {
                         style: {
-                            marginTop: 10
+                            borderTop: `1px solid ${THEME.colors.border}`,
+                            paddingTop: 24,
+                            display: 'grid',
+                            gridTemplateColumns: 'repeat(4, 1fr)',
+                            gap: 40
                         },
                         children: [
                             /*#__PURE__*/ (0,jsx_runtime.jsxs)("div", {
                                 style: {
-                                    display: 'flex',
-                                    justifyContent: 'space-between',
-                                    marginBottom: 10,
-                                    opacity: 0.6
+                                    borderRight: `1px solid ${THEME.colors.borderSubtle}`,
+                                    paddingRight: 24
                                 },
                                 children: [
-                                    /*#__PURE__*/ (0,jsx_runtime.jsx)(PlaceholderBox, {
-                                        width: 80,
-                                        height: 16,
-                                        variant: "pill",
-                                        accent: "neutral"
+                                    /*#__PURE__*/ (0,jsx_runtime.jsx)("div", {
+                                        style: {
+                                            fontSize: 12,
+                                            textTransform: 'uppercase',
+                                            letterSpacing: 1,
+                                            color: THEME.colors.textMuted,
+                                            fontWeight: 600
+                                        },
+                                        children: "Байесовский рейтинг"
                                     }),
-                                    /*#__PURE__*/ (0,jsx_runtime.jsx)(PlaceholderBox, {
-                                        width: 80,
-                                        height: 16,
-                                        variant: "pill",
-                                        accent: "neutral"
+                                    /*#__PURE__*/ (0,jsx_runtime.jsxs)("div", {
+                                        style: {
+                                            display: 'flex',
+                                            alignItems: 'baseline',
+                                            gap: 8,
+                                            marginTop: 6
+                                        },
+                                        children: [
+                                            /*#__PURE__*/ (0,jsx_runtime.jsx)("span", {
+                                                style: {
+                                                    fontSize: 36,
+                                                    fontWeight: 700,
+                                                    color: THEME.colors.cobalt,
+                                                    fontFamily: 'Inter, system-ui, sans-serif'
+                                                },
+                                                children: "4.62"
+                                            }),
+                                            /*#__PURE__*/ (0,jsx_runtime.jsx)("span", {
+                                                style: {
+                                                    fontSize: 14,
+                                                    color: THEME.colors.textSecondary,
+                                                    fontFamily: 'JetBrains Mono, monospace'
+                                                },
+                                                children: "\xb1 0.12 (95% CI)"
+                                            })
+                                        ]
+                                    }),
+                                    /*#__PURE__*/ (0,jsx_runtime.jsx)("div", {
+                                        style: {
+                                            fontSize: 12,
+                                            color: THEME.colors.textSecondary,
+                                            marginTop: 4
+                                        },
+                                        children: "Устойчивое взвешивание"
                                     })
                                 ]
                             }),
-                            /*#__PURE__*/ (0,jsx_runtime.jsx)("div", {
+                            /*#__PURE__*/ (0,jsx_runtime.jsxs)("div", {
                                 style: {
-                                    width: '100%',
-                                    height: 12,
-                                    borderRadius: 6,
-                                    backgroundColor: 'rgba(255, 255, 255, 0.1)',
-                                    overflow: 'hidden'
+                                    borderRight: `1px solid ${THEME.colors.borderSubtle}`,
+                                    paddingRight: 24
                                 },
-                                children: /*#__PURE__*/ (0,jsx_runtime.jsx)("div", {
-                                    style: {
-                                        width: `${timelineProgress * 100}%`,
-                                        height: '100%',
-                                        backgroundColor: THEME.colors.electricBlue,
-                                        boxShadow: `0 0 16px ${THEME.colors.electricBlue}`
-                                    }
-                                })
+                                children: [
+                                    /*#__PURE__*/ (0,jsx_runtime.jsx)("div", {
+                                        style: {
+                                            fontSize: 12,
+                                            textTransform: 'uppercase',
+                                            letterSpacing: 1,
+                                            color: THEME.colors.textMuted,
+                                            fontWeight: 600
+                                        },
+                                        children: "Сырое арифметическое"
+                                    }),
+                                    /*#__PURE__*/ (0,jsx_runtime.jsxs)("div", {
+                                        style: {
+                                            display: 'flex',
+                                            alignItems: 'baseline',
+                                            gap: 8,
+                                            marginTop: 6
+                                        },
+                                        children: [
+                                            /*#__PURE__*/ (0,jsx_runtime.jsx)("span", {
+                                                style: {
+                                                    fontSize: 36,
+                                                    fontWeight: 700,
+                                                    color: THEME.colors.amber,
+                                                    fontFamily: 'Inter, system-ui, sans-serif'
+                                                },
+                                                children: "4.85"
+                                            }),
+                                            /*#__PURE__*/ (0,jsx_runtime.jsx)("span", {
+                                                style: {
+                                                    fontSize: 13,
+                                                    color: THEME.colors.amber,
+                                                    fontWeight: 600
+                                                },
+                                                children: "Шум"
+                                            })
+                                        ]
+                                    }),
+                                    /*#__PURE__*/ (0,jsx_runtime.jsx)("div", {
+                                        style: {
+                                            fontSize: 12,
+                                            color: THEME.colors.textSecondary,
+                                            marginTop: 4
+                                        },
+                                        children: "Уязвимо к малым выборкам"
+                                    })
+                                ]
+                            }),
+                            /*#__PURE__*/ (0,jsx_runtime.jsxs)("div", {
+                                style: {
+                                    borderRight: `1px solid ${THEME.colors.borderSubtle}`,
+                                    paddingRight: 24
+                                },
+                                children: [
+                                    /*#__PURE__*/ (0,jsx_runtime.jsx)("div", {
+                                        style: {
+                                            fontSize: 12,
+                                            textTransform: 'uppercase',
+                                            letterSpacing: 1,
+                                            color: THEME.colors.textMuted,
+                                            fontWeight: 600
+                                        },
+                                        children: "Объем выборки"
+                                    }),
+                                    /*#__PURE__*/ (0,jsx_runtime.jsxs)("div", {
+                                        style: {
+                                            display: 'flex',
+                                            alignItems: 'baseline',
+                                            gap: 8,
+                                            marginTop: 6
+                                        },
+                                        children: [
+                                            /*#__PURE__*/ (0,jsx_runtime.jsx)("span", {
+                                                style: {
+                                                    fontSize: 36,
+                                                    fontWeight: 700,
+                                                    color: THEME.colors.textPrimary,
+                                                    fontFamily: 'JetBrains Mono, monospace',
+                                                    fontVariantNumeric: 'tabular-nums'
+                                                },
+                                                children: currentVotes.toLocaleString('ru-RU')
+                                            }),
+                                            /*#__PURE__*/ (0,jsx_runtime.jsx)("span", {
+                                                style: {
+                                                    fontSize: 13,
+                                                    color: THEME.colors.textSecondary
+                                                },
+                                                children: "голосов"
+                                            })
+                                        ]
+                                    }),
+                                    /*#__PURE__*/ (0,jsx_runtime.jsx)("div", {
+                                        style: {
+                                            fontSize: 12,
+                                            color: THEME.colors.textSecondary,
+                                            marginTop: 4
+                                        },
+                                        children: "Поток оценок в реальном времени"
+                                    })
+                                ]
+                            }),
+                            /*#__PURE__*/ (0,jsx_runtime.jsxs)("div", {
+                                children: [
+                                    /*#__PURE__*/ (0,jsx_runtime.jsx)("div", {
+                                        style: {
+                                            fontSize: 12,
+                                            textTransform: 'uppercase',
+                                            letterSpacing: 1,
+                                            color: THEME.colors.textMuted,
+                                            fontWeight: 600
+                                        },
+                                        children: "Дисперсия апостериора"
+                                    }),
+                                    /*#__PURE__*/ (0,jsx_runtime.jsx)("div", {
+                                        style: {
+                                            display: 'flex',
+                                            alignItems: 'baseline',
+                                            gap: 8,
+                                            marginTop: 6
+                                        },
+                                        children: /*#__PURE__*/ (0,jsx_runtime.jsx)("span", {
+                                            style: {
+                                                fontSize: 36,
+                                                fontWeight: 700,
+                                                color: THEME.colors.emerald,
+                                                fontFamily: 'JetBrains Mono, monospace'
+                                            },
+                                            children: "σ\xb2 = 0.014"
+                                        })
+                                    }),
+                                    /*#__PURE__*/ (0,jsx_runtime.jsx)("div", {
+                                        style: {
+                                            fontSize: 12,
+                                            color: THEME.colors.emerald,
+                                            marginTop: 4,
+                                            fontWeight: 500
+                                        },
+                                        children: "Высокая статистическая уверенность"
+                                    })
+                                ]
                             })
                         ]
                     })
@@ -20943,481 +20930,530 @@ const Scene1_LiveBroadcast = ()=>{
 
 
 
-
 const Scene2_TwoTraps = ()=>{
     const frame = (0,esm/* .useCurrentFrame */.UC)();
-    // High-frequency jittery noise curve for left trap
+    // Smooth continuous noise waveform for Trap 1
     const leftNoisePath = (0,react.useMemo)(()=>{
-        const pointsCount = 40;
-        const width = 1100;
-        const height = 400;
+        const pointsCount = 70;
+        const width = 800;
+        const height = 260;
         return Array.from({
             length: pointsCount
         }).map((_, i)=>{
             const x = i / (pointsCount - 1) * width;
-            // high frequency erratic swings
-            const jitter = Math.sin(i * 1.8 + frame * 0.2) * 60 + Math.cos(i * 3.4) * 35;
-            const y = height / 2 + jitter;
+            const scrollT = i * 0.28 + frame * 0.045;
+            const noise = Math.sin(scrollT * 1.1) * 36 + Math.sin(scrollT * 2.3) * 20 + Math.cos(scrollT * 0.4) * 24;
+            const y = height / 2 + noise;
             return `${i === 0 ? 'M' : 'L'} ${x.toFixed(1)} ${y.toFixed(1)}`;
         }).join(' ');
     }, [
         frame
     ]);
-    // Inertia line for right trap: flat, delayed response
+    // Inertia line for Trap 2 with lagging drop
     const rightInertiaPath = (0,react.useMemo)(()=>{
-        const width = 1100;
-        const height = 400;
-        return `M 0 ${height * 0.6} L ${width * 0.7} ${height * 0.6} L ${width} ${height * 0.58}`;
+        const width = 800;
+        const height = 260;
+        return `M 0 ${height * 0.48} L ${width * 0.72} ${height * 0.48} L ${width} ${height * 0.46}`;
     }, []);
-    // Flashing alert on the right
-    const alertBlink = (0,esm/* .interpolate */.GW)(Math.sin(frame * 0.3), [
+    // Alert beacon blinking
+    const alertBlink = (0,esm/* .interpolate */.GW)(Math.sin(frame * Math.PI * 2 / 45), [
         -1,
         1
     ], [
-        0.2,
+        0.3,
         1
-    ]);
-    // Left & Right Cross (✗) appearance
-    const crossOpacity = (0,esm/* .interpolate */.GW)(frame, [
-        300,
-        360
-    ], [
-        0,
-        1
-    ], {
-        extrapolateLeft: 'clamp',
-        extrapolateRight: 'clamp'
-    });
-    // Center scale entrance in the second half
-    const scaleEntrance = (0,esm/* .interpolate */.GW)(frame, [
-        450,
-        570
-    ], [
-        0,
-        1
-    ], {
-        extrapolateLeft: 'clamp',
-        extrapolateRight: 'clamp',
-        easing: esm/* .Easing.bezier */.GS.bezier(0.16, 1, 0.3, 1)
-    });
-    // Scale oscillation settling into balance
-    const scaleTilt = (0,esm/* .interpolate */.GW)(Math.sin((frame - 450) * 0.08) * Math.exp(-(frame - 450) / 250), [
-        -1,
-        1
-    ], [
-        -18,
-        18
     ]);
     return /*#__PURE__*/ (0,jsx_runtime.jsxs)("div", {
         style: {
             position: 'absolute',
             inset: 0,
             backgroundColor: THEME.colors.bg,
-            overflow: 'hidden'
+            overflow: 'hidden',
+            width: 1920,
+            height: 1080
         },
         children: [
             /*#__PURE__*/ (0,jsx_runtime.jsx)(BackgroundGrid, {
-                intensity: 1.0
+                intensity: 1
             }),
             /*#__PURE__*/ (0,jsx_runtime.jsxs)("div", {
                 style: {
                     position: 'absolute',
                     inset: 0,
-                    display: 'grid',
-                    gridTemplateColumns: '1fr 1fr',
-                    gap: 60,
-                    padding: 80,
+                    display: 'flex',
+                    flexDirection: 'column',
+                    justifyContent: 'space-between',
+                    padding: '48px 80px 40px 80px',
                     boxSizing: 'border-box'
                 },
                 children: [
-                    /*#__PURE__*/ (0,jsx_runtime.jsxs)("div", {
+                    /*#__PURE__*/ (0,jsx_runtime.jsxs)("header", {
                         style: {
-                            position: 'relative',
-                            borderRadius: 24,
-                            backgroundColor: 'rgba(15, 29, 48, 0.6)',
-                            border: `2px solid rgba(255, 123, 84, 0.35)`,
-                            padding: 48,
                             display: 'flex',
-                            flexDirection: 'column',
-                            justifyContent: 'space-between'
+                            justifyContent: 'space-between',
+                            alignItems: 'flex-start',
+                            borderBottom: `1px solid ${THEME.colors.border}`,
+                            paddingBottom: 20
                         },
                         children: [
                             /*#__PURE__*/ (0,jsx_runtime.jsxs)("div", {
-                                style: {
-                                    display: 'flex',
-                                    justifyContent: 'space-between',
-                                    alignItems: 'center'
-                                },
                                 children: [
-                                    /*#__PURE__*/ (0,jsx_runtime.jsx)(PlaceholderBox, {
-                                        width: 260,
-                                        height: 48,
-                                        variant: "pill",
-                                        accent: "coral",
-                                        glow: true
+                                    /*#__PURE__*/ (0,jsx_runtime.jsx)("div", {
+                                        style: {
+                                            fontSize: 12,
+                                            fontFamily: 'Inter, system-ui, sans-serif',
+                                            fontWeight: 600,
+                                            letterSpacing: 2,
+                                            textTransform: 'uppercase',
+                                            color: THEME.colors.amber,
+                                            marginBottom: 8
+                                        },
+                                        children: "02 / ДИЛЕММА ОЦЕНКИ \xb7 ДВЕ КЛАССИЧЕСКИЕ КРАЙНОСТИ"
                                     }),
-                                    /*#__PURE__*/ (0,jsx_runtime.jsx)(PlaceholderBox, {
-                                        width: 120,
-                                        height: 40,
-                                        variant: "card",
-                                        accent: "coral"
+                                    /*#__PURE__*/ (0,jsx_runtime.jsx)("h1", {
+                                        style: {
+                                            fontSize: 34,
+                                            fontWeight: 700,
+                                            color: THEME.colors.textPrimary,
+                                            letterSpacing: -0.8,
+                                            margin: 0,
+                                            lineHeight: 1.2,
+                                            fontFamily: 'Inter, system-ui, sans-serif'
+                                        },
+                                        children: "Две ловушки оценки данных в прямом эфире"
+                                    }),
+                                    /*#__PURE__*/ (0,jsx_runtime.jsx)("p", {
+                                        style: {
+                                            fontSize: 15,
+                                            color: THEME.colors.textSecondary,
+                                            margin: '6px 0 0 0',
+                                            fontFamily: 'Inter, system-ui, sans-serif'
+                                        },
+                                        children: "Почему простое усреднение разрушает доверие на разных стадиях эфира"
                                     })
                                 ]
                             }),
                             /*#__PURE__*/ (0,jsx_runtime.jsx)("div", {
                                 style: {
-                                    position: 'relative',
-                                    height: 420,
-                                    margin: '20px 0'
+                                    padding: '6px 16px',
+                                    borderRadius: 6,
+                                    border: `1px solid ${THEME.colors.border}`,
+                                    fontSize: 12,
+                                    fontFamily: 'JetBrains Mono, monospace',
+                                    color: THEME.colors.textMuted
                                 },
-                                children: /*#__PURE__*/ (0,jsx_runtime.jsx)("svg", {
-                                    width: "100%",
-                                    height: "100%",
-                                    viewBox: "0 0 1100 400",
-                                    style: {
-                                        overflow: 'visible'
-                                    },
-                                    children: /*#__PURE__*/ (0,jsx_runtime.jsx)("path", {
-                                        d: leftNoisePath,
-                                        fill: "none",
-                                        stroke: THEME.colors.warmCoral,
-                                        strokeWidth: "4",
-                                        filter: "drop-shadow(0 0 10px rgba(255, 123, 84, 0.5))"
-                                    })
-                                })
-                            }),
-                            /*#__PURE__*/ (0,jsx_runtime.jsxs)("div", {
-                                style: {
-                                    display: 'flex',
-                                    flexDirection: 'column',
-                                    alignItems: 'center',
-                                    gap: 24
-                                },
-                                children: [
-                                    /*#__PURE__*/ (0,jsx_runtime.jsx)("div", {
-                                        style: {
-                                            width: 36,
-                                            height: 36,
-                                            transform: `translateY(${Math.sin(frame * 0.15) * 8}px)`,
-                                            display: 'flex',
-                                            justifyContent: 'center'
-                                        },
-                                        children: /*#__PURE__*/ (0,jsx_runtime.jsx)("svg", {
-                                            width: "36",
-                                            height: "36",
-                                            viewBox: "0 0 24 24",
-                                            fill: "none",
-                                            children: /*#__PURE__*/ (0,jsx_runtime.jsx)("path", {
-                                                d: "M12 2v14M12 16l-4-4M12 16l4-4",
-                                                stroke: THEME.colors.warmCoral,
-                                                strokeWidth: "3",
-                                                strokeLinecap: "round",
-                                                strokeLinejoin: "round"
-                                            })
-                                        })
-                                    }),
-                                    /*#__PURE__*/ (0,jsx_runtime.jsx)(PlaceholderBox, {
-                                        width: 380,
-                                        height: 76,
-                                        variant: "card",
-                                        accent: "coral",
-                                        glow: true,
-                                        pulse: true,
-                                        children: /*#__PURE__*/ (0,jsx_runtime.jsx)("div", {
-                                            style: {
-                                                width: '45%',
-                                                height: 16,
-                                                backgroundColor: THEME.colors.warmCoral,
-                                                borderRadius: 4
-                                            }
-                                        })
-                                    }),
-                                    /*#__PURE__*/ (0,jsx_runtime.jsx)("div", {
-                                        style: {
-                                            fontSize: 84,
-                                            color: THEME.colors.warmCoral,
-                                            fontWeight: 900,
-                                            opacity: crossOpacity,
-                                            textShadow: `0 0 25px ${THEME.colors.warmCoralGlow}`,
-                                            lineHeight: 1
-                                        },
-                                        children: "✗"
-                                    })
-                                ]
+                                children: "ГИПЕРРЕАКЦИЯ vs ИНЕРЦИЯ"
                             })
                         ]
                     }),
                     /*#__PURE__*/ (0,jsx_runtime.jsxs)("div", {
                         style: {
+                            flex: 1,
+                            display: 'grid',
+                            gridTemplateColumns: '1fr 1fr',
+                            gap: 80,
+                            alignItems: 'center',
                             position: 'relative',
-                            borderRadius: 24,
-                            backgroundColor: 'rgba(15, 29, 48, 0.6)',
-                            border: `2px solid rgba(108, 130, 153, 0.35)`,
-                            padding: 48,
-                            display: 'flex',
-                            flexDirection: 'column',
-                            justifyContent: 'space-between'
+                            margin: '24px 0'
                         },
                         children: [
-                            /*#__PURE__*/ (0,jsx_runtime.jsxs)("div", {
-                                style: {
-                                    display: 'flex',
-                                    justifyContent: 'space-between',
-                                    alignItems: 'center'
-                                },
-                                children: [
-                                    /*#__PURE__*/ (0,jsx_runtime.jsx)(PlaceholderBox, {
-                                        width: 260,
-                                        height: 48,
-                                        variant: "pill",
-                                        accent: "neutral"
-                                    }),
-                                    /*#__PURE__*/ (0,jsx_runtime.jsx)(PlaceholderBox, {
-                                        width: 120,
-                                        height: 40,
-                                        variant: "card",
-                                        accent: "neutral"
-                                    })
-                                ]
-                            }),
                             /*#__PURE__*/ (0,jsx_runtime.jsx)("div", {
                                 style: {
-                                    position: 'relative',
-                                    height: 420,
-                                    margin: '20px 0'
-                                },
-                                children: /*#__PURE__*/ (0,jsx_runtime.jsxs)("svg", {
-                                    width: "100%",
-                                    height: "100%",
-                                    viewBox: "0 0 1100 400",
-                                    style: {
-                                        overflow: 'visible'
-                                    },
-                                    children: [
-                                        /*#__PURE__*/ (0,jsx_runtime.jsx)("path", {
-                                            d: rightInertiaPath,
-                                            fill: "none",
-                                            stroke: THEME.colors.textMuted,
-                                            strokeWidth: "4",
-                                            strokeDasharray: "10 10"
-                                        }),
-                                        /*#__PURE__*/ (0,jsx_runtime.jsx)("circle", {
-                                            cx: 770,
-                                            cy: 240,
-                                            r: 16,
-                                            fill: THEME.colors.warmCoral,
-                                            opacity: alertBlink,
-                                            filter: "drop-shadow(0 0 16px #FF7B54)"
-                                        })
-                                    ]
-                                })
+                                    position: 'absolute',
+                                    top: '5%',
+                                    bottom: '5%',
+                                    left: '50%',
+                                    width: 1,
+                                    backgroundColor: THEME.colors.border
+                                }
                             }),
                             /*#__PURE__*/ (0,jsx_runtime.jsxs)("div", {
                                 style: {
                                     display: 'flex',
                                     flexDirection: 'column',
-                                    alignItems: 'center',
-                                    gap: 24
+                                    justifyContent: 'space-between',
+                                    height: '100%',
+                                    paddingRight: 20
                                 },
                                 children: [
+                                    /*#__PURE__*/ (0,jsx_runtime.jsxs)("div", {
+                                        children: [
+                                            /*#__PURE__*/ (0,jsx_runtime.jsxs)("div", {
+                                                style: {
+                                                    display: 'flex',
+                                                    alignItems: 'center',
+                                                    gap: 10
+                                                },
+                                                children: [
+                                                    /*#__PURE__*/ (0,jsx_runtime.jsx)("span", {
+                                                        style: {
+                                                            fontSize: 12,
+                                                            fontWeight: 700,
+                                                            letterSpacing: 1.5,
+                                                            textTransform: 'uppercase',
+                                                            color: THEME.colors.amber,
+                                                            fontFamily: 'Inter, system-ui, sans-serif'
+                                                        },
+                                                        children: "Ловушка 01 \xb7 Старт эфира"
+                                                    }),
+                                                    /*#__PURE__*/ (0,jsx_runtime.jsx)("span", {
+                                                        style: {
+                                                            fontSize: 13,
+                                                            color: THEME.colors.textMuted
+                                                        },
+                                                        children: "(N < 50 голосов)"
+                                                    })
+                                                ]
+                                            }),
+                                            /*#__PURE__*/ (0,jsx_runtime.jsx)("h2", {
+                                                style: {
+                                                    fontSize: 24,
+                                                    fontWeight: 700,
+                                                    color: THEME.colors.textPrimary,
+                                                    marginTop: 10,
+                                                    fontFamily: 'Inter, system-ui, sans-serif',
+                                                    letterSpacing: -0.5
+                                                },
+                                                children: "Паника на шуме первых откликов"
+                                            }),
+                                            /*#__PURE__*/ (0,jsx_runtime.jsx)("p", {
+                                                style: {
+                                                    fontSize: 14,
+                                                    color: THEME.colors.textSecondary,
+                                                    lineHeight: 1.5,
+                                                    marginTop: 6,
+                                                    fontFamily: 'Inter, system-ui, sans-serif'
+                                                },
+                                                children: "Один случайный хейтер на старте обрушивает среднее с 5.0 до 3.0. Система устраивает ложные тревоги, когда данных ещё нет."
+                                            })
+                                        ]
+                                    }),
                                     /*#__PURE__*/ (0,jsx_runtime.jsx)("div", {
                                         style: {
-                                            opacity: alertBlink
+                                            height: 260,
+                                            position: 'relative',
+                                            margin: '16px 0'
                                         },
                                         children: /*#__PURE__*/ (0,jsx_runtime.jsxs)("svg", {
-                                            width: "40",
-                                            height: "40",
-                                            viewBox: "0 0 24 24",
-                                            fill: "none",
+                                            width: "100%",
+                                            height: "100%",
+                                            viewBox: "0 0 800 260",
+                                            style: {
+                                                overflow: 'visible'
+                                            },
                                             children: [
-                                                /*#__PURE__*/ (0,jsx_runtime.jsx)("path", {
-                                                    d: "M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z",
-                                                    stroke: THEME.colors.textMuted,
-                                                    strokeWidth: "2"
+                                                /*#__PURE__*/ (0,jsx_runtime.jsx)("line", {
+                                                    x1: "0",
+                                                    y1: "130",
+                                                    x2: "800",
+                                                    y2: "130",
+                                                    stroke: THEME.colors.borderSubtle,
+                                                    strokeDasharray: "4 4",
+                                                    strokeWidth: "1"
+                                                }),
+                                                /*#__PURE__*/ (0,jsx_runtime.jsx)("line", {
+                                                    x1: "0",
+                                                    y1: "60",
+                                                    x2: "800",
+                                                    y2: "60",
+                                                    stroke: THEME.colors.borderSubtle,
+                                                    strokeDasharray: "2 4",
+                                                    strokeWidth: "1"
+                                                }),
+                                                /*#__PURE__*/ (0,jsx_runtime.jsx)("line", {
+                                                    x1: "0",
+                                                    y1: "200",
+                                                    x2: "800",
+                                                    y2: "200",
+                                                    stroke: THEME.colors.borderSubtle,
+                                                    strokeDasharray: "2 4",
+                                                    strokeWidth: "1"
+                                                }),
+                                                /*#__PURE__*/ (0,jsx_runtime.jsx)("text", {
+                                                    x: "0",
+                                                    y: "55",
+                                                    fill: THEME.colors.textMuted,
+                                                    fontSize: "11",
+                                                    fontFamily: "JetBrains Mono, monospace",
+                                                    children: "5.0 ★"
+                                                }),
+                                                /*#__PURE__*/ (0,jsx_runtime.jsx)("text", {
+                                                    x: "0",
+                                                    y: "195",
+                                                    fill: THEME.colors.textMuted,
+                                                    fontSize: "11",
+                                                    fontFamily: "JetBrains Mono, monospace",
+                                                    children: "2.5 ★"
                                                 }),
                                                 /*#__PURE__*/ (0,jsx_runtime.jsx)("path", {
-                                                    d: "M4 4l16 16",
-                                                    stroke: THEME.colors.warmCoral,
-                                                    strokeWidth: "2.5"
+                                                    d: leftNoisePath,
+                                                    fill: "none",
+                                                    stroke: THEME.colors.amber,
+                                                    strokeWidth: "2.5",
+                                                    strokeLinecap: "round"
+                                                }),
+                                                /*#__PURE__*/ (0,jsx_runtime.jsx)("circle", {
+                                                    cx: "280",
+                                                    cy: "50",
+                                                    r: "5",
+                                                    fill: THEME.colors.amber
+                                                }),
+                                                /*#__PURE__*/ (0,jsx_runtime.jsx)("text", {
+                                                    x: "290",
+                                                    y: "45",
+                                                    fill: THEME.colors.amber,
+                                                    fontSize: "11",
+                                                    fontFamily: "JetBrains Mono, monospace",
+                                                    children: "+1 голос ★5"
+                                                }),
+                                                /*#__PURE__*/ (0,jsx_runtime.jsx)("circle", {
+                                                    cx: "510",
+                                                    cy: "210",
+                                                    r: "5",
+                                                    fill: THEME.colors.amber
+                                                }),
+                                                /*#__PURE__*/ (0,jsx_runtime.jsx)("text", {
+                                                    x: "520",
+                                                    y: "225",
+                                                    fill: THEME.colors.amber,
+                                                    fontSize: "11",
+                                                    fontFamily: "JetBrains Mono, monospace",
+                                                    children: "-1 голос ★1"
                                                 })
                                             ]
                                         })
                                     }),
-                                    /*#__PURE__*/ (0,jsx_runtime.jsx)(PlaceholderBox, {
-                                        width: 380,
-                                        height: 76,
-                                        variant: "card",
-                                        accent: "neutral",
-                                        children: /*#__PURE__*/ (0,jsx_runtime.jsx)("div", {
-                                            style: {
-                                                width: '45%',
-                                                height: 16,
-                                                backgroundColor: THEME.colors.textMuted,
-                                                borderRadius: 4
-                                            }
-                                        })
+                                    /*#__PURE__*/ (0,jsx_runtime.jsxs)("div", {
+                                        style: {
+                                            display: 'flex',
+                                            alignItems: 'baseline',
+                                            gap: 12,
+                                            borderTop: `1px solid ${THEME.colors.borderSubtle}`,
+                                            paddingTop: 12
+                                        },
+                                        children: [
+                                            /*#__PURE__*/ (0,jsx_runtime.jsx)("span", {
+                                                style: {
+                                                    fontSize: 12,
+                                                    textTransform: 'uppercase',
+                                                    color: THEME.colors.textMuted
+                                                },
+                                                children: "Следствие:"
+                                            }),
+                                            /*#__PURE__*/ (0,jsx_runtime.jsx)("span", {
+                                                style: {
+                                                    fontSize: 13,
+                                                    color: THEME.colors.amber,
+                                                    fontWeight: 600
+                                                },
+                                                children: "Дисперсия слишком велика, чтобы верить цифрам напрямую"
+                                            })
+                                        ]
+                                    })
+                                ]
+                            }),
+                            /*#__PURE__*/ (0,jsx_runtime.jsxs)("div", {
+                                style: {
+                                    display: 'flex',
+                                    flexDirection: 'column',
+                                    justifyContent: 'space-between',
+                                    height: '100%',
+                                    paddingLeft: 20
+                                },
+                                children: [
+                                    /*#__PURE__*/ (0,jsx_runtime.jsxs)("div", {
+                                        children: [
+                                            /*#__PURE__*/ (0,jsx_runtime.jsxs)("div", {
+                                                style: {
+                                                    display: 'flex',
+                                                    alignItems: 'center',
+                                                    gap: 10
+                                                },
+                                                children: [
+                                                    /*#__PURE__*/ (0,jsx_runtime.jsx)("span", {
+                                                        style: {
+                                                            fontSize: 12,
+                                                            fontWeight: 700,
+                                                            letterSpacing: 1.5,
+                                                            textTransform: 'uppercase',
+                                                            color: THEME.colors.textSecondary,
+                                                            fontFamily: 'Inter, system-ui, sans-serif'
+                                                        },
+                                                        children: "Ловушка 02 \xb7 Зрелый эфир"
+                                                    }),
+                                                    /*#__PURE__*/ (0,jsx_runtime.jsx)("span", {
+                                                        style: {
+                                                            fontSize: 13,
+                                                            color: THEME.colors.textMuted
+                                                        },
+                                                        children: "(N > 10 000 голосов)"
+                                                    })
+                                                ]
+                                            }),
+                                            /*#__PURE__*/ (0,jsx_runtime.jsx)("h2", {
+                                                style: {
+                                                    fontSize: 24,
+                                                    fontWeight: 700,
+                                                    color: THEME.colors.textPrimary,
+                                                    marginTop: 10,
+                                                    fontFamily: 'Inter, system-ui, sans-serif',
+                                                    letterSpacing: -0.5
+                                                },
+                                                children: "Слепая инерция накопленной массы"
+                                            }),
+                                            /*#__PURE__*/ (0,jsx_runtime.jsx)("p", {
+                                                style: {
+                                                    fontSize: 14,
+                                                    color: THEME.colors.textSecondary,
+                                                    lineHeight: 1.5,
+                                                    marginTop: 6,
+                                                    fontFamily: 'Inter, system-ui, sans-serif'
+                                                },
+                                                children: "Скользящее среднее цементируется. Если на 30-й минуте пропадает звук или падает качество, рейтинг продолжит показывать 4.8."
+                                            })
+                                        ]
                                     }),
                                     /*#__PURE__*/ (0,jsx_runtime.jsx)("div", {
                                         style: {
-                                            fontSize: 84,
-                                            color: THEME.colors.warmCoral,
-                                            fontWeight: 900,
-                                            opacity: crossOpacity,
-                                            textShadow: `0 0 25px ${THEME.colors.warmCoralGlow}`,
-                                            lineHeight: 1
+                                            height: 260,
+                                            position: 'relative',
+                                            margin: '16px 0'
                                         },
-                                        children: "✗"
+                                        children: /*#__PURE__*/ (0,jsx_runtime.jsxs)("svg", {
+                                            width: "100%",
+                                            height: "100%",
+                                            viewBox: "0 0 800 260",
+                                            style: {
+                                                overflow: 'visible'
+                                            },
+                                            children: [
+                                                /*#__PURE__*/ (0,jsx_runtime.jsx)("line", {
+                                                    x1: "0",
+                                                    y1: "130",
+                                                    x2: "800",
+                                                    y2: "130",
+                                                    stroke: THEME.colors.borderSubtle,
+                                                    strokeDasharray: "4 4",
+                                                    strokeWidth: "1"
+                                                }),
+                                                /*#__PURE__*/ (0,jsx_runtime.jsx)("path", {
+                                                    d: rightInertiaPath,
+                                                    fill: "none",
+                                                    stroke: THEME.colors.textMuted,
+                                                    strokeWidth: "2.5",
+                                                    strokeDasharray: "8 8"
+                                                }),
+                                                /*#__PURE__*/ (0,jsx_runtime.jsx)("circle", {
+                                                    cx: "580",
+                                                    cy: "125",
+                                                    r: "6",
+                                                    fill: THEME.colors.amber,
+                                                    opacity: alertBlink
+                                                }),
+                                                /*#__PURE__*/ (0,jsx_runtime.jsx)("circle", {
+                                                    cx: "580",
+                                                    cy: "125",
+                                                    r: "14",
+                                                    fill: "none",
+                                                    stroke: THEME.colors.amber,
+                                                    strokeWidth: "1",
+                                                    opacity: alertBlink * 0.5
+                                                }),
+                                                /*#__PURE__*/ (0,jsx_runtime.jsx)("text", {
+                                                    x: "595",
+                                                    y: "115",
+                                                    fill: THEME.colors.amber,
+                                                    fontSize: "11",
+                                                    fontFamily: "JetBrains Mono, monospace",
+                                                    children: "Сбой трансляции (звук пропал)"
+                                                }),
+                                                /*#__PURE__*/ (0,jsx_runtime.jsx)("text", {
+                                                    x: "595",
+                                                    y: "132",
+                                                    fill: THEME.colors.textMuted,
+                                                    fontSize: "10",
+                                                    fontFamily: "Inter, system-ui, sans-serif",
+                                                    children: "Рейтинг не шелохнулся из-за инерции"
+                                                })
+                                            ]
+                                        })
+                                    }),
+                                    /*#__PURE__*/ (0,jsx_runtime.jsxs)("div", {
+                                        style: {
+                                            display: 'flex',
+                                            alignItems: 'baseline',
+                                            gap: 12,
+                                            borderTop: `1px solid ${THEME.colors.borderSubtle}`,
+                                            paddingTop: 12
+                                        },
+                                        children: [
+                                            /*#__PURE__*/ (0,jsx_runtime.jsx)("span", {
+                                                style: {
+                                                    fontSize: 12,
+                                                    textTransform: 'uppercase',
+                                                    color: THEME.colors.textMuted
+                                                },
+                                                children: "Следствие:"
+                                            }),
+                                            /*#__PURE__*/ (0,jsx_runtime.jsx)("span", {
+                                                style: {
+                                                    fontSize: 13,
+                                                    color: THEME.colors.textSecondary,
+                                                    fontWeight: 600
+                                                },
+                                                children: "Запаздывание реакции в 12–15 минут лишает смысла аналитику"
+                                            })
+                                        ]
                                     })
                                 ]
                             })
                         ]
-                    })
-                ]
-            }),
-            frame >= 450 && /*#__PURE__*/ (0,jsx_runtime.jsxs)("div", {
-                style: {
-                    position: 'absolute',
-                    top: '50%',
-                    left: '50%',
-                    transform: `translate(-50%, -50%) scale(${scaleEntrance})`,
-                    width: 880,
-                    height: 620,
-                    borderRadius: 32,
-                    backgroundColor: 'rgba(13, 27, 42, 0.95)',
-                    border: `3px solid ${THEME.colors.electricBlue}`,
-                    boxShadow: `0 30px 100px rgba(0, 0, 0, 0.8), 0 0 50px ${THEME.colors.electricBlueGlow}`,
-                    padding: 40,
-                    display: 'flex',
-                    flexDirection: 'column',
-                    alignItems: 'center',
-                    justifyContent: 'space-between',
-                    backdropFilter: 'blur(24px)',
-                    zIndex: 30
-                },
-                children: [
-                    /*#__PURE__*/ (0,jsx_runtime.jsx)(PlaceholderBox, {
-                        width: 520,
-                        height: 56,
-                        variant: "pill",
-                        accent: "blue",
-                        glow: true,
-                        pulse: true,
-                        children: /*#__PURE__*/ (0,jsx_runtime.jsx)("div", {
-                            style: {
-                                width: '60%',
-                                height: 18,
-                                backgroundColor: THEME.colors.electricBlue,
-                                borderRadius: 6
-                            }
-                        })
-                    }),
-                    /*#__PURE__*/ (0,jsx_runtime.jsx)("div", {
-                        style: {
-                            position: 'relative',
-                            width: 650,
-                            height: 260,
-                            margin: '20px 0'
-                        },
-                        children: /*#__PURE__*/ (0,jsx_runtime.jsxs)("svg", {
-                            width: "650",
-                            height: "260",
-                            viewBox: "0 0 650 260",
-                            style: {
-                                overflow: 'visible'
-                            },
-                            children: [
-                                /*#__PURE__*/ (0,jsx_runtime.jsx)("line", {
-                                    x1: "325",
-                                    y1: "50",
-                                    x2: "325",
-                                    y2: "240",
-                                    stroke: THEME.colors.white,
-                                    strokeWidth: "6"
-                                }),
-                                /*#__PURE__*/ (0,jsx_runtime.jsx)("path", {
-                                    d: "M 270 240 L 380 240",
-                                    stroke: THEME.colors.white,
-                                    strokeWidth: "6",
-                                    strokeLinecap: "round"
-                                }),
-                                /*#__PURE__*/ (0,jsx_runtime.jsx)("circle", {
-                                    cx: "325",
-                                    cy: "50",
-                                    r: "10",
-                                    fill: THEME.colors.electricBlue
-                                }),
-                                /*#__PURE__*/ (0,jsx_runtime.jsxs)("g", {
-                                    transform: `rotate(${scaleTilt}, 325, 50)`,
-                                    children: [
-                                        /*#__PURE__*/ (0,jsx_runtime.jsx)("line", {
-                                            x1: "100",
-                                            y1: "50",
-                                            x2: "550",
-                                            y2: "50",
-                                            stroke: THEME.colors.electricBlue,
-                                            strokeWidth: "6"
-                                        }),
-                                        /*#__PURE__*/ (0,jsx_runtime.jsx)("line", {
-                                            x1: "130",
-                                            y1: "50",
-                                            x2: "130",
-                                            y2: "120",
-                                            stroke: "rgba(255,255,255,0.4)",
-                                            strokeWidth: "3"
-                                        }),
-                                        /*#__PURE__*/ (0,jsx_runtime.jsx)("path", {
-                                            d: "M 70 120 Q 130 150 190 120 Z",
-                                            fill: THEME.colors.electricBlueSubtle,
-                                            stroke: THEME.colors.electricBlue,
-                                            strokeWidth: "3"
-                                        }),
-                                        /*#__PURE__*/ (0,jsx_runtime.jsx)("line", {
-                                            x1: "520",
-                                            y1: "50",
-                                            x2: "520",
-                                            y2: "120",
-                                            stroke: "rgba(255,255,255,0.4)",
-                                            strokeWidth: "3"
-                                        }),
-                                        /*#__PURE__*/ (0,jsx_runtime.jsx)("path", {
-                                            d: "M 460 120 Q 520 150 580 120 Z",
-                                            fill: THEME.colors.warmCoralSubtle,
-                                            stroke: THEME.colors.warmCoral,
-                                            strokeWidth: "3"
-                                        })
-                                    ]
-                                })
-                            ]
-                        })
                     }),
                     /*#__PURE__*/ (0,jsx_runtime.jsxs)("div", {
                         style: {
+                            borderTop: `1px solid ${THEME.colors.border}`,
+                            paddingTop: 20,
                             display: 'flex',
-                            gap: 30,
-                            width: '100%',
-                            justifyContent: 'center'
+                            justifyContent: 'space-between',
+                            alignItems: 'center'
                         },
                         children: [
-                            /*#__PURE__*/ (0,jsx_runtime.jsx)(PlaceholderBox, {
-                                width: 260,
-                                height: 70,
-                                variant: "card",
-                                accent: "blue"
+                            /*#__PURE__*/ (0,jsx_runtime.jsxs)("div", {
+                                style: {
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    gap: 16
+                                },
+                                children: [
+                                    /*#__PURE__*/ (0,jsx_runtime.jsx)("span", {
+                                        style: {
+                                            padding: '4px 10px',
+                                            borderRadius: 4,
+                                            backgroundColor: 'rgba(56, 189, 248, 0.12)',
+                                            color: THEME.colors.cobalt,
+                                            fontSize: 12,
+                                            fontFamily: 'JetBrains Mono, monospace',
+                                            fontWeight: 600
+                                        },
+                                        children: "РЕШЕНИЕ БАЙЕСА"
+                                    }),
+                                    /*#__PURE__*/ (0,jsx_runtime.jsx)("span", {
+                                        style: {
+                                            fontSize: 14,
+                                            color: THEME.colors.textPrimary,
+                                            fontFamily: 'Inter, system-ui, sans-serif'
+                                        },
+                                        children: "Баланс доверия: на старте доверяем априорному опыту, по мере накопления голосов — наблюдениям."
+                                    })
+                                ]
                             }),
                             /*#__PURE__*/ (0,jsx_runtime.jsx)("div", {
                                 style: {
-                                    fontSize: 40,
-                                    color: THEME.colors.white,
-                                    fontWeight: 700,
-                                    alignSelf: 'center'
+                                    fontSize: 13,
+                                    color: THEME.colors.cobalt,
+                                    fontFamily: 'JetBrains Mono, monospace'
                                 },
-                                children: "+"
-                            }),
-                            /*#__PURE__*/ (0,jsx_runtime.jsx)(PlaceholderBox, {
-                                width: 260,
-                                height: 70,
-                                variant: "card",
-                                accent: "coral"
+                                children: "Вес данных ∝ N / σ\xb2 →"
                             })
                         ]
                     })
@@ -21432,12 +21468,12 @@ const Scene2_TwoTraps = ()=>{
 
 
 
-const WaitingFrame = ({ durationInFrames = 150 })=>{
+const WaitingFrame = ({ durationInFrames = 150, title = 'Контрольная точка для осмысления', subtitle = 'Попробуйте сформулировать ответ до продолжения разбора' })=>{
     const frame = (0,esm/* .useCurrentFrame */.UC)();
     if (frame >= durationInFrames) {
         return null;
     }
-    // Smooth fade-in and fade-out of the waiting frame
+    // Smooth fade-in and fade-out
     const opacity = (0,esm/* .interpolate */.GW)(frame, [
         0,
         15,
@@ -21452,110 +21488,163 @@ const WaitingFrame = ({ durationInFrames = 150 })=>{
         extrapolateLeft: 'clamp',
         extrapolateRight: 'clamp'
     });
-    // Gentle pulsing glow
-    const pulse = (0,esm/* .interpolate */.GW)(Math.sin(frame * Math.PI * 2 / 30), [
-        -1,
-        1
-    ], [
-        0.75,
-        1.1
-    ]);
-    // Progress of the 5-second checkpoint (0 to 1)
-    const progress = (0,esm/* .interpolate */.GW)(frame, [
+    // Remaining progress (1 to 0)
+    const remaining = (0,esm/* .interpolate */.GW)(frame, [
         0,
         durationInFrames
     ], [
-        0,
-        1
+        1,
+        0
     ], {
         extrapolateRight: 'clamp'
     });
+    const secondsLeft = Math.max(1, Math.ceil((durationInFrames - frame) / 30));
     return /*#__PURE__*/ (0,jsx_runtime.jsxs)("div", {
         style: {
             position: 'absolute',
             inset: 0,
             pointerEvents: 'none',
             zIndex: 50,
-            opacity
+            opacity,
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'space-between',
+            padding: '50px 80px',
+            boxSizing: 'border-box',
+            backgroundColor: 'rgba(8, 9, 12, 0.94)',
+            backdropFilter: 'blur(16px)'
         },
         children: [
-            /*#__PURE__*/ (0,jsx_runtime.jsx)("div", {
-                style: {
-                    position: 'absolute',
-                    inset: 32,
-                    borderRadius: 28,
-                    border: `3px solid ${THEME.colors.electricBlue}`,
-                    boxShadow: `0 0 ${40 * pulse}px ${THEME.colors.electricBlueGlow}, inset 0 0 ${30 * pulse}px ${THEME.colors.electricBlueSubtle}`,
-                    transition: 'box-shadow 0.1s ease'
-                }
-            }),
             /*#__PURE__*/ (0,jsx_runtime.jsxs)("div", {
                 style: {
-                    position: 'absolute',
-                    top: 56,
-                    left: '50%',
-                    transform: 'translateX(-50%)',
                     display: 'flex',
                     alignItems: 'center',
-                    gap: 16,
-                    padding: '12px 28px',
-                    borderRadius: 9999,
-                    backgroundColor: 'rgba(13, 27, 42, 0.9)',
-                    border: `2px solid ${THEME.colors.electricBlue}`,
-                    boxShadow: `0 0 24px ${THEME.colors.electricBlueGlow}`
+                    justifyContent: 'space-between',
+                    borderBottom: `1px solid ${THEME.colors.border}`,
+                    paddingBottom: 24
                 },
                 children: [
-                    /*#__PURE__*/ (0,jsx_runtime.jsx)("div", {
+                    /*#__PURE__*/ (0,jsx_runtime.jsxs)("div", {
                         style: {
-                            width: 14,
-                            height: 14,
-                            borderRadius: '50%',
-                            backgroundColor: THEME.colors.warmCoral,
-                            boxShadow: `0 0 16px ${THEME.colors.warmCoralGlow}`,
-                            transform: `scale(${pulse})`
-                        }
-                    }),
-                    /*#__PURE__*/ (0,jsx_runtime.jsx)("div", {
-                        style: {
-                            width: 160,
-                            height: 8,
-                            borderRadius: 4,
-                            backgroundColor: 'rgba(255, 255, 255, 0.15)',
-                            overflow: 'hidden'
+                            display: 'flex',
+                            alignItems: 'center',
+                            gap: 16
                         },
-                        children: /*#__PURE__*/ (0,jsx_runtime.jsx)("div", {
-                            style: {
-                                width: `${(1 - progress) * 100}%`,
-                                height: '100%',
-                                backgroundColor: THEME.colors.electricBlue,
-                                boxShadow: `0 0 10px ${THEME.colors.electricBlue}`
-                            }
-                        })
+                        children: [
+                            /*#__PURE__*/ (0,jsx_runtime.jsx)("div", {
+                                style: {
+                                    width: 8,
+                                    height: 8,
+                                    borderRadius: '50%',
+                                    backgroundColor: THEME.colors.amber
+                                }
+                            }),
+                            /*#__PURE__*/ (0,jsx_runtime.jsx)("span", {
+                                style: {
+                                    fontSize: 13,
+                                    fontWeight: 600,
+                                    letterSpacing: 2,
+                                    textTransform: 'uppercase',
+                                    fontFamily: 'Inter, system-ui, sans-serif',
+                                    color: THEME.colors.textSecondary
+                                },
+                                children: "Контрольная точка \xb7 Вопрос зрителю"
+                            })
+                        ]
+                    }),
+                    /*#__PURE__*/ (0,jsx_runtime.jsxs)("div", {
+                        style: {
+                            display: 'flex',
+                            alignItems: 'center',
+                            gap: 16
+                        },
+                        children: [
+                            /*#__PURE__*/ (0,jsx_runtime.jsxs)("span", {
+                                style: {
+                                    fontSize: 14,
+                                    fontFamily: 'JetBrains Mono, monospace',
+                                    color: THEME.colors.cobalt,
+                                    fontWeight: 600,
+                                    fontVariantNumeric: 'tabular-nums'
+                                },
+                                children: [
+                                    "0",
+                                    secondsLeft,
+                                    "s"
+                                ]
+                            }),
+                            /*#__PURE__*/ (0,jsx_runtime.jsx)("div", {
+                                style: {
+                                    width: 120,
+                                    height: 2,
+                                    backgroundColor: 'rgba(255, 255, 255, 0.08)',
+                                    overflow: 'hidden'
+                                },
+                                children: /*#__PURE__*/ (0,jsx_runtime.jsx)("div", {
+                                    style: {
+                                        width: `${remaining * 100}%`,
+                                        height: '100%',
+                                        backgroundColor: THEME.colors.cobalt,
+                                        transition: 'width 0.05s linear'
+                                    }
+                                })
+                            })
+                        ]
                     })
                 ]
             }),
-            /*#__PURE__*/ (0,jsx_runtime.jsx)("div", {
+            /*#__PURE__*/ (0,jsx_runtime.jsxs)("div", {
                 style: {
-                    position: 'absolute',
-                    bottom: 56,
-                    right: 56,
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: 12,
-                    padding: '10px 20px',
-                    borderRadius: 12,
-                    backgroundColor: 'rgba(13, 27, 42, 0.8)',
-                    border: `1.5px solid ${THEME.colors.electricBlueSubtle}`
+                    maxWidth: 1200,
+                    margin: '0 auto',
+                    textAlign: 'center'
                 },
-                children: /*#__PURE__*/ (0,jsx_runtime.jsx)("div", {
-                    style: {
-                        width: 100,
-                        height: 12,
-                        borderRadius: 6,
-                        background: `linear-gradient(90deg, ${THEME.colors.electricBlue} 0%, transparent 100%)`,
-                        opacity: 0.7
-                    }
-                })
+                children: [
+                    /*#__PURE__*/ (0,jsx_runtime.jsx)("h2", {
+                        style: {
+                            fontSize: 44,
+                            fontWeight: 700,
+                            lineHeight: 1.25,
+                            color: THEME.colors.textPrimary,
+                            letterSpacing: -0.8,
+                            fontFamily: 'Inter, system-ui, sans-serif',
+                            marginBottom: 20
+                        },
+                        children: title
+                    }),
+                    /*#__PURE__*/ (0,jsx_runtime.jsx)("p", {
+                        style: {
+                            fontSize: 18,
+                            color: THEME.colors.textSecondary,
+                            lineHeight: 1.6,
+                            fontFamily: 'Inter, system-ui, sans-serif'
+                        },
+                        children: subtitle
+                    })
+                ]
+            }),
+            /*#__PURE__*/ (0,jsx_runtime.jsxs)("div", {
+                style: {
+                    borderTop: `1px solid ${THEME.colors.border}`,
+                    paddingTop: 20,
+                    display: 'flex',
+                    justifyContent: 'space-between',
+                    alignItems: 'center',
+                    fontSize: 12,
+                    color: THEME.colors.textMuted,
+                    fontFamily: 'Inter, system-ui, sans-serif'
+                },
+                children: [
+                    /*#__PURE__*/ (0,jsx_runtime.jsx)("span", {
+                        children: "Автоматическое возобновление через 5 секунд"
+                    }),
+                    /*#__PURE__*/ (0,jsx_runtime.jsx)("span", {
+                        style: {
+                            fontFamily: 'JetBrains Mono, monospace'
+                        },
+                        children: "ПРОДОЛЖЕНИЕ РАЗБОРА →"
+                    })
+                ]
             })
         ]
     });
@@ -21565,24 +21654,21 @@ const WaitingFrame = ({ durationInFrames = 150 })=>{
 
 
 
-
-const BellCurve = ({ width, height, mean = 0.5, stdDev = 0.15, color = THEME.colors.electricBlue, glowColor = THEME.colors.electricBlueGlow, showFill = true, showConfidenceInterval = false, ciWidth = 1.96, dataPoints = [], priorOutline, peakGlow = true })=>{
-    const frame = (0,esm/* .useCurrentFrame */.UC)();
-    // Generate smooth Gaussian SVG path
+const BellCurve = ({ width, height, mean = 0.5, stdDev = 0.15, color = THEME.colors.cobalt, label, showFill = true, showConfidenceInterval = false, ciWidth = 1.96, dataPoints = [], priorOutline })=>{
+    // Generate mathematically exact Gaussian SVG path
     const { pathD, areaD, peakY, peakX, ciStartX, ciEndX } = (0,react.useMemo)(()=>{
-        const pointsCount = 120;
+        const pointsCount = 140;
         const paddingX = 40;
         const usableWidth = width - paddingX * 2;
-        const usableHeight = height - 60;
-        const baselineY = height - 30;
+        const usableHeight = height - 70;
+        const baselineY = height - 35;
         const actualMeanX = paddingX + mean * usableWidth;
-        const actualStdDevX = stdDev * usableWidth;
+        const actualStdDevX = Math.max(10, stdDev * usableWidth);
         let maxVal = 0;
         const calculated = [];
         for(let i = 0; i <= pointsCount; i++){
             const x = paddingX + i / pointsCount * usableWidth;
-            const diff = (x - actualMeanX) / (actualStdDevX || 1);
-            // Gaussian: f(x) = exp(-0.5 * diff^2)
+            const diff = (x - actualMeanX) / actualStdDevX;
             const val = Math.exp(-0.5 * diff * diff);
             if (val > maxVal) maxVal = val;
             calculated.push([
@@ -21590,7 +21676,6 @@ const BellCurve = ({ width, height, mean = 0.5, stdDev = 0.15, color = THEME.col
                 val
             ]);
         }
-        // Scale to usable height
         const scaledPoints = calculated.map(([x, val])=>{
             const y = baselineY - val / (maxVal || 1) * usableHeight;
             return [
@@ -21598,7 +21683,6 @@ const BellCurve = ({ width, height, mean = 0.5, stdDev = 0.15, color = THEME.col
                 y
             ];
         });
-        // Build SVG Path
         const dStr = scaledPoints.reduce((acc, [x, y], idx)=>{
             return idx === 0 ? `M ${x.toFixed(1)} ${y.toFixed(1)}` : `${acc} L ${x.toFixed(1)} ${y.toFixed(1)}`;
         }, '');
@@ -21622,21 +21706,21 @@ const BellCurve = ({ width, height, mean = 0.5, stdDev = 0.15, color = THEME.col
         stdDev,
         ciWidth
     ]);
-    // Prior comparison path if provided
+    // Prior comparison path if provided (dashed historical curve)
     const priorPathD = (0,react.useMemo)(()=>{
         if (!priorOutline) return null;
-        const pointsCount = 80;
+        const pointsCount = 90;
         const paddingX = 40;
         const usableWidth = width - paddingX * 2;
-        const usableHeight = height - 60;
-        const baselineY = height - 30;
+        const usableHeight = height - 70;
+        const baselineY = height - 35;
         const actualMeanX = paddingX + priorOutline.mean * usableWidth;
-        const actualStdDevX = priorOutline.stdDev * usableWidth;
+        const actualStdDevX = Math.max(10, priorOutline.stdDev * usableWidth);
         let maxVal = 0;
         const calculated = [];
         for(let i = 0; i <= pointsCount; i++){
             const x = paddingX + i / pointsCount * usableWidth;
-            const diff = (x - actualMeanX) / (actualStdDevX || 1);
+            const diff = (x - actualMeanX) / actualStdDevX;
             const val = Math.exp(-0.5 * diff * diff);
             if (val > maxVal) maxVal = val;
             calculated.push([
@@ -21645,7 +21729,7 @@ const BellCurve = ({ width, height, mean = 0.5, stdDev = 0.15, color = THEME.col
             ]);
         }
         const scaled = calculated.map(([x, val])=>{
-            const y = baselineY - val / (maxVal || 1) * (usableHeight * 0.7);
+            const y = baselineY - val / (maxVal || 1) * (usableHeight * 0.65);
             return [
                 x,
                 y
@@ -21659,30 +21743,26 @@ const BellCurve = ({ width, height, mean = 0.5, stdDev = 0.15, color = THEME.col
         height,
         priorOutline
     ]);
-    const pulse = (0,esm/* .interpolate */.GW)(Math.sin(frame * 0.1), [
-        -1,
-        1
-    ], [
-        0.85,
-        1.15
-    ]);
-    return /*#__PURE__*/ (0,jsx_runtime.jsx)("div", {
+    const baselineY = height - 35;
+    return /*#__PURE__*/ (0,jsx_runtime.jsxs)("div", {
         style: {
             position: 'relative',
             width,
+            maxWidth: '100%',
             height
         },
-        children: /*#__PURE__*/ (0,jsx_runtime.jsxs)("svg", {
-            width: width,
-            height: height,
-            style: {
-                overflow: 'visible'
-            },
-            children: [
-                /*#__PURE__*/ (0,jsx_runtime.jsxs)("defs", {
-                    children: [
-                        /*#__PURE__*/ (0,jsx_runtime.jsxs)("linearGradient", {
-                            id: `grad-${color.replace(/[^a-zA-Z0-9]/g, '')}`,
+        children: [
+            /*#__PURE__*/ (0,jsx_runtime.jsxs)("svg", {
+                width: "100%",
+                height: height,
+                viewBox: `0 0 ${width} ${height}`,
+                style: {
+                    overflow: 'visible'
+                },
+                children: [
+                    /*#__PURE__*/ (0,jsx_runtime.jsx)("defs", {
+                        children: /*#__PURE__*/ (0,jsx_runtime.jsxs)("linearGradient", {
+                            id: `clean-grad-${color.replace(/[^a-zA-Z0-9]/g, '')}`,
                             x1: "0%",
                             y1: "0%",
                             x2: "0%",
@@ -21691,110 +21771,127 @@ const BellCurve = ({ width, height, mean = 0.5, stdDev = 0.15, color = THEME.col
                                 /*#__PURE__*/ (0,jsx_runtime.jsx)("stop", {
                                     offset: "0%",
                                     stopColor: color,
-                                    stopOpacity: "0.45"
-                                }),
-                                /*#__PURE__*/ (0,jsx_runtime.jsx)("stop", {
-                                    offset: "60%",
-                                    stopColor: color,
-                                    stopOpacity: "0.12"
+                                    stopOpacity: "0.18"
                                 }),
                                 /*#__PURE__*/ (0,jsx_runtime.jsx)("stop", {
                                     offset: "100%",
                                     stopColor: color,
-                                    stopOpacity: "0"
-                                })
-                            ]
-                        }),
-                        /*#__PURE__*/ (0,jsx_runtime.jsxs)("filter", {
-                            id: "glow-filter",
-                            x: "-20%",
-                            y: "-20%",
-                            width: "140%",
-                            height: "140%",
-                            children: [
-                                /*#__PURE__*/ (0,jsx_runtime.jsx)("feGaussianBlur", {
-                                    stdDeviation: "8",
-                                    result: "blur"
-                                }),
-                                /*#__PURE__*/ (0,jsx_runtime.jsx)("feComposite", {
-                                    in: "SourceGraphic",
-                                    in2: "blur",
-                                    operator: "over"
+                                    stopOpacity: "0.0"
                                 })
                             ]
                         })
-                    ]
-                }),
-                /*#__PURE__*/ (0,jsx_runtime.jsx)("line", {
-                    x1: 30,
-                    y1: height - 30,
-                    x2: width - 30,
-                    y2: height - 30,
-                    stroke: "rgba(255, 255, 255, 0.15)",
-                    strokeWidth: "2"
-                }),
-                showConfidenceInterval && /*#__PURE__*/ (0,jsx_runtime.jsx)("rect", {
-                    x: ciStartX,
-                    y: peakY,
-                    width: Math.max(10, ciEndX - ciStartX),
-                    height: height - 30 - peakY,
-                    fill: THEME.colors.electricBlueSubtle,
-                    stroke: `2px dashed ${THEME.colors.electricBlue}`,
-                    rx: 8,
-                    opacity: 0.65
-                }),
-                priorPathD && /*#__PURE__*/ (0,jsx_runtime.jsx)("path", {
-                    d: priorPathD,
-                    fill: "none",
-                    stroke: "rgba(255, 255, 255, 0.25)",
-                    strokeWidth: "2.5",
-                    strokeDasharray: "6 6"
-                }),
-                showFill && /*#__PURE__*/ (0,jsx_runtime.jsx)("path", {
-                    d: areaD,
-                    fill: `url(#grad-${color.replace(/[^a-zA-Z0-9]/g, '')})`
-                }),
-                /*#__PURE__*/ (0,jsx_runtime.jsx)("path", {
-                    d: pathD,
-                    fill: "none",
-                    stroke: color,
-                    strokeWidth: "4",
-                    filter: "url(#glow-filter)"
-                }),
-                peakGlow && /*#__PURE__*/ (0,jsx_runtime.jsx)("circle", {
-                    cx: peakX,
-                    cy: peakY,
-                    r: 7 * pulse,
-                    fill: color,
-                    boxShadow: `0 0 20px ${glowColor}`
-                }),
-                dataPoints.map((dp, idx)=>{
-                    const ptX = 40 + dp.x * (width - 80);
-                    const ptColor = dp.isOutlier ? THEME.colors.warmCoral : THEME.colors.electricBlue;
-                    return /*#__PURE__*/ (0,jsx_runtime.jsxs)("g", {
-                        children: [
-                            /*#__PURE__*/ (0,jsx_runtime.jsx)("circle", {
-                                cx: ptX,
-                                cy: height - 30,
-                                r: dp.isOutlier ? 9 : 6,
-                                fill: ptColor,
-                                opacity: 0.9
-                            }),
-                            /*#__PURE__*/ (0,jsx_runtime.jsx)("line", {
-                                x1: ptX,
-                                y1: height - 30,
-                                x2: ptX,
-                                y2: height - 55,
-                                stroke: ptColor,
-                                strokeWidth: "2",
-                                strokeDasharray: "3 3",
-                                opacity: 0.7
-                            })
-                        ]
-                    }, idx);
-                })
-            ]
-        })
+                    }),
+                    /*#__PURE__*/ (0,jsx_runtime.jsx)("line", {
+                        x1: 30,
+                        y1: baselineY,
+                        x2: width - 30,
+                        y2: baselineY,
+                        stroke: "rgba(255, 255, 255, 0.15)",
+                        strokeWidth: "1.5"
+                    }),
+                    /*#__PURE__*/ (0,jsx_runtime.jsx)("line", {
+                        x1: ciStartX,
+                        y1: baselineY,
+                        x2: ciStartX,
+                        y2: baselineY + 6,
+                        stroke: "rgba(255,255,255,0.2)",
+                        strokeWidth: "1"
+                    }),
+                    /*#__PURE__*/ (0,jsx_runtime.jsx)("line", {
+                        x1: peakX,
+                        y1: baselineY,
+                        x2: peakX,
+                        y2: baselineY + 8,
+                        stroke: "rgba(255,255,255,0.4)",
+                        strokeWidth: "1.5"
+                    }),
+                    /*#__PURE__*/ (0,jsx_runtime.jsx)("line", {
+                        x1: ciEndX,
+                        y1: baselineY,
+                        x2: ciEndX,
+                        y2: baselineY + 6,
+                        stroke: "rgba(255,255,255,0.2)",
+                        strokeWidth: "1"
+                    }),
+                    showConfidenceInterval && /*#__PURE__*/ (0,jsx_runtime.jsx)("rect", {
+                        x: ciStartX,
+                        y: peakY,
+                        width: Math.max(8, ciEndX - ciStartX),
+                        height: baselineY - peakY,
+                        fill: "rgba(56, 189, 248, 0.08)",
+                        stroke: "rgba(56, 189, 248, 0.25)",
+                        strokeDasharray: "4 4",
+                        rx: 4
+                    }),
+                    priorPathD && /*#__PURE__*/ (0,jsx_runtime.jsx)("path", {
+                        d: priorPathD,
+                        fill: "none",
+                        stroke: "rgba(255, 255, 255, 0.25)",
+                        strokeWidth: "1.5",
+                        strokeDasharray: "5 5"
+                    }),
+                    showFill && /*#__PURE__*/ (0,jsx_runtime.jsx)("path", {
+                        d: areaD,
+                        fill: `url(#clean-grad-${color.replace(/[^a-zA-Z0-9]/g, '')})`
+                    }),
+                    /*#__PURE__*/ (0,jsx_runtime.jsx)("path", {
+                        d: pathD,
+                        fill: "none",
+                        stroke: color,
+                        strokeWidth: "2.5",
+                        strokeLinecap: "round"
+                    }),
+                    /*#__PURE__*/ (0,jsx_runtime.jsx)("line", {
+                        x1: peakX,
+                        y1: peakY,
+                        x2: peakX,
+                        y2: baselineY,
+                        stroke: color,
+                        strokeWidth: "1",
+                        strokeDasharray: "3 3",
+                        opacity: 0.6
+                    }),
+                    dataPoints.map((dp, idx)=>{
+                        const ptX = 40 + dp.x * (width - 80);
+                        const ptColor = dp.isOutlier ? THEME.colors.amber : THEME.colors.cobalt;
+                        return /*#__PURE__*/ (0,jsx_runtime.jsxs)("g", {
+                            children: [
+                                /*#__PURE__*/ (0,jsx_runtime.jsx)("circle", {
+                                    cx: ptX,
+                                    cy: baselineY,
+                                    r: dp.isOutlier ? 4.5 : 3.5,
+                                    fill: ptColor,
+                                    opacity: 0.85
+                                }),
+                                /*#__PURE__*/ (0,jsx_runtime.jsx)("line", {
+                                    x1: ptX,
+                                    y1: baselineY,
+                                    x2: ptX,
+                                    y2: baselineY - 18,
+                                    stroke: ptColor,
+                                    strokeWidth: "1",
+                                    strokeDasharray: "2 2",
+                                    opacity: 0.5
+                                })
+                            ]
+                        }, idx);
+                    })
+                ]
+            }),
+            label && /*#__PURE__*/ (0,jsx_runtime.jsx)("div", {
+                style: {
+                    position: 'absolute',
+                    bottom: 6,
+                    left: '50%',
+                    transform: 'translateX(-50%)',
+                    fontSize: 12,
+                    fontFamily: 'Inter, system-ui, sans-serif',
+                    color: THEME.colors.textSecondary,
+                    fontWeight: 500
+                },
+                children: label
+            })
+        ]
     });
 };
 
@@ -21806,15 +21903,14 @@ const BellCurve = ({ width, height, mean = 0.5, stdDev = 0.15, color = THEME.col
 
 
 
-
 const Scene3_CheckpointOne = ()=>{
     const frame = (0,esm/* .useCurrentFrame */.UC)();
     // 5-second interactive pause (150 frames at 30 fps)
     const isPausedCheckpoint = frame < 150;
-    // Three cards entrance staggered after frame 150
-    const card1Entrance = (0,esm/* .interpolate */.GW)(frame, [
+    // Staggered reveal for the 3 stages
+    const stage1Entrance = (0,esm/* .interpolate */.GW)(frame, [
         150,
-        210
+        195
     ], [
         0,
         1
@@ -21823,9 +21919,9 @@ const Scene3_CheckpointOne = ()=>{
         extrapolateRight: 'clamp',
         easing: esm/* .Easing.bezier */.GS.bezier(0.16, 1, 0.3, 1)
     });
-    const card2Entrance = (0,esm/* .interpolate */.GW)(frame, [
-        230,
-        290
+    const stage2Entrance = (0,esm/* .interpolate */.GW)(frame, [
+        210,
+        255
     ], [
         0,
         1
@@ -21834,9 +21930,9 @@ const Scene3_CheckpointOne = ()=>{
         extrapolateRight: 'clamp',
         easing: esm/* .Easing.bezier */.GS.bezier(0.16, 1, 0.3, 1)
     });
-    const card3Entrance = (0,esm/* .interpolate */.GW)(frame, [
-        310,
-        370
+    const stage3Entrance = (0,esm/* .interpolate */.GW)(frame, [
+        270,
+        315
     ], [
         0,
         1
@@ -21844,62 +21940,24 @@ const Scene3_CheckpointOne = ()=>{
         extrapolateLeft: 'clamp',
         extrapolateRight: 'clamp',
         easing: esm/* .Easing.bezier */.GS.bezier(0.16, 1, 0.3, 1)
-    });
-    // Transformation of cards into graphs (fade in graph components)
-    const graph1Opacity = (0,esm/* .interpolate */.GW)(frame, [
-        220,
-        280
-    ], [
-        0,
-        1
-    ], {
-        extrapolateLeft: 'clamp',
-        extrapolateRight: 'clamp'
-    });
-    const graph2Opacity = (0,esm/* .interpolate */.GW)(frame, [
-        300,
-        360
-    ], [
-        0,
-        1
-    ], {
-        extrapolateLeft: 'clamp',
-        extrapolateRight: 'clamp'
-    });
-    const graph3Opacity = (0,esm/* .interpolate */.GW)(frame, [
-        380,
-        440
-    ], [
-        0,
-        1
-    ], {
-        extrapolateLeft: 'clamp',
-        extrapolateRight: 'clamp'
-    });
-    // Connecting bayesian graph spark
-    const sparkProgress = (0,esm/* .interpolate */.GW)(frame, [
-        360,
-        600
-    ], [
-        0,
-        1
-    ], {
-        extrapolateLeft: 'clamp',
-        extrapolateRight: 'clamp'
     });
     return /*#__PURE__*/ (0,jsx_runtime.jsxs)("div", {
         style: {
             position: 'absolute',
             inset: 0,
             backgroundColor: THEME.colors.bg,
-            overflow: 'hidden'
+            overflow: 'hidden',
+            width: 1920,
+            height: 1080
         },
         children: [
             /*#__PURE__*/ (0,jsx_runtime.jsx)(BackgroundGrid, {
-                intensity: 1.0
+                intensity: 1
             }),
             isPausedCheckpoint && /*#__PURE__*/ (0,jsx_runtime.jsx)(WaitingFrame, {
-                durationInFrames: 150
+                durationInFrames: 150,
+                title: "Контрольная точка 1: как объединить опыт и наблюдения?",
+                subtitle: "Сформулируйте, какую роль играет начальное предположение до поступления первых оценок"
             }),
             /*#__PURE__*/ (0,jsx_runtime.jsxs)("div", {
                 style: {
@@ -21907,277 +21965,350 @@ const Scene3_CheckpointOne = ()=>{
                     inset: 0,
                     display: 'flex',
                     flexDirection: 'column',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    padding: '60px 100px',
+                    justifyContent: 'space-between',
+                    padding: '48px 80px 40px 80px',
                     boxSizing: 'border-box'
                 },
                 children: [
-                    /*#__PURE__*/ (0,jsx_runtime.jsxs)("div", {
+                    /*#__PURE__*/ (0,jsx_runtime.jsxs)("header", {
                         style: {
-                            marginBottom: 50,
                             display: 'flex',
-                            gap: 24,
-                            alignItems: 'center'
+                            justifyContent: 'space-between',
+                            alignItems: 'flex-start',
+                            borderBottom: `1px solid ${THEME.colors.border}`,
+                            paddingBottom: 20
                         },
                         children: [
-                            /*#__PURE__*/ (0,jsx_runtime.jsx)(PlaceholderBox, {
-                                width: 460,
-                                height: 56,
-                                variant: "pill",
-                                accent: "blue",
-                                glow: true,
-                                children: /*#__PURE__*/ (0,jsx_runtime.jsx)("div", {
-                                    style: {
-                                        width: '50%',
-                                        height: 16,
-                                        backgroundColor: THEME.colors.electricBlue,
-                                        borderRadius: 4
-                                    }
-                                })
+                            /*#__PURE__*/ (0,jsx_runtime.jsxs)("div", {
+                                children: [
+                                    /*#__PURE__*/ (0,jsx_runtime.jsx)("div", {
+                                        style: {
+                                            fontSize: 12,
+                                            fontFamily: 'Inter, system-ui, sans-serif',
+                                            fontWeight: 600,
+                                            letterSpacing: 2,
+                                            textTransform: 'uppercase',
+                                            color: THEME.colors.cobalt,
+                                            marginBottom: 8
+                                        },
+                                        children: "03 / МАТЕМАТИЧЕСКИЙ ФУНДАМЕНТ \xb7 ТРИ ЭЛЕМЕНТА СИНТЕЗА"
+                                    }),
+                                    /*#__PURE__*/ (0,jsx_runtime.jsx)("h1", {
+                                        style: {
+                                            fontSize: 34,
+                                            fontWeight: 700,
+                                            color: THEME.colors.textPrimary,
+                                            letterSpacing: -0.8,
+                                            margin: 0,
+                                            lineHeight: 1.2,
+                                            fontFamily: 'Inter, system-ui, sans-serif'
+                                        },
+                                        children: "Три шага байесовского обновления"
+                                    }),
+                                    /*#__PURE__*/ (0,jsx_runtime.jsx)("p", {
+                                        style: {
+                                            fontSize: 15,
+                                            color: THEME.colors.textSecondary,
+                                            margin: '6px 0 0 0',
+                                            fontFamily: 'Inter, system-ui, sans-serif'
+                                        },
+                                        children: "Непрерывный переход от прошлого опыта к объективной реальности эфира"
+                                    })
+                                ]
                             }),
-                            /*#__PURE__*/ (0,jsx_runtime.jsx)(PlaceholderBox, {
-                                width: 140,
-                                height: 56,
-                                variant: "pill",
-                                accent: "coral"
+                            /*#__PURE__*/ (0,jsx_runtime.jsx)("div", {
+                                style: {
+                                    padding: '6px 16px',
+                                    borderRadius: 6,
+                                    border: `1px solid ${THEME.colors.border}`,
+                                    fontSize: 12,
+                                    fontFamily: 'JetBrains Mono, monospace',
+                                    color: THEME.colors.cobalt
+                                },
+                                children: "P(θ | D) ∝ P(D | θ) \xb7 P(θ)"
                             })
                         ]
                     }),
                     /*#__PURE__*/ (0,jsx_runtime.jsxs)("div", {
                         style: {
-                            position: 'relative',
-                            width: '100%',
-                            maxWidth: 2800,
                             display: 'grid',
-                            gridTemplateColumns: '1fr 1fr 1fr',
-                            gap: 70,
-                            alignItems: 'center'
+                            gridTemplateColumns: '1fr auto 1fr auto 1fr',
+                            gap: 24,
+                            alignItems: 'center',
+                            margin: '20px 0',
+                            width: '100%'
                         },
                         children: [
                             /*#__PURE__*/ (0,jsx_runtime.jsxs)("div", {
                                 style: {
-                                    opacity: isPausedCheckpoint ? 0.6 : card1Entrance,
-                                    transform: `translateY(${(1 - card1Entrance) * 40}px)`,
+                                    opacity: stage1Entrance,
+                                    transform: `translateY(${(1 - stage1Entrance) * 20}px)`,
                                     display: 'flex',
                                     flexDirection: 'column',
-                                    alignItems: 'center'
+                                    justifyContent: 'space-between',
+                                    height: 480,
+                                    padding: '16px 20px',
+                                    borderRight: `1px solid ${THEME.colors.borderSubtle}`
                                 },
                                 children: [
-                                    /*#__PURE__*/ (0,jsx_runtime.jsx)("div", {
-                                        style: {
-                                            marginBottom: 20
-                                        },
-                                        children: /*#__PURE__*/ (0,jsx_runtime.jsx)(PlaceholderBox, {
-                                            width: 320,
-                                            height: 52,
-                                            variant: "card",
-                                            accent: "blue",
-                                            cornerMarks: true,
-                                            glow: true,
-                                            children: /*#__PURE__*/ (0,jsx_runtime.jsx)("div", {
+                                    /*#__PURE__*/ (0,jsx_runtime.jsxs)("div", {
+                                        children: [
+                                            /*#__PURE__*/ (0,jsx_runtime.jsx)("div", {
                                                 style: {
-                                                    width: '60%',
-                                                    height: 16,
-                                                    backgroundColor: THEME.colors.electricBlue,
-                                                    borderRadius: 4
-                                                }
-                                            })
-                                        })
-                                    }),
-                                    /*#__PURE__*/ (0,jsx_runtime.jsx)("div", {
-                                        style: {
-                                            width: '100%',
-                                            height: 520,
-                                            borderRadius: 24,
-                                            backgroundColor: THEME.colors.bgCard,
-                                            border: `2px solid rgba(78, 168, 222, 0.4)`,
-                                            padding: 30,
-                                            boxSizing: 'border-box',
-                                            display: 'flex',
-                                            flexDirection: 'column',
-                                            justifyContent: 'center',
-                                            alignItems: 'center',
-                                            boxShadow: '0 20px 60px rgba(0,0,0,0.5)'
-                                        },
-                                        children: frame >= 200 ? /*#__PURE__*/ (0,jsx_runtime.jsx)("div", {
-                                            style: {
-                                                opacity: graph1Opacity,
-                                                width: '100%'
-                                            },
-                                            children: /*#__PURE__*/ (0,jsx_runtime.jsx)(BellCurve, {
-                                                width: 760,
-                                                height: 420,
-                                                mean: 0.42,
-                                                stdDev: 0.28,
-                                                color: THEME.colors.electricBlue,
-                                                showFill: true
-                                            })
-                                        }) : /*#__PURE__*/ (0,jsx_runtime.jsx)(PlaceholderBox, {
-                                            width: "90%",
-                                            height: 380,
-                                            variant: "dashed",
-                                            accent: "blue",
-                                            pulse: true
-                                        })
-                                    })
-                                ]
-                            }),
-                            /*#__PURE__*/ (0,jsx_runtime.jsxs)("div", {
-                                style: {
-                                    opacity: isPausedCheckpoint ? 0.6 : card2Entrance,
-                                    transform: `translateY(${(1 - card2Entrance) * 40}px)`,
-                                    display: 'flex',
-                                    flexDirection: 'column',
-                                    alignItems: 'center'
-                                },
-                                children: [
-                                    /*#__PURE__*/ (0,jsx_runtime.jsx)("div", {
-                                        style: {
-                                            marginBottom: 20
-                                        },
-                                        children: /*#__PURE__*/ (0,jsx_runtime.jsx)(PlaceholderBox, {
-                                            width: 320,
-                                            height: 52,
-                                            variant: "card",
-                                            accent: "coral",
-                                            cornerMarks: true,
-                                            glow: true,
-                                            children: /*#__PURE__*/ (0,jsx_runtime.jsx)("div", {
-                                                style: {
-                                                    width: '60%',
-                                                    height: 16,
-                                                    backgroundColor: THEME.colors.warmCoral,
-                                                    borderRadius: 4
-                                                }
-                                            })
-                                        })
-                                    }),
-                                    /*#__PURE__*/ (0,jsx_runtime.jsx)("div", {
-                                        style: {
-                                            width: '100%',
-                                            height: 520,
-                                            borderRadius: 24,
-                                            backgroundColor: THEME.colors.bgCard,
-                                            border: `2px solid rgba(255, 123, 84, 0.4)`,
-                                            padding: 30,
-                                            boxSizing: 'border-box',
-                                            display: 'flex',
-                                            flexDirection: 'column',
-                                            justifyContent: 'center',
-                                            alignItems: 'center',
-                                            boxShadow: '0 20px 60px rgba(0,0,0,0.5)'
-                                        },
-                                        children: frame >= 280 ? /*#__PURE__*/ (0,jsx_runtime.jsx)("div", {
-                                            style: {
-                                                opacity: graph2Opacity,
-                                                width: '100%'
-                                            },
-                                            children: /*#__PURE__*/ (0,jsx_runtime.jsx)(BellCurve, {
-                                                width: 760,
-                                                height: 420,
-                                                mean: 0.68,
-                                                stdDev: 0.16,
-                                                color: THEME.colors.warmCoral,
-                                                showFill: true,
-                                                dataPoints: [
-                                                    {
-                                                        x: 0.62
-                                                    },
-                                                    {
-                                                        x: 0.66
-                                                    },
-                                                    {
-                                                        x: 0.71
-                                                    },
-                                                    {
-                                                        x: 0.69
-                                                    },
-                                                    {
-                                                        x: 0.74
-                                                    }
-                                                ]
-                                            })
-                                        }) : /*#__PURE__*/ (0,jsx_runtime.jsx)(PlaceholderBox, {
-                                            width: "90%",
-                                            height: 380,
-                                            variant: "dashed",
-                                            accent: "coral",
-                                            pulse: true
-                                        })
-                                    })
-                                ]
-                            }),
-                            /*#__PURE__*/ (0,jsx_runtime.jsxs)("div", {
-                                style: {
-                                    opacity: isPausedCheckpoint ? 0.6 : card3Entrance,
-                                    transform: `translateY(${(1 - card3Entrance) * 40}px)`,
-                                    display: 'flex',
-                                    flexDirection: 'column',
-                                    alignItems: 'center'
-                                },
-                                children: [
-                                    /*#__PURE__*/ (0,jsx_runtime.jsx)("div", {
-                                        style: {
-                                            marginBottom: 20
-                                        },
-                                        children: /*#__PURE__*/ (0,jsx_runtime.jsx)(PlaceholderBox, {
-                                            width: 320,
-                                            height: 52,
-                                            variant: "card",
-                                            accent: "blue",
-                                            cornerMarks: true,
-                                            glow: true,
-                                            children: /*#__PURE__*/ (0,jsx_runtime.jsx)("div", {
-                                                style: {
-                                                    width: '70%',
-                                                    height: 16,
-                                                    backgroundColor: THEME.colors.electricBlue,
-                                                    borderRadius: 4
-                                                }
-                                            })
-                                        })
-                                    }),
-                                    /*#__PURE__*/ (0,jsx_runtime.jsx)("div", {
-                                        style: {
-                                            width: '100%',
-                                            height: 520,
-                                            borderRadius: 24,
-                                            backgroundColor: THEME.colors.bgCardHighlight,
-                                            border: `3px solid ${THEME.colors.electricBlue}`,
-                                            padding: 30,
-                                            boxSizing: 'border-box',
-                                            display: 'flex',
-                                            flexDirection: 'column',
-                                            justifyContent: 'center',
-                                            alignItems: 'center',
-                                            boxShadow: `0 20px 60px rgba(0,0,0,0.6), 0 0 40px ${THEME.colors.electricBlueGlow}`
-                                        },
-                                        children: frame >= 360 ? /*#__PURE__*/ (0,jsx_runtime.jsx)("div", {
-                                            style: {
-                                                opacity: graph3Opacity,
-                                                width: '100%'
-                                            },
-                                            children: /*#__PURE__*/ (0,jsx_runtime.jsx)(BellCurve, {
-                                                width: 760,
-                                                height: 420,
-                                                mean: 0.61,
-                                                stdDev: 0.12,
-                                                color: THEME.colors.electricBlue,
-                                                priorOutline: {
-                                                    mean: 0.42,
-                                                    stdDev: 0.28
+                                                    fontSize: 12,
+                                                    fontFamily: 'JetBrains Mono, monospace',
+                                                    color: THEME.colors.textMuted
                                                 },
-                                                showFill: true,
-                                                showConfidenceInterval: true
+                                                children: "ЭТАП 01"
+                                            }),
+                                            /*#__PURE__*/ (0,jsx_runtime.jsx)("h2", {
+                                                style: {
+                                                    fontSize: 22,
+                                                    fontWeight: 700,
+                                                    color: THEME.colors.textPrimary,
+                                                    margin: '6px 0 4px 0'
+                                                },
+                                                children: "Априор P(θ)"
+                                            }),
+                                            /*#__PURE__*/ (0,jsx_runtime.jsx)("div", {
+                                                style: {
+                                                    fontSize: 13,
+                                                    color: THEME.colors.textSecondary,
+                                                    lineHeight: 1.4
+                                                },
+                                                children: "Историческая база: рейтинг похожих стримов до начала эфира (μ₀ = 4.2)."
                                             })
-                                        }) : /*#__PURE__*/ (0,jsx_runtime.jsx)(PlaceholderBox, {
-                                            width: "90%",
-                                            height: 380,
-                                            variant: "dashed",
-                                            accent: "blue",
-                                            pulse: true
+                                        ]
+                                    }),
+                                    /*#__PURE__*/ (0,jsx_runtime.jsx)("div", {
+                                        style: {
+                                            width: '100%',
+                                            height: 260
+                                        },
+                                        children: /*#__PURE__*/ (0,jsx_runtime.jsx)(BellCurve, {
+                                            width: 460,
+                                            height: 260,
+                                            mean: 0.42,
+                                            stdDev: 0.24,
+                                            color: THEME.colors.textSecondary,
+                                            label: "Широкая дисперсия (неопределенность)"
                                         })
+                                    }),
+                                    /*#__PURE__*/ (0,jsx_runtime.jsx)("div", {
+                                        style: {
+                                            borderTop: `1px solid ${THEME.colors.borderSubtle}`,
+                                            paddingTop: 10,
+                                            fontSize: 12,
+                                            color: THEME.colors.textMuted
+                                        },
+                                        children: "Защищает рейтинг от шоков первых секунд"
+                                    })
+                                ]
+                            }),
+                            /*#__PURE__*/ (0,jsx_runtime.jsxs)("div", {
+                                style: {
+                                    opacity: stage2Entrance,
+                                    display: 'flex',
+                                    flexDirection: 'column',
+                                    alignItems: 'center',
+                                    gap: 6
+                                },
+                                children: [
+                                    /*#__PURE__*/ (0,jsx_runtime.jsx)("span", {
+                                        style: {
+                                            fontSize: 24,
+                                            color: THEME.colors.amber,
+                                            fontWeight: 300
+                                        },
+                                        children: "+"
+                                    }),
+                                    /*#__PURE__*/ (0,jsx_runtime.jsx)("span", {
+                                        style: {
+                                            fontSize: 10,
+                                            fontFamily: 'JetBrains Mono, monospace',
+                                            color: THEME.colors.textMuted,
+                                            letterSpacing: 1
+                                        },
+                                        children: "ДАННЫЕ"
+                                    })
+                                ]
+                            }),
+                            /*#__PURE__*/ (0,jsx_runtime.jsxs)("div", {
+                                style: {
+                                    opacity: stage2Entrance,
+                                    transform: `translateY(${(1 - stage2Entrance) * 20}px)`,
+                                    display: 'flex',
+                                    flexDirection: 'column',
+                                    justifyContent: 'space-between',
+                                    height: 480,
+                                    padding: '16px 20px',
+                                    borderRight: `1px solid ${THEME.colors.borderSubtle}`
+                                },
+                                children: [
+                                    /*#__PURE__*/ (0,jsx_runtime.jsxs)("div", {
+                                        children: [
+                                            /*#__PURE__*/ (0,jsx_runtime.jsx)("div", {
+                                                style: {
+                                                    fontSize: 12,
+                                                    fontFamily: 'JetBrains Mono, monospace',
+                                                    color: THEME.colors.amber
+                                                },
+                                                children: "ЭТАП 02"
+                                            }),
+                                            /*#__PURE__*/ (0,jsx_runtime.jsx)("h2", {
+                                                style: {
+                                                    fontSize: 22,
+                                                    fontWeight: 700,
+                                                    color: THEME.colors.textPrimary,
+                                                    margin: '6px 0 4px 0'
+                                                },
+                                                children: "Правдоподобие P(D|θ)"
+                                            }),
+                                            /*#__PURE__*/ (0,jsx_runtime.jsx)("div", {
+                                                style: {
+                                                    fontSize: 13,
+                                                    color: THEME.colors.textSecondary,
+                                                    lineHeight: 1.4
+                                                },
+                                                children: "Живой поток зрительских оценок во время трансляции (x̄ = 4.75)."
+                                            })
+                                        ]
+                                    }),
+                                    /*#__PURE__*/ (0,jsx_runtime.jsx)("div", {
+                                        style: {
+                                            width: '100%',
+                                            height: 260
+                                        },
+                                        children: /*#__PURE__*/ (0,jsx_runtime.jsx)(BellCurve, {
+                                            width: 460,
+                                            height: 260,
+                                            mean: 0.68,
+                                            stdDev: 0.16,
+                                            color: THEME.colors.amber,
+                                            dataPoints: [
+                                                {
+                                                    x: 0.62
+                                                },
+                                                {
+                                                    x: 0.68
+                                                },
+                                                {
+                                                    x: 0.71
+                                                },
+                                                {
+                                                    x: 0.35,
+                                                    isOutlier: true
+                                                }
+                                            ],
+                                            label: "Выборка оценок текущего эфира"
+                                        })
+                                    }),
+                                    /*#__PURE__*/ (0,jsx_runtime.jsx)("div", {
+                                        style: {
+                                            borderTop: `1px solid ${THEME.colors.borderSubtle}`,
+                                            paddingTop: 10,
+                                            fontSize: 12,
+                                            color: THEME.colors.textMuted
+                                        },
+                                        children: "Каждый новый голос смещает фокус модели"
+                                    })
+                                ]
+                            }),
+                            /*#__PURE__*/ (0,jsx_runtime.jsxs)("div", {
+                                style: {
+                                    opacity: stage3Entrance,
+                                    display: 'flex',
+                                    flexDirection: 'column',
+                                    alignItems: 'center',
+                                    gap: 6
+                                },
+                                children: [
+                                    /*#__PURE__*/ (0,jsx_runtime.jsx)("span", {
+                                        style: {
+                                            fontSize: 24,
+                                            color: THEME.colors.cobalt,
+                                            fontWeight: 300
+                                        },
+                                        children: "⇒"
+                                    }),
+                                    /*#__PURE__*/ (0,jsx_runtime.jsx)("span", {
+                                        style: {
+                                            fontSize: 10,
+                                            fontFamily: 'JetBrains Mono, monospace',
+                                            color: THEME.colors.textMuted,
+                                            letterSpacing: 1
+                                        },
+                                        children: "СИНТЕЗ"
+                                    })
+                                ]
+                            }),
+                            /*#__PURE__*/ (0,jsx_runtime.jsxs)("div", {
+                                style: {
+                                    opacity: stage3Entrance,
+                                    transform: `translateY(${(1 - stage3Entrance) * 20}px)`,
+                                    display: 'flex',
+                                    flexDirection: 'column',
+                                    justifyContent: 'space-between',
+                                    height: 480,
+                                    padding: '16px 20px'
+                                },
+                                children: [
+                                    /*#__PURE__*/ (0,jsx_runtime.jsxs)("div", {
+                                        children: [
+                                            /*#__PURE__*/ (0,jsx_runtime.jsx)("div", {
+                                                style: {
+                                                    fontSize: 12,
+                                                    fontFamily: 'JetBrains Mono, monospace',
+                                                    color: THEME.colors.cobalt
+                                                },
+                                                children: "ЭТАП 03"
+                                            }),
+                                            /*#__PURE__*/ (0,jsx_runtime.jsx)("h2", {
+                                                style: {
+                                                    fontSize: 22,
+                                                    fontWeight: 700,
+                                                    color: THEME.colors.textPrimary,
+                                                    margin: '6px 0 4px 0'
+                                                },
+                                                children: "Апостериор P(θ|D)"
+                                            }),
+                                            /*#__PURE__*/ (0,jsx_runtime.jsx)("div", {
+                                                style: {
+                                                    fontSize: 13,
+                                                    color: THEME.colors.textSecondary,
+                                                    lineHeight: 1.4
+                                                },
+                                                children: "Итоговый математический рейтинг с сужающимся доверительным коридором."
+                                            })
+                                        ]
+                                    }),
+                                    /*#__PURE__*/ (0,jsx_runtime.jsx)("div", {
+                                        style: {
+                                            width: '100%',
+                                            height: 260
+                                        },
+                                        children: /*#__PURE__*/ (0,jsx_runtime.jsx)(BellCurve, {
+                                            width: 460,
+                                            height: 260,
+                                            mean: 0.62,
+                                            stdDev: 0.09,
+                                            color: THEME.colors.cobalt,
+                                            showConfidenceInterval: true,
+                                            priorOutline: {
+                                                mean: 0.42,
+                                                stdDev: 0.24
+                                            },
+                                            label: "Сжатая дисперсия: μ = 4.62 \xb1 0.12"
+                                        })
+                                    }),
+                                    /*#__PURE__*/ (0,jsx_runtime.jsx)("div", {
+                                        style: {
+                                            borderTop: `1px solid ${THEME.colors.borderSubtle}`,
+                                            paddingTop: 10,
+                                            fontSize: 12,
+                                            color: THEME.colors.textMuted
+                                        },
+                                        children: "Узкий пик означает высокую точность"
                                     })
                                 ]
                             })
@@ -22185,44 +22316,50 @@ const Scene3_CheckpointOne = ()=>{
                     }),
                     /*#__PURE__*/ (0,jsx_runtime.jsxs)("div", {
                         style: {
-                            marginTop: 60,
+                            borderTop: `1px solid ${THEME.colors.border}`,
+                            paddingTop: 20,
                             display: 'flex',
-                            gap: 40,
+                            justifyContent: 'space-between',
                             alignItems: 'center'
                         },
                         children: [
-                            /*#__PURE__*/ (0,jsx_runtime.jsx)(PlaceholderBox, {
-                                width: 260,
-                                height: 46,
-                                variant: "pill",
-                                accent: "neutral"
+                            /*#__PURE__*/ (0,jsx_runtime.jsxs)("div", {
+                                style: {
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    gap: 16
+                                },
+                                children: [
+                                    /*#__PURE__*/ (0,jsx_runtime.jsx)("span", {
+                                        style: {
+                                            padding: '4px 10px',
+                                            borderRadius: 4,
+                                            backgroundColor: 'rgba(56, 189, 248, 0.12)',
+                                            color: THEME.colors.cobalt,
+                                            fontSize: 12,
+                                            fontFamily: 'JetBrains Mono, monospace',
+                                            fontWeight: 600
+                                        },
+                                        children: "ПРАВИЛО ПРИРОСТА ИНФОРМАЦИИ"
+                                    }),
+                                    /*#__PURE__*/ (0,jsx_runtime.jsx)("span", {
+                                        style: {
+                                            fontSize: 14,
+                                            color: THEME.colors.textPrimary,
+                                            fontFamily: 'Inter, system-ui, sans-serif'
+                                        },
+                                        children: "Точность апостериора равна сумме точности априора и точности выборки: 1/σ\xb2_post = 1/σ\xb2_0 + N/σ\xb2"
+                                    })
+                                ]
                             }),
                             /*#__PURE__*/ (0,jsx_runtime.jsx)("div", {
                                 style: {
-                                    width: 140,
-                                    height: 3,
-                                    backgroundColor: THEME.colors.electricBlueGlow
-                                }
-                            }),
-                            /*#__PURE__*/ (0,jsx_runtime.jsx)(PlaceholderBox, {
-                                width: 260,
-                                height: 46,
-                                variant: "pill",
-                                accent: "coral"
-                            }),
-                            /*#__PURE__*/ (0,jsx_runtime.jsx)("div", {
-                                style: {
-                                    width: 140,
-                                    height: 3,
-                                    backgroundColor: THEME.colors.electricBlueGlow
-                                }
-                            }),
-                            /*#__PURE__*/ (0,jsx_runtime.jsx)(PlaceholderBox, {
-                                width: 260,
-                                height: 46,
-                                variant: "pill",
-                                accent: "blue",
-                                glow: true
+                                    fontSize: 13,
+                                    color: THEME.colors.emerald,
+                                    fontFamily: 'JetBrains Mono, monospace',
+                                    fontWeight: 600
+                                },
+                                children: "Дисперсия монотонно убывает ✓"
                             })
                         ]
                     })
@@ -22238,14 +22375,12 @@ const Scene3_CheckpointOne = ()=>{
 
 
 
-
-
 const Scene4_Formula = ()=>{
     const frame = (0,esm/* .useCurrentFrame */.UC)();
-    // Entrance of each formula term
-    const termPosteriorEntrance = (0,esm/* .interpolate */.GW)(frame, [
-        30,
-        90
+    // Sequential mathematical term reveals
+    const termPosterior = (0,esm/* .interpolate */.GW)(frame, [
+        15,
+        45
     ], [
         0,
         1
@@ -22254,9 +22389,9 @@ const Scene4_Formula = ()=>{
         extrapolateRight: 'clamp',
         easing: esm/* .Easing.bezier */.GS.bezier(0.16, 1, 0.3, 1)
     });
-    const termLikelihoodEntrance = (0,esm/* .interpolate */.GW)(frame, [
-        80,
-        140
+    const termLikelihood = (0,esm/* .interpolate */.GW)(frame, [
+        50,
+        80
     ], [
         0,
         1
@@ -22265,9 +22400,9 @@ const Scene4_Formula = ()=>{
         extrapolateRight: 'clamp',
         easing: esm/* .Easing.bezier */.GS.bezier(0.16, 1, 0.3, 1)
     });
-    const termPriorEntrance = (0,esm/* .interpolate */.GW)(frame, [
-        130,
-        190
+    const termPrior = (0,esm/* .interpolate */.GW)(frame, [
+        85,
+        115
     ], [
         0,
         1
@@ -22276,12 +22411,9 @@ const Scene4_Formula = ()=>{
         extrapolateRight: 'clamp',
         easing: esm/* .Easing.bezier */.GS.bezier(0.16, 1, 0.3, 1)
     });
-    // Spark stream animation flowing between terms
-    const sparkPhase = frame * 0.08 % 1;
-    // Synthesis curve emergence at the bottom
-    const synthesisEntrance = (0,esm/* .interpolate */.GW)(frame, [
-        220,
-        320
+    const gaussianSolution = (0,esm/* .interpolate */.GW)(frame, [
+        150,
+        200
     ], [
         0,
         1
@@ -22295,11 +22427,13 @@ const Scene4_Formula = ()=>{
             position: 'absolute',
             inset: 0,
             backgroundColor: THEME.colors.bg,
-            overflow: 'hidden'
+            overflow: 'hidden',
+            width: 1920,
+            height: 1080
         },
         children: [
             /*#__PURE__*/ (0,jsx_runtime.jsx)(BackgroundGrid, {
-                intensity: 1.1
+                intensity: 1
             }),
             /*#__PURE__*/ (0,jsx_runtime.jsxs)("div", {
                 style: {
@@ -22307,209 +22441,342 @@ const Scene4_Formula = ()=>{
                     inset: 0,
                     display: 'flex',
                     flexDirection: 'column',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    padding: '60px 100px',
+                    justifyContent: 'space-between',
+                    padding: '48px 80px 40px 80px',
                     boxSizing: 'border-box'
                 },
                 children: [
-                    /*#__PURE__*/ (0,jsx_runtime.jsx)("div", {
+                    /*#__PURE__*/ (0,jsx_runtime.jsxs)("header", {
                         style: {
-                            marginBottom: 70
+                            display: 'flex',
+                            justifyContent: 'space-between',
+                            alignItems: 'flex-start',
+                            borderBottom: `1px solid ${THEME.colors.border}`,
+                            paddingBottom: 20
                         },
-                        children: /*#__PURE__*/ (0,jsx_runtime.jsx)(PlaceholderBox, {
-                            width: 500,
-                            height: 60,
-                            variant: "pill",
-                            accent: "blue",
-                            glow: true,
-                            children: /*#__PURE__*/ (0,jsx_runtime.jsx)("div", {
+                        children: [
+                            /*#__PURE__*/ (0,jsx_runtime.jsxs)("div", {
+                                children: [
+                                    /*#__PURE__*/ (0,jsx_runtime.jsx)("div", {
+                                        style: {
+                                            fontSize: 12,
+                                            fontFamily: 'Inter, system-ui, sans-serif',
+                                            fontWeight: 600,
+                                            letterSpacing: 2,
+                                            textTransform: 'uppercase',
+                                            color: THEME.colors.cobalt,
+                                            marginBottom: 8
+                                        },
+                                        children: "04 / ТЕОРЕМА БАЙЕСА \xb7 ТОЧНАЯ АНАЛИТИЧЕСКАЯ ФОРМА"
+                                    }),
+                                    /*#__PURE__*/ (0,jsx_runtime.jsx)("h1", {
+                                        style: {
+                                            fontSize: 34,
+                                            fontWeight: 700,
+                                            color: THEME.colors.textPrimary,
+                                            letterSpacing: -0.8,
+                                            margin: 0,
+                                            lineHeight: 1.2,
+                                            fontFamily: 'Inter, system-ui, sans-serif'
+                                        },
+                                        children: "Формула байесовского взвешивания"
+                                    }),
+                                    /*#__PURE__*/ (0,jsx_runtime.jsx)("p", {
+                                        style: {
+                                            fontSize: 15,
+                                            color: THEME.colors.textSecondary,
+                                            margin: '6px 0 0 0',
+                                            fontFamily: 'Inter, system-ui, sans-serif'
+                                        },
+                                        children: "Математический закон пропорционального сложения опыта и новых свидетельств"
+                                    })
+                                ]
+                            }),
+                            /*#__PURE__*/ (0,jsx_runtime.jsx)("div", {
                                 style: {
-                                    width: '60%',
-                                    height: 18,
-                                    backgroundColor: THEME.colors.electricBlue,
-                                    borderRadius: 6
-                                }
+                                    padding: '6px 16px',
+                                    borderRadius: 6,
+                                    border: `1px solid ${THEME.colors.border}`,
+                                    fontSize: 12,
+                                    fontFamily: 'JetBrains Mono, monospace',
+                                    color: THEME.colors.emerald
+                                },
+                                children: "ТОЧНОЕ РЕШЕНИЕ (БЕЗ MCMC)"
                             })
-                        })
+                        ]
                     }),
                     /*#__PURE__*/ (0,jsx_runtime.jsxs)("div", {
                         style: {
                             display: 'flex',
+                            flexDirection: 'column',
                             alignItems: 'center',
                             justifyContent: 'center',
-                            gap: 40,
-                            marginBottom: 80
+                            margin: '20px 0'
                         },
                         children: [
                             /*#__PURE__*/ (0,jsx_runtime.jsxs)("div", {
                                 style: {
-                                    opacity: termPosteriorEntrance,
-                                    transform: `scale(${termPosteriorEntrance})`,
                                     display: 'flex',
-                                    flexDirection: 'column',
                                     alignItems: 'center',
-                                    gap: 16
+                                    gap: 36,
+                                    fontSize: 54,
+                                    fontFamily: 'JetBrains Mono, monospace',
+                                    color: THEME.colors.textPrimary
                                 },
                                 children: [
-                                    /*#__PURE__*/ (0,jsx_runtime.jsx)(PlaceholderBox, {
-                                        width: 420,
-                                        height: 130,
-                                        variant: "card",
-                                        accent: "blue",
-                                        glow: true,
-                                        pulse: true,
-                                        cornerMarks: true,
-                                        children: /*#__PURE__*/ (0,jsx_runtime.jsxs)("div", {
-                                            style: {
-                                                display: 'flex',
-                                                gap: 14,
-                                                alignItems: 'center'
-                                            },
-                                            children: [
-                                                /*#__PURE__*/ (0,jsx_runtime.jsx)("div", {
-                                                    style: {
-                                                        width: 140,
-                                                        height: 26,
-                                                        backgroundColor: THEME.colors.electricBlue,
-                                                        borderRadius: 6
-                                                    }
-                                                }),
-                                                /*#__PURE__*/ (0,jsx_runtime.jsx)("div", {
-                                                    style: {
-                                                        width: 4,
-                                                        height: 32,
-                                                        backgroundColor: 'rgba(255,255,255,0.4)'
-                                                    }
-                                                }),
-                                                /*#__PURE__*/ (0,jsx_runtime.jsx)("div", {
-                                                    style: {
-                                                        width: 110,
-                                                        height: 26,
-                                                        backgroundColor: 'rgba(78, 168, 222, 0.5)',
-                                                        borderRadius: 6
-                                                    }
-                                                })
-                                            ]
-                                        })
+                                    /*#__PURE__*/ (0,jsx_runtime.jsxs)("div", {
+                                        style: {
+                                            opacity: termPosterior,
+                                            transform: `scale(${0.96 + termPosterior * 0.04})`,
+                                            display: 'flex',
+                                            flexDirection: 'column',
+                                            alignItems: 'center'
+                                        },
+                                        children: [
+                                            /*#__PURE__*/ (0,jsx_runtime.jsx)("span", {
+                                                style: {
+                                                    color: THEME.colors.cobalt,
+                                                    fontWeight: 700
+                                                },
+                                                children: "P(θ | D)"
+                                            }),
+                                            /*#__PURE__*/ (0,jsx_runtime.jsx)("div", {
+                                                style: {
+                                                    width: '100%',
+                                                    height: 1,
+                                                    backgroundColor: THEME.colors.cobalt,
+                                                    margin: '10px 0 6px 0',
+                                                    opacity: 0.5
+                                                }
+                                            }),
+                                            /*#__PURE__*/ (0,jsx_runtime.jsx)("span", {
+                                                style: {
+                                                    fontSize: 13,
+                                                    fontFamily: 'Inter, system-ui, sans-serif',
+                                                    color: THEME.colors.cobalt,
+                                                    fontWeight: 600
+                                                },
+                                                children: "Апостериор"
+                                            }),
+                                            /*#__PURE__*/ (0,jsx_runtime.jsx)("span", {
+                                                style: {
+                                                    fontSize: 11,
+                                                    fontFamily: 'Inter, system-ui, sans-serif',
+                                                    color: THEME.colors.textMuted
+                                                },
+                                                children: "Обновленный рейтинг"
+                                            })
+                                        ]
                                     }),
-                                    /*#__PURE__*/ (0,jsx_runtime.jsx)(PlaceholderBox, {
-                                        width: 180,
-                                        height: 32,
-                                        variant: "pill",
-                                        accent: "neutral"
+                                    /*#__PURE__*/ (0,jsx_runtime.jsx)("span", {
+                                        style: {
+                                            color: THEME.colors.textMuted,
+                                            fontSize: 44,
+                                            fontWeight: 300,
+                                            marginBottom: 40
+                                        },
+                                        children: "∝"
+                                    }),
+                                    /*#__PURE__*/ (0,jsx_runtime.jsxs)("div", {
+                                        style: {
+                                            opacity: termLikelihood,
+                                            transform: `scale(${0.96 + termLikelihood * 0.04})`,
+                                            display: 'flex',
+                                            flexDirection: 'column',
+                                            alignItems: 'center'
+                                        },
+                                        children: [
+                                            /*#__PURE__*/ (0,jsx_runtime.jsx)("span", {
+                                                style: {
+                                                    color: THEME.colors.amber,
+                                                    fontWeight: 700
+                                                },
+                                                children: "P(D | θ)"
+                                            }),
+                                            /*#__PURE__*/ (0,jsx_runtime.jsx)("div", {
+                                                style: {
+                                                    width: '100%',
+                                                    height: 1,
+                                                    backgroundColor: THEME.colors.amber,
+                                                    margin: '10px 0 6px 0',
+                                                    opacity: 0.5
+                                                }
+                                            }),
+                                            /*#__PURE__*/ (0,jsx_runtime.jsx)("span", {
+                                                style: {
+                                                    fontSize: 13,
+                                                    fontFamily: 'Inter, system-ui, sans-serif',
+                                                    color: THEME.colors.amber,
+                                                    fontWeight: 600
+                                                },
+                                                children: "Правдоподобие"
+                                            }),
+                                            /*#__PURE__*/ (0,jsx_runtime.jsx)("span", {
+                                                style: {
+                                                    fontSize: 11,
+                                                    fontFamily: 'Inter, system-ui, sans-serif',
+                                                    color: THEME.colors.textMuted
+                                                },
+                                                children: "Текущие оценки эфира"
+                                            })
+                                        ]
+                                    }),
+                                    /*#__PURE__*/ (0,jsx_runtime.jsx)("span", {
+                                        style: {
+                                            color: THEME.colors.textMuted,
+                                            fontSize: 36,
+                                            fontWeight: 300,
+                                            marginBottom: 40
+                                        },
+                                        children: "\xd7"
+                                    }),
+                                    /*#__PURE__*/ (0,jsx_runtime.jsxs)("div", {
+                                        style: {
+                                            opacity: termPrior,
+                                            transform: `scale(${0.96 + termPrior * 0.04})`,
+                                            display: 'flex',
+                                            flexDirection: 'column',
+                                            alignItems: 'center'
+                                        },
+                                        children: [
+                                            /*#__PURE__*/ (0,jsx_runtime.jsx)("span", {
+                                                style: {
+                                                    color: THEME.colors.textSecondary,
+                                                    fontWeight: 700
+                                                },
+                                                children: "P(θ)"
+                                            }),
+                                            /*#__PURE__*/ (0,jsx_runtime.jsx)("div", {
+                                                style: {
+                                                    width: '100%',
+                                                    height: 1,
+                                                    backgroundColor: THEME.colors.textMuted,
+                                                    margin: '10px 0 6px 0',
+                                                    opacity: 0.5
+                                                }
+                                            }),
+                                            /*#__PURE__*/ (0,jsx_runtime.jsx)("span", {
+                                                style: {
+                                                    fontSize: 13,
+                                                    fontFamily: 'Inter, system-ui, sans-serif',
+                                                    color: THEME.colors.textSecondary,
+                                                    fontWeight: 600
+                                                },
+                                                children: "Априор"
+                                            }),
+                                            /*#__PURE__*/ (0,jsx_runtime.jsx)("span", {
+                                                style: {
+                                                    fontSize: 11,
+                                                    fontFamily: 'Inter, system-ui, sans-serif',
+                                                    color: THEME.colors.textMuted
+                                                },
+                                                children: "Историческая база"
+                                            })
+                                        ]
                                     })
                                 ]
                             }),
-                            /*#__PURE__*/ (0,jsx_runtime.jsx)("div", {
-                                style: {
-                                    fontSize: 90,
-                                    color: THEME.colors.white,
-                                    fontWeight: 300,
-                                    fontFamily: 'serif',
-                                    textShadow: `0 0 20px ${THEME.colors.electricBlueGlow}`,
-                                    padding: '0 10px'
-                                },
-                                children: "∝"
-                            }),
                             /*#__PURE__*/ (0,jsx_runtime.jsxs)("div", {
                                 style: {
-                                    opacity: termLikelihoodEntrance,
-                                    transform: `scale(${termLikelihoodEntrance})`,
+                                    opacity: gaussianSolution,
+                                    transform: `translateY(${(1 - gaussianSolution) * 20}px)`,
+                                    marginTop: 48,
+                                    width: '100%',
+                                    maxWidth: 1200,
+                                    borderTop: `1px solid ${THEME.colors.border}`,
+                                    paddingTop: 32,
                                     display: 'flex',
-                                    flexDirection: 'column',
-                                    alignItems: 'center',
-                                    gap: 16
+                                    justifyContent: 'space-between',
+                                    alignItems: 'center'
                                 },
                                 children: [
-                                    /*#__PURE__*/ (0,jsx_runtime.jsx)(PlaceholderBox, {
-                                        width: 420,
-                                        height: 130,
-                                        variant: "card",
-                                        accent: "coral",
-                                        glow: true,
-                                        cornerMarks: true,
-                                        children: /*#__PURE__*/ (0,jsx_runtime.jsxs)("div", {
-                                            style: {
-                                                display: 'flex',
-                                                gap: 14,
-                                                alignItems: 'center'
-                                            },
-                                            children: [
-                                                /*#__PURE__*/ (0,jsx_runtime.jsx)("div", {
-                                                    style: {
-                                                        width: 110,
-                                                        height: 26,
-                                                        backgroundColor: THEME.colors.warmCoral,
-                                                        borderRadius: 6
-                                                    }
-                                                }),
-                                                /*#__PURE__*/ (0,jsx_runtime.jsx)("div", {
-                                                    style: {
-                                                        width: 4,
-                                                        height: 32,
-                                                        backgroundColor: 'rgba(255,255,255,0.4)'
-                                                    }
-                                                }),
-                                                /*#__PURE__*/ (0,jsx_runtime.jsx)("div", {
-                                                    style: {
-                                                        width: 140,
-                                                        height: 26,
-                                                        backgroundColor: 'rgba(255, 123, 84, 0.5)',
-                                                        borderRadius: 6
-                                                    }
-                                                })
-                                            ]
-                                        })
+                                    /*#__PURE__*/ (0,jsx_runtime.jsxs)("div", {
+                                        children: [
+                                            /*#__PURE__*/ (0,jsx_runtime.jsx)("div", {
+                                                style: {
+                                                    fontSize: 12,
+                                                    fontFamily: 'JetBrains Mono, monospace',
+                                                    color: THEME.colors.cobalt,
+                                                    letterSpacing: 1
+                                                },
+                                                children: "ГАУССОВСКОЕ СОПРЯЖЕННОЕ РЕШЕНИЕ"
+                                            }),
+                                            /*#__PURE__*/ (0,jsx_runtime.jsx)("div", {
+                                                style: {
+                                                    fontSize: 26,
+                                                    fontFamily: 'JetBrains Mono, monospace',
+                                                    color: THEME.colors.textPrimary,
+                                                    marginTop: 8,
+                                                    fontWeight: 600
+                                                },
+                                                children: "μ_post = ( μ₀ / σ₀\xb2 + N \xb7 x̄ / σ\xb2 ) / ( 1 / σ₀\xb2 + N / σ\xb2 )"
+                                            }),
+                                            /*#__PURE__*/ (0,jsx_runtime.jsxs)("div", {
+                                                style: {
+                                                    fontSize: 14,
+                                                    color: THEME.colors.textSecondary,
+                                                    marginTop: 10,
+                                                    lineHeight: 1.5,
+                                                    fontFamily: 'Inter, system-ui, sans-serif'
+                                                },
+                                                children: [
+                                                    "Каждый источник голосует своим весом, равным точности (1 / σ\xb2).",
+                                                    /*#__PURE__*/ (0,jsx_runtime.jsx)("br", {}),
+                                                    "Больше объем выборки N — тем сильнее вес наблюдаемых данных x̄."
+                                                ]
+                                            })
+                                        ]
                                     }),
-                                    /*#__PURE__*/ (0,jsx_runtime.jsx)(PlaceholderBox, {
-                                        width: 180,
-                                        height: 32,
-                                        variant: "pill",
-                                        accent: "coral"
-                                    })
-                                ]
-                            }),
-                            /*#__PURE__*/ (0,jsx_runtime.jsx)("div", {
-                                style: {
-                                    fontSize: 70,
-                                    color: THEME.colors.white,
-                                    fontWeight: 400,
-                                    fontFamily: 'sans-serif',
-                                    padding: '0 10px'
-                                },
-                                children: "\xd7"
-                            }),
-                            /*#__PURE__*/ (0,jsx_runtime.jsxs)("div", {
-                                style: {
-                                    opacity: termPriorEntrance,
-                                    transform: `scale(${termPriorEntrance})`,
-                                    display: 'flex',
-                                    flexDirection: 'column',
-                                    alignItems: 'center',
-                                    gap: 16
-                                },
-                                children: [
-                                    /*#__PURE__*/ (0,jsx_runtime.jsx)(PlaceholderBox, {
-                                        width: 360,
-                                        height: 130,
-                                        variant: "card",
-                                        accent: "blue",
-                                        cornerMarks: true,
-                                        children: /*#__PURE__*/ (0,jsx_runtime.jsx)("div", {
-                                            style: {
-                                                width: 180,
-                                                height: 26,
-                                                backgroundColor: THEME.colors.electricBlue,
-                                                borderRadius: 6
-                                            }
-                                        })
-                                    }),
-                                    /*#__PURE__*/ (0,jsx_runtime.jsx)(PlaceholderBox, {
-                                        width: 160,
-                                        height: 32,
-                                        variant: "pill",
-                                        accent: "neutral"
+                                    /*#__PURE__*/ (0,jsx_runtime.jsxs)("div", {
+                                        style: {
+                                            borderLeft: `1px solid ${THEME.colors.borderSubtle}`,
+                                            paddingLeft: 40,
+                                            display: 'flex',
+                                            flexDirection: 'column',
+                                            gap: 12
+                                        },
+                                        children: [
+                                            /*#__PURE__*/ (0,jsx_runtime.jsxs)("div", {
+                                                children: [
+                                                    /*#__PURE__*/ (0,jsx_runtime.jsx)("div", {
+                                                        style: {
+                                                            fontSize: 11,
+                                                            color: THEME.colors.textMuted,
+                                                            textTransform: 'uppercase'
+                                                        },
+                                                        children: "Сложность вычисления"
+                                                    }),
+                                                    /*#__PURE__*/ (0,jsx_runtime.jsx)("div", {
+                                                        style: {
+                                                            fontSize: 20,
+                                                            fontWeight: 700,
+                                                            color: THEME.colors.emerald,
+                                                            fontFamily: 'JetBrains Mono, monospace'
+                                                        },
+                                                        children: "O(1) \xb7 0.05 мс"
+                                                    })
+                                                ]
+                                            }),
+                                            /*#__PURE__*/ (0,jsx_runtime.jsxs)("div", {
+                                                children: [
+                                                    /*#__PURE__*/ (0,jsx_runtime.jsx)("div", {
+                                                        style: {
+                                                            fontSize: 11,
+                                                            color: THEME.colors.textMuted,
+                                                            textTransform: 'uppercase'
+                                                        },
+                                                        children: "Применимость"
+                                                    }),
+                                                    /*#__PURE__*/ (0,jsx_runtime.jsx)("div", {
+                                                        style: {
+                                                            fontSize: 14,
+                                                            color: THEME.colors.textSecondary
+                                                        },
+                                                        children: "Мгновенный real-time расчет"
+                                                    })
+                                                ]
+                                            })
+                                        ]
                                     })
                                 ]
                             })
@@ -22517,66 +22784,25 @@ const Scene4_Formula = ()=>{
                     }),
                     /*#__PURE__*/ (0,jsx_runtime.jsxs)("div", {
                         style: {
-                            position: 'relative',
-                            width: 1200,
-                            height: 380,
-                            opacity: synthesisEntrance,
-                            transform: `scale(${synthesisEntrance})`,
+                            borderTop: `1px solid ${THEME.colors.border}`,
+                            paddingTop: 20,
                             display: 'flex',
-                            justifyContent: 'center',
-                            alignItems: 'center'
+                            justifyContent: 'space-between',
+                            alignItems: 'center',
+                            fontSize: 13,
+                            color: THEME.colors.textSecondary,
+                            fontFamily: 'Inter, system-ui, sans-serif'
                         },
                         children: [
-                            /*#__PURE__*/ (0,jsx_runtime.jsxs)("svg", {
-                                width: "100%",
-                                height: "100%",
-                                viewBox: "0 0 1200 380",
-                                style: {
-                                    position: 'absolute',
-                                    inset: 0,
-                                    overflow: 'visible'
-                                },
-                                children: [
-                                    /*#__PURE__*/ (0,jsx_runtime.jsx)("path", {
-                                        d: "M 200 0 C 200 120, 500 140, 600 160",
-                                        fill: "none",
-                                        stroke: THEME.colors.electricBlue,
-                                        strokeWidth: "3",
-                                        strokeDasharray: "8 8",
-                                        strokeDashoffset: -frame * 3,
-                                        opacity: 0.6
-                                    }),
-                                    /*#__PURE__*/ (0,jsx_runtime.jsx)("path", {
-                                        d: "M 1000 0 C 1000 120, 700 140, 600 160",
-                                        fill: "none",
-                                        stroke: THEME.colors.warmCoral,
-                                        strokeWidth: "3",
-                                        strokeDasharray: "8 8",
-                                        strokeDashoffset: -frame * 3,
-                                        opacity: 0.6
-                                    })
-                                ]
+                            /*#__PURE__*/ (0,jsx_runtime.jsx)("span", {
+                                children: "При N → 0 рейтинг строго равен априору μ₀. При N → ∞ рейтинг стремится к истинному среднему зрителей x̄."
                             }),
-                            /*#__PURE__*/ (0,jsx_runtime.jsx)("div", {
+                            /*#__PURE__*/ (0,jsx_runtime.jsx)("span", {
                                 style: {
-                                    width: 900,
-                                    height: 340,
-                                    borderRadius: 24,
-                                    backgroundColor: 'rgba(19, 34, 56, 0.9)',
-                                    border: `2px solid ${THEME.colors.electricBlue}`,
-                                    boxShadow: `0 0 50px ${THEME.colors.electricBlueGlow}`,
-                                    padding: 20,
-                                    boxSizing: 'border-box'
+                                    fontFamily: 'JetBrains Mono, monospace',
+                                    color: THEME.colors.cobalt
                                 },
-                                children: /*#__PURE__*/ (0,jsx_runtime.jsx)(BellCurve, {
-                                    width: 860,
-                                    height: 300,
-                                    mean: 0.55,
-                                    stdDev: 0.11,
-                                    color: THEME.colors.electricBlue,
-                                    showFill: true,
-                                    showConfidenceInterval: true
-                                })
+                                children: "НЕПРЕРЫВНЫЙ БАЛАНС →"
                             })
                         ]
                     })
@@ -22597,50 +22823,35 @@ const Scene4_Formula = ()=>{
 const Scene5_CheckpointTwo = ()=>{
     const frame = (0,esm/* .useCurrentFrame */.UC)();
     const isPausedCheckpoint = frame < 150;
-    // Particle simulation for chaotic noisy stream (left)
-    const noisyParticles = (0,react.useMemo)(()=>{
-        return Array.from({
-            length: 30
-        }).map((_, i)=>({
-                id: i,
-                offset: i * 37 % 100,
-                jitterX: Math.sin(i * 1.5) * 60,
-                jitterY: Math.cos(i * 2.3) * 40,
-                speed: 0.8 + i % 4 * 0.4
-            }));
-    }, []);
-    // Particle simulation for dense stable stream (right)
-    const denseParticles = (0,react.useMemo)(()=>{
-        return Array.from({
-            length: 45
-        }).map((_, i)=>({
-                id: i,
-                offset: i * 23 % 100,
-                speed: 1.2 + i % 3 * 0.2
-            }));
-    }, []);
-    // Output needle deflection (heavily influenced by the dense stream, barely by noise)
-    const needleAngle = (0,esm/* .interpolate */.GW)(Math.sin(frame * 0.05), [
-        -1,
-        1
+    // Comparison animation entrance
+    const comparisonEntrance = (0,esm/* .interpolate */.GW)(frame, [
+        150,
+        200
     ], [
-        12,
-        28
-    ] // biased towards informative stream
-    );
+        0,
+        1
+    ], {
+        extrapolateLeft: 'clamp',
+        extrapolateRight: 'clamp',
+        easing: esm/* .Easing.bezier */.GS.bezier(0.16, 1, 0.3, 1)
+    });
     return /*#__PURE__*/ (0,jsx_runtime.jsxs)("div", {
         style: {
             position: 'absolute',
             inset: 0,
             backgroundColor: THEME.colors.bg,
-            overflow: 'hidden'
+            overflow: 'hidden',
+            width: 1920,
+            height: 1080
         },
         children: [
             /*#__PURE__*/ (0,jsx_runtime.jsx)(BackgroundGrid, {
-                intensity: 1.1
+                intensity: 1
             }),
             isPausedCheckpoint && /*#__PURE__*/ (0,jsx_runtime.jsx)(WaitingFrame, {
-                durationInFrames: 150
+                durationInFrames: 150,
+                title: "Контрольная точка 2: сколько голосов нужно, чтобы перевесить априорный опыт?",
+                subtitle: "Подумайте, нужен ли искусственный порог или математика регулирует баланс сама"
             }),
             /*#__PURE__*/ (0,jsx_runtime.jsxs)("div", {
                 style: {
@@ -22648,76 +22859,197 @@ const Scene5_CheckpointTwo = ()=>{
                     inset: 0,
                     display: 'flex',
                     flexDirection: 'column',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    padding: '60px 100px',
+                    justifyContent: 'space-between',
+                    padding: '48px 80px 40px 80px',
                     boxSizing: 'border-box'
                 },
                 children: [
-                    /*#__PURE__*/ (0,jsx_runtime.jsx)("div", {
+                    /*#__PURE__*/ (0,jsx_runtime.jsxs)("header", {
                         style: {
-                            marginBottom: 40,
                             display: 'flex',
-                            gap: 30,
-                            alignItems: 'center'
+                            justifyContent: 'space-between',
+                            alignItems: 'flex-start',
+                            borderBottom: `1px solid ${THEME.colors.border}`,
+                            paddingBottom: 20
                         },
-                        children: /*#__PURE__*/ (0,jsx_runtime.jsx)(PlaceholderBox, {
-                            width: 500,
-                            height: 56,
-                            variant: "pill",
-                            accent: "blue",
-                            glow: true,
-                            children: /*#__PURE__*/ (0,jsx_runtime.jsx)("div", {
+                        children: [
+                            /*#__PURE__*/ (0,jsx_runtime.jsxs)("div", {
+                                children: [
+                                    /*#__PURE__*/ (0,jsx_runtime.jsx)("div", {
+                                        style: {
+                                            fontSize: 12,
+                                            fontFamily: 'Inter, system-ui, sans-serif',
+                                            fontWeight: 600,
+                                            letterSpacing: 2,
+                                            textTransform: 'uppercase',
+                                            color: THEME.colors.cobalt,
+                                            marginBottom: 8
+                                        },
+                                        children: "05 / МАСШТАБ ВЫБОРКИ \xb7 САМОРЕГУЛЯЦИЯ БАЙЕСА"
+                                    }),
+                                    /*#__PURE__*/ (0,jsx_runtime.jsx)("h1", {
+                                        style: {
+                                            fontSize: 34,
+                                            fontWeight: 700,
+                                            color: THEME.colors.textPrimary,
+                                            letterSpacing: -0.8,
+                                            margin: 0,
+                                            lineHeight: 1.2,
+                                            fontFamily: 'Inter, system-ui, sans-serif'
+                                        },
+                                        children: "Автоматическое взвешивание объёма данных"
+                                    }),
+                                    /*#__PURE__*/ (0,jsx_runtime.jsx)("p", {
+                                        style: {
+                                            fontSize: 15,
+                                            color: THEME.colors.textSecondary,
+                                            margin: '6px 0 0 0',
+                                            fontFamily: 'Inter, system-ui, sans-serif'
+                                        },
+                                        children: "Плавный самонастраивающийся переход от защиты от шума к полной демократии данных"
+                                    })
+                                ]
+                            }),
+                            /*#__PURE__*/ (0,jsx_runtime.jsx)("div", {
                                 style: {
-                                    width: '55%',
-                                    height: 16,
-                                    backgroundColor: THEME.colors.electricBlue,
-                                    borderRadius: 4
-                                }
+                                    padding: '6px 16px',
+                                    borderRadius: 6,
+                                    border: `1px solid ${THEME.colors.border}`,
+                                    fontSize: 12,
+                                    fontFamily: 'JetBrains Mono, monospace',
+                                    color: THEME.colors.textMuted
+                                },
+                                children: "N = 10 vs N = 10 000"
                             })
-                        })
+                        ]
                     }),
                     /*#__PURE__*/ (0,jsx_runtime.jsxs)("div", {
                         style: {
-                            width: '100%',
-                            maxWidth: 2200,
-                            display: 'flex',
-                            justifyContent: 'space-between',
-                            marginBottom: 20,
-                            padding: '0 80px',
-                            boxSizing: 'border-box'
+                            opacity: comparisonEntrance,
+                            transform: `translateY(${(1 - comparisonEntrance) * 20}px)`,
+                            flex: 1,
+                            display: 'grid',
+                            gridTemplateColumns: '1fr 1fr',
+                            gap: 80,
+                            alignItems: 'center',
+                            position: 'relative',
+                            margin: '20px 0'
                         },
                         children: [
+                            /*#__PURE__*/ (0,jsx_runtime.jsx)("div", {
+                                style: {
+                                    position: 'absolute',
+                                    top: '5%',
+                                    bottom: '5%',
+                                    left: '50%',
+                                    width: 1,
+                                    backgroundColor: THEME.colors.border
+                                }
+                            }),
                             /*#__PURE__*/ (0,jsx_runtime.jsxs)("div", {
                                 style: {
                                     display: 'flex',
                                     flexDirection: 'column',
-                                    alignItems: 'center',
-                                    gap: 12
+                                    justifyContent: 'space-between',
+                                    height: '100%',
+                                    paddingRight: 20
                                 },
                                 children: [
-                                    /*#__PURE__*/ (0,jsx_runtime.jsx)(PlaceholderBox, {
-                                        width: 340,
-                                        height: 60,
-                                        variant: "card",
-                                        accent: "coral",
-                                        glow: true,
-                                        children: /*#__PURE__*/ (0,jsx_runtime.jsx)("div", {
-                                            style: {
-                                                width: '50%',
-                                                height: 16,
-                                                backgroundColor: THEME.colors.warmCoral,
-                                                borderRadius: 4
-                                            }
-                                        })
+                                    /*#__PURE__*/ (0,jsx_runtime.jsxs)("div", {
+                                        children: [
+                                            /*#__PURE__*/ (0,jsx_runtime.jsxs)("div", {
+                                                style: {
+                                                    display: 'flex',
+                                                    alignItems: 'center',
+                                                    gap: 10
+                                                },
+                                                children: [
+                                                    /*#__PURE__*/ (0,jsx_runtime.jsx)("span", {
+                                                        style: {
+                                                            fontSize: 12,
+                                                            fontWeight: 700,
+                                                            letterSpacing: 1.5,
+                                                            textTransform: 'uppercase',
+                                                            color: THEME.colors.amber,
+                                                            fontFamily: 'Inter, system-ui, sans-serif'
+                                                        },
+                                                        children: "Сценарий А \xb7 Малая выборка"
+                                                    }),
+                                                    /*#__PURE__*/ (0,jsx_runtime.jsx)("span", {
+                                                        style: {
+                                                            fontSize: 13,
+                                                            color: THEME.colors.textMuted,
+                                                            fontFamily: 'JetBrains Mono, monospace'
+                                                        },
+                                                        children: "N = 10"
+                                                    })
+                                                ]
+                                            }),
+                                            /*#__PURE__*/ (0,jsx_runtime.jsx)("h2", {
+                                                style: {
+                                                    fontSize: 24,
+                                                    fontWeight: 700,
+                                                    color: THEME.colors.textPrimary,
+                                                    marginTop: 10,
+                                                    fontFamily: 'Inter, system-ui, sans-serif',
+                                                    letterSpacing: -0.5
+                                                },
+                                                children: "Априор удерживает центр тяжести"
+                                            }),
+                                            /*#__PURE__*/ (0,jsx_runtime.jsx)("p", {
+                                                style: {
+                                                    fontSize: 14,
+                                                    color: THEME.colors.textSecondary,
+                                                    lineHeight: 1.5,
+                                                    marginTop: 6,
+                                                    fontFamily: 'Inter, system-ui, sans-serif'
+                                                },
+                                                children: "10 случайных оценок не могут разрушить исторический ориентир. Рейтинг смещается аккуратно, оберегая зрителей от волатильности."
+                                            })
+                                        ]
                                     }),
                                     /*#__PURE__*/ (0,jsx_runtime.jsx)("div", {
                                         style: {
-                                            width: 120,
-                                            height: 10,
-                                            backgroundColor: 'rgba(255, 123, 84, 0.3)',
-                                            borderRadius: 5
-                                        }
+                                            width: '100%',
+                                            height: 260
+                                        },
+                                        children: /*#__PURE__*/ (0,jsx_runtime.jsx)(BellCurve, {
+                                            width: 700,
+                                            height: 260,
+                                            mean: 0.44,
+                                            stdDev: 0.18,
+                                            color: THEME.colors.amber,
+                                            priorOutline: {
+                                                mean: 0.40,
+                                                stdDev: 0.22
+                                            },
+                                            showConfidenceInterval: true,
+                                            label: "Апостериор (μ = 4.12) привязан к априору (μ₀ = 4.0)"
+                                        })
+                                    }),
+                                    /*#__PURE__*/ (0,jsx_runtime.jsxs)("div", {
+                                        style: {
+                                            display: 'flex',
+                                            justifyContent: 'space-between',
+                                            borderTop: `1px solid ${THEME.colors.borderSubtle}`,
+                                            paddingTop: 12,
+                                            fontSize: 12,
+                                            fontFamily: 'JetBrains Mono, monospace'
+                                        },
+                                        children: [
+                                            /*#__PURE__*/ (0,jsx_runtime.jsx)("span", {
+                                                style: {
+                                                    color: THEME.colors.textMuted
+                                                },
+                                                children: "ВЕС АПРИОРА: 82%"
+                                            }),
+                                            /*#__PURE__*/ (0,jsx_runtime.jsx)("span", {
+                                                style: {
+                                                    color: THEME.colors.amber
+                                                },
+                                                children: "ВЕС ДАННЫХ: 18%"
+                                            })
+                                        ]
                                     })
                                 ]
                             }),
@@ -22725,206 +23057,132 @@ const Scene5_CheckpointTwo = ()=>{
                                 style: {
                                     display: 'flex',
                                     flexDirection: 'column',
-                                    alignItems: 'center',
-                                    gap: 12
+                                    justifyContent: 'space-between',
+                                    height: '100%',
+                                    paddingLeft: 20
                                 },
                                 children: [
-                                    /*#__PURE__*/ (0,jsx_runtime.jsx)(PlaceholderBox, {
-                                        width: 340,
-                                        height: 60,
-                                        variant: "card",
-                                        accent: "blue",
-                                        glow: true,
-                                        children: /*#__PURE__*/ (0,jsx_runtime.jsx)("div", {
-                                            style: {
-                                                width: '65%',
-                                                height: 16,
-                                                backgroundColor: THEME.colors.electricBlue,
-                                                borderRadius: 4
-                                            }
-                                        })
+                                    /*#__PURE__*/ (0,jsx_runtime.jsxs)("div", {
+                                        children: [
+                                            /*#__PURE__*/ (0,jsx_runtime.jsxs)("div", {
+                                                style: {
+                                                    display: 'flex',
+                                                    alignItems: 'center',
+                                                    gap: 10
+                                                },
+                                                children: [
+                                                    /*#__PURE__*/ (0,jsx_runtime.jsx)("span", {
+                                                        style: {
+                                                            fontSize: 12,
+                                                            fontWeight: 700,
+                                                            letterSpacing: 1.5,
+                                                            textTransform: 'uppercase',
+                                                            color: THEME.colors.emerald,
+                                                            fontFamily: 'Inter, system-ui, sans-serif'
+                                                        },
+                                                        children: "Сценарий Б \xb7 Массовая выборка"
+                                                    }),
+                                                    /*#__PURE__*/ (0,jsx_runtime.jsx)("span", {
+                                                        style: {
+                                                            fontSize: 13,
+                                                            color: THEME.colors.textMuted,
+                                                            fontFamily: 'JetBrains Mono, monospace'
+                                                        },
+                                                        children: "N = 10 000"
+                                                    })
+                                                ]
+                                            }),
+                                            /*#__PURE__*/ (0,jsx_runtime.jsx)("h2", {
+                                                style: {
+                                                    fontSize: 24,
+                                                    fontWeight: 700,
+                                                    color: THEME.colors.textPrimary,
+                                                    marginTop: 10,
+                                                    fontFamily: 'Inter, system-ui, sans-serif',
+                                                    letterSpacing: -0.5
+                                                },
+                                                children: "Данные полностью подчиняют себе модель"
+                                            }),
+                                            /*#__PURE__*/ (0,jsx_runtime.jsx)("p", {
+                                                style: {
+                                                    fontSize: 14,
+                                                    color: THEME.colors.textSecondary,
+                                                    lineHeight: 1.5,
+                                                    marginTop: 6,
+                                                    fontFamily: 'Inter, system-ui, sans-serif'
+                                                },
+                                                children: "Когда голосуют тысячи, влияние начального априора стремится к нулю. Дисперсия сжимается в тончайшую иглу точной истины."
+                                            })
+                                        ]
                                     }),
                                     /*#__PURE__*/ (0,jsx_runtime.jsx)("div", {
                                         style: {
-                                            width: 120,
-                                            height: 10,
-                                            backgroundColor: 'rgba(78, 168, 222, 0.3)',
-                                            borderRadius: 5
-                                        }
+                                            width: '100%',
+                                            height: 260
+                                        },
+                                        children: /*#__PURE__*/ (0,jsx_runtime.jsx)(BellCurve, {
+                                            width: 700,
+                                            height: 260,
+                                            mean: 0.72,
+                                            stdDev: 0.045,
+                                            color: THEME.colors.emerald,
+                                            priorOutline: {
+                                                mean: 0.40,
+                                                stdDev: 0.22
+                                            },
+                                            showConfidenceInterval: true,
+                                            label: "Игольчатый апостериор: μ = 4.82 \xb1 0.02"
+                                        })
+                                    }),
+                                    /*#__PURE__*/ (0,jsx_runtime.jsxs)("div", {
+                                        style: {
+                                            display: 'flex',
+                                            justifyContent: 'space-between',
+                                            borderTop: `1px solid ${THEME.colors.borderSubtle}`,
+                                            paddingTop: 12,
+                                            fontSize: 12,
+                                            fontFamily: 'JetBrains Mono, monospace'
+                                        },
+                                        children: [
+                                            /*#__PURE__*/ (0,jsx_runtime.jsx)("span", {
+                                                style: {
+                                                    color: THEME.colors.textMuted
+                                                },
+                                                children: "ВЕС АПРИОРА: 0.1%"
+                                            }),
+                                            /*#__PURE__*/ (0,jsx_runtime.jsx)("span", {
+                                                style: {
+                                                    color: THEME.colors.emerald
+                                                },
+                                                children: "ВЕС ДАННЫХ: 99.9%"
+                                            })
+                                        ]
                                     })
                                 ]
                             })
                         ]
                     }),
-                    /*#__PURE__*/ (0,jsx_runtime.jsx)("div", {
-                        style: {
-                            position: 'relative',
-                            width: 1400,
-                            height: 700,
-                            display: 'flex',
-                            justifyContent: 'center',
-                            alignItems: 'center'
-                        },
-                        children: /*#__PURE__*/ (0,jsx_runtime.jsxs)("svg", {
-                            width: "1400",
-                            height: "700",
-                            viewBox: "0 0 1400 700",
-                            style: {
-                                position: 'absolute',
-                                inset: 0,
-                                overflow: 'visible'
-                            },
-                            children: [
-                                /*#__PURE__*/ (0,jsx_runtime.jsx)("defs", {
-                                    children: /*#__PURE__*/ (0,jsx_runtime.jsxs)("linearGradient", {
-                                        id: "funnel-grad",
-                                        x1: "0%",
-                                        y1: "0%",
-                                        x2: "0%",
-                                        y2: "100%",
-                                        children: [
-                                            /*#__PURE__*/ (0,jsx_runtime.jsx)("stop", {
-                                                offset: "0%",
-                                                stopColor: "rgba(78, 168, 222, 0.3)"
-                                            }),
-                                            /*#__PURE__*/ (0,jsx_runtime.jsx)("stop", {
-                                                offset: "60%",
-                                                stopColor: "rgba(78, 168, 222, 0.15)"
-                                            }),
-                                            /*#__PURE__*/ (0,jsx_runtime.jsx)("stop", {
-                                                offset: "100%",
-                                                stopColor: "rgba(78, 168, 222, 0.4)"
-                                            })
-                                        ]
-                                    })
-                                }),
-                                /*#__PURE__*/ (0,jsx_runtime.jsx)("path", {
-                                    d: "M 250 80 L 580 420 L 580 620 L 820 620 L 820 420 L 1150 80",
-                                    fill: "url(#funnel-grad)",
-                                    stroke: THEME.colors.electricBlue,
-                                    strokeWidth: "4",
-                                    strokeLinejoin: "round",
-                                    filter: "drop-shadow(0 0 25px rgba(78, 168, 222, 0.4))"
-                                }),
-                                /*#__PURE__*/ (0,jsx_runtime.jsx)("path", {
-                                    d: "M 280 80 Q 450 300 650 480",
-                                    fill: "none",
-                                    stroke: "rgba(255, 123, 84, 0.25)",
-                                    strokeWidth: "2",
-                                    strokeDasharray: "6 6"
-                                }),
-                                /*#__PURE__*/ (0,jsx_runtime.jsx)("path", {
-                                    d: "M 1120 80 Q 950 300 750 480",
-                                    fill: "none",
-                                    stroke: "rgba(78, 168, 222, 0.35)",
-                                    strokeWidth: "3",
-                                    strokeDasharray: "6 6"
-                                }),
-                                noisyParticles.map((p)=>{
-                                    const flowT = (frame * p.speed + p.offset) % 100 / 100;
-                                    // Noise particles scatter and lose energy near funnel
-                                    const curX = 280 + flowT * 320 + p.jitterX * (1 - flowT);
-                                    const curY = 80 + flowT * 340 + p.jitterY * (1 - flowT);
-                                    const opacity = flowT > 0.75 ? (1 - flowT) * 4 : 0.8;
-                                    return /*#__PURE__*/ (0,jsx_runtime.jsx)("circle", {
-                                        cx: curX,
-                                        cy: curY,
-                                        r: 3.5,
-                                        fill: THEME.colors.warmCoral,
-                                        opacity: opacity,
-                                        filter: "drop-shadow(0 0 6px rgba(255,123,84,0.6))"
-                                    }, `noise-${p.id}`);
-                                }),
-                                denseParticles.map((p)=>{
-                                    const flowT = (frame * p.speed + p.offset) % 100 / 100;
-                                    // Dense stream stays tight along curve into the neck
-                                    const curX = 1120 - flowT * 400 + Math.sin(flowT * Math.PI) * 15;
-                                    const curY = 80 + flowT * 500;
-                                    return /*#__PURE__*/ (0,jsx_runtime.jsx)("circle", {
-                                        cx: curX,
-                                        cy: curY,
-                                        r: 5,
-                                        fill: THEME.colors.electricBlue,
-                                        opacity: 0.9,
-                                        filter: "drop-shadow(0 0 8px #4EA8DE)"
-                                    }, `dense-${p.id}`);
-                                }),
-                                /*#__PURE__*/ (0,jsx_runtime.jsx)("circle", {
-                                    cx: "700",
-                                    cy: "540",
-                                    r: "45",
-                                    fill: "rgba(13, 27, 42, 0.9)",
-                                    stroke: THEME.colors.electricBlue,
-                                    strokeWidth: "3"
-                                }),
-                                /*#__PURE__*/ (0,jsx_runtime.jsx)("line", {
-                                    x1: "700",
-                                    y1: "540",
-                                    x2: 700 + Math.sin(needleAngle * Math.PI / 180) * 35,
-                                    y2: 540 - Math.cos(needleAngle * Math.PI / 180) * 35,
-                                    stroke: THEME.colors.electricBlue,
-                                    strokeWidth: "4",
-                                    strokeLinecap: "round"
-                                })
-                            ]
-                        })
-                    }),
                     /*#__PURE__*/ (0,jsx_runtime.jsxs)("div", {
                         style: {
-                            marginTop: 30,
+                            borderTop: `1px solid ${THEME.colors.border}`,
+                            paddingTop: 20,
                             display: 'flex',
+                            justifyContent: 'space-between',
                             alignItems: 'center',
-                            gap: 20
+                            fontSize: 13,
+                            color: THEME.colors.textSecondary,
+                            fontFamily: 'Inter, system-ui, sans-serif'
                         },
                         children: [
-                            /*#__PURE__*/ (0,jsx_runtime.jsx)("div", {
-                                style: {
-                                    width: 52,
-                                    height: 52,
-                                    borderRadius: 14,
-                                    backgroundColor: 'rgba(78, 168, 222, 0.15)',
-                                    border: `2px solid ${THEME.colors.electricBlue}`,
-                                    display: 'flex',
-                                    alignItems: 'center',
-                                    justifyContent: 'center',
-                                    transform: `rotate(${frame * 1.5}deg)`
-                                },
-                                children: /*#__PURE__*/ (0,jsx_runtime.jsxs)("svg", {
-                                    width: "28",
-                                    height: "28",
-                                    viewBox: "0 0 24 24",
-                                    fill: "none",
-                                    children: [
-                                        /*#__PURE__*/ (0,jsx_runtime.jsx)("circle", {
-                                            cx: "12",
-                                            cy: "12",
-                                            r: "3",
-                                            stroke: THEME.colors.electricBlue,
-                                            strokeWidth: "2"
-                                        }),
-                                        /*#__PURE__*/ (0,jsx_runtime.jsx)("path", {
-                                            d: "M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z",
-                                            stroke: THEME.colors.electricBlue,
-                                            strokeWidth: "2"
-                                        })
-                                    ]
-                                })
+                            /*#__PURE__*/ (0,jsx_runtime.jsx)("span", {
+                                children: "Разработчику не требуется писать условные конструкции `if (count < 50)`. Математика выполняет непрерывное взвешивание автоматически."
                             }),
-                            /*#__PURE__*/ (0,jsx_runtime.jsx)(PlaceholderBox, {
-                                width: 460,
-                                height: 56,
-                                variant: "card",
-                                accent: "blue",
-                                glow: true,
-                                cornerMarks: true,
-                                children: /*#__PURE__*/ (0,jsx_runtime.jsx)("div", {
-                                    style: {
-                                        width: '70%',
-                                        height: 16,
-                                        backgroundColor: THEME.colors.electricBlue,
-                                        borderRadius: 4
-                                    }
-                                })
+                            /*#__PURE__*/ (0,jsx_runtime.jsx)("span", {
+                                style: {
+                                    fontFamily: 'JetBrains Mono, monospace',
+                                    color: THEME.colors.emerald
+                                },
+                                children: "САМОНАСТРАИВАЕМЫЙ ВЕС ✓"
                             })
                         ]
                     })
@@ -22934,506 +23192,7 @@ const Scene5_CheckpointTwo = ()=>{
     });
 };
 
-;// CONCATENATED MODULE: ./node_modules/lucide-react/dist/esm/shared/src/utils/toKebabCase.mjs
-/**
- * @license lucide-react v1.77.0 - ISC
- *
- * This source code is licensed under the ISC license.
- * See the LICENSE file in the root directory of this source tree.
- */
-
-const toKebabCase = (value) => (value.match(/\d+[xX]\d+|[A-Z]?[a-z]+|[A-Z]|\d+/g) ?? []).join("-").toLowerCase();
-
-
-//# sourceMappingURL=toKebabCase.mjs.map
-
-;// CONCATENATED MODULE: ./node_modules/lucide-react/dist/esm/shared/src/utils/toLucideIconData.mjs
-/**
- * @license lucide-react v1.77.0 - ISC
- *
- * This source code is licensed under the ISC license.
- * See the LICENSE file in the root directory of this source tree.
- */
-
-
-
-function toLucideIconData(iconName, iconNode, aliases = []) {
-  if (iconNode == null) {
-    throw new Error("[lucide]: iconNode is required when icon name is used");
-  }
-  return {
-    name: toKebabCase(iconName),
-    size: 24,
-    node: iconNode,
-    ...aliases.length > 0 ? { aliases } : {}
-  };
-}
-
-
-//# sourceMappingURL=toLucideIconData.mjs.map
-
-;// CONCATENATED MODULE: ./node_modules/lucide-react/dist/esm/shared/src/utils/toCamelCase.mjs
-/**
- * @license lucide-react v1.77.0 - ISC
- *
- * This source code is licensed under the ISC license.
- * See the LICENSE file in the root directory of this source tree.
- */
-
-const toCamelCase = (string) => {
-  let out = "";
-  let upperNext = false;
-  for (const ch of string) {
-    if (ch === "-" || ch === "_" || ch <= " ") {
-      upperNext = out.length > 0;
-      continue;
-    }
-    if (out.length === 0) {
-      out += ch.toLowerCase();
-    } else {
-      out += upperNext ? ch.toUpperCase() : ch;
-    }
-    upperNext = false;
-  }
-  return out;
-};
-
-
-//# sourceMappingURL=toCamelCase.mjs.map
-
-;// CONCATENATED MODULE: ./node_modules/lucide-react/dist/esm/shared/src/utils/toPascalCase.mjs
-/**
- * @license lucide-react v1.77.0 - ISC
- *
- * This source code is licensed under the ISC license.
- * See the LICENSE file in the root directory of this source tree.
- */
-
-
-
-const toPascalCase = (string) => {
-  const camelCase = toCamelCase(string);
-  return camelCase.charAt(0).toUpperCase() + camelCase.slice(1);
-};
-
-
-//# sourceMappingURL=toPascalCase.mjs.map
-
-;// CONCATENATED MODULE: ./node_modules/lucide-react/dist/esm/shared/src/utils/mergeClasses.mjs
-/**
- * @license lucide-react v1.77.0 - ISC
- *
- * This source code is licensed under the ISC license.
- * See the LICENSE file in the root directory of this source tree.
- */
-
-const mergeClasses = (...classes) => {
-  const tokens = /* @__PURE__ */ new Set();
-  for (const cls of classes) {
-    if (typeof cls !== "string") continue;
-    for (const token of cls.split(/\s+/)) {
-      if (token) tokens.add(token);
-    }
-  }
-  return [...tokens].join(" ");
-};
-
-
-//# sourceMappingURL=mergeClasses.mjs.map
-
-;// CONCATENATED MODULE: ./node_modules/lucide-react/dist/esm/shared/src/build/defaultAttributes.mjs
-/**
- * @license lucide-react v1.77.0 - ISC
- *
- * This source code is licensed under the ISC license.
- * See the LICENSE file in the root directory of this source tree.
- */
-
-const defaultAttributes = {
-  xmlns: "http://www.w3.org/2000/svg",
-  width: 24,
-  height: 24,
-  viewBox: "0 0 24 24",
-  fill: "none",
-  stroke: "currentColor",
-  "stroke-width": 2,
-  "stroke-linecap": "round",
-  "stroke-linejoin": "round"
-};
-
-
-//# sourceMappingURL=defaultAttributes.mjs.map
-
-;// CONCATENATED MODULE: ./node_modules/lucide-react/dist/esm/shared/src/build/buildLucideIconNode.mjs
-/**
- * @license lucide-react v1.77.0 - ISC
- *
- * This source code is licensed under the ISC license.
- * See the LICENSE file in the root directory of this source tree.
- */
-
-
-
-
-function isDefined(value) {
-  return value !== null && value !== void 0;
-}
-function buildLucideIconNode(icon, params = {}) {
-  const attributeNames = params.attributeNames ?? {};
-  const getAttributeName = (attributeName) => attributeNames[attributeName] ?? attributeName;
-  const viewBoxWidth = icon.size ?? icon.width ?? defaultAttributes.width;
-  const viewBoxHeight = icon.size ?? icon.height ?? defaultAttributes.height;
-  const aliasClassNames = icon.aliases?.filter((alias) => typeof alias === "string" && alias.trim() !== "").map((alias) => `lucide-${alias}`) ?? [];
-  const iconClassNames = [...icon.name ? [`lucide-${icon.name}`] : [], ...aliasClassNames];
-  const classNamesFromClassName = params.className?.split(" ").filter(Boolean) ?? [];
-  const className = params.includeDefaultClasses === false ? mergeClasses(...classNamesFromClassName) : mergeClasses("lucide", ...iconClassNames, ...classNamesFromClassName);
-  const calculatedStrokeWidth = params.absoluteStrokeWidth ? Number(params.strokeWidth ?? defaultAttributes["stroke-width"]) * Number(icon.size ?? icon.width ?? defaultAttributes.width) / Number(params.size ?? params.width ?? defaultAttributes.width) : params.strokeWidth ?? defaultAttributes["stroke-width"];
-  const attributes = {
-    ...Object.entries(defaultAttributes).reduce((attrs, [attrName, value]) => {
-      attrs[getAttributeName(attrName)] = value;
-      return attrs;
-    }, {}),
-    ..."color" in params && params.color && {
-      [getAttributeName("stroke")]: params.color
-    },
-    ..."size" in params && isDefined(params.size) && {
-      [getAttributeName("width")]: params.size,
-      [getAttributeName("height")]: params.size
-    },
-    ..."width" in params && isDefined(params.width) && {
-      [getAttributeName("width")]: params.width
-    },
-    ..."height" in params && isDefined(params.height) && {
-      [getAttributeName("height")]: params.height
-    },
-    [getAttributeName("stroke-width")]: calculatedStrokeWidth,
-    ...className && {
-      [getAttributeName("class")]: className
-    },
-    [getAttributeName("viewBox")]: `0 0 ${viewBoxWidth} ${viewBoxHeight}`,
-    ...params.hasA11yProp === false ? {
-      [getAttributeName("aria-hidden")]: "true"
-    } : {},
-    ..."attributes" in params && params.attributes
-  };
-  return [
-    "svg",
-    attributes,
-    icon.node.map((child) => {
-      const [name, attrs, children] = child;
-      const nextAttrs = params.nonScalingStroke ? { [getAttributeName("vector-effect")]: "non-scaling-stroke", ...attrs } : attrs;
-      return children ? [name, nextAttrs, children] : [name, nextAttrs];
-    })
-  ];
-}
-
-
-//# sourceMappingURL=buildLucideIconNode.mjs.map
-
-;// CONCATENATED MODULE: ./node_modules/lucide-react/dist/esm/shared/src/build/buildLucideIconForReact.mjs
-/**
- * @license lucide-react v1.77.0 - ISC
- *
- * This source code is licensed under the ISC license.
- * See the LICENSE file in the root directory of this source tree.
- */
-
-
-
-function buildLucideIconForReact(icon, params = {}) {
-  return buildLucideIconNode(icon, {
-    ...params,
-    attributeNames: {
-      ...params.attributeNames,
-      class: "className",
-      "stroke-width": "strokeWidth",
-      "stroke-linecap": "strokeLinecap",
-      "stroke-linejoin": "strokeLinejoin",
-      "vector-effect": "vectorEffect"
-    }
-  });
-}
-
-
-//# sourceMappingURL=buildLucideIconForReact.mjs.map
-
-;// CONCATENATED MODULE: ./node_modules/lucide-react/dist/esm/shared/src/utils/hasA11yProp.mjs
-/**
- * @license lucide-react v1.77.0 - ISC
- *
- * This source code is licensed under the ISC license.
- * See the LICENSE file in the root directory of this source tree.
- */
-
-const hasA11yProp = (props) => {
-  if (props == null || typeof props !== "object") {
-    return false;
-  }
-  for (const prop in props) {
-    if (Object.prototype.hasOwnProperty.call(props, prop) && (prop.startsWith("aria-") || prop === "role" || prop === "title") && props[prop] != null) {
-      return true;
-    }
-  }
-  return false;
-};
-
-
-//# sourceMappingURL=hasA11yProp.mjs.map
-
-;// CONCATENATED MODULE: ./node_modules/lucide-react/dist/esm/context.mjs
-
-"use client";
-/**
- * @license lucide-react v1.77.0 - ISC
- *
- * This source code is licensed under the ISC license.
- * See the LICENSE file in the root directory of this source tree.
- */
-
-
-
-const LucideContext = (0,react.createContext)({});
-function LucideProvider({
-  children,
-  size,
-  color,
-  strokeWidth,
-  absoluteStrokeWidth,
-  nonScalingStroke,
-  className
-}) {
-  const value = useMemo(
-    () => ({
-      size,
-      color,
-      strokeWidth,
-      absoluteStrokeWidth,
-      nonScalingStroke,
-      className
-    }),
-    [size, color, strokeWidth, absoluteStrokeWidth, nonScalingStroke, className]
-  );
-  return createElement(LucideContext.Provider, { value }, children);
-}
-const useLucideContext = () => (0,react.useContext)(LucideContext);
-
-
-//# sourceMappingURL=context.mjs.map
-
-;// CONCATENATED MODULE: ./node_modules/lucide-react/dist/esm/Icon.mjs
-
-"use client";
-/**
- * @license lucide-react v1.77.0 - ISC
- *
- * This source code is licensed under the ISC license.
- * See the LICENSE file in the root directory of this source tree.
- */
-
-
-
-
-
-
-
-const Icon_Icon = (0,react.forwardRef)(
-  ({
-    color,
-    size,
-    width,
-    height,
-    strokeWidth,
-    absoluteStrokeWidth,
-    nonScalingStroke,
-    className = "",
-    children,
-    iconNode = [],
-    icon = {
-      node: iconNode,
-      aliases: [],
-      size: 24
-    },
-    ...rest
-  }, ref) => {
-    const {
-      size: contextSize = 24,
-      strokeWidth: contextStrokeWidth = 2,
-      absoluteStrokeWidth: contextAbsoluteStrokeWidth = false,
-      nonScalingStroke: contextNonScalingStroke = false,
-      color: contextColor = "currentColor",
-      className: contextClass = ""
-    } = useLucideContext() ?? {};
-    const hasAccessibleProp = Boolean(children) || hasA11yProp(rest);
-    const [name, svgAttributes, builtIconNode = []] = buildLucideIconForReact(icon, {
-      color: color ?? contextColor,
-      width: width ?? size ?? contextSize,
-      height: height ?? size ?? contextSize,
-      strokeWidth: strokeWidth ?? contextStrokeWidth,
-      absoluteStrokeWidth: absoluteStrokeWidth ?? contextAbsoluteStrokeWidth,
-      nonScalingStroke: nonScalingStroke ?? contextNonScalingStroke,
-      className: mergeClasses(contextClass, className),
-      hasA11yProp: hasAccessibleProp,
-      attributes: rest
-    });
-    return (0,react.createElement)(
-      name,
-      {
-        ref,
-        ...svgAttributes
-      },
-      [
-        ...builtIconNode.map(([tag, attrs]) => (0,react.createElement)(tag, attrs)),
-        ...Array.isArray(children) ? children : [children]
-      ]
-    );
-  }
-);
-
-
-//# sourceMappingURL=Icon.mjs.map
-
-;// CONCATENATED MODULE: ./node_modules/lucide-react/dist/esm/createLucideIcon.mjs
-/**
- * @license lucide-react v1.77.0 - ISC
- *
- * This source code is licensed under the ISC license.
- * See the LICENSE file in the root directory of this source tree.
- */
-
-
-
-
-
-
-function createLucideIcon(iconDataOrName, iconNode = [], aliases = []) {
-  const iconData = typeof iconDataOrName === "string" ? toLucideIconData(iconDataOrName, iconNode, aliases) : iconDataOrName;
-  const Component = (0,react.forwardRef)(
-    ({ className, ...props }, ref) => (0,react.createElement)(Icon_Icon, {
-      ref,
-      icon: iconData,
-      className,
-      ...props
-    })
-  );
-  if (iconData.name) {
-    Component.displayName = toPascalCase(iconData.name);
-  }
-  return Component;
-}
-
-
-//# sourceMappingURL=createLucideIcon.mjs.map
-
-;// CONCATENATED MODULE: ./node_modules/lucide-react/dist/esm/icons/chart-column.mjs
-/**
- * @license lucide-react v1.77.0 - ISC
- *
- * This source code is licensed under the ISC license.
- * See the LICENSE file in the root directory of this source tree.
- */
-
-
-
-const __iconData = {
-  name: "chart-column",
-  size: 24,
-  node: [
-    ["path", { d: "M3 3v16a2 2 0 0 0 2 2h16", key: "c24i48" }],
-    ["path", { d: "M18 17V9", key: "2bz60n" }],
-    ["path", { d: "M13 17V5", key: "1frdt8" }],
-    ["path", { d: "M8 17v-3", key: "17ska0" }]
-  ],
-  aliases: ["bar-chart-3"]
-};
-__iconData.node;
-const ChartColumn = createLucideIcon(__iconData);
-
-
-//# sourceMappingURL=chart-column.mjs.map
-
-;// CONCATENATED MODULE: ./node_modules/lucide-react/dist/esm/icons/radio.mjs
-/**
- * @license lucide-react v1.77.0 - ISC
- *
- * This source code is licensed under the ISC license.
- * See the LICENSE file in the root directory of this source tree.
- */
-
-
-
-const radio_iconData = {
-  name: "radio",
-  size: 24,
-  node: [
-    ["path", { d: "M16.247 7.761a6 6 0 0 1 0 8.478", key: "1fwjs5" }],
-    ["path", { d: "M19.075 4.933a10 10 0 0 1 0 14.134", key: "ehdyv1" }],
-    ["path", { d: "M4.925 19.067a10 10 0 0 1 0-14.134", key: "1q22gi" }],
-    ["path", { d: "M7.753 16.239a6 6 0 0 1 0-8.478", key: "r2q7qm" }],
-    ["circle", { cx: "12", cy: "12", r: "2", key: "1c9p78" }]
-  ]
-};
-radio_iconData.node;
-const Radio = createLucideIcon(radio_iconData);
-
-
-//# sourceMappingURL=radio.mjs.map
-
-;// CONCATENATED MODULE: ./node_modules/lucide-react/dist/esm/icons/scale.mjs
-/**
- * @license lucide-react v1.77.0 - ISC
- *
- * This source code is licensed under the ISC license.
- * See the LICENSE file in the root directory of this source tree.
- */
-
-
-
-const scale_iconData = {
-  name: "scale",
-  size: 24,
-  node: [
-    ["path", { d: "M12 3v18", key: "108xh3" }],
-    ["path", { d: "m19 8 3 8a5 5 0 0 1-6 0zV7", key: "zcdpyk" }],
-    ["path", { d: "M3 7h1a17 17 0 0 0 8-2 17 17 0 0 0 8 2h1", key: "1yorad" }],
-    ["path", { d: "m5 8 3 8a5 5 0 0 1-6 0zV7", key: "eua70x" }],
-    ["path", { d: "M7 21h10", key: "1b0cd5" }]
-  ]
-};
-scale_iconData.node;
-const Scale = createLucideIcon(scale_iconData);
-
-
-//# sourceMappingURL=scale.mjs.map
-
-;// CONCATENATED MODULE: ./node_modules/lucide-react/dist/esm/icons/refresh-cw.mjs
-/**
- * @license lucide-react v1.77.0 - ISC
- *
- * This source code is licensed under the ISC license.
- * See the LICENSE file in the root directory of this source tree.
- */
-
-
-
-const refresh_cw_iconData = {
-  name: "refresh-cw",
-  size: 24,
-  node: [
-    ["path", { d: "M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8", key: "v9h5vc" }],
-    ["path", { d: "M21 3v5h-5", key: "1q7to0" }],
-    ["path", { d: "M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16", key: "3uifl3" }],
-    ["path", { d: "M8 16H3v5", key: "1cv678" }]
-  ]
-};
-refresh_cw_iconData.node;
-const RefreshCw = createLucideIcon(refresh_cw_iconData);
-
-
-//# sourceMappingURL=refresh-cw.mjs.map
-
 ;// CONCATENATED MODULE: ./src/scenes/Scene6_StepPipeline.tsx
-
-
 
 
 
@@ -23442,35 +23201,33 @@ const RefreshCw = createLucideIcon(refresh_cw_iconData);
 
 const Scene6_StepPipeline = ()=>{
     const frame = (0,esm/* .useCurrentFrame */.UC)();
-    // Cycle period: 300 frames per loop (~10 seconds)
+    // 10-second cycle (300 frames)
     const cycleFrame = frame % 300;
     const cycleCount = Math.floor(frame / 300); // 0, 1, 2, 3, 4
-    // Active stage in current cycle (0, 1, 2, 3)
     const activeStage = Math.min(3, Math.floor(cycleFrame / 75));
-    // Gaussian stdDev narrows and mean shifts with each cycle iteration
-    // Starts wide (0.24), narrows down to (0.09) by 4th cycle
-    const currentStdDev = Math.max(0.08, 0.24 - cycleCount * 0.035 - cycleFrame / 300 * 0.035);
-    const currentMean = 0.45 + cycleCount * 0.04 + cycleFrame / 300 * 0.04;
+    // Monotonically shrinking variance as updates accumulate
+    const currentStdDev = Math.max(0.065, 0.22 - cycleCount * 0.035 - cycleFrame / 300 * 0.035);
+    const currentMean = 0.46 + cycleCount * 0.03 + cycleFrame / 300 * 0.03;
     const stages = [
         {
-            id: 0,
-            icon: ChartColumn,
-            labelAccent: 'blue'
+            num: '01',
+            title: 'Входящий поток',
+            desc: 'События пользовательских оценок через WebSocket'
         },
         {
-            id: 1,
-            icon: Radio,
-            labelAccent: 'blue'
+            num: '02',
+            title: 'Окно наблюдений',
+            desc: 'Батчинг за последние 15 сек + фильтрация всплесков'
         },
         {
-            id: 2,
-            icon: Scale,
-            labelAccent: 'coral'
+            num: '03',
+            title: 'Формула Гаусса',
+            desc: 'Аналитический пересчет μ_post и σ²_post за 0.05 мс'
         },
         {
-            id: 3,
-            icon: RefreshCw,
-            labelAccent: 'blue'
+            num: '04',
+            title: 'Выдача в эфир',
+            desc: 'Плавная анимация доверительного коридора в плеере'
         }
     ];
     return /*#__PURE__*/ (0,jsx_runtime.jsxs)("div", {
@@ -23478,11 +23235,13 @@ const Scene6_StepPipeline = ()=>{
             position: 'absolute',
             inset: 0,
             backgroundColor: THEME.colors.bg,
-            overflow: 'hidden'
+            overflow: 'hidden',
+            width: 1920,
+            height: 1080
         },
         children: [
             /*#__PURE__*/ (0,jsx_runtime.jsx)(BackgroundGrid, {
-                intensity: 1.1
+                intensity: 1
             }),
             /*#__PURE__*/ (0,jsx_runtime.jsxs)("div", {
                 style: {
@@ -23490,239 +23249,300 @@ const Scene6_StepPipeline = ()=>{
                     inset: 0,
                     display: 'flex',
                     flexDirection: 'column',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    padding: '60px 100px',
+                    justifyContent: 'space-between',
+                    padding: '48px 80px 40px 80px',
                     boxSizing: 'border-box'
                 },
                 children: [
-                    /*#__PURE__*/ (0,jsx_runtime.jsx)("div", {
+                    /*#__PURE__*/ (0,jsx_runtime.jsxs)("header", {
                         style: {
-                            marginBottom: 50
+                            display: 'flex',
+                            justifyContent: 'space-between',
+                            alignItems: 'flex-start',
+                            borderBottom: `1px solid ${THEME.colors.border}`,
+                            paddingBottom: 20
                         },
-                        children: /*#__PURE__*/ (0,jsx_runtime.jsx)(PlaceholderBox, {
-                            width: 540,
-                            height: 56,
-                            variant: "pill",
-                            accent: "blue",
-                            glow: true,
-                            children: /*#__PURE__*/ (0,jsx_runtime.jsx)("div", {
+                        children: [
+                            /*#__PURE__*/ (0,jsx_runtime.jsxs)("div", {
+                                children: [
+                                    /*#__PURE__*/ (0,jsx_runtime.jsx)("div", {
+                                        style: {
+                                            fontSize: 12,
+                                            fontFamily: 'Inter, system-ui, sans-serif',
+                                            fontWeight: 600,
+                                            letterSpacing: 2,
+                                            textTransform: 'uppercase',
+                                            color: THEME.colors.cobalt,
+                                            marginBottom: 8
+                                        },
+                                        children: "06 / АРХИТЕКТУРА СИСТЕМЫ \xb7 ПОШАГОВЫЙ КОНВЕЙЕР"
+                                    }),
+                                    /*#__PURE__*/ (0,jsx_runtime.jsx)("h1", {
+                                        style: {
+                                            fontSize: 34,
+                                            fontWeight: 700,
+                                            color: THEME.colors.textPrimary,
+                                            letterSpacing: -0.8,
+                                            margin: 0,
+                                            lineHeight: 1.2,
+                                            fontFamily: 'Inter, system-ui, sans-serif'
+                                        },
+                                        children: "Непрерывный конвейер вычислений в реальном времени"
+                                    }),
+                                    /*#__PURE__*/ (0,jsx_runtime.jsx)("p", {
+                                        style: {
+                                            fontSize: 15,
+                                            color: THEME.colors.textSecondary,
+                                            margin: '6px 0 0 0',
+                                            fontFamily: 'Inter, system-ui, sans-serif'
+                                        },
+                                        children: "Циклический процесс обработки событий без накопления задержек"
+                                    })
+                                ]
+                            }),
+                            /*#__PURE__*/ (0,jsx_runtime.jsxs)("div", {
                                 style: {
-                                    width: '60%',
-                                    height: 16,
-                                    backgroundColor: THEME.colors.electricBlue,
-                                    borderRadius: 4
-                                }
+                                    padding: '6px 16px',
+                                    borderRadius: 6,
+                                    border: `1px solid ${THEME.colors.border}`,
+                                    fontSize: 12,
+                                    fontFamily: 'JetBrains Mono, monospace',
+                                    color: THEME.colors.cobalt
+                                },
+                                children: [
+                                    "ЦИКЛ #",
+                                    cycleCount + 1,
+                                    " \xb7 ТАКТ ",
+                                    activeStage + 1,
+                                    "/4"
+                                ]
                             })
-                        })
+                        ]
                     }),
                     /*#__PURE__*/ (0,jsx_runtime.jsxs)("div", {
                         style: {
                             position: 'relative',
                             width: '100%',
-                            maxWidth: 2400,
-                            display: 'flex',
-                            alignItems: 'center',
-                            justifyContent: 'space-between',
-                            marginBottom: 60,
-                            padding: '40px 60px',
-                            boxSizing: 'border-box'
-                        },
-                        children: [
-                            /*#__PURE__*/ (0,jsx_runtime.jsxs)("svg", {
-                                width: "100%",
-                                height: "180",
-                                viewBox: "0 0 2200 180",
-                                style: {
-                                    position: 'absolute',
-                                    top: -30,
-                                    left: 0,
-                                    overflow: 'visible',
-                                    pointerEvents: 'none'
-                                },
-                                children: [
-                                    /*#__PURE__*/ (0,jsx_runtime.jsx)("path", {
-                                        d: "M 1950 40 C 1950 -60, 250 -60, 250 40",
-                                        fill: "none",
-                                        stroke: THEME.colors.electricBlue,
-                                        strokeWidth: "3",
-                                        strokeDasharray: "10 10",
-                                        strokeDashoffset: -frame * 2.5,
-                                        opacity: 0.45
-                                    }),
-                                    /*#__PURE__*/ (0,jsx_runtime.jsx)("polygon", {
-                                        points: "240,40 260,40 250,55",
-                                        fill: THEME.colors.electricBlue
-                                    })
-                                ]
-                            }),
-                            stages.map((stg, idx)=>{
-                                const Icon = stg.icon;
-                                const isActive = activeStage === stg.id;
-                                const pulse = isActive ? (0,esm/* .interpolate */.GW)(Math.sin(frame * 0.2), [
-                                    -1,
-                                    1
-                                ], [
-                                    1.02,
-                                    1.08
-                                ]) : 1;
-                                return /*#__PURE__*/ (0,jsx_runtime.jsxs)(react.Fragment, {
-                                    children: [
-                                        /*#__PURE__*/ (0,jsx_runtime.jsxs)("div", {
-                                            style: {
-                                                display: 'flex',
-                                                flexDirection: 'column',
-                                                alignItems: 'center',
-                                                gap: 18,
-                                                transform: `scale(${pulse})`,
-                                                transition: 'transform 0.15s ease'
-                                            },
-                                            children: [
-                                                /*#__PURE__*/ (0,jsx_runtime.jsx)("div", {
-                                                    style: {
-                                                        width: 140,
-                                                        height: 140,
-                                                        borderRadius: 28,
-                                                        backgroundColor: isActive ? 'rgba(78, 168, 222, 0.25)' : THEME.colors.bgCard,
-                                                        border: `3px solid ${isActive ? THEME.colors.electricBlue : 'rgba(78, 168, 222, 0.3)'}`,
-                                                        boxShadow: isActive ? `0 0 40px ${THEME.colors.electricBlueGlow}` : 'none',
-                                                        display: 'flex',
-                                                        alignItems: 'center',
-                                                        justifyContent: 'center',
-                                                        color: isActive ? THEME.colors.white : THEME.colors.electricBlue
-                                                    },
-                                                    children: /*#__PURE__*/ (0,jsx_runtime.jsx)(Icon, {
-                                                        size: 60,
-                                                        strokeWidth: 2.2,
-                                                        style: {
-                                                            transform: stg.id === 3 ? `rotate(${frame * 2}deg)` : 'none'
-                                                        }
-                                                    })
-                                                }),
-                                                /*#__PURE__*/ (0,jsx_runtime.jsx)(PlaceholderBox, {
-                                                    width: 220,
-                                                    height: 44,
-                                                    variant: "card",
-                                                    accent: stg.labelAccent,
-                                                    glow: isActive,
-                                                    pulse: isActive,
-                                                    children: /*#__PURE__*/ (0,jsx_runtime.jsx)("div", {
-                                                        style: {
-                                                            width: '60%',
-                                                            height: 12,
-                                                            backgroundColor: isActive ? THEME.colors.electricBlue : 'rgba(78, 168, 222, 0.4)',
-                                                            borderRadius: 4
-                                                        }
-                                                    })
-                                                })
-                                            ]
-                                        }),
-                                        idx < stages.length - 1 && /*#__PURE__*/ (0,jsx_runtime.jsx)("div", {
-                                            style: {
-                                                display: 'flex',
-                                                alignItems: 'center',
-                                                opacity: 0.7
-                                            },
-                                            children: /*#__PURE__*/ (0,jsx_runtime.jsxs)("svg", {
-                                                width: "100",
-                                                height: "24",
-                                                viewBox: "0 0 100 24",
-                                                children: [
-                                                    /*#__PURE__*/ (0,jsx_runtime.jsx)("line", {
-                                                        x1: "0",
-                                                        y1: "12",
-                                                        x2: "90",
-                                                        y2: "12",
-                                                        stroke: THEME.colors.electricBlue,
-                                                        strokeWidth: "3",
-                                                        strokeDasharray: "6 6",
-                                                        strokeDashoffset: -frame * 2
-                                                    }),
-                                                    /*#__PURE__*/ (0,jsx_runtime.jsx)("polygon", {
-                                                        points: "85,6 98,12 85,18",
-                                                        fill: THEME.colors.electricBlue
-                                                    })
-                                                ]
-                                            })
-                                        })
-                                    ]
-                                }, stg.id);
-                            })
-                        ]
-                    }),
-                    /*#__PURE__*/ (0,jsx_runtime.jsx)("div", {
-                        style: {
-                            width: 1400,
-                            height: 400,
-                            borderRadius: 24,
-                            backgroundColor: THEME.colors.bgCardHighlight,
-                            border: `2px solid rgba(78, 168, 222, 0.4)`,
-                            padding: 30,
-                            boxSizing: 'border-box',
-                            display: 'flex',
-                            flexDirection: 'column',
-                            justifyContent: 'center',
-                            alignItems: 'center',
-                            boxShadow: '0 20px 60px rgba(0,0,0,0.5)',
-                            marginBottom: 35
-                        },
-                        children: /*#__PURE__*/ (0,jsx_runtime.jsx)(BellCurve, {
-                            width: 1320,
-                            height: 340,
-                            mean: currentMean,
-                            stdDev: currentStdDev,
-                            color: THEME.colors.electricBlue,
-                            priorOutline: {
-                                mean: 0.45,
-                                stdDev: 0.24
-                            },
-                            showFill: true,
-                            showConfidenceInterval: true
-                        })
-                    }),
-                    /*#__PURE__*/ (0,jsx_runtime.jsxs)("div", {
-                        style: {
-                            display: 'flex',
-                            alignItems: 'center',
-                            gap: 20
+                            margin: '10px 0'
                         },
                         children: [
                             /*#__PURE__*/ (0,jsx_runtime.jsx)("div", {
                                 style: {
-                                    width: 44,
-                                    height: 44,
-                                    borderRadius: '50%',
-                                    backgroundColor: 'rgba(78, 168, 222, 0.2)',
-                                    border: `2px solid ${THEME.colors.electricBlue}`,
-                                    display: 'flex',
-                                    alignItems: 'center',
-                                    justifyContent: 'center'
+                                    position: 'absolute',
+                                    top: 24,
+                                    left: 100,
+                                    right: 100,
+                                    height: 2,
+                                    backgroundColor: THEME.colors.border
+                                }
+                            }),
+                            /*#__PURE__*/ (0,jsx_runtime.jsx)("div", {
+                                style: {
+                                    position: 'absolute',
+                                    top: 24,
+                                    left: 100,
+                                    width: `${activeStage / 3 * 88}%`,
+                                    height: 2,
+                                    backgroundColor: THEME.colors.cobalt,
+                                    transition: 'width 0.2s ease'
+                                }
+                            }),
+                            /*#__PURE__*/ (0,jsx_runtime.jsx)("div", {
+                                style: {
+                                    display: 'grid',
+                                    gridTemplateColumns: 'repeat(4, 1fr)',
+                                    gap: 40,
+                                    position: 'relative',
+                                    zIndex: 2
                                 },
-                                children: /*#__PURE__*/ (0,jsx_runtime.jsx)("div", {
-                                    style: {
-                                        width: 14,
-                                        height: 14,
-                                        borderRadius: '50%',
-                                        backgroundColor: THEME.colors.electricBlue,
-                                        boxShadow: `0 0 14px ${THEME.colors.electricBlue}`
-                                    }
+                                children: stages.map((st, idx)=>{
+                                    const isActive = activeStage === idx;
+                                    const isPassed = activeStage > idx;
+                                    return /*#__PURE__*/ (0,jsx_runtime.jsxs)("div", {
+                                        style: {
+                                            display: 'flex',
+                                            flexDirection: 'column',
+                                            alignItems: 'flex-start'
+                                        },
+                                        children: [
+                                            /*#__PURE__*/ (0,jsx_runtime.jsx)("div", {
+                                                style: {
+                                                    width: 48,
+                                                    height: 48,
+                                                    borderRadius: '50%',
+                                                    backgroundColor: isActive ? THEME.colors.cobalt : isPassed ? '#0E1626' : THEME.colors.bg,
+                                                    border: isActive ? `2px solid ${THEME.colors.textPrimary}` : isPassed ? `2px solid ${THEME.colors.cobalt}` : `2px solid ${THEME.colors.border}`,
+                                                    display: 'flex',
+                                                    alignItems: 'center',
+                                                    justifyContent: 'center',
+                                                    fontSize: 14,
+                                                    fontFamily: 'JetBrains Mono, monospace',
+                                                    fontWeight: 700,
+                                                    color: isActive ? '#08090C' : isPassed ? THEME.colors.cobalt : THEME.colors.textMuted,
+                                                    marginBottom: 16,
+                                                    boxShadow: isActive ? '0 0 20px rgba(56, 189, 248, 0.4)' : 'none'
+                                                },
+                                                children: st.num
+                                            }),
+                                            /*#__PURE__*/ (0,jsx_runtime.jsx)("div", {
+                                                style: {
+                                                    fontSize: 16,
+                                                    fontWeight: 700,
+                                                    color: isActive ? THEME.colors.cobalt : THEME.colors.textPrimary
+                                                },
+                                                children: st.title
+                                            }),
+                                            /*#__PURE__*/ (0,jsx_runtime.jsx)("div", {
+                                                style: {
+                                                    fontSize: 13,
+                                                    color: THEME.colors.textSecondary,
+                                                    marginTop: 4,
+                                                    lineHeight: 1.4
+                                                },
+                                                children: st.desc
+                                            })
+                                        ]
+                                    }, idx);
+                                })
+                            })
+                        ]
+                    }),
+                    /*#__PURE__*/ (0,jsx_runtime.jsxs)("div", {
+                        style: {
+                            display: 'grid',
+                            gridTemplateColumns: '1.2fr 0.8fr',
+                            gap: 60,
+                            alignItems: 'center',
+                            borderTop: `1px solid ${THEME.colors.borderSubtle}`,
+                            paddingTop: 20
+                        },
+                        children: [
+                            /*#__PURE__*/ (0,jsx_runtime.jsx)("div", {
+                                style: {
+                                    width: '100%',
+                                    height: 260
+                                },
+                                children: /*#__PURE__*/ (0,jsx_runtime.jsx)(BellCurve, {
+                                    width: 900,
+                                    height: 260,
+                                    mean: currentMean,
+                                    stdDev: currentStdDev,
+                                    color: THEME.colors.cobalt,
+                                    showConfidenceInterval: true,
+                                    priorOutline: {
+                                        mean: 0.46,
+                                        stdDev: 0.22
+                                    },
+                                    label: `Сжатие доверительного коридора: σ = ${currentStdDev.toFixed(3)}`
                                 })
                             }),
-                            /*#__PURE__*/ (0,jsx_runtime.jsx)(PlaceholderBox, {
-                                width: 560,
-                                height: 52,
-                                variant: "card",
-                                accent: "blue",
-                                glow: true,
-                                cornerMarks: true,
-                                children: /*#__PURE__*/ (0,jsx_runtime.jsx)("div", {
-                                    style: {
-                                        width: '70%',
-                                        height: 16,
-                                        backgroundColor: THEME.colors.electricBlue,
-                                        borderRadius: 4
-                                    }
-                                })
+                            /*#__PURE__*/ (0,jsx_runtime.jsxs)("div", {
+                                style: {
+                                    display: 'flex',
+                                    flexDirection: 'column',
+                                    gap: 18
+                                },
+                                children: [
+                                    /*#__PURE__*/ (0,jsx_runtime.jsxs)("div", {
+                                        style: {
+                                            borderBottom: `1px solid ${THEME.colors.borderSubtle}`,
+                                            paddingBottom: 10
+                                        },
+                                        children: [
+                                            /*#__PURE__*/ (0,jsx_runtime.jsx)("div", {
+                                                style: {
+                                                    fontSize: 11,
+                                                    color: THEME.colors.textMuted,
+                                                    textTransform: 'uppercase',
+                                                    letterSpacing: 1
+                                                },
+                                                children: "Время отклика одного шага"
+                                            }),
+                                            /*#__PURE__*/ (0,jsx_runtime.jsx)("div", {
+                                                style: {
+                                                    fontSize: 26,
+                                                    fontWeight: 700,
+                                                    color: THEME.colors.emerald,
+                                                    fontFamily: 'JetBrains Mono, monospace',
+                                                    marginTop: 4
+                                                },
+                                                children: "0.05 мс"
+                                            })
+                                        ]
+                                    }),
+                                    /*#__PURE__*/ (0,jsx_runtime.jsxs)("div", {
+                                        style: {
+                                            borderBottom: `1px solid ${THEME.colors.borderSubtle}`,
+                                            paddingBottom: 10
+                                        },
+                                        children: [
+                                            /*#__PURE__*/ (0,jsx_runtime.jsx)("div", {
+                                                style: {
+                                                    fontSize: 11,
+                                                    color: THEME.colors.textMuted,
+                                                    textTransform: 'uppercase',
+                                                    letterSpacing: 1
+                                                },
+                                                children: "Сжатие неопределенности"
+                                            }),
+                                            /*#__PURE__*/ (0,jsx_runtime.jsx)("div", {
+                                                style: {
+                                                    fontSize: 26,
+                                                    fontWeight: 700,
+                                                    color: THEME.colors.cobalt,
+                                                    fontFamily: 'JetBrains Mono, monospace',
+                                                    marginTop: 4
+                                                },
+                                                children: "-68% к 3-й минуте"
+                                            })
+                                        ]
+                                    }),
+                                    /*#__PURE__*/ (0,jsx_runtime.jsxs)("div", {
+                                        children: [
+                                            /*#__PURE__*/ (0,jsx_runtime.jsx)("div", {
+                                                style: {
+                                                    fontSize: 11,
+                                                    color: THEME.colors.textMuted,
+                                                    textTransform: 'uppercase',
+                                                    letterSpacing: 1
+                                                },
+                                                children: "Сложность алгоритма"
+                                            }),
+                                            /*#__PURE__*/ (0,jsx_runtime.jsx)("div", {
+                                                style: {
+                                                    fontSize: 15,
+                                                    color: THEME.colors.textSecondary,
+                                                    marginTop: 4
+                                                },
+                                                children: "Константная O(1) память и вычисления"
+                                            })
+                                        ]
+                                    })
+                                ]
+                            })
+                        ]
+                    }),
+                    /*#__PURE__*/ (0,jsx_runtime.jsxs)("div", {
+                        style: {
+                            borderTop: `1px solid ${THEME.colors.border}`,
+                            paddingTop: 20,
+                            display: 'flex',
+                            justifyContent: 'space-between',
+                            alignItems: 'center',
+                            fontSize: 13,
+                            color: THEME.colors.textSecondary,
+                            fontFamily: 'Inter, system-ui, sans-serif'
+                        },
+                        children: [
+                            /*#__PURE__*/ (0,jsx_runtime.jsx)("span", {
+                                children: "Архитектура не требует очередей переобучения или MCMC. Аналитическое байесовское обновление работает прямо на потоке событий."
+                            }),
+                            /*#__PURE__*/ (0,jsx_runtime.jsx)("span", {
+                                style: {
+                                    fontFamily: 'JetBrains Mono, monospace',
+                                    color: THEME.colors.cobalt
+                                },
+                                children: "РЕАЛЬНОЕ ВРЕМЯ БЕЗ ЗАДЕРЖЕК →"
                             })
                         ]
                     })
@@ -23739,79 +23559,46 @@ const Scene6_StepPipeline = ()=>{
 
 
 
-
 const Scene7_CheckpointThree = ()=>{
     const frame = (0,esm/* .useCurrentFrame */.UC)();
     const isPausedCheckpoint = frame < 150;
-    // Narrowing confidence interval along x-axis
-    // Wide at 1 min (left), narrow at 5 min (right)
-    const ciWidthFactor = (0,esm/* .interpolate */.GW)(frame, [
-        150,
-        600
-    ], [
-        1,
-        0.3
-    ], {
-        extrapolateLeft: 'clamp',
-        extrapolateRight: 'clamp'
+    // Comparison curve values
+    const curvePoints = Array.from({
+        length: 45
+    }).map((_, i)=>{
+        const t = i / 44;
+        const x = 80 + t * 1600;
+        // Raw noisy rating with dramatic jumps
+        const rawY = 220 + Math.sin(i * 1.5) * 65 + (i === 6 ? -85 : i === 32 ? 90 : 0);
+        // Smooth bayesian rating with subtle organic drift
+        const bayesY = 210 + Math.sin(t * Math.PI * 1.5) * 22;
+        return {
+            x,
+            rawY,
+            bayesY,
+            t
+        };
     });
-    // Outlier appearance and smooth assimilation
-    const outlierEntrance = (0,esm/* .interpolate */.GW)(frame, [
-        300,
-        340
-    ], [
-        0,
-        1
-    ], {
-        extrapolateLeft: 'clamp',
-        extrapolateRight: 'clamp'
-    });
-    const outlierDampen = (0,esm/* .interpolate */.GW)(frame, [
-        380,
-        520
-    ], [
-        0,
-        1
-    ], {
-        extrapolateLeft: 'clamp',
-        extrapolateRight: 'clamp',
-        easing: esm/* .Easing.bezier */.GS.bezier(0.16, 1, 0.3, 1)
-    });
-    const outlierY = 160 - (1 - outlierDampen) * 110; // high outlier dampening towards the mean line (160)
-    // Example layout animated shimmer values (number growth without actual digits)
-    const barGrowth = (0,esm/* .interpolate */.GW)(frame, [
-        500,
-        900
-    ], [
-        0.4,
-        0.85
-    ], {
-        extrapolateLeft: 'clamp',
-        extrapolateRight: 'clamp'
-    });
-    const varianceNarrowing = (0,esm/* .interpolate */.GW)(frame, [
-        500,
-        900
-    ], [
-        0.8,
-        0.25
-    ], {
-        extrapolateLeft: 'clamp',
-        extrapolateRight: 'clamp'
-    });
+    const rawPath = curvePoints.reduce((acc, pt, idx)=>`${acc} ${idx === 0 ? 'M' : 'L'} ${pt.x.toFixed(1)} ${pt.rawY.toFixed(1)}`, '');
+    const bayesPath = curvePoints.reduce((acc, pt, idx)=>`${acc} ${idx === 0 ? 'M' : 'L'} ${pt.x.toFixed(1)} ${pt.bayesY.toFixed(1)}`, '');
+    // Smooth comparison curves
     return /*#__PURE__*/ (0,jsx_runtime.jsxs)("div", {
         style: {
             position: 'absolute',
             inset: 0,
             backgroundColor: THEME.colors.bg,
-            overflow: 'hidden'
+            overflow: 'hidden',
+            width: 1920,
+            height: 1080
         },
         children: [
             /*#__PURE__*/ (0,jsx_runtime.jsx)(BackgroundGrid, {
-                intensity: 1.1
+                intensity: 1
             }),
             isPausedCheckpoint && /*#__PURE__*/ (0,jsx_runtime.jsx)(WaitingFrame, {
-                durationInFrames: 150
+                durationInFrames: 150,
+                title: "Контрольная точка 3: что видит зритель — скачки или устойчивый рейтинг?",
+                subtitle: "Сравните восприятие скачущей цифры и плавного коридора доверия"
             }),
             /*#__PURE__*/ (0,jsx_runtime.jsxs)("div", {
                 style: {
@@ -23819,360 +23606,384 @@ const Scene7_CheckpointThree = ()=>{
                     inset: 0,
                     display: 'flex',
                     flexDirection: 'column',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    padding: '60px 100px',
+                    justifyContent: 'space-between',
+                    padding: '48px 80px 40px 80px',
                     boxSizing: 'border-box'
                 },
                 children: [
-                    /*#__PURE__*/ (0,jsx_runtime.jsx)("div", {
+                    /*#__PURE__*/ (0,jsx_runtime.jsxs)("header", {
                         style: {
-                            marginBottom: 40,
                             display: 'flex',
-                            gap: 30,
-                            alignItems: 'center'
-                        },
-                        children: /*#__PURE__*/ (0,jsx_runtime.jsx)(PlaceholderBox, {
-                            width: 580,
-                            height: 56,
-                            variant: "pill",
-                            accent: "blue",
-                            glow: true,
-                            children: /*#__PURE__*/ (0,jsx_runtime.jsx)("div", {
-                                style: {
-                                    width: '65%',
-                                    height: 16,
-                                    backgroundColor: THEME.colors.electricBlue,
-                                    borderRadius: 4
-                                }
-                            })
-                        })
-                    }),
-                    /*#__PURE__*/ (0,jsx_runtime.jsxs)("div", {
-                        style: {
-                            width: '100%',
-                            maxWidth: 2200,
-                            height: 440,
-                            borderRadius: 24,
-                            backgroundColor: THEME.colors.bgCard,
-                            border: `2px solid rgba(78, 168, 222, 0.35)`,
-                            padding: 30,
-                            boxSizing: 'border-box',
-                            position: 'relative',
-                            marginBottom: 60,
-                            boxShadow: '0 20px 60px rgba(0,0,0,0.5)'
+                            justifyContent: 'space-between',
+                            alignItems: 'flex-start',
+                            borderBottom: `1px solid ${THEME.colors.border}`,
+                            paddingBottom: 20
                         },
                         children: [
                             /*#__PURE__*/ (0,jsx_runtime.jsxs)("div", {
-                                style: {
-                                    display: 'flex',
-                                    justifyContent: 'space-between',
-                                    padding: '0 40px',
-                                    marginBottom: 15
-                                },
                                 children: [
-                                    /*#__PURE__*/ (0,jsx_runtime.jsx)(PlaceholderBox, {
-                                        width: 120,
-                                        height: 28,
-                                        variant: "pill",
-                                        accent: "neutral"
+                                    /*#__PURE__*/ (0,jsx_runtime.jsx)("div", {
+                                        style: {
+                                            fontSize: 12,
+                                            fontFamily: 'Inter, system-ui, sans-serif',
+                                            fontWeight: 600,
+                                            letterSpacing: 2,
+                                            textTransform: 'uppercase',
+                                            color: THEME.colors.cobalt,
+                                            marginBottom: 8
+                                        },
+                                        children: "07 / ПРАКТИЧЕСКИЙ РЕЗУЛЬТАТ \xb7 ТЕСТИРОВАНИЕ В ЭФИРЕ"
                                     }),
-                                    /*#__PURE__*/ (0,jsx_runtime.jsx)(PlaceholderBox, {
-                                        width: 120,
-                                        height: 28,
-                                        variant: "pill",
-                                        accent: "blue",
-                                        glow: true
+                                    /*#__PURE__*/ (0,jsx_runtime.jsx)("h1", {
+                                        style: {
+                                            fontSize: 34,
+                                            fontWeight: 700,
+                                            color: THEME.colors.textPrimary,
+                                            letterSpacing: -0.8,
+                                            margin: 0,
+                                            lineHeight: 1.2,
+                                            fontFamily: 'Inter, system-ui, sans-serif'
+                                        },
+                                        children: "Сравнение алгоритмов на реальном 40-минутном эфире"
+                                    }),
+                                    /*#__PURE__*/ (0,jsx_runtime.jsx)("p", {
+                                        style: {
+                                            fontSize: 15,
+                                            color: THEME.colors.textSecondary,
+                                            margin: '6px 0 0 0',
+                                            fontFamily: 'Inter, system-ui, sans-serif'
+                                        },
+                                        children: "Сырое арифметическое среднее против непрерывного байесовского фильтра"
                                     })
                                 ]
                             }),
-                            /*#__PURE__*/ (0,jsx_runtime.jsxs)("svg", {
-                                width: "100%",
-                                height: "320",
-                                viewBox: "0 0 2100 320",
+                            /*#__PURE__*/ (0,jsx_runtime.jsxs)("div", {
                                 style: {
-                                    overflow: 'visible'
+                                    display: 'flex',
+                                    gap: 24,
+                                    alignItems: 'center'
                                 },
                                 children: [
-                                    /*#__PURE__*/ (0,jsx_runtime.jsx)("defs", {
-                                        children: /*#__PURE__*/ (0,jsx_runtime.jsxs)("linearGradient", {
-                                            id: "ci-grad",
-                                            x1: "0%",
-                                            y1: "0%",
-                                            x2: "100%",
-                                            y2: "0%",
-                                            children: [
-                                                /*#__PURE__*/ (0,jsx_runtime.jsx)("stop", {
-                                                    offset: "0%",
-                                                    stopColor: THEME.colors.electricBlue,
-                                                    stopOpacity: "0.35"
-                                                }),
-                                                /*#__PURE__*/ (0,jsx_runtime.jsx)("stop", {
-                                                    offset: "100%",
-                                                    stopColor: THEME.colors.electricBlue,
-                                                    stopOpacity: "0.1"
-                                                })
-                                            ]
-                                        })
-                                    }),
-                                    /*#__PURE__*/ (0,jsx_runtime.jsx)("line", {
-                                        x1: "80",
-                                        y1: "160",
-                                        x2: "2020",
-                                        y2: "160",
-                                        stroke: "rgba(255,255,255,0.2)",
-                                        strokeWidth: "2",
-                                        strokeDasharray: "6 6"
-                                    }),
-                                    /*#__PURE__*/ (0,jsx_runtime.jsx)("path", {
-                                        d: `M 80 ${160 - 110 * ciWidthFactor} 
-                  C 700 ${160 - 80 * ciWidthFactor}, 1400 ${160 - 45 * ciWidthFactor}, 2020 ${160 - 25 * ciWidthFactor} 
-                  L 2020 ${160 + 25 * ciWidthFactor} 
-                  C 1400 ${160 + 45 * ciWidthFactor}, 700 ${160 + 80 * ciWidthFactor}, 80 ${160 + 110 * ciWidthFactor} Z`,
-                                        fill: "url(#ci-grad)",
-                                        stroke: THEME.colors.electricBlue,
-                                        strokeWidth: "2.5"
-                                    }),
-                                    /*#__PURE__*/ (0,jsx_runtime.jsx)("path", {
-                                        d: "M 80 160 C 600 155, 1200 162, 2020 160",
-                                        fill: "none",
-                                        stroke: THEME.colors.white,
-                                        strokeWidth: "4",
-                                        filter: "drop-shadow(0 0 8px rgba(255,255,255,0.6))"
-                                    }),
-                                    /*#__PURE__*/ (0,jsx_runtime.jsx)("circle", {
-                                        cx: "450",
-                                        cy: "158",
-                                        r: "6",
-                                        fill: THEME.colors.electricBlue
-                                    }),
-                                    /*#__PURE__*/ (0,jsx_runtime.jsx)("circle", {
-                                        cx: "820",
-                                        cy: "163",
-                                        r: "6",
-                                        fill: THEME.colors.electricBlue
-                                    }),
-                                    /*#__PURE__*/ (0,jsx_runtime.jsx)("circle", {
-                                        cx: "1550",
-                                        cy: "160",
-                                        r: "6",
-                                        fill: THEME.colors.electricBlue
-                                    }),
-                                    frame >= 300 && /*#__PURE__*/ (0,jsx_runtime.jsxs)("g", {
-                                        opacity: outlierEntrance,
+                                    /*#__PURE__*/ (0,jsx_runtime.jsxs)("div", {
+                                        style: {
+                                            display: 'flex',
+                                            alignItems: 'center',
+                                            gap: 8,
+                                            fontSize: 13,
+                                            color: THEME.colors.amber,
+                                            fontWeight: 600
+                                        },
                                         children: [
-                                            /*#__PURE__*/ (0,jsx_runtime.jsx)("circle", {
-                                                cx: "1150",
-                                                cy: outlierY,
-                                                r: 12,
-                                                fill: THEME.colors.warmCoral,
-                                                filter: "drop-shadow(0 0 16px #FF7B54)"
+                                            /*#__PURE__*/ (0,jsx_runtime.jsx)("span", {
+                                                style: {
+                                                    width: 14,
+                                                    height: 2.5,
+                                                    backgroundColor: THEME.colors.amber
+                                                }
                                             }),
-                                            /*#__PURE__*/ (0,jsx_runtime.jsx)("line", {
-                                                x1: "1150",
-                                                y1: 50,
-                                                x2: "1150",
-                                                y2: 160,
-                                                stroke: THEME.colors.warmCoral,
-                                                strokeWidth: "2.5",
-                                                strokeDasharray: "4 4",
-                                                opacity: 0.6
-                                            })
+                                            "Сырое среднее (шум и скачки)"
+                                        ]
+                                    }),
+                                    /*#__PURE__*/ (0,jsx_runtime.jsxs)("div", {
+                                        style: {
+                                            display: 'flex',
+                                            alignItems: 'center',
+                                            gap: 8,
+                                            fontSize: 13,
+                                            color: THEME.colors.cobalt,
+                                            fontWeight: 600
+                                        },
+                                        children: [
+                                            /*#__PURE__*/ (0,jsx_runtime.jsx)("span", {
+                                                style: {
+                                                    width: 14,
+                                                    height: 2.5,
+                                                    backgroundColor: THEME.colors.cobalt
+                                                }
+                                            }),
+                                            "Байесовский рейтинг (фильтр)"
                                         ]
                                     })
                                 ]
                             })
                         ]
                     }),
+                    /*#__PURE__*/ (0,jsx_runtime.jsx)("div", {
+                        style: {
+                            position: 'relative',
+                            width: '100%',
+                            height: 420
+                        },
+                        children: /*#__PURE__*/ (0,jsx_runtime.jsxs)("svg", {
+                            width: "100%",
+                            height: "100%",
+                            viewBox: "0 0 1760 420",
+                            style: {
+                                overflow: 'visible'
+                            },
+                            children: [
+                                [
+                                    {
+                                        val: '5.0 ★',
+                                        y: 70
+                                    },
+                                    {
+                                        val: '4.5 ★',
+                                        y: 150
+                                    },
+                                    {
+                                        val: '4.0 ★',
+                                        y: 230
+                                    },
+                                    {
+                                        val: '3.5 ★',
+                                        y: 310
+                                    },
+                                    {
+                                        val: '3.0 ★',
+                                        y: 390
+                                    }
+                                ].map((grid, idx)=>/*#__PURE__*/ (0,jsx_runtime.jsxs)("g", {
+                                        children: [
+                                            /*#__PURE__*/ (0,jsx_runtime.jsx)("line", {
+                                                x1: "80",
+                                                y1: grid.y,
+                                                x2: "1720",
+                                                y2: grid.y,
+                                                stroke: THEME.colors.borderSubtle,
+                                                strokeWidth: "1"
+                                            }),
+                                            /*#__PURE__*/ (0,jsx_runtime.jsx)("text", {
+                                                x: "65",
+                                                y: grid.y + 4,
+                                                textAnchor: "end",
+                                                fill: THEME.colors.textMuted,
+                                                fontSize: "12",
+                                                fontFamily: "Inter, system-ui, sans-serif",
+                                                children: grid.val
+                                            })
+                                        ]
+                                    }, idx)),
+                                /*#__PURE__*/ (0,jsx_runtime.jsxs)("g", {
+                                    transform: "translate(320, 110)",
+                                    children: [
+                                        /*#__PURE__*/ (0,jsx_runtime.jsx)("line", {
+                                            x1: "0",
+                                            y1: "0",
+                                            x2: "0",
+                                            y2: "40",
+                                            stroke: THEME.colors.amber,
+                                            strokeWidth: "1",
+                                            strokeDasharray: "3 3"
+                                        }),
+                                        /*#__PURE__*/ (0,jsx_runtime.jsx)("rect", {
+                                            x: "-10",
+                                            y: "-30",
+                                            width: "220",
+                                            height: "26",
+                                            fill: "#0E121C",
+                                            stroke: THEME.colors.amber,
+                                            rx: "4"
+                                        }),
+                                        /*#__PURE__*/ (0,jsx_runtime.jsx)("text", {
+                                            x: "0",
+                                            y: "-13",
+                                            fill: THEME.colors.amber,
+                                            fontSize: "11",
+                                            fontFamily: "JetBrains Mono, monospace",
+                                            children: "Всплеск троллей (5 хейтеров)"
+                                        })
+                                    ]
+                                }),
+                                /*#__PURE__*/ (0,jsx_runtime.jsxs)("g", {
+                                    transform: "translate(1280, 290)",
+                                    children: [
+                                        /*#__PURE__*/ (0,jsx_runtime.jsx)("line", {
+                                            x1: "0",
+                                            y1: "0",
+                                            x2: "0",
+                                            y2: "40",
+                                            stroke: THEME.colors.cobalt,
+                                            strokeWidth: "1",
+                                            strokeDasharray: "3 3"
+                                        }),
+                                        /*#__PURE__*/ (0,jsx_runtime.jsx)("rect", {
+                                            x: "-10",
+                                            y: "-30",
+                                            width: "220",
+                                            height: "26",
+                                            fill: "#0E121C",
+                                            stroke: THEME.colors.cobalt,
+                                            rx: "4"
+                                        }),
+                                        /*#__PURE__*/ (0,jsx_runtime.jsx)("text", {
+                                            x: "0",
+                                            y: "-13",
+                                            fill: THEME.colors.cobalt,
+                                            fontSize: "11",
+                                            fontFamily: "JetBrains Mono, monospace",
+                                            children: "Реальный сбой трансляции"
+                                        })
+                                    ]
+                                }),
+                                /*#__PURE__*/ (0,jsx_runtime.jsx)("path", {
+                                    d: curvePoints.reduce((acc, pt, i)=>`${acc} ${i === 0 ? 'M' : 'L'} ${pt.x.toFixed(1)} ${(pt.bayesY - 18).toFixed(1)}`, '') + curvePoints.slice().reverse().reduce((acc, pt)=>`${acc} L ${pt.x.toFixed(1)} ${(pt.bayesY + 18).toFixed(1)}`, '') + ' Z',
+                                    fill: "rgba(56, 189, 248, 0.06)"
+                                }),
+                                /*#__PURE__*/ (0,jsx_runtime.jsx)("path", {
+                                    d: rawPath,
+                                    fill: "none",
+                                    stroke: THEME.colors.amber,
+                                    strokeWidth: "2",
+                                    strokeOpacity: 0.7,
+                                    strokeDasharray: "4 4"
+                                }),
+                                /*#__PURE__*/ (0,jsx_runtime.jsx)("path", {
+                                    d: bayesPath,
+                                    fill: "none",
+                                    stroke: THEME.colors.cobalt,
+                                    strokeWidth: "3",
+                                    strokeLinecap: "round"
+                                }),
+                                /*#__PURE__*/ (0,jsx_runtime.jsx)("line", {
+                                    x1: "80",
+                                    y1: "400",
+                                    x2: "1720",
+                                    y2: "400",
+                                    stroke: THEME.colors.border,
+                                    strokeWidth: "1"
+                                }),
+                                [
+                                    '00:00 (Старт)',
+                                    '10:00',
+                                    '20:00 (Экватор)',
+                                    '30:00',
+                                    '40:00 (Финал)'
+                                ].map((l, i)=>{
+                                    const xPos = 80 + i * 410;
+                                    return /*#__PURE__*/ (0,jsx_runtime.jsx)("text", {
+                                        x: xPos,
+                                        y: "418",
+                                        fill: THEME.colors.textMuted,
+                                        fontSize: "11",
+                                        fontFamily: "JetBrains Mono, monospace",
+                                        textAnchor: i === 4 ? 'end' : i === 0 ? 'start' : 'middle',
+                                        children: l
+                                    }, i);
+                                })
+                            ]
+                        })
+                    }),
                     /*#__PURE__*/ (0,jsx_runtime.jsxs)("div", {
                         style: {
-                            width: '100%',
-                            maxWidth: 2200,
-                            display: 'flex',
-                            alignItems: 'center',
-                            justifyContent: 'center',
-                            gap: 36
+                            borderTop: `1px solid ${THEME.colors.border}`,
+                            paddingTop: 24,
+                            display: 'grid',
+                            gridTemplateColumns: 'repeat(3, 1fr)',
+                            gap: 48
                         },
                         children: [
                             /*#__PURE__*/ (0,jsx_runtime.jsxs)("div", {
                                 style: {
-                                    display: 'flex',
-                                    flexDirection: 'column',
-                                    alignItems: 'center',
-                                    gap: 14
+                                    borderRight: `1px solid ${THEME.colors.borderSubtle}`,
+                                    paddingRight: 32
                                 },
                                 children: [
-                                    /*#__PURE__*/ (0,jsx_runtime.jsx)(PlaceholderBox, {
-                                        width: 140,
-                                        height: 32,
-                                        variant: "pill",
-                                        accent: "neutral"
+                                    /*#__PURE__*/ (0,jsx_runtime.jsx)("div", {
+                                        style: {
+                                            fontSize: 12,
+                                            textTransform: 'uppercase',
+                                            letterSpacing: 1,
+                                            color: THEME.colors.amber,
+                                            fontWeight: 700
+                                        },
+                                        children: "01 \xb7 Защита от накруток"
                                     }),
-                                    /*#__PURE__*/ (0,jsx_runtime.jsx)(PlaceholderBox, {
-                                        width: 460,
-                                        height: 120,
-                                        variant: "card",
-                                        accent: "neutral",
-                                        cornerMarks: true,
-                                        children: /*#__PURE__*/ (0,jsx_runtime.jsxs)("div", {
-                                            style: {
-                                                display: 'flex',
-                                                alignItems: 'center',
-                                                gap: 20
-                                            },
-                                            children: [
-                                                /*#__PURE__*/ (0,jsx_runtime.jsx)("div", {
-                                                    style: {
-                                                        width: 140,
-                                                        height: 28,
-                                                        backgroundColor: 'rgba(255,255,255,0.3)',
-                                                        borderRadius: 6
-                                                    }
-                                                }),
-                                                /*#__PURE__*/ (0,jsx_runtime.jsx)("span", {
-                                                    style: {
-                                                        fontSize: 36,
-                                                        color: 'rgba(255,255,255,0.5)',
-                                                        fontWeight: 600
-                                                    },
-                                                    children: "\xb1"
-                                                }),
-                                                /*#__PURE__*/ (0,jsx_runtime.jsx)("div", {
-                                                    style: {
-                                                        width: 100,
-                                                        height: 28,
-                                                        backgroundColor: 'rgba(255,255,255,0.2)',
-                                                        borderRadius: 6
-                                                    }
-                                                })
-                                            ]
-                                        })
+                                    /*#__PURE__*/ (0,jsx_runtime.jsx)("div", {
+                                        style: {
+                                            fontSize: 18,
+                                            fontWeight: 700,
+                                            color: THEME.colors.textPrimary,
+                                            marginTop: 6
+                                        },
+                                        children: "Иммунитет к малым всплескам"
+                                    }),
+                                    /*#__PURE__*/ (0,jsx_runtime.jsx)("div", {
+                                        style: {
+                                            fontSize: 13,
+                                            color: THEME.colors.textSecondary,
+                                            marginTop: 6,
+                                            lineHeight: 1.5
+                                        },
+                                        children: "Случайные 1 или 5 баллов от 3–5 человек не вызывают нервной реакции ведущих и аудитории."
                                     })
                                 ]
                             }),
-                            /*#__PURE__*/ (0,jsx_runtime.jsx)("div", {
-                                style: {
-                                    fontSize: 50,
-                                    color: THEME.colors.electricBlue,
-                                    fontWeight: 700
-                                },
-                                children: "→"
-                            }),
                             /*#__PURE__*/ (0,jsx_runtime.jsxs)("div", {
                                 style: {
-                                    display: 'flex',
-                                    flexDirection: 'column',
-                                    alignItems: 'center',
-                                    gap: 14
+                                    borderRight: `1px solid ${THEME.colors.borderSubtle}`,
+                                    paddingRight: 32
                                 },
                                 children: [
-                                    /*#__PURE__*/ (0,jsx_runtime.jsx)(PlaceholderBox, {
-                                        width: 220,
-                                        height: 32,
-                                        variant: "pill",
-                                        accent: "coral"
+                                    /*#__PURE__*/ (0,jsx_runtime.jsx)("div", {
+                                        style: {
+                                            fontSize: 12,
+                                            textTransform: 'uppercase',
+                                            letterSpacing: 1,
+                                            color: THEME.colors.cobalt,
+                                            fontWeight: 700
+                                        },
+                                        children: "02 \xb7 Чувствительность к правде"
                                     }),
-                                    /*#__PURE__*/ (0,jsx_runtime.jsx)(PlaceholderBox, {
-                                        width: 380,
-                                        height: 120,
-                                        variant: "card",
-                                        accent: "coral",
-                                        glow: true,
-                                        cornerMarks: true,
-                                        children: /*#__PURE__*/ (0,jsx_runtime.jsxs)("div", {
-                                            style: {
-                                                display: 'flex',
-                                                flexDirection: 'column',
-                                                alignItems: 'center',
-                                                gap: 10
-                                            },
-                                            children: [
-                                                /*#__PURE__*/ (0,jsx_runtime.jsx)("div", {
-                                                    style: {
-                                                        width: 180,
-                                                        height: 28,
-                                                        backgroundColor: THEME.colors.warmCoral,
-                                                        borderRadius: 6
-                                                    }
-                                                }),
-                                                /*#__PURE__*/ (0,jsx_runtime.jsx)("div", {
-                                                    style: {
-                                                        width: 32,
-                                                        height: 4,
-                                                        backgroundColor: 'rgba(255,255,255,0.6)',
-                                                        borderRadius: 2
-                                                    }
-                                                })
-                                            ]
-                                        })
+                                    /*#__PURE__*/ (0,jsx_runtime.jsx)("div", {
+                                        style: {
+                                            fontSize: 18,
+                                            fontWeight: 700,
+                                            color: THEME.colors.textPrimary,
+                                            marginTop: 6
+                                        },
+                                        children: "Быстрая реакция на тренд"
+                                    }),
+                                    /*#__PURE__*/ (0,jsx_runtime.jsx)("div", {
+                                        style: {
+                                            fontSize: 13,
+                                            color: THEME.colors.textSecondary,
+                                            marginTop: 6,
+                                            lineHeight: 1.5
+                                        },
+                                        children: "Когда проблема затрагивает сотни зрителей, модель плавно и уверенно перестраивается без запаздывания."
                                     })
                                 ]
                             }),
-                            /*#__PURE__*/ (0,jsx_runtime.jsx)("div", {
-                                style: {
-                                    fontSize: 50,
-                                    color: THEME.colors.electricBlue,
-                                    fontWeight: 700
-                                },
-                                children: "→"
-                            }),
                             /*#__PURE__*/ (0,jsx_runtime.jsxs)("div", {
-                                style: {
-                                    display: 'flex',
-                                    flexDirection: 'column',
-                                    alignItems: 'center',
-                                    gap: 14
-                                },
                                 children: [
-                                    /*#__PURE__*/ (0,jsx_runtime.jsx)(PlaceholderBox, {
-                                        width: 140,
-                                        height: 32,
-                                        variant: "pill",
-                                        accent: "blue",
-                                        glow: true
+                                    /*#__PURE__*/ (0,jsx_runtime.jsx)("div", {
+                                        style: {
+                                            fontSize: 12,
+                                            textTransform: 'uppercase',
+                                            letterSpacing: 1,
+                                            color: THEME.colors.emerald,
+                                            fontWeight: 700
+                                        },
+                                        children: "03 \xb7 Доверие аудитории"
                                     }),
-                                    /*#__PURE__*/ (0,jsx_runtime.jsx)(PlaceholderBox, {
-                                        width: 460,
-                                        height: 120,
-                                        variant: "card",
-                                        accent: "blue",
-                                        glow: true,
-                                        pulse: true,
-                                        cornerMarks: true,
-                                        children: /*#__PURE__*/ (0,jsx_runtime.jsxs)("div", {
-                                            style: {
-                                                display: 'flex',
-                                                alignItems: 'center',
-                                                gap: 20
-                                            },
-                                            children: [
-                                                /*#__PURE__*/ (0,jsx_runtime.jsx)("div", {
-                                                    style: {
-                                                        width: 140 * barGrowth + 40,
-                                                        height: 28,
-                                                        backgroundColor: THEME.colors.electricBlue,
-                                                        borderRadius: 6,
-                                                        boxShadow: `0 0 16px ${THEME.colors.electricBlueGlow}`
-                                                    }
-                                                }),
-                                                /*#__PURE__*/ (0,jsx_runtime.jsx)("span", {
-                                                    style: {
-                                                        fontSize: 36,
-                                                        color: THEME.colors.electricBlue,
-                                                        fontWeight: 600
-                                                    },
-                                                    children: "\xb1"
-                                                }),
-                                                /*#__PURE__*/ (0,jsx_runtime.jsx)("div", {
-                                                    style: {
-                                                        width: 100 * varianceNarrowing + 20,
-                                                        height: 28,
-                                                        backgroundColor: 'rgba(78, 168, 222, 0.45)',
-                                                        borderRadius: 6
-                                                    }
-                                                })
-                                            ]
-                                        })
+                                    /*#__PURE__*/ (0,jsx_runtime.jsx)("div", {
+                                        style: {
+                                            fontSize: 18,
+                                            fontWeight: 700,
+                                            color: THEME.colors.textPrimary,
+                                            marginTop: 6
+                                        },
+                                        children: "Коридор вместо псевдоточки"
+                                    }),
+                                    /*#__PURE__*/ (0,jsx_runtime.jsx)("div", {
+                                        style: {
+                                            fontSize: 13,
+                                            color: THEME.colors.textSecondary,
+                                            marginTop: 6,
+                                            lineHeight: 1.5
+                                        },
+                                        children: "Отображение \xb10.12 снимает вопросы зрителей о точности и повышает доверие к платформе."
                                     })
                                 ]
                             })
@@ -24184,99 +23995,7 @@ const Scene7_CheckpointThree = ()=>{
     });
 };
 
-;// CONCATENATED MODULE: ./node_modules/lucide-react/dist/esm/icons/triangle-exclamation-point.mjs
-/**
- * @license lucide-react v1.77.0 - ISC
- *
- * This source code is licensed under the ISC license.
- * See the LICENSE file in the root directory of this source tree.
- */
-
-
-
-const triangle_exclamation_point_iconData = {
-  name: "triangle-exclamation-point",
-  size: 24,
-  node: [
-    [
-      "path",
-      {
-        d: "m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3",
-        key: "wmoenq"
-      }
-    ],
-    ["path", { d: "M12 9v4", key: "juzpu7" }],
-    ["path", { d: "M12 17h.01", key: "p32p05" }]
-  ],
-  aliases: ["alert-triangle", "triangle-alert"]
-};
-triangle_exclamation_point_iconData.node;
-const TriangleExclamationPoint = createLucideIcon(triangle_exclamation_point_iconData);
-
-
-//# sourceMappingURL=triangle-exclamation-point.mjs.map
-
-;// CONCATENATED MODULE: ./node_modules/lucide-react/dist/esm/icons/shield-exclamation-point.mjs
-/**
- * @license lucide-react v1.77.0 - ISC
- *
- * This source code is licensed under the ISC license.
- * See the LICENSE file in the root directory of this source tree.
- */
-
-
-
-const shield_exclamation_point_iconData = {
-  name: "shield-exclamation-point",
-  size: 24,
-  node: [
-    [
-      "path",
-      {
-        d: "M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z",
-        key: "oel41y"
-      }
-    ],
-    ["path", { d: "M12 8v4", key: "1got3b" }],
-    ["path", { d: "M12 16h.01", key: "1drbdi" }]
-  ],
-  aliases: ["shield-alert"]
-};
-shield_exclamation_point_iconData.node;
-const ShieldExclamationPoint = createLucideIcon(shield_exclamation_point_iconData);
-
-
-//# sourceMappingURL=shield-exclamation-point.mjs.map
-
-;// CONCATENATED MODULE: ./node_modules/lucide-react/dist/esm/icons/circle-exclamation-point.mjs
-/**
- * @license lucide-react v1.77.0 - ISC
- *
- * This source code is licensed under the ISC license.
- * See the LICENSE file in the root directory of this source tree.
- */
-
-
-
-const circle_exclamation_point_iconData = {
-  name: "circle-exclamation-point",
-  size: 24,
-  node: [
-    ["circle", { cx: "12", cy: "12", r: "10", key: "1mglay" }],
-    ["line", { x1: "12", x2: "12", y1: "8", y2: "12", key: "1pkeuh" }],
-    ["line", { x1: "12", x2: "12.01", y1: "16", y2: "16", key: "4dfq90" }]
-  ],
-  aliases: ["alert-circle", "circle-alert"]
-};
-circle_exclamation_point_iconData.node;
-const CircleExclamationPoint = createLucideIcon(circle_exclamation_point_iconData);
-
-
-//# sourceMappingURL=circle-exclamation-point.mjs.map
-
 ;// CONCATENATED MODULE: ./src/scenes/Scene8_Conclusion.tsx
-
-
 
 
 
@@ -24285,12 +24004,12 @@ const CircleExclamationPoint = createLucideIcon(circle_exclamation_point_iconDat
 
 const Scene8_Conclusion = ()=>{
     const frame = (0,esm/* .useCurrentFrame */.UC)();
-    // Part 1: Warnings entrance (0 - 300 frames)
-    const warningsOpacity = (0,esm/* .interpolate */.GW)(frame, [
+    // Part 1: Warnings (frames 0 - 340)
+    const part1Opacity = (0,esm/* .interpolate */.GW)(frame, [
         0,
-        40,
-        260,
-        300
+        20,
+        310,
+        340
     ], [
         0,
         1,
@@ -24299,25 +24018,10 @@ const Scene8_Conclusion = ()=>{
     ], {
         extrapolateRight: 'clamp'
     });
-    // Part 2: Summary card entrance (280 - 600 frames)
-    const summaryOpacity = (0,esm/* .interpolate */.GW)(frame, [
-        280,
-        340,
-        560,
-        600
-    ], [
-        0,
-        1,
-        1,
-        0
-    ], {
-        extrapolateLeft: 'clamp',
-        extrapolateRight: 'clamp'
-    });
-    // Part 3: Finale Bell curve and credits (580 - 900 frames)
-    const finaleOpacity = (0,esm/* .interpolate */.GW)(frame, [
-        580,
-        640
+    // Part 2: Finale & Authors (frames 330 - 900)
+    const part2Opacity = (0,esm/* .interpolate */.GW)(frame, [
+        330,
+        370
     ], [
         0,
         1
@@ -24325,16 +24029,24 @@ const Scene8_Conclusion = ()=>{
         extrapolateLeft: 'clamp',
         extrapolateRight: 'clamp'
     });
+    const authors = [
+        'Голомидова Женя',
+        'Селиванов Илья',
+        'Константин Толов',
+        'Фураев Никита'
+    ];
     return /*#__PURE__*/ (0,jsx_runtime.jsxs)("div", {
         style: {
             position: 'absolute',
             inset: 0,
             backgroundColor: THEME.colors.bg,
-            overflow: 'hidden'
+            overflow: 'hidden',
+            width: 1920,
+            height: 1080
         },
         children: [
             /*#__PURE__*/ (0,jsx_runtime.jsx)(BackgroundGrid, {
-                intensity: 1.1
+                intensity: 1
             }),
             /*#__PURE__*/ (0,jsx_runtime.jsxs)("div", {
                 style: {
@@ -24342,363 +24054,315 @@ const Scene8_Conclusion = ()=>{
                     inset: 0,
                     display: 'flex',
                     flexDirection: 'column',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    padding: '60px 100px',
+                    justifyContent: 'space-between',
+                    padding: '48px 80px 40px 80px',
                     boxSizing: 'border-box'
                 },
                 children: [
-                    frame < 300 && /*#__PURE__*/ (0,jsx_runtime.jsxs)("div", {
+                    frame < 340 && /*#__PURE__*/ (0,jsx_runtime.jsxs)("div", {
                         style: {
-                            opacity: warningsOpacity,
+                            opacity: part1Opacity,
                             display: 'flex',
                             flexDirection: 'column',
-                            alignItems: 'center',
-                            gap: 60
+                            justifyContent: 'space-between',
+                            height: '100%'
                         },
                         children: [
-                            /*#__PURE__*/ (0,jsx_runtime.jsx)(PlaceholderBox, {
-                                width: 500,
-                                height: 56,
-                                variant: "pill",
-                                accent: "coral",
-                                glow: true,
-                                children: /*#__PURE__*/ (0,jsx_runtime.jsx)("div", {
-                                    style: {
-                                        width: '60%',
-                                        height: 16,
-                                        backgroundColor: THEME.colors.warmCoral,
-                                        borderRadius: 4
-                                    }
-                                })
-                            }),
-                            /*#__PURE__*/ (0,jsx_runtime.jsx)("div", {
+                            /*#__PURE__*/ (0,jsx_runtime.jsxs)("header", {
                                 style: {
-                                    display: 'flex',
-                                    gap: 60
+                                    borderBottom: `1px solid ${THEME.colors.border}`,
+                                    paddingBottom: 20
                                 },
                                 children: [
-                                    {
-                                        icon: TriangleExclamationPoint,
-                                        id: 1
-                                    },
-                                    {
-                                        icon: ShieldExclamationPoint,
-                                        id: 2
-                                    },
-                                    {
-                                        icon: CircleExclamationPoint,
-                                        id: 3
-                                    }
-                                ].map((item, idx)=>{
-                                    const Icon = item.icon;
-                                    const cardEntrance = (0,esm/* .interpolate */.GW)(frame, [
-                                        20 + idx * 30,
-                                        60 + idx * 30
-                                    ], [
-                                        0,
-                                        1
-                                    ], {
-                                        extrapolateLeft: 'clamp',
-                                        extrapolateRight: 'clamp'
-                                    });
-                                    return /*#__PURE__*/ (0,jsx_runtime.jsxs)("div", {
+                                    /*#__PURE__*/ (0,jsx_runtime.jsx)("div", {
                                         style: {
-                                            transform: `scale(${cardEntrance})`,
-                                            display: 'flex',
-                                            flexDirection: 'column',
-                                            alignItems: 'center',
-                                            gap: 24
+                                            fontSize: 12,
+                                            fontFamily: 'Inter, system-ui, sans-serif',
+                                            fontWeight: 600,
+                                            letterSpacing: 2,
+                                            textTransform: 'uppercase',
+                                            color: THEME.colors.amber,
+                                            marginBottom: 8
                                         },
-                                        children: [
-                                            /*#__PURE__*/ (0,jsx_runtime.jsx)("div", {
-                                                style: {
-                                                    width: 150,
-                                                    height: 150,
-                                                    borderRadius: 30,
-                                                    backgroundColor: 'rgba(255, 123, 84, 0.15)',
-                                                    border: `3px solid ${THEME.colors.warmCoral}`,
-                                                    boxShadow: `0 0 40px ${THEME.colors.warmCoralGlow}`,
-                                                    display: 'flex',
-                                                    alignItems: 'center',
-                                                    justifyContent: 'center',
-                                                    color: THEME.colors.warmCoral
-                                                },
-                                                children: /*#__PURE__*/ (0,jsx_runtime.jsx)(Icon, {
-                                                    size: 70,
-                                                    strokeWidth: 2.2
-                                                })
-                                            }),
-                                            /*#__PURE__*/ (0,jsx_runtime.jsx)(PlaceholderBox, {
-                                                width: 320,
-                                                height: 50,
-                                                variant: "card",
-                                                accent: "coral",
-                                                children: /*#__PURE__*/ (0,jsx_runtime.jsx)("div", {
-                                                    style: {
-                                                        width: '65%',
-                                                        height: 14,
-                                                        backgroundColor: THEME.colors.warmCoral,
-                                                        borderRadius: 4
-                                                    }
-                                                })
-                                            })
-                                        ]
-                                    }, item.id);
-                                })
-                            })
-                        ]
-                    }),
-                    frame >= 280 && frame < 600 && /*#__PURE__*/ (0,jsx_runtime.jsxs)("div", {
-                        style: {
-                            opacity: summaryOpacity,
-                            display: 'flex',
-                            flexDirection: 'column',
-                            alignItems: 'center',
-                            gap: 40
-                        },
-                        children: [
-                            /*#__PURE__*/ (0,jsx_runtime.jsx)(PlaceholderBox, {
-                                width: 460,
-                                height: 56,
-                                variant: "pill",
-                                accent: "blue",
-                                glow: true,
-                                children: /*#__PURE__*/ (0,jsx_runtime.jsx)("div", {
-                                    style: {
-                                        width: '55%',
-                                        height: 16,
-                                        backgroundColor: THEME.colors.electricBlue,
-                                        borderRadius: 4
-                                    }
-                                })
+                                        children: "08 / ИНЖЕНЕРНЫЕ ПРАВИЛА ВНЕДРЕНИЯ В PRODUCTION"
+                                    }),
+                                    /*#__PURE__*/ (0,jsx_runtime.jsx)("h1", {
+                                        style: {
+                                            fontSize: 34,
+                                            fontWeight: 700,
+                                            color: THEME.colors.textPrimary,
+                                            letterSpacing: -0.8,
+                                            margin: 0,
+                                            lineHeight: 1.2,
+                                            fontFamily: 'Inter, system-ui, sans-serif'
+                                        },
+                                        children: "Три предостережения при развертывании модели"
+                                    }),
+                                    /*#__PURE__*/ (0,jsx_runtime.jsx)("p", {
+                                        style: {
+                                            fontSize: 15,
+                                            color: THEME.colors.textSecondary,
+                                            margin: '6px 0 0 0',
+                                            fontFamily: 'Inter, system-ui, sans-serif'
+                                        },
+                                        children: "Что необходимо учесть перед передачей алгоритма в промышленную эксплуатацию"
+                                    })
+                                ]
                             }),
-                            /*#__PURE__*/ (0,jsx_runtime.jsx)("div", {
-                                style: {
-                                    width: 1100,
-                                    borderRadius: 28,
-                                    backgroundColor: THEME.colors.bgCardHighlight,
-                                    border: `3px solid ${THEME.colors.electricBlue}`,
-                                    boxShadow: `0 24px 80px rgba(0, 0, 0, 0.6), 0 0 50px ${THEME.colors.electricBlueGlow}`,
-                                    padding: '50px 60px',
-                                    display: 'flex',
-                                    flexDirection: 'column',
-                                    gap: 30,
-                                    boxSizing: 'border-box'
-                                },
-                                children: [
-                                    1,
-                                    2,
-                                    3
-                                ].map((row)=>/*#__PURE__*/ (0,jsx_runtime.jsxs)("div", {
-                                        style: {
-                                            display: 'flex',
-                                            alignItems: 'center',
-                                            gap: 30,
-                                            padding: '16px 24px',
-                                            borderRadius: 16,
-                                            backgroundColor: 'rgba(13, 27, 42, 0.7)',
-                                            border: '1.5px solid rgba(78, 168, 222, 0.25)'
-                                        },
-                                        children: [
-                                            /*#__PURE__*/ (0,jsx_runtime.jsx)("div", {
-                                                style: {
-                                                    width: 18,
-                                                    height: 18,
-                                                    borderRadius: '50%',
-                                                    backgroundColor: THEME.colors.electricBlue,
-                                                    boxShadow: `0 0 12px ${THEME.colors.electricBlue}`
-                                                }
-                                            }),
-                                            /*#__PURE__*/ (0,jsx_runtime.jsx)("div", {
-                                                style: {
-                                                    flex: 1,
-                                                    height: 20,
-                                                    backgroundColor: 'rgba(255, 255, 255, 0.25)',
-                                                    borderRadius: 6
-                                                }
-                                            })
-                                        ]
-                                    }, row))
-                            })
-                        ]
-                    }),
-                    frame >= 580 && /*#__PURE__*/ (0,jsx_runtime.jsxs)("div", {
-                        style: {
-                            opacity: finaleOpacity,
-                            display: 'flex',
-                            flexDirection: 'column',
-                            alignItems: 'center',
-                            width: '100%',
-                            maxWidth: 2400
-                        },
-                        children: [
                             /*#__PURE__*/ (0,jsx_runtime.jsxs)("div", {
                                 style: {
-                                    position: 'relative',
-                                    width: 1400,
-                                    height: 440,
-                                    borderRadius: 28,
-                                    backgroundColor: THEME.colors.bgCard,
-                                    border: `2px solid rgba(78, 168, 222, 0.4)`,
-                                    padding: 30,
-                                    boxSizing: 'border-box',
-                                    marginBottom: 40,
-                                    boxShadow: '0 24px 80px rgba(0, 0, 0, 0.7), 0 0 40px rgba(78, 168, 222, 0.2)'
+                                    display: 'grid',
+                                    gridTemplateColumns: 'repeat(3, 1fr)',
+                                    gap: 60,
+                                    margin: 'auto 0'
                                 },
                                 children: [
-                                    /*#__PURE__*/ (0,jsx_runtime.jsx)(BellCurve, {
-                                        width: 1340,
-                                        height: 370,
-                                        mean: 0.5,
-                                        stdDev: 0.11,
-                                        color: THEME.colors.electricBlue,
-                                        showFill: true,
-                                        showConfidenceInterval: true,
-                                        dataPoints: [
-                                            {
-                                                x: 0.35
-                                            },
-                                            {
-                                                x: 0.44
-                                            },
-                                            {
-                                                x: 0.52
-                                            },
-                                            {
-                                                x: 0.58
-                                            },
-                                            {
-                                                x: 0.64
-                                            }
+                                    /*#__PURE__*/ (0,jsx_runtime.jsxs)("div", {
+                                        style: {
+                                            borderRight: `1px solid ${THEME.colors.borderSubtle}`,
+                                            paddingRight: 40
+                                        },
+                                        children: [
+                                            /*#__PURE__*/ (0,jsx_runtime.jsx)("span", {
+                                                style: {
+                                                    fontSize: 12,
+                                                    fontFamily: 'JetBrains Mono, monospace',
+                                                    color: THEME.colors.amber,
+                                                    fontWeight: 700
+                                                },
+                                                children: "РИСК 01"
+                                            }),
+                                            /*#__PURE__*/ (0,jsx_runtime.jsx)("h2", {
+                                                style: {
+                                                    fontSize: 22,
+                                                    fontWeight: 700,
+                                                    color: THEME.colors.textPrimary,
+                                                    marginTop: 12
+                                                },
+                                                children: "Слишком жёсткий априор"
+                                            }),
+                                            /*#__PURE__*/ (0,jsx_runtime.jsx)("p", {
+                                                style: {
+                                                    fontSize: 14,
+                                                    color: THEME.colors.textSecondary,
+                                                    marginTop: 10,
+                                                    lineHeight: 1.6
+                                                },
+                                                children: "Если задать нулевую дисперсию (σ₀\xb2 → 0), модель откажется слышать зрителей и навсегда застрянет в начальном значении. Всегда сохраняйте разумную степень сомнения."
+                                            })
                                         ]
                                     }),
                                     /*#__PURE__*/ (0,jsx_runtime.jsxs)("div", {
                                         style: {
-                                            position: 'absolute',
-                                            top: 40,
-                                            right: 180,
-                                            display: 'flex',
-                                            alignItems: 'center',
-                                            gap: 12,
-                                            padding: '12px 24px',
-                                            borderRadius: 9999,
-                                            backgroundColor: 'rgba(13, 27, 42, 0.85)',
-                                            border: `2px solid ${THEME.colors.electricBlue}`,
-                                            boxShadow: `0 0 25px ${THEME.colors.electricBlueGlow}`
+                                            borderRight: `1px solid ${THEME.colors.borderSubtle}`,
+                                            paddingRight: 40
                                         },
                                         children: [
-                                            /*#__PURE__*/ (0,jsx_runtime.jsx)("svg", {
-                                                width: "32",
-                                                height: "32",
-                                                viewBox: "0 0 24 24",
-                                                fill: "none",
-                                                children: /*#__PURE__*/ (0,jsx_runtime.jsx)("path", {
-                                                    d: "M7 17L17 7M17 7H9M17 7V15",
-                                                    stroke: THEME.colors.electricBlue,
-                                                    strokeWidth: "3",
-                                                    strokeLinecap: "round",
-                                                    strokeLinejoin: "round"
-                                                })
-                                            }),
-                                            /*#__PURE__*/ (0,jsx_runtime.jsx)("div", {
+                                            /*#__PURE__*/ (0,jsx_runtime.jsx)("span", {
                                                 style: {
-                                                    width: 80,
-                                                    height: 12,
-                                                    backgroundColor: THEME.colors.electricBlue,
-                                                    borderRadius: 6
-                                                }
+                                                    fontSize: 12,
+                                                    fontFamily: 'JetBrains Mono, monospace',
+                                                    color: THEME.colors.amber,
+                                                    fontWeight: 700
+                                                },
+                                                children: "РИСК 02"
+                                            }),
+                                            /*#__PURE__*/ (0,jsx_runtime.jsx)("h2", {
+                                                style: {
+                                                    fontSize: 22,
+                                                    fontWeight: 700,
+                                                    color: THEME.colors.textPrimary,
+                                                    marginTop: 12
+                                                },
+                                                children: "Скоординированные боты"
+                                            }),
+                                            /*#__PURE__*/ (0,jsx_runtime.jsx)("p", {
+                                                style: {
+                                                    fontSize: 14,
+                                                    color: THEME.colors.textSecondary,
+                                                    marginTop: 10,
+                                                    lineHeight: 1.6
+                                                },
+                                                children: "Байесовская теорема строго опирается на предпосылку о независимости наблюдений (i.i.d.). Атаки накрутки и спам-фермы должны отсекаться до передачи в математическую формулу."
+                                            })
+                                        ]
+                                    }),
+                                    /*#__PURE__*/ (0,jsx_runtime.jsxs)("div", {
+                                        children: [
+                                            /*#__PURE__*/ (0,jsx_runtime.jsx)("span", {
+                                                style: {
+                                                    fontSize: 12,
+                                                    fontFamily: 'JetBrains Mono, monospace',
+                                                    color: THEME.colors.emerald,
+                                                    fontWeight: 700
+                                                },
+                                                children: "РИСК 03"
+                                            }),
+                                            /*#__PURE__*/ (0,jsx_runtime.jsx)("h2", {
+                                                style: {
+                                                    fontSize: 22,
+                                                    fontWeight: 700,
+                                                    color: THEME.colors.textPrimary,
+                                                    marginTop: 12
+                                                },
+                                                children: "Иллюзия точечной цифры"
+                                            }),
+                                            /*#__PURE__*/ (0,jsx_runtime.jsx)("p", {
+                                                style: {
+                                                    fontSize: 14,
+                                                    color: THEME.colors.textSecondary,
+                                                    marginTop: 10,
+                                                    lineHeight: 1.6
+                                                },
+                                                children: "Показ одной \xabголой\xbb цифры лишает зрителя понимания погрешности. Транслируйте доверительный коридор (\xb10.12) — это делает продукт профессиональным."
                                             })
                                         ]
                                     })
                                 ]
                             }),
+                            /*#__PURE__*/ (0,jsx_runtime.jsxs)("div", {
+                                style: {
+                                    borderTop: `1px solid ${THEME.colors.border}`,
+                                    paddingTop: 16,
+                                    fontSize: 12,
+                                    color: THEME.colors.textMuted,
+                                    display: 'flex',
+                                    justifyContent: 'space-between'
+                                },
+                                children: [
+                                    /*#__PURE__*/ (0,jsx_runtime.jsx)("span", {
+                                        children: "Контроль качества данных \xb7 Data-Ink Ratio"
+                                    }),
+                                    /*#__PURE__*/ (0,jsx_runtime.jsx)("span", {
+                                        style: {
+                                            fontFamily: 'JetBrains Mono, monospace'
+                                        },
+                                        children: "ФИНАЛЬНОЕ ЗАКЛЮЧЕНИЕ →"
+                                    })
+                                ]
+                            })
+                        ]
+                    }),
+                    frame >= 330 && /*#__PURE__*/ (0,jsx_runtime.jsxs)("div", {
+                        style: {
+                            opacity: part2Opacity,
+                            display: 'flex',
+                            flexDirection: 'column',
+                            justifyContent: 'space-between',
+                            height: '100%'
+                        },
+                        children: [
+                            /*#__PURE__*/ (0,jsx_runtime.jsxs)("header", {
+                                style: {
+                                    borderBottom: `1px solid ${THEME.colors.border}`,
+                                    paddingBottom: 20
+                                },
+                                children: [
+                                    /*#__PURE__*/ (0,jsx_runtime.jsx)("div", {
+                                        style: {
+                                            fontSize: 12,
+                                            fontFamily: 'Inter, system-ui, sans-serif',
+                                            fontWeight: 600,
+                                            letterSpacing: 2,
+                                            textTransform: 'uppercase',
+                                            color: THEME.colors.cobalt,
+                                            marginBottom: 8
+                                        },
+                                        children: "ЗАКЛЮЧЕНИЕ \xb7 ИТОГОВАЯ МОДЕЛЬ"
+                                    }),
+                                    /*#__PURE__*/ (0,jsx_runtime.jsx)("h1", {
+                                        style: {
+                                            fontSize: 38,
+                                            fontWeight: 700,
+                                            color: THEME.colors.textPrimary,
+                                            letterSpacing: -0.8,
+                                            margin: 0,
+                                            lineHeight: 1.2,
+                                            fontFamily: 'Inter, system-ui, sans-serif'
+                                        },
+                                        children: "Байесовское обновление для оценки рейтингов"
+                                    }),
+                                    /*#__PURE__*/ (0,jsx_runtime.jsx)("p", {
+                                        style: {
+                                            fontSize: 16,
+                                            color: THEME.colors.textSecondary,
+                                            margin: '8px 0 0 0',
+                                            fontFamily: 'Inter, system-ui, sans-serif'
+                                        },
+                                        children: "Надежный математический мост между начальным предположением и реальным мнением аудитории"
+                                    })
+                                ]
+                            }),
                             /*#__PURE__*/ (0,jsx_runtime.jsx)("div", {
                                 style: {
-                                    marginBottom: 40
+                                    display: 'flex',
+                                    flexDirection: 'column',
+                                    alignItems: 'center',
+                                    margin: 'auto 0'
                                 },
-                                children: /*#__PURE__*/ (0,jsx_runtime.jsx)(PlaceholderBox, {
-                                    width: 700,
-                                    height: 70,
-                                    variant: "card",
-                                    accent: "blue",
-                                    glow: true,
-                                    cornerMarks: true,
-                                    children: /*#__PURE__*/ (0,jsx_runtime.jsx)("div", {
-                                        style: {
-                                            width: '70%',
-                                            height: 20,
-                                            backgroundColor: THEME.colors.electricBlue,
-                                            borderRadius: 6
-                                        }
+                                children: /*#__PURE__*/ (0,jsx_runtime.jsx)("div", {
+                                    style: {
+                                        width: 800,
+                                        height: 260
+                                    },
+                                    children: /*#__PURE__*/ (0,jsx_runtime.jsx)(BellCurve, {
+                                        width: 800,
+                                        height: 260,
+                                        mean: 0.58,
+                                        stdDev: 0.065,
+                                        color: THEME.colors.cobalt,
+                                        showConfidenceInterval: true,
+                                        label: "Сходимость: истинный рейтинг трансляции ★ 4.62 \xb1 0.12"
                                     })
                                 })
                             }),
                             /*#__PURE__*/ (0,jsx_runtime.jsxs)("div", {
                                 style: {
+                                    borderTop: `1px solid ${THEME.colors.border}`,
+                                    paddingTop: 24,
                                     display: 'flex',
-                                    flexDirection: 'column',
-                                    alignItems: 'center',
-                                    gap: 14,
-                                    padding: '24px 48px',
-                                    borderRadius: 20,
-                                    backgroundColor: 'rgba(13, 27, 42, 0.75)',
-                                    border: '1.5px solid rgba(78, 168, 222, 0.25)',
-                                    backdropFilter: 'blur(16px)'
+                                    justifyContent: 'space-between',
+                                    alignItems: 'flex-end'
                                 },
                                 children: [
-                                    /*#__PURE__*/ (0,jsx_runtime.jsx)("div", {
-                                        style: {
-                                            fontSize: 18,
-                                            fontWeight: 600,
-                                            letterSpacing: 4,
-                                            textTransform: 'uppercase',
-                                            color: THEME.colors.textMuted,
-                                            fontFamily: 'system-ui, sans-serif'
-                                        },
-                                        children: "НАД ПРОЕКТОМ РАБОТАЛИ"
+                                    /*#__PURE__*/ (0,jsx_runtime.jsxs)("div", {
+                                        children: [
+                                            /*#__PURE__*/ (0,jsx_runtime.jsx)("div", {
+                                                style: {
+                                                    fontSize: 11,
+                                                    textTransform: 'uppercase',
+                                                    letterSpacing: 2,
+                                                    color: THEME.colors.textMuted,
+                                                    fontFamily: 'Inter, system-ui, sans-serif',
+                                                    marginBottom: 10
+                                                },
+                                                children: "Авторы проекта"
+                                            }),
+                                            /*#__PURE__*/ (0,jsx_runtime.jsx)("div", {
+                                                style: {
+                                                    display: 'flex',
+                                                    gap: 32,
+                                                    fontSize: 15,
+                                                    fontWeight: 600,
+                                                    color: THEME.colors.textPrimary
+                                                },
+                                                children: authors.map((auth, idx)=>/*#__PURE__*/ (0,jsx_runtime.jsx)("span", {
+                                                        children: auth
+                                                    }, idx))
+                                            })
+                                        ]
                                     }),
                                     /*#__PURE__*/ (0,jsx_runtime.jsxs)("div", {
                                         style: {
-                                            fontSize: 26,
-                                            fontWeight: 500,
-                                            letterSpacing: 1.5,
-                                            color: THEME.colors.white,
-                                            fontFamily: 'system-ui, sans-serif',
-                                            display: 'flex',
-                                            gap: 24
+                                            fontSize: 12,
+                                            fontFamily: 'JetBrains Mono, monospace',
+                                            color: THEME.colors.textMuted,
+                                            textAlign: 'right'
                                         },
                                         children: [
-                                            /*#__PURE__*/ (0,jsx_runtime.jsx)("span", {
-                                                children: "Голомидова Женя"
-                                            }),
-                                            /*#__PURE__*/ (0,jsx_runtime.jsx)("span", {
-                                                style: {
-                                                    color: THEME.colors.electricBlue
-                                                },
-                                                children: "•"
-                                            }),
-                                            /*#__PURE__*/ (0,jsx_runtime.jsx)("span", {
-                                                children: "Селиванов Илья"
-                                            }),
-                                            /*#__PURE__*/ (0,jsx_runtime.jsx)("span", {
-                                                style: {
-                                                    color: THEME.colors.electricBlue
-                                                },
-                                                children: "•"
-                                            }),
-                                            /*#__PURE__*/ (0,jsx_runtime.jsx)("span", {
-                                                children: "Константин Толов"
-                                            }),
-                                            /*#__PURE__*/ (0,jsx_runtime.jsx)("span", {
-                                                style: {
-                                                    color: THEME.colors.electricBlue
-                                                },
-                                                children: "•"
-                                            }),
-                                            /*#__PURE__*/ (0,jsx_runtime.jsx)("span", {
-                                                children: "Фураев Никита"
-                                            })
+                                            "1080p \xb7 30 FPS \xb7 05:00 МИН",
+                                            /*#__PURE__*/ (0,jsx_runtime.jsx)("br", {}),
+                                            "2026"
                                         ]
                                     })
                                 ]
@@ -24724,14 +24388,49 @@ const Scene8_Conclusion = ()=>{
 
 
 
-const MainVideo = ()=>{
-    return /*#__PURE__*/ (0,jsx_runtime.jsxs)("div", {
+const SmoothScene = ({ durationInFrames, children })=>{
+    const frame = (0,esm/* .useCurrentFrame */.UC)();
+    const opacity = (0,esm/* .interpolate */.GW)(frame, [
+        0,
+        18,
+        durationInFrames - 18,
+        durationInFrames
+    ], [
+        0,
+        1,
+        1,
+        0
+    ], {
+        extrapolateLeft: 'clamp',
+        extrapolateRight: 'clamp',
+        easing: esm/* .Easing.bezier */.GS.bezier(0.25, 0.1, 0.25, 1)
+    });
+    return /*#__PURE__*/ (0,jsx_runtime.jsx)("div", {
         style: {
             position: 'absolute',
             inset: 0,
-            backgroundColor: THEME.colors.bg,
-            width: '100%',
-            height: '100%'
+            opacity,
+            width: 1920,
+            height: 1080,
+            overflow: 'hidden'
+        },
+        children: children
+    });
+};
+const MainVideo = ()=>{
+    const { width } = (0,esm/* .useVideoConfig */.Bk)();
+    const scale = width / 1920;
+    return /*#__PURE__*/ (0,jsx_runtime.jsxs)("div", {
+        style: {
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            width: 1920,
+            height: 1080,
+            transform: `scale(${scale})`,
+            transformOrigin: 'top left',
+            overflow: 'hidden',
+            backgroundColor: THEME.colors.bg
         },
         children: [
             /*#__PURE__*/ (0,jsx_runtime.jsx)(esm/* .Audio */.fP, {
@@ -24742,35 +24441,59 @@ const MainVideo = ()=>{
                 children: [
                     /*#__PURE__*/ (0,jsx_runtime.jsx)(esm/* .Series.Sequence */.sf.Sequence, {
                         durationInFrames: THEME.timings.scene1.duration,
-                        children: /*#__PURE__*/ (0,jsx_runtime.jsx)(Scene1_LiveBroadcast, {})
+                        children: /*#__PURE__*/ (0,jsx_runtime.jsx)(SmoothScene, {
+                            durationInFrames: THEME.timings.scene1.duration,
+                            children: /*#__PURE__*/ (0,jsx_runtime.jsx)(Scene1_LiveBroadcast, {})
+                        })
                     }),
                     /*#__PURE__*/ (0,jsx_runtime.jsx)(esm/* .Series.Sequence */.sf.Sequence, {
                         durationInFrames: THEME.timings.scene2.duration,
-                        children: /*#__PURE__*/ (0,jsx_runtime.jsx)(Scene2_TwoTraps, {})
+                        children: /*#__PURE__*/ (0,jsx_runtime.jsx)(SmoothScene, {
+                            durationInFrames: THEME.timings.scene2.duration,
+                            children: /*#__PURE__*/ (0,jsx_runtime.jsx)(Scene2_TwoTraps, {})
+                        })
                     }),
                     /*#__PURE__*/ (0,jsx_runtime.jsx)(esm/* .Series.Sequence */.sf.Sequence, {
                         durationInFrames: THEME.timings.scene3.duration,
-                        children: /*#__PURE__*/ (0,jsx_runtime.jsx)(Scene3_CheckpointOne, {})
+                        children: /*#__PURE__*/ (0,jsx_runtime.jsx)(SmoothScene, {
+                            durationInFrames: THEME.timings.scene3.duration,
+                            children: /*#__PURE__*/ (0,jsx_runtime.jsx)(Scene3_CheckpointOne, {})
+                        })
                     }),
                     /*#__PURE__*/ (0,jsx_runtime.jsx)(esm/* .Series.Sequence */.sf.Sequence, {
                         durationInFrames: THEME.timings.scene4.duration,
-                        children: /*#__PURE__*/ (0,jsx_runtime.jsx)(Scene4_Formula, {})
+                        children: /*#__PURE__*/ (0,jsx_runtime.jsx)(SmoothScene, {
+                            durationInFrames: THEME.timings.scene4.duration,
+                            children: /*#__PURE__*/ (0,jsx_runtime.jsx)(Scene4_Formula, {})
+                        })
                     }),
                     /*#__PURE__*/ (0,jsx_runtime.jsx)(esm/* .Series.Sequence */.sf.Sequence, {
                         durationInFrames: THEME.timings.scene5.duration,
-                        children: /*#__PURE__*/ (0,jsx_runtime.jsx)(Scene5_CheckpointTwo, {})
+                        children: /*#__PURE__*/ (0,jsx_runtime.jsx)(SmoothScene, {
+                            durationInFrames: THEME.timings.scene5.duration,
+                            children: /*#__PURE__*/ (0,jsx_runtime.jsx)(Scene5_CheckpointTwo, {})
+                        })
                     }),
                     /*#__PURE__*/ (0,jsx_runtime.jsx)(esm/* .Series.Sequence */.sf.Sequence, {
                         durationInFrames: THEME.timings.scene6.duration,
-                        children: /*#__PURE__*/ (0,jsx_runtime.jsx)(Scene6_StepPipeline, {})
+                        children: /*#__PURE__*/ (0,jsx_runtime.jsx)(SmoothScene, {
+                            durationInFrames: THEME.timings.scene6.duration,
+                            children: /*#__PURE__*/ (0,jsx_runtime.jsx)(Scene6_StepPipeline, {})
+                        })
                     }),
                     /*#__PURE__*/ (0,jsx_runtime.jsx)(esm/* .Series.Sequence */.sf.Sequence, {
                         durationInFrames: THEME.timings.scene7.duration,
-                        children: /*#__PURE__*/ (0,jsx_runtime.jsx)(Scene7_CheckpointThree, {})
+                        children: /*#__PURE__*/ (0,jsx_runtime.jsx)(SmoothScene, {
+                            durationInFrames: THEME.timings.scene7.duration,
+                            children: /*#__PURE__*/ (0,jsx_runtime.jsx)(Scene7_CheckpointThree, {})
+                        })
                     }),
                     /*#__PURE__*/ (0,jsx_runtime.jsx)(esm/* .Series.Sequence */.sf.Sequence, {
                         durationInFrames: THEME.timings.scene8.duration,
-                        children: /*#__PURE__*/ (0,jsx_runtime.jsx)(Scene8_Conclusion, {})
+                        children: /*#__PURE__*/ (0,jsx_runtime.jsx)(SmoothScene, {
+                            durationInFrames: THEME.timings.scene8.duration,
+                            children: /*#__PURE__*/ (0,jsx_runtime.jsx)(Scene8_Conclusion, {})
+                        })
                     })
                 ]
             })
@@ -46538,7 +46261,7 @@ __webpack_require__.u = (chunkId) => {
 })();
 // webpack/runtime/get_full_hash
 (() => {
-__webpack_require__.h = () => ("605caec67aa33467")
+__webpack_require__.h = () => ("d9fe70f1c36d2f4d")
 })();
 // webpack/runtime/global
 (() => {
@@ -46756,7 +46479,7 @@ jsonpChunkLoadingGlobal.push = __rspack_jsonp.bind(null, jsonpChunkLoadingGlobal
 // Load entry module and return exports
 __webpack_require__(6507);
 __webpack_require__(3999);
-__webpack_require__(9839);
+__webpack_require__(5206);
 __webpack_require__(3610);
 var __webpack_exports__ = __webpack_require__(3482);
 })()
