@@ -51,16 +51,19 @@ export const Scene4_Formula: React.FC = () => {
           flexDirection: 'column',
           alignItems: 'center',
           justifyContent: 'center',
-          padding: '60px 100px',
+          padding: '40px 60px',
           boxSizing: 'border-box',
+          width: 1920,
+          height: 1080,
+          overflow: 'hidden',
         }}
       >
         {/* Top Header */}
-        <div style={{ textAlign: 'center', marginBottom: 50 }}>
+        <div style={{ textAlign: 'center', marginBottom: 36 }}>
           <div style={{ fontSize: 13, color: THEME.colors.textSecondary, fontWeight: 500 }}>
             Раздел 4 · Математический базис
           </div>
-          <div style={{ fontSize: 36, fontWeight: 700, color: THEME.colors.textPrimary, letterSpacing: -0.5, marginTop: 6 }}>
+          <div style={{ fontSize: 34, fontWeight: 700, color: THEME.colors.textPrimary, letterSpacing: -0.5, marginTop: 6 }}>
             Формула байесовского взвешивания
           </div>
         </div>
@@ -70,13 +73,13 @@ export const Scene4_Formula: React.FC = () => {
           style={{
             display: 'flex',
             alignItems: 'center',
-            gap: 36,
-            padding: '36px 64px',
-            borderRadius: 20,
+            gap: 32,
+            padding: '28px 48px',
+            borderRadius: 18,
             backgroundColor: 'rgba(21, 29, 46, 0.85)',
             border: '1px solid rgba(255, 255, 255, 0.08)',
             boxShadow: '0 25px 60px rgba(0, 0, 0, 0.5)',
-            marginBottom: 50,
+            marginBottom: 36,
           }}
         >
           {/* TERM 1: POSTERIOR */}

@@ -39,8 +39,11 @@ export const Scene8_Conclusion: React.FC = () => {
           flexDirection: 'column',
           alignItems: 'center',
           justifyContent: 'center',
-          padding: '60px 100px',
+          padding: '40px 60px',
           boxSizing: 'border-box',
+          width: 1920,
+          height: 1080,
+          overflow: 'hidden',
         }}
       >
         {/* PART 1: THREE CRITICAL WARNINGS */}
@@ -49,17 +52,17 @@ export const Scene8_Conclusion: React.FC = () => {
             style={{
               opacity: part1Opacity,
               width: '100%',
-              maxWidth: 2200,
+              maxWidth: 1760,
               display: 'flex',
               flexDirection: 'column',
               alignItems: 'center',
             }}
           >
-            <div style={{ textAlign: 'center', marginBottom: 44 }}>
+            <div style={{ textAlign: 'center', marginBottom: 36 }}>
               <div style={{ fontSize: 13, color: THEME.colors.amber, fontWeight: 500 }}>
                 Раздел 8 · Инженерные нюансы внедрения
               </div>
-              <div style={{ fontSize: 36, fontWeight: 700, color: THEME.colors.textPrimary, letterSpacing: -0.5, marginTop: 6 }}>
+              <div style={{ fontSize: 34, fontWeight: 700, color: THEME.colors.textPrimary, letterSpacing: -0.5, marginTop: 6 }}>
                 Три предостережения при внедрении
               </div>
             </div>
@@ -69,41 +72,41 @@ export const Scene8_Conclusion: React.FC = () => {
                 width: '100%',
                 display: 'grid',
                 gridTemplateColumns: '1fr 1fr 1fr',
-                gap: 36,
+                gap: 28,
               }}
             >
-              <div style={{ padding: '36px 32px', borderRadius: 16, backgroundColor: 'rgba(21, 29, 46, 0.8)', border: '1px solid rgba(249, 115, 22, 0.3)' }}>
+              <div style={{ padding: '28px 28px', borderRadius: 16, backgroundColor: 'rgba(21, 29, 46, 0.8)', border: '1px solid rgba(249, 115, 22, 0.3)' }}>
                 <span style={{ fontSize: 12, fontFamily: 'Inter, system-ui, sans-serif', color: THEME.colors.amber, fontWeight: 700 }}>
                   Риск 1
                 </span>
                 <div style={{ fontSize: 20, fontWeight: 700, color: THEME.colors.textPrimary, marginTop: 12 }}>
                   Слишком жёсткий априор
                 </div>
-                <div style={{ fontSize: 14, color: THEME.colors.textSecondary, marginTop: 8, lineHeight: 1.5 }}>
+                <div style={{ fontSize: 13, color: THEME.colors.textSecondary, marginTop: 6, lineHeight: 1.5 }}>
                   Если задать нулевую дисперсию, модель откажется слышать зрителей и навсегда застрянет в прошлом.
                 </div>
               </div>
 
-              <div style={{ padding: '36px 32px', borderRadius: 16, backgroundColor: 'rgba(21, 29, 46, 0.8)', border: '1px solid rgba(249, 115, 22, 0.3)' }}>
+              <div style={{ padding: '28px 28px', borderRadius: 16, backgroundColor: 'rgba(21, 29, 46, 0.8)', border: '1px solid rgba(249, 115, 22, 0.3)' }}>
                 <span style={{ fontSize: 12, fontFamily: 'Inter, system-ui, sans-serif', color: THEME.colors.amber, fontWeight: 700 }}>
                   Риск 2
                 </span>
                 <div style={{ fontSize: 20, fontWeight: 700, color: THEME.colors.textPrimary, marginTop: 12 }}>
                   Коррелированные боты
                 </div>
-                <div style={{ fontSize: 14, color: THEME.colors.textSecondary, marginTop: 8, lineHeight: 1.5 }}>
+                <div style={{ fontSize: 13, color: THEME.colors.textSecondary, marginTop: 6, lineHeight: 1.5 }}>
                   Байес предполагает независимость наблюдений. Накрутку необходимо фильтровать до передачи в модель.
                 </div>
               </div>
 
-              <div style={{ padding: '36px 32px', borderRadius: 16, backgroundColor: 'rgba(21, 29, 46, 0.8)', border: '1px solid rgba(249, 115, 22, 0.3)' }}>
+              <div style={{ padding: '28px 28px', borderRadius: 16, backgroundColor: 'rgba(21, 29, 46, 0.8)', border: '1px solid rgba(249, 115, 22, 0.3)' }}>
                 <span style={{ fontSize: 12, fontFamily: 'Inter, system-ui, sans-serif', color: THEME.colors.amber, fontWeight: 700 }}>
                   Риск 3
                 </span>
                 <div style={{ fontSize: 20, fontWeight: 700, color: THEME.colors.textPrimary, marginTop: 12 }}>
                   Сдвиг тренда стрима
                 </div>
-                <div style={{ fontSize: 14, color: THEME.colors.textSecondary, marginTop: 8, lineHeight: 1.5 }}>
+                <div style={{ fontSize: 13, color: THEME.colors.textSecondary, marginTop: 6, lineHeight: 1.5 }}>
                   Контент трансляции меняется со временем — полезно вводить коэффициент забывания старых данных.
                 </div>
               </div>

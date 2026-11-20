@@ -6,12 +6,6 @@ import { BackgroundGrid } from '../components/common/BackgroundGrid';
 export const Scene1_LiveBroadcast: React.FC = () => {
   const frame = useCurrentFrame();
 
-  // Subtle cinematic zoom over 40 seconds
-  const cameraScale = interpolate(frame, [0, 1200], [1.0, 1.05], {
-    easing: Easing.bezier(0.25, 0.1, 0.25, 1),
-    extrapolateRight: 'clamp',
-  });
-
   // Timeline progress filling up second by second
   const timelineProgress = interpolate(frame, [0, 1200], [0, 1], {
     extrapolateRight: 'clamp',
@@ -24,8 +18,8 @@ export const Scene1_LiveBroadcast: React.FC = () => {
       const t = i / (pointsCount - 1);
       const x = t * 1600;
       const baseGrowth = Math.pow(t, 0.85);
-      const wave = Math.sin(t * 14) * 28;
-      const y = 460 - (baseGrowth * 300 + wave);
+      const wave = Math.sin(t * 14) * 26;
+      const y = 420 - (baseGrowth * 280 + wave);
       return { x, y, t };
     });
     const d = pts.reduce((acc, pt, idx) => (idx === 0 ? `M ${pt.x.toFixed(1)} ${pt.y.toFixed(1)}` : `${acc} L ${pt.x.toFixed(1)} ${pt.y.toFixed(1)}`), '');
@@ -47,8 +41,8 @@ export const Scene1_LiveBroadcast: React.FC = () => {
 
   const dotX = curveProgress * 1600;
   const dotBaseGrowth = Math.pow(curveProgress, 0.85);
-  const dotWave = Math.sin(curveProgress * 14) * 28;
-  const dotY = 460 - (dotBaseGrowth * 300 + dotWave);
+  const dotWave = Math.sin(curveProgress * 14) * 26;
+  const dotY = 420 - (dotBaseGrowth * 280 + dotWave);
 
   // Timecode calculation
   const seconds = Math.floor(frame / 30);
@@ -61,8 +55,8 @@ export const Scene1_LiveBroadcast: React.FC = () => {
         inset: 0,
         backgroundColor: THEME.colors.bg,
         overflow: 'hidden',
-        transform: `scale(${cameraScale})`,
-        transformOrigin: 'center center',
+        width: 1920,
+        height: 1080,
       }}
     >
       <BackgroundGrid intensity={1} />
@@ -74,8 +68,8 @@ export const Scene1_LiveBroadcast: React.FC = () => {
           top: '50%',
           left: '50%',
           transform: 'translate(-50%, -50%)',
-          width: 2500,
-          height: 1420,
+          width: 1780,
+          height: 980,
           borderRadius: 20,
           backgroundColor: 'rgba(17, 23, 38, 0.85)',
           border: '1px solid rgba(255, 255, 255, 0.08)',
@@ -83,7 +77,8 @@ export const Scene1_LiveBroadcast: React.FC = () => {
           backdropFilter: 'blur(20px)',
           display: 'flex',
           flexDirection: 'column',
-          padding: 56,
+          justifyContent: 'space-between',
+          padding: '32px 48px',
           boxSizing: 'border-box',
         }}
       >
@@ -94,7 +89,7 @@ export const Scene1_LiveBroadcast: React.FC = () => {
             alignItems: 'center',
             justifyContent: 'space-between',
             borderBottom: '1px solid rgba(255, 255, 255, 0.08)',
-            paddingBottom: 28,
+            paddingBottom: 20,
           }}
         >
           {/* LIVE ● В ЭФИРЕ Badge */}
@@ -181,26 +176,26 @@ export const Scene1_LiveBroadcast: React.FC = () => {
             position: 'relative',
             display: 'flex',
             flexDirection: 'column',
-            justifyContent: 'center',
-            margin: '20px 0',
+            justifyContent: 'space-between',
+            margin: '12px 0',
           }}
         >
           {/* Main Visual Heading (Editorial) */}
-          <div style={{ position: 'absolute', top: 10, left: 10, zIndex: 5 }}>
-            <div style={{ fontSize: 32, fontWeight: 700, color: THEME.colors.textPrimary, letterSpacing: -0.5 }}>
+          <div style={{ position: 'absolute', top: 0, left: 0, zIndex: 5 }}>
+            <div style={{ fontSize: 26, fontWeight: 700, color: THEME.colors.textPrimary, letterSpacing: -0.5 }}>
               Оценка рейтинга в прямом эфире
             </div>
-            <div style={{ fontSize: 14, color: THEME.colors.textSecondary, marginTop: 4 }}>
+            <div style={{ fontSize: 13, color: THEME.colors.textSecondary, marginTop: 4 }}>
               Сглаживание случайных выбросов зрительского голосования
             </div>
           </div>
 
           {/* Real-time Engagement Curve */}
-          <div style={{ width: '100%', height: 500, position: 'relative' }}>
+          <div style={{ width: '100%', height: 420, position: 'relative' }}>
             <svg
               width="100%"
               height="100%"
-              viewBox="0 0 1600 500"
+              viewBox="0 0 1600 440"
               style={{ position: 'absolute', inset: 0, overflow: 'visible' }}
             >
               <defs>
@@ -209,20 +204,20 @@ export const Scene1_LiveBroadcast: React.FC = () => {
                   <stop offset="100%" stopColor={THEME.colors.cobalt} stopOpacity="0.0" />
                 </linearGradient>
                 <clipPath id="editorial-curve-clip">
-                  <rect x="0" y="0" width={dotX} height="500" />
+                  <rect x="0" y="0" width={dotX} height="440" />
                 </clipPath>
               </defs>
 
               {/* Horizontal Reference Lines */}
-              <line x1="0" y1="460" x2="1600" y2="460" stroke="rgba(255,255,255,0.08)" strokeWidth="1" />
-              <line x1="0" y1="310" x2="1600" y2="310" stroke="rgba(255,255,255,0.04)" strokeDasharray="4 4" strokeWidth="1" />
-              <line x1="0" y1="160" x2="1600" y2="160" stroke="rgba(255,255,255,0.04)" strokeDasharray="4 4" strokeWidth="1" />
+              <line x1="0" y1="420" x2="1600" y2="420" stroke="rgba(255,255,255,0.08)" strokeWidth="1" />
+              <line x1="0" y1="280" x2="1600" y2="280" stroke="rgba(255,255,255,0.04)" strokeDasharray="4 4" strokeWidth="1" />
+              <line x1="0" y1="140" x2="1600" y2="140" stroke="rgba(255,255,255,0.04)" strokeDasharray="4 4" strokeWidth="1" />
 
               {/* Curve path */}
               {curveProgress > 0 && (
                 <>
                   <path
-                    d={`${fullCurveData.d} L 1600 460 L 0 460 Z`}
+                    d={`${fullCurveData.d} L 1600 420 L 0 420 Z`}
                     fill="url(#editorial-curve-gradient)"
                     clipPath="url(#editorial-curve-clip)"
                   />
@@ -253,17 +248,17 @@ export const Scene1_LiveBroadcast: React.FC = () => {
           <div
             style={{
               display: 'flex',
-              gap: 32,
+              gap: 24,
               justifyContent: 'space-between',
-              marginTop: 30,
+              marginTop: 14,
             }}
           >
             {/* Card 1: Raw Rating Average */}
             <div
               style={{
                 flex: 1,
-                padding: '24px 32px',
-                borderRadius: 14,
+                padding: '16px 24px',
+                borderRadius: 12,
                 backgroundColor: 'rgba(21, 29, 46, 0.6)',
                 border: '1px solid rgba(255, 255, 255, 0.08)',
               }}
@@ -271,15 +266,15 @@ export const Scene1_LiveBroadcast: React.FC = () => {
               <div style={{ fontSize: 13, color: THEME.colors.textSecondary, fontWeight: 500 }}>
                 Сырая средняя оценка
               </div>
-              <div style={{ display: 'flex', alignItems: 'baseline', gap: 12, marginTop: 8 }}>
-                <span style={{ fontSize: 44, fontWeight: 700, color: THEME.colors.textPrimary, fontFamily: 'Inter, sans-serif' }}>
+              <div style={{ display: 'flex', alignItems: 'baseline', gap: 10, marginTop: 6 }}>
+                <span style={{ fontSize: 34, fontWeight: 700, color: THEME.colors.textPrimary, fontFamily: 'Inter, sans-serif' }}>
                   ★ 4.85
                 </span>
-                <span style={{ fontSize: 13, color: THEME.colors.amber, fontWeight: 600 }}>
+                <span style={{ fontSize: 12, color: THEME.colors.amber, fontWeight: 600 }}>
                   Высокий шум
                 </span>
               </div>
-              <div style={{ width: '100%', height: 4, borderRadius: 2, backgroundColor: 'rgba(255,255,255,0.06)', marginTop: 14 }}>
+              <div style={{ width: '100%', height: 4, borderRadius: 2, backgroundColor: 'rgba(255,255,255,0.06)', marginTop: 10 }}>
                 <div style={{ width: '85%', height: '100%', backgroundColor: THEME.colors.amber, borderRadius: 2 }} />
               </div>
             </div>
@@ -288,8 +283,8 @@ export const Scene1_LiveBroadcast: React.FC = () => {
             <div
               style={{
                 flex: 1,
-                padding: '24px 32px',
-                borderRadius: 14,
+                padding: '16px 24px',
+                borderRadius: 12,
                 backgroundColor: 'rgba(21, 29, 46, 0.6)',
                 border: '1px solid rgba(255, 255, 255, 0.08)',
               }}
@@ -297,15 +292,15 @@ export const Scene1_LiveBroadcast: React.FC = () => {
               <div style={{ fontSize: 13, color: THEME.colors.textSecondary, fontWeight: 500 }}>
                 Число голосов
               </div>
-              <div style={{ display: 'flex', alignItems: 'baseline', gap: 12, marginTop: 8 }}>
-                <span style={{ fontSize: 44, fontWeight: 700, color: THEME.colors.textPrimary, fontFamily: 'JetBrains Mono, monospace' }}>
+              <div style={{ display: 'flex', alignItems: 'baseline', gap: 10, marginTop: 6 }}>
+                <span style={{ fontSize: 34, fontWeight: 700, color: THEME.colors.textPrimary, fontFamily: 'JetBrains Mono, monospace' }}>
                   {Math.floor(curveProgress * 3420)}
                 </span>
-                <span style={{ fontSize: 14, color: THEME.colors.textSecondary }}>
+                <span style={{ fontSize: 13, color: THEME.colors.textSecondary }}>
                   оценок
                 </span>
               </div>
-              <div style={{ width: '100%', height: 4, borderRadius: 2, backgroundColor: 'rgba(255,255,255,0.06)', marginTop: 14 }}>
+              <div style={{ width: '100%', height: 4, borderRadius: 2, backgroundColor: 'rgba(255,255,255,0.06)', marginTop: 10 }}>
                 <div style={{ width: `${curveProgress * 100}%`, height: '100%', backgroundColor: THEME.colors.cobalt, borderRadius: 2 }} />
               </div>
             </div>
@@ -314,8 +309,8 @@ export const Scene1_LiveBroadcast: React.FC = () => {
             <div
               style={{
                 flex: 1,
-                padding: '24px 32px',
-                borderRadius: 14,
+                padding: '16px 24px',
+                borderRadius: 12,
                 backgroundColor: 'rgba(21, 29, 46, 0.6)',
                 border: '1px solid rgba(56, 189, 248, 0.3)',
               }}
@@ -323,15 +318,15 @@ export const Scene1_LiveBroadcast: React.FC = () => {
               <div style={{ fontSize: 13, color: THEME.colors.cobalt, fontWeight: 600 }}>
                 Байесовская оценка
               </div>
-              <div style={{ display: 'flex', alignItems: 'baseline', gap: 12, marginTop: 8 }}>
-                <span style={{ fontSize: 44, fontWeight: 700, color: THEME.colors.cobalt, fontFamily: 'Inter, sans-serif' }}>
+              <div style={{ display: 'flex', alignItems: 'baseline', gap: 10, marginTop: 6 }}>
+                <span style={{ fontSize: 34, fontWeight: 700, color: THEME.colors.cobalt, fontFamily: 'Inter, sans-serif' }}>
                   ★ 4.62
                 </span>
-                <span style={{ fontSize: 14, color: THEME.colors.textSecondary, fontFamily: 'JetBrains Mono, monospace' }}>
+                <span style={{ fontSize: 13, color: THEME.colors.textSecondary, fontFamily: 'JetBrains Mono, monospace' }}>
                   ±0.12 (95% CI)
                 </span>
               </div>
-              <div style={{ width: '100%', height: 4, borderRadius: 2, backgroundColor: 'rgba(255,255,255,0.06)', marginTop: 14 }}>
+              <div style={{ width: '100%', height: 4, borderRadius: 2, backgroundColor: 'rgba(255,255,255,0.06)', marginTop: 10 }}>
                 <div style={{ width: '65%', height: '100%', backgroundColor: THEME.colors.cobalt, borderRadius: 2 }} />
               </div>
             </div>

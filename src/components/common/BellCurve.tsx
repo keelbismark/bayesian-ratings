@@ -112,8 +112,13 @@ export const BellCurve: React.FC<BellCurveProps> = ({
   const baselineY = height - 35;
 
   return (
-    <div style={{ position: 'relative', width, height }}>
-      <svg width={width} height={height} style={{ overflow: 'visible' }}>
+    <div style={{ position: 'relative', width, maxWidth: '100%', height }}>
+      <svg
+        width="100%"
+        height={height}
+        viewBox={`0 0 ${width} ${height}`}
+        style={{ overflow: 'visible' }}
+      >
         <defs>
           <linearGradient id={`clean-grad-${color.replace(/[^a-zA-Z0-9]/g, '')}`} x1="0%" y1="0%" x2="0%" y2="100%">
             <stop offset="0%" stopColor={color} stopOpacity="0.18" />

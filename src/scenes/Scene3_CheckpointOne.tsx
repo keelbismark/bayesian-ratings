@@ -58,16 +58,19 @@ export const Scene3_CheckpointOne: React.FC = () => {
           flexDirection: 'column',
           alignItems: 'center',
           justifyContent: 'center',
-          padding: '60px 100px',
+          padding: '40px 60px',
           boxSizing: 'border-box',
+          width: 1920,
+          height: 1080,
+          overflow: 'hidden',
         }}
       >
         {/* Top Header */}
-        <div style={{ textAlign: 'center', marginBottom: 40 }}>
+        <div style={{ textAlign: 'center', marginBottom: 36 }}>
           <div style={{ fontSize: 13, color: THEME.colors.textSecondary, fontWeight: 500 }}>
             Фундамент байесовского анализа
           </div>
-          <div style={{ fontSize: 36, fontWeight: 700, color: THEME.colors.textPrimary, letterSpacing: -0.5, marginTop: 6 }}>
+          <div style={{ fontSize: 34, fontWeight: 700, color: THEME.colors.textPrimary, letterSpacing: -0.5, marginTop: 6 }}>
             Три шага байесовского обновления
           </div>
         </div>
@@ -76,10 +79,10 @@ export const Scene3_CheckpointOne: React.FC = () => {
         <div
           style={{
             width: '100%',
-            maxWidth: 2400,
+            maxWidth: 1760,
             display: 'grid',
             gridTemplateColumns: '1fr 1fr 1fr',
-            gap: 40,
+            gap: 28,
             alignItems: 'stretch',
           }}
         >
@@ -91,7 +94,7 @@ export const Scene3_CheckpointOne: React.FC = () => {
               borderRadius: 18,
               backgroundColor: 'rgba(21, 29, 46, 0.8)',
               border: '1px solid rgba(255, 255, 255, 0.08)',
-              padding: 36,
+              padding: '28px 28px',
               display: 'flex',
               flexDirection: 'column',
               boxShadow: '0 20px 40px rgba(0,0,0,0.4)',
@@ -114,17 +117,17 @@ export const Scene3_CheckpointOne: React.FC = () => {
                 P(θ)
               </span>
             </div>
-            <div style={{ fontSize: 22, fontWeight: 700, color: THEME.colors.textPrimary, marginTop: 14 }}>
+            <div style={{ fontSize: 20, fontWeight: 700, color: THEME.colors.textPrimary, marginTop: 12 }}>
               Априорная вероятность
             </div>
-            <div style={{ fontSize: 14, color: THEME.colors.textSecondary, marginTop: 6, lineHeight: 1.4 }}>
+            <div style={{ fontSize: 13, color: THEME.colors.textSecondary, marginTop: 6, lineHeight: 1.4 }}>
               Широкое распределение на основе прошлых эфиров. Мы ещё не уверены в сегодняшнем стриме.
             </div>
 
-            <div style={{ marginTop: 24, display: 'flex', justifyContent: 'center' }}>
+            <div style={{ marginTop: 20, display: 'flex', justifyContent: 'center' }}>
               <BellCurve
-                width={650}
-                height={260}
+                width={480}
+                height={210}
                 mean={0.5}
                 stdDev={0.24}
                 color="rgba(255, 255, 255, 0.5)"
@@ -142,7 +145,7 @@ export const Scene3_CheckpointOne: React.FC = () => {
               borderRadius: 18,
               backgroundColor: 'rgba(21, 29, 46, 0.8)',
               border: '1px solid rgba(249, 115, 22, 0.3)',
-              padding: 36,
+              padding: '28px 28px',
               display: 'flex',
               flexDirection: 'column',
               boxShadow: '0 20px 40px rgba(0,0,0,0.4)',
@@ -165,17 +168,17 @@ export const Scene3_CheckpointOne: React.FC = () => {
                 P(D | θ)
               </span>
             </div>
-            <div style={{ fontSize: 22, fontWeight: 700, color: THEME.colors.textPrimary, marginTop: 14 }}>
+            <div style={{ fontSize: 20, fontWeight: 700, color: THEME.colors.textPrimary, marginTop: 12 }}>
               Правдоподобие наблюдений
             </div>
-            <div style={{ fontSize: 14, color: THEME.colors.textSecondary, marginTop: 6, lineHeight: 1.4 }}>
+            <div style={{ fontSize: 13, color: THEME.colors.textSecondary, marginTop: 6, lineHeight: 1.4 }}>
               Поток реальных голосов и кликов из чата и плеера за последние минуты трансляции.
             </div>
 
-            <div style={{ marginTop: 24, display: 'flex', justifyContent: 'center' }}>
+            <div style={{ marginTop: 20, display: 'flex', justifyContent: 'center' }}>
               <BellCurve
-                width={650}
-                height={260}
+                width={480}
+                height={210}
                 mean={0.62}
                 stdDev={0.16}
                 color={THEME.colors.amber}
@@ -195,7 +198,7 @@ export const Scene3_CheckpointOne: React.FC = () => {
               borderRadius: 18,
               backgroundColor: 'rgba(21, 29, 46, 0.8)',
               border: '1px solid rgba(56, 189, 248, 0.4)',
-              padding: 36,
+              padding: '28px 28px',
               display: 'flex',
               flexDirection: 'column',
               boxShadow: '0 20px 40px rgba(0,0,0,0.4)',
@@ -218,17 +221,17 @@ export const Scene3_CheckpointOne: React.FC = () => {
                 P(θ | D)
               </span>
             </div>
-            <div style={{ fontSize: 22, fontWeight: 700, color: THEME.colors.textPrimary, marginTop: 14 }}>
+            <div style={{ fontSize: 20, fontWeight: 700, color: THEME.colors.textPrimary, marginTop: 12 }}>
               Апостериорная оценка
             </div>
-            <div style={{ fontSize: 14, color: THEME.colors.textSecondary, marginTop: 6, lineHeight: 1.4 }}>
+            <div style={{ fontSize: 13, color: THEME.colors.textSecondary, marginTop: 6, lineHeight: 1.4 }}>
               Обновлённая узкая кривая: неопределённость снизилась, рейтинг скорректирован с учётом данных.
             </div>
 
-            <div style={{ marginTop: 24, display: 'flex', justifyContent: 'center' }}>
+            <div style={{ marginTop: 20, display: 'flex', justifyContent: 'center' }}>
               <BellCurve
-                width={650}
-                height={260}
+                width={480}
+                height={210}
                 mean={0.59}
                 stdDev={0.09}
                 color={THEME.colors.cobalt}

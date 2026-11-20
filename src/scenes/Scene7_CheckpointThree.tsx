@@ -55,16 +55,19 @@ export const Scene7_CheckpointThree: React.FC = () => {
           flexDirection: 'column',
           alignItems: 'center',
           justifyContent: 'center',
-          padding: '60px 100px',
+          padding: '40px 60px',
           boxSizing: 'border-box',
+          width: 1920,
+          height: 1080,
+          overflow: 'hidden',
         }}
       >
         {/* Top Header */}
-        <div style={{ textAlign: 'center', marginBottom: 36 }}>
+        <div style={{ textAlign: 'center', marginBottom: 28 }}>
           <div style={{ fontSize: 13, color: THEME.colors.textSecondary, fontWeight: 500 }}>
             Раздел 7 · Практическое сравнение алгоритмов
           </div>
-          <div style={{ fontSize: 36, fontWeight: 700, color: THEME.colors.textPrimary, letterSpacing: -0.5, marginTop: 6 }}>
+          <div style={{ fontSize: 34, fontWeight: 700, color: THEME.colors.textPrimary, letterSpacing: -0.5, marginTop: 6 }}>
             Практический результат на реальном эфире
           </div>
         </div>
@@ -73,15 +76,15 @@ export const Scene7_CheckpointThree: React.FC = () => {
         <div
           style={{
             width: '100%',
-            maxWidth: 2200,
+            maxWidth: 1760,
             borderRadius: 18,
             backgroundColor: 'rgba(21, 29, 46, 0.8)',
             border: '1px solid rgba(255, 255, 255, 0.08)',
-            padding: '36px 48px',
-            marginBottom: 36,
+            padding: '28px 40px',
+            marginBottom: 28,
           }}
         >
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 20 }}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 16 }}>
             <div>
               <div style={{ fontSize: 13, color: THEME.colors.textSecondary, fontWeight: 500 }}>
                 Сравнение алгоритмов на 40-минутной трансляции
@@ -104,7 +107,7 @@ export const Scene7_CheckpointThree: React.FC = () => {
           </div>
 
           {/* SVG Multi-track Graph */}
-          <div style={{ width: '100%', height: 320, position: 'relative' }}>
+          <div style={{ width: '100%', height: 280, position: 'relative' }}>
             <svg width="100%" height="100%" viewBox="0 0 1100 320" style={{ overflow: 'visible' }}>
               <clipPath id="reveal-clip">
                 <rect x="0" y="0" width={reveal * 1100} height="320" />
@@ -153,10 +156,10 @@ export const Scene7_CheckpointThree: React.FC = () => {
         <div
           style={{
             width: '100%',
-            maxWidth: 2200,
+            maxWidth: 1760,
             display: 'grid',
             gridTemplateColumns: '1fr 1fr 1fr',
-            gap: 28,
+            gap: 24,
           }}
         >
           <div style={{ padding: '20px 28px', borderRadius: 12, backgroundColor: 'rgba(21, 29, 46, 0.65)', border: '1px solid rgba(255, 255, 255, 0.06)' }}>

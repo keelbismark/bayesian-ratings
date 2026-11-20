@@ -10,12 +10,12 @@ export const Scene2_TwoTraps: React.FC = () => {
   const leftNoisePath = useMemo(() => {
     const pointsCount = 80;
     const width = 1100;
-    const height = 360;
+    const height = 280;
     return Array.from({ length: pointsCount })
       .map((_, i) => {
         const x = (i / (pointsCount - 1)) * width;
         const scrollT = (i * 0.3) + (frame * 0.05);
-        const noise = Math.sin(scrollT * 1.1) * 45 + Math.sin(scrollT * 2.3) * 25 + Math.cos(scrollT * 0.4) * 30;
+        const noise = Math.sin(scrollT * 1.1) * 35 + Math.sin(scrollT * 2.3) * 18 + Math.cos(scrollT * 0.4) * 22;
         const y = height / 2 + noise;
         return `${i === 0 ? 'M' : 'L'} ${x.toFixed(1)} ${y.toFixed(1)}`;
       })
@@ -25,7 +25,7 @@ export const Scene2_TwoTraps: React.FC = () => {
   // Inertia line for right trap
   const rightInertiaPath = useMemo(() => {
     const width = 1100;
-    const height = 360;
+    const height = 280;
     return `M 0 ${height * 0.55} L ${width * 0.75} ${height * 0.55} L ${width} ${height * 0.52}`;
   }, []);
 
@@ -64,16 +64,19 @@ export const Scene2_TwoTraps: React.FC = () => {
           inset: 0,
           display: 'flex',
           flexDirection: 'column',
-          padding: '60px 100px',
+          padding: '40px 60px',
           boxSizing: 'border-box',
+          width: 1920,
+          height: 1080,
+          overflow: 'hidden',
         }}
       >
         {/* Top Editorial Scene Header */}
-        <div style={{ textAlign: 'center', marginBottom: 40 }}>
+        <div style={{ textAlign: 'center', marginBottom: 30 }}>
           <div style={{ fontSize: 13, color: THEME.colors.textSecondary, fontWeight: 500 }}>
             Методологическая дилемма
           </div>
-          <div style={{ fontSize: 36, fontWeight: 700, color: THEME.colors.textPrimary, letterSpacing: -0.5, marginTop: 6 }}>
+          <div style={{ fontSize: 34, fontWeight: 700, color: THEME.colors.textPrimary, letterSpacing: -0.5, marginTop: 6 }}>
             Две ловушки оценки данных в прямом эфире
           </div>
         </div>
@@ -84,7 +87,10 @@ export const Scene2_TwoTraps: React.FC = () => {
             flex: 1,
             display: 'grid',
             gridTemplateColumns: '1fr 1fr',
-            gap: 50,
+            gap: 36,
+            width: '100%',
+            maxWidth: 1760,
+            margin: '0 auto',
           }}
         >
           {/* TRAP 1: OVER-REACTION TO EARLY NOISE */}
@@ -93,7 +99,7 @@ export const Scene2_TwoTraps: React.FC = () => {
               borderRadius: 18,
               backgroundColor: 'rgba(21, 29, 46, 0.75)',
               border: '1px solid rgba(249, 115, 22, 0.3)',
-              padding: 44,
+              padding: '28px 36px',
               display: 'flex',
               flexDirection: 'column',
               justifyContent: 'space-between',
@@ -116,18 +122,18 @@ export const Scene2_TwoTraps: React.FC = () => {
                 </span>
                 <span style={{ fontSize: 13, color: THEME.colors.amber, fontWeight: 600 }}>Ошибка гиперреакции</span>
               </div>
-              <div style={{ fontSize: 24, fontWeight: 700, color: THEME.colors.textPrimary, marginTop: 16 }}>
+              <div style={{ fontSize: 22, fontWeight: 700, color: THEME.colors.textPrimary, marginTop: 14 }}>
                 Слепо верить первым 5 оценкам
               </div>
-              <div style={{ fontSize: 15, color: THEME.colors.textSecondary, marginTop: 8, lineHeight: 1.5 }}>
+              <div style={{ fontSize: 14, color: THEME.colors.textSecondary, marginTop: 6, lineHeight: 1.5 }}>
                 Случайный всплеск или 1 хейтер мгновенно обрушивает рейтинг стрима. Ошибка сверхчувствительности.
               </div>
             </div>
 
             {/* Noisy Oscillation Path */}
-            <div style={{ position: 'relative', height: 360, margin: '20px 0' }}>
-              <svg width="100%" height="100%" viewBox="0 0 1100 360" style={{ overflow: 'visible' }}>
-                <line x1="0" y1="180" x2="1100" y2="180" stroke="rgba(255,255,255,0.08)" strokeDasharray="4 4" />
+            <div style={{ position: 'relative', height: 280, margin: '14px 0' }}>
+              <svg width="100%" height="100%" viewBox="0 0 1100 280" style={{ overflow: 'visible' }}>
+                <line x1="0" y1="140" x2="1100" y2="140" stroke="rgba(255,255,255,0.08)" strokeDasharray="4 4" />
                 <path
                   d={leftNoisePath}
                   fill="none"
@@ -140,11 +146,11 @@ export const Scene2_TwoTraps: React.FC = () => {
 
             <div
               style={{
-                padding: '16px 24px',
+                padding: '14px 20px',
                 borderRadius: 10,
                 backgroundColor: 'rgba(249, 115, 22, 0.08)',
                 border: '1px solid rgba(249, 115, 22, 0.2)',
-                fontSize: 14,
+                fontSize: 13,
                 color: THEME.colors.amber,
                 textAlign: 'center',
                 fontWeight: 500,
@@ -160,7 +166,7 @@ export const Scene2_TwoTraps: React.FC = () => {
               borderRadius: 18,
               backgroundColor: 'rgba(21, 29, 46, 0.75)',
               border: '1px solid rgba(255, 255, 255, 0.1)',
-              padding: 44,
+              padding: '28px 36px',
               display: 'flex',
               flexDirection: 'column',
               justifyContent: 'space-between',
@@ -183,18 +189,18 @@ export const Scene2_TwoTraps: React.FC = () => {
                 </span>
                 <span style={{ fontSize: 13, color: THEME.colors.textSecondary, fontWeight: 600 }}>Ошибка инерции</span>
               </div>
-              <div style={{ fontSize: 24, fontWeight: 700, color: THEME.colors.textPrimary, marginTop: 16 }}>
+              <div style={{ fontSize: 22, fontWeight: 700, color: THEME.colors.textPrimary, marginTop: 14 }}>
                 Игнорировать свежие сигналы
               </div>
-              <div style={{ fontSize: 15, color: THEME.colors.textSecondary, marginTop: 8, lineHeight: 1.5 }}>
+              <div style={{ fontSize: 14, color: THEME.colors.textSecondary, marginTop: 6, lineHeight: 1.5 }}>
                 Ждать тысячи голосов, удерживая старый рейтинг. Система «засыпает» и не реагирует на реальные сбои эфира.
               </div>
             </div>
 
             {/* Flat Inactive Path with Alert Beacon */}
-            <div style={{ position: 'relative', height: 360, margin: '20px 0' }}>
-              <svg width="100%" height="100%" viewBox="0 0 1100 360" style={{ overflow: 'visible' }}>
-                <line x1="0" y1="180" x2="1100" y2="180" stroke="rgba(255,255,255,0.08)" strokeDasharray="4 4" />
+            <div style={{ position: 'relative', height: 280, margin: '14px 0' }}>
+              <svg width="100%" height="100%" viewBox="0 0 1100 280" style={{ overflow: 'visible' }}>
+                <line x1="0" y1="140" x2="1100" y2="140" stroke="rgba(255,255,255,0.08)" strokeDasharray="4 4" />
                 <path
                   d={rightInertiaPath}
                   fill="none"
@@ -204,8 +210,8 @@ export const Scene2_TwoTraps: React.FC = () => {
                 />
                 <circle
                   cx={825}
-                  cy={190}
-                  r={8}
+                  cy={148}
+                  r={7}
                   fill={THEME.colors.amber}
                   opacity={alertBlink}
                 />
@@ -214,11 +220,11 @@ export const Scene2_TwoTraps: React.FC = () => {
 
             <div
               style={{
-                padding: '16px 24px',
+                padding: '14px 20px',
                 borderRadius: 10,
                 backgroundColor: 'rgba(255, 255, 255, 0.04)',
                 border: '1px solid rgba(255, 255, 255, 0.08)',
-                fontSize: 14,
+                fontSize: 13,
                 color: THEME.colors.textSecondary,
                 textAlign: 'center',
                 fontWeight: 500,

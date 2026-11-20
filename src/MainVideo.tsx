@@ -1,5 +1,5 @@
 import React from 'react';
-import { Series, Audio, staticFile, interpolate, useCurrentFrame, Easing } from 'remotion';
+import { Series, Audio, staticFile, interpolate, useCurrentFrame, useVideoConfig, Easing } from 'remotion';
 import { THEME } from './theme';
 import { Scene1_LiveBroadcast } from './scenes/Scene1_LiveBroadcast';
 import { Scene2_TwoTraps } from './scenes/Scene2_TwoTraps';
@@ -26,21 +26,28 @@ const SmoothScene: React.FC<{ durationInFrames: number; children: React.ReactNod
     }
   );
   return (
-    <div style={{ position: 'absolute', inset: 0, opacity, width: '100%', height: '100%' }}>
+    <div style={{ position: 'absolute', inset: 0, opacity, width: 1920, height: 1080, overflow: 'hidden' }}>
       {children}
     </div>
   );
 };
 
 export const MainVideo: React.FC = () => {
+  const { width } = useVideoConfig();
+  const scale = width / 1920;
+
   return (
     <div
       style={{
         position: 'absolute',
-        inset: 0,
+        top: 0,
+        left: 0,
+        width: 1920,
+        height: 1080,
+        transform: `scale(${scale})`,
+        transformOrigin: 'top left',
+        overflow: 'hidden',
         backgroundColor: THEME.colors.bg,
-        width: '100%',
-        height: '100%',
       }}
     >
       {/* Background Soft Ambient Soundtrack (Low volume 25%, no harsh beats) */}

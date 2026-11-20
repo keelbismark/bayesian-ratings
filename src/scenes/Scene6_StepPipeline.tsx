@@ -41,16 +41,19 @@ export const Scene6_StepPipeline: React.FC = () => {
           flexDirection: 'column',
           alignItems: 'center',
           justifyContent: 'center',
-          padding: '60px 100px',
+          padding: '40px 60px',
           boxSizing: 'border-box',
+          width: 1920,
+          height: 1080,
+          overflow: 'hidden',
         }}
       >
         {/* Top Header */}
-        <div style={{ textAlign: 'center', marginBottom: 40 }}>
+        <div style={{ textAlign: 'center', marginBottom: 32 }}>
           <div style={{ fontSize: 13, color: THEME.colors.textSecondary, fontWeight: 500 }}>
             Раздел 6 · Непрерывный конвейер вычислений
           </div>
-          <div style={{ fontSize: 36, fontWeight: 700, color: THEME.colors.textPrimary, letterSpacing: -0.5, marginTop: 6 }}>
+          <div style={{ fontSize: 34, fontWeight: 700, color: THEME.colors.textPrimary, letterSpacing: -0.5, marginTop: 6 }}>
             Пошаговый конвейер обновления в реальном времени
           </div>
         </div>
@@ -59,11 +62,11 @@ export const Scene6_StepPipeline: React.FC = () => {
         <div
           style={{
             width: '100%',
-            maxWidth: 2200,
+            maxWidth: 1760,
             display: 'grid',
             gridTemplateColumns: 'repeat(4, 1fr)',
-            gap: 24,
-            marginBottom: 40,
+            gap: 20,
+            marginBottom: 32,
           }}
         >
           {stages.map((st, idx) => {
@@ -113,11 +116,11 @@ export const Scene6_StepPipeline: React.FC = () => {
         <div
           style={{
             width: '100%',
-            maxWidth: 2200,
+            maxWidth: 1760,
             borderRadius: 18,
             backgroundColor: 'rgba(21, 29, 46, 0.75)',
             border: '1px solid rgba(255, 255, 255, 0.08)',
-            padding: '30px 48px',
+            padding: '24px 44px',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'space-between',
@@ -127,17 +130,17 @@ export const Scene6_StepPipeline: React.FC = () => {
             <div style={{ fontSize: 12, color: THEME.colors.cobalt, fontWeight: 600 }}>
               Итеративная сходимость · Цикл #{cycleCount + 1}
             </div>
-            <div style={{ fontSize: 24, fontWeight: 700, color: THEME.colors.textPrimary, marginTop: 6 }}>
+            <div style={{ fontSize: 22, fontWeight: 700, color: THEME.colors.textPrimary, marginTop: 6 }}>
               С каждым циклом дисперсия уменьшается
             </div>
-            <div style={{ fontSize: 14, color: THEME.colors.textSecondary, marginTop: 8, maxWidth: 500, lineHeight: 1.5 }}>
+            <div style={{ fontSize: 13, color: THEME.colors.textSecondary, marginTop: 6, maxWidth: 500, lineHeight: 1.5 }}>
               Новый апостериор автоматически становится априорным знанием для следующей секунды эфира. Рейтинг обновляется плавно, без провалов.
             </div>
           </div>
 
           <BellCurve
-            width={750}
-            height={220}
+            width={680}
+            height={200}
             mean={currentMean}
             stdDev={currentStdDev}
             color={THEME.colors.cobalt}
