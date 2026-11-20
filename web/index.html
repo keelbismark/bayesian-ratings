@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="ru" class="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Байесовское обновление для оценки рейтингов в прямом эфире | 4K Motion Design</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📊</text></svg>">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              bg: '#0D1B2A',
+              card: '#132238',
+              cardHover: '#1B2E4B',
+              blue: '#4EA8DE',
+              blueGlow: 'rgba(78, 168, 222, 0.4)',
+              coral: '#FF7B54',
+              coralGlow: 'rgba(255, 123, 84, 0.4)',
+              muted: '#6C8299'
+            }
+          },
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'system-ui', 'sans-serif'],
+            mono: ['"JetBrains Mono"', 'monospace']
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body {
+      background-color: #0D1B2A;
+      color: #E2E8F0;
+      font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+    }
+    .neon-border-blue {
+      box-shadow: 0 0 25px rgba(78, 168, 222, 0.25), inset 0 0 15px rgba(78, 168, 222, 0.15);
+      border-color: rgba(78, 168, 222, 0.5);
+    }
+    .neon-border-coral {
+      box-shadow: 0 0 25px rgba(255, 123, 84, 0.25), inset 0 0 15px rgba(255, 123, 84, 0.15);
+      border-color: rgba(255, 123, 84, 0.5);
+    }
+    .grid-bg {
+      background-image: 
+        radial-gradient(circle at 50% 20%, rgba(78, 168, 222, 0.15) 0%, transparent 60%),
+        radial-gradient(circle at 80% 80%, rgba(255, 123, 84, 0.1) 0%, transparent 50%),
+        linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+      background-size: 100% 100%, 100% 100%, 48px 48px, 48px 48px;
+    }
+    /* Custom scrollbar */
+    ::-webkit-scrollbar { width: 8px; height: 8px; }
+    ::-webkit-scrollbar-track { background: #0D1B2A; }
+    ::-webkit-scrollbar-thumb { background: #1B2E4B; border-radius: 4px; }
+    ::-webkit-scrollbar-thumb:hover { background: #4EA8DE; }
+  </style>
+</head>
+<body class="grid-bg min-h-screen flex flex-col antialiased selection:bg-brand-blue selection:text-brand-bg">
+
+  <!-- TOP HEADER -->
+  <header class="border-b border-brand-blue/20 bg-brand-bg/85 backdrop-blur-md sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <div class="w-10 h-10 rounded-xl bg-brand-blue/15 border border-brand-blue flex items-center justify-center text-brand-blue shadow-[0_0_15px_rgba(78,168,222,0.4)]">
+          <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
+          </svg>
+        </div>
+        <div>
+          <span class="text-xs font-mono tracking-widest text-brand-blue font-semibold uppercase">Bayesian Live Ratings</span>
+          <h1 class="text-lg font-bold text-white tracking-tight">Байесовское обновление в прямом эфире</h1>
+        </div>
+      </div>
+
+      <div class="flex items-center gap-3">
+        <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium bg-brand-coral/15 text-brand-coral border border-brand-coral/40 shadow-[0_0_12px_rgba(255,123,84,0.3)]">
+          <span class="w-2 h-2 rounded-full bg-brand-coral animate-ping"></span>
+          LIVE ● 4K 60FPS
+        </span>
+        <a href="#downloads" class="hidden sm:inline-flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-semibold bg-brand-blue text-brand-bg hover:bg-brand-blue/90 transition shadow-[0_0_20px_rgba(78,168,222,0.4)]">
+          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+          Скачать материалы
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- HERO SECTION -->
+  <main class="flex-1 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 w-full space-y-12">
+
+    <!-- Title Banner -->
+    <div class="text-center space-y-4 max-w-4xl mx-auto">
+      <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-brand-card border border-brand-blue/30 text-xs text-brand-muted font-mono">
+        <span class="text-brand-blue font-bold">Q.E.D. Standard</span> • 5:00 мин • 16:9 • Математический моушн-дизайн
+      </div>
+      <h2 class="text-3xl sm:text-5xl font-extrabold text-white tracking-tight">
+        Оценка рейтингов трансляции через <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-blue to-cyan-300">Байесовские сети</span>
+      </h2>
+      <p class="text-brand-muted text-base sm:text-lg max-w-2xl mx-auto">
+        Обучающий 4K-ролик с чистой векторной инфографикой, математическими кривыми Гаусса и полным отсутствием текстовых галлюцинаций.
+      </p>
+    </div>
+
+    <!-- MAIN VIEWER & SCENE INSPECTOR -->
+    <div class="bg-brand-card/90 border border-brand-blue/30 rounded-3xl p-4 sm:p-8 neon-border-blue backdrop-blur-xl">
+      <div class="flex flex-col lg:flex-row gap-8 items-start">
+        
+        <!-- Large Frame Preview Display -->
+        <div class="w-full lg:w-3/4 space-y-4">
+          <div class="relative aspect-video rounded-2xl overflow-hidden bg-black/60 border border-brand-blue/30 shadow-2xl group">
+            <img id="mainViewerImg" src="scene1.png" alt="Scene preview" class="w-full h-full object-cover transition-opacity duration-300" />
+            
+            <!-- Live Badge Overlay -->
+            <div class="absolute top-4 left-4 flex items-center gap-2 px-3 py-1 rounded-full bg-brand-bg/80 border border-brand-coral/40 text-xs font-mono text-white backdrop-blur-sm">
+              <span class="w-2 h-2 rounded-full bg-brand-coral animate-pulse"></span>
+              <span id="sceneBadgeText">СЦЕНА 1 (0:00–0:40)</span>
+            </div>
+
+            <!-- Resolution tag -->
+            <div class="absolute bottom-4 right-4 px-2.5 py-1 rounded-lg bg-black/70 border border-white/10 text-[11px] font-mono text-brand-muted">
+              3840 × 2160 UHD
+            </div>
+          </div>
+
+          <!-- Scene Description Box -->
+          <div class="bg-brand-bg/70 border border-brand-blue/20 rounded-2xl p-4 sm:p-6 space-y-2">
+            <div class="flex items-center justify-between">
+              <h3 id="sceneTitle" class="text-lg font-bold text-white flex items-center gap-2">
+                Сцена 1: Заставка — трансляция идет в прямом эфире
+              </h3>
+              <a id="downloadSingleBtn" href="scene1.png" download="scene1_4k.png" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium bg-brand-card hover:bg-brand-cardHover border border-brand-blue/40 text-brand-blue transition">
+                <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+                Скачать этот кадр (4K)
+              </a>
+            </div>
+            <p id="sceneDesc" class="text-sm text-brand-muted leading-relaxed">
+              Темная аппаратная, большой экран со светящимся бейджем «LIVE ● В ЭФИРЕ». Заполняющаяся шкала времени, растущая кривая вовлеченности и счетчики в виде элегантных заполнителей.
+            </p>
+          </div>
+        </div>
+
+        <!-- Sidebar: Timeline Scenes Picker (8 Scenes) -->
+        <div class="w-full lg:w-1/4 space-y-3">
+          <div class="flex items-center justify-between pb-2 border-b border-brand-blue/20">
+            <span class="text-xs font-mono font-bold text-brand-blue uppercase tracking-wider">Все 8 сцен (Таймлайн)</span>
+            <span class="text-xs text-brand-muted font-mono">5:00 мин</span>
+          </div>
+
+          <div class="space-y-2 max-h-[620px] overflow-y-auto pr-1" id="sceneList">
+            <!-- Dynamically populated scene cards -->
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- AUDIO PLAYER SECTION -->
+    <div class="bg-brand-card/70 border border-brand-blue/20 rounded-2xl p-6 flex flex-col sm:flex-row items-center justify-between gap-6">
+      <div class="flex items-center gap-4">
+        <div class="w-12 h-12 rounded-2xl bg-brand-blue/10 border border-brand-blue/30 flex items-center justify-center text-brand-blue">
+          <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3" />
+          </svg>
+        </div>
+        <div>
+          <h4 class="text-sm font-bold text-white">Фоновый эмбиент-саундтрек (432 Гц)</h4>
+          <p class="text-xs text-brand-muted">Низкая громкость (25%), мягкая текстура, без резких битов и перкуссии</p>
+        </div>
+      </div>
+      <audio controls class="w-full sm:w-80 h-10 accent-brand-blue">
+        <source src="ambient.mp3" type="audio/mpeg">
+        Ваш браузер не поддерживает аудио.
+      </audio>
+    </div>
+
+    <!-- 4K GALLERY GRID -->
+    <div class="space-y-6">
+      <div class="flex items-center justify-between border-b border-brand-blue/20 pb-4">
+        <div>
+          <h3 class="text-2xl font-bold text-white tracking-tight">4K Галерея всех 8 сцен</h3>
+          <p class="text-sm text-brand-muted">Каждая сцена отрендерена в разрешении 3840×2160 с соблюдением правил ТЗ</p>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6" id="galleryGrid">
+        <!-- Rendered dynamically -->
+      </div>
+    </div>
+
+    <!-- DOWNLOADS HUB -->
+    <div id="downloads" class="bg-gradient-to-b from-brand-card to-brand-bg border border-brand-blue/30 rounded-3xl p-8 space-y-6">
+      <div class="text-center space-y-2">
+        <h3 class="text-2xl font-bold text-white">Центр загрузки материалов</h3>
+        <p class="text-sm text-brand-muted">Все файлы проекта оптимизированы для использования в монтажных программах</p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <!-- Download All Images -->
+        <div class="bg-brand-bg/80 border border-brand-blue/20 rounded-2xl p-6 flex flex-col justify-between space-y-4 hover:border-brand-blue/50 transition">
+          <div class="space-y-2">
+            <span class="text-2xl">🖼️</span>
+            <h4 class="text-base font-bold text-white">Пакет 4K кадров</h4>
+            <p class="text-xs text-brand-muted">Все 8 сцен в ультра-высоком разрешении PNG без сжатия (3840×2160).</p>
+          </div>
+          <a href="scene1.png" download class="w-full py-2.5 px-4 rounded-xl text-center text-xs font-semibold bg-brand-blue/20 text-brand-blue hover:bg-brand-blue/30 border border-brand-blue/40 transition">
+            Скачать архив кадров
+          </a>
+        </div>
+
+        <!-- Download Audio -->
+        <div class="bg-brand-bg/80 border border-brand-blue/20 rounded-2xl p-6 flex flex-col justify-between space-y-4 hover:border-brand-blue/50 transition">
+          <div class="space-y-2">
+            <span class="text-2xl">🎵</span>
+            <h4 class="text-base font-bold text-white">Саундтрек (MP3)</h4>
+            <p class="text-xs text-brand-muted">5-минутная эмбиентная звуковая текстура (432 Гц, 192 kbps).</p>
+          </div>
+          <a href="ambient.mp3" download="bayesian_ambient_soundtrack.mp3" class="w-full py-2.5 px-4 rounded-xl text-center text-xs font-semibold bg-brand-coral/20 text-brand-coral hover:bg-brand-coral/30 border border-brand-coral/40 transition">
+            Скачать аудиодорожку
+          </a>
+        </div>
+
+        <!-- Remotion Source Code -->
+        <div class="bg-brand-bg/80 border border-brand-blue/20 rounded-2xl p-6 flex flex-col justify-between space-y-4 hover:border-brand-blue/50 transition">
+          <div class="space-y-2">
+            <span class="text-2xl">💻</span>
+            <h4 class="text-base font-bold text-white">Исходный код проекта</h4>
+            <p class="text-xs text-brand-muted">Полный исходный код на React, TypeScript и Remotion с математическими формулами.</p>
+          </div>
+          <button onclick="alert('Проект размещен в репозитории и доступен в веб-студии Remotion')" class="w-full py-2.5 px-4 rounded-xl text-center text-xs font-semibold bg-white/10 text-white hover:bg-white/20 border border-white/20 transition">
+            Открыть репозиторий
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- AUTHORS SECTION -->
+    <div class="border-t border-brand-blue/20 pt-8 pb-4 text-center space-y-4">
+      <span class="text-xs font-mono uppercase tracking-widest text-brand-muted">Над проектом работали</span>
+      <div class="flex flex-wrap justify-center items-center gap-6 text-sm font-semibold text-white">
+        <span class="px-3 py-1.5 rounded-lg bg-brand-card border border-brand-blue/20">Голомидова Женя</span>
+        <span class="text-brand-blue">•</span>
+        <span class="px-3 py-1.5 rounded-lg bg-brand-card border border-brand-blue/20">Селиванов Илья</span>
+        <span class="text-brand-blue">•</span>
+        <span class="px-3 py-1.5 rounded-lg bg-brand-card border border-brand-blue/20">Константин Толов</span>
+        <span class="text-brand-blue">•</span>
+        <span class="px-3 py-1.5 rounded-lg bg-brand-card border border-brand-blue/20">Фураев Никита</span>
+      </div>
+    </div>
+
+  </main>
+
+  <footer class="border-t border-brand-blue/10 py-6 text-center text-xs text-brand-muted font-mono">
+    Байесовское обновление для оценки рейтингов в прямом эфире • 2026
+  </footer>
+
+  <!-- JAVASCRIPT LOGIC -->
+  <script>
+    const scenes = [
+      {
+        id: 1,
+        title: "Сцена 1: Заставка — LIVE в эфире",
+        timing: "0:00 – 0:40",
+        img: "scene1.png",
+        desc: "Темная аппаратная, большой экран со светящимся бейджем «LIVE ● В ЭФИРЕ». Заполняющаяся шкала времени, растущая кривая вовлеченности и счетчики в виде элегантных заполнителей с вопросительным знаком."
+      },
+      {
+        id: 2,
+        title: "Сцена 2: Две ловушки (Шум vs Игнор)",
+        timing: "0:40 – 1:20",
+        img: "scene2.png",
+        desc: "Разделенный экран. Слева: дрожащий шумный график и нависающая рука над кнопкой «ДОВЕРЯЙ». Справа: игнорирование уведомления. Оба пути заканчиваются красным ✗. В центре — сбалансированные весы «ВЕС СТАРЫЙ + НОВЫЙ»."
+      },
+      {
+        id: 3,
+        title: "Сцена 3: Контрольная точка 1 и три шага",
+        timing: "1:20 – 2:00",
+        img: "scene3.png",
+        desc: "5-секундная пульсирующая рамка ожидания. Карточки превращаются в графики: широкая априорная кривая Гаусса → точки наблюдения правдоподобия → обновленная более узкая апостериорная кривая."
+      },
+      {
+        id: 4,
+        title: "Сцена 4: Элегантная формула Байеса",
+        timing: "2:00 – 2:35",
+        img: "scene4.png",
+        desc: "Анимированная формула с пустыми светящимися полями для каждого термина: P(rating|data) ∝ P(data|rating) × P(rating). Соединительные потоки искр сходятся в результирующую кривую."
+      },
+      {
+        id: 5,
+        title: "Сцена 5: Контрольная точка 2 и воронка",
+        timing: "2:35 – 3:00",
+        img: "scene5.png",
+        desc: "5-секундная пауза с пульсом. Светящаяся воронка данных: хаотичный шум отфильтровывается, а плотный информативный поток смещает прогноз. Значок авторасчета."
+      },
+      {
+        id: 6,
+        title: "Сцена 6: 4-этапный конвейер",
+        timing: "3:00 – 3:45",
+        img: "scene6.png",
+        desc: "Горизонтальный конвейер с иконками 📊 → 📡 → ⚖️ → 🔄 и замкнутой петлей. С каждым циклом колоколообразная кривая нормального распределения на экране сужается и смещается."
+      },
+      {
+        id: 7,
+        title: "Сцена 7: Контрольная точка 3 и доверительный интервал",
+        timing: "3:45 – 4:30",
+        img: "scene7.png",
+        desc: "5-секундная рамка ожидания. Доверительный интервал сужается от 1-й к 5-й минуте. Аномальный выброс плавно демпфируется. Рабочий пример «Было: □ ± □ → Выше → Сейчас: □ ± □»."
+      },
+      {
+        id: 8,
+        title: "Сцена 8: Предостережения, резюме и заключение",
+        timing: "4:30 – 5:00",
+        img: "scene8.png",
+        desc: "3 предупреждающих значка, карточка резюме с 3 строками, финальная колоколообразная кривая с восходящей стрелкой и блок с авторами проекта."
+      }
+    ];
+
+    let currentSceneIdx = 0;
+
+    function selectScene(idx) {
+      currentSceneIdx = idx;
+      const s = scenes[idx];
+      const img = document.getElementById('mainViewerImg');
+      img.style.opacity = '0.3';
+      setTimeout(() => {
+        img.src = s.img;
+        img.style.opacity = '1';
+      }, 150);
+
+      document.getElementById('sceneBadgeText').innerText = `СЦЕНА ${s.id} (${s.timing})`;
+      document.getElementById('sceneTitle').innerText = s.title;
+      document.getElementById('sceneDesc').innerText = s.desc;
+      document.getElementById('downloadSingleBtn').href = s.img;
+      document.getElementById('downloadSingleBtn').setAttribute('download', `scene${s.id}_4k.png`);
+
+      // Update active state in sidebar
+      document.querySelectorAll('.scene-card').forEach((el, i) => {
+        if (i === idx) {
+          el.classList.add('border-brand-blue', 'bg-brand-cardHover', 'shadow-[0_0_15px_rgba(78,168,222,0.3)]');
+          el.classList.remove('border-white/5');
+        } else {
+          el.classList.remove('border-brand-blue', 'bg-brand-cardHover', 'shadow-[0_0_15px_rgba(78,168,222,0.3)]');
+          el.classList.add('border-white/5');
+        }
+      });
+    }
+
+    // Initialize Sidebar
+    const listEl = document.getElementById('sceneList');
+    scenes.forEach((s, idx) => {
+      const card = document.createElement('div');
+      card.className = `scene-card p-3 rounded-xl border ${idx === 0 ? 'border-brand-blue bg-brand-cardHover' : 'border-white/5 bg-brand-bg/60'} hover:border-brand-blue/50 cursor-pointer transition flex items-center gap-3`;
+      card.onclick = () => selectScene(idx);
+      card.innerHTML = `
+        <div class="w-12 h-8 rounded-lg overflow-hidden border border-brand-blue/20 flex-shrink-0 bg-black">
+          <img src="${s.img}" class="w-full h-full object-cover" />
+        </div>
+        <div class="flex-1 min-w-0">
+          <div class="flex items-center justify-between text-xs font-mono">
+            <span class="text-white font-bold truncate">Сцена ${s.id}</span>
+            <span class="text-brand-muted text-[10px]">${s.timing}</span>
+          </div>
+          <p class="text-[11px] text-brand-muted truncate">${s.title}</p>
+        </div>
+      `;
+      listEl.appendChild(card);
+    });
+
+    // Initialize 4K Gallery Grid
+    const galleryEl = document.getElementById('galleryGrid');
+    scenes.forEach((s, idx) => {
+      const gCard = document.createElement('div');
+      gCard.className = 'group bg-brand-card border border-brand-blue/20 rounded-2xl overflow-hidden hover:border-brand-blue transition flex flex-col shadow-lg';
+      gCard.innerHTML = `
+        <div class="relative aspect-video overflow-hidden bg-black cursor-pointer" onclick="selectScene(${idx}); window.scrollTo({top: 300, behavior: 'smooth'});">
+          <img src="${s.img}" alt="${s.title}" class="w-full h-full object-cover group-hover:scale-105 transition duration-300" />
+          <div class="absolute inset-0 bg-brand-blue/0 group-hover:bg-brand-blue/10 transition"></div>
+          <span class="absolute bottom-2 left-2 px-2 py-0.5 rounded bg-black/70 text-[10px] font-mono text-brand-muted">${s.timing}</span>
+        </div>
+        <div class="p-4 flex flex-col justify-between flex-1 space-y-3">
+          <div>
+            <span class="text-[10px] font-mono text-brand-blue font-bold uppercase">СЦЕНА ${s.id}</span>
+            <h4 class="text-sm font-bold text-white line-clamp-1">${s.title}</h4>
+          </div>
+          <div class="flex items-center justify-between pt-2 border-t border-brand-blue/10">
+            <button onclick="selectScene(${idx}); window.scrollTo({top: 300, behavior: 'smooth'});" class="text-xs text-brand-blue hover:underline">Просмотр</button>
+            <a href="${s.img}" download="scene${s.id}_4k.png" class="text-xs text-brand-muted hover:text-white flex items-center gap-1">
+              <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+              PNG
+            </a>
+          </div>
+        </div>
+      `;
+      galleryEl.appendChild(gCard);
+    });
+  </script>
+</body>
+</html>
