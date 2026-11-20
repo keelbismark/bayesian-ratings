@@ -1,12 +1,11 @@
 import React from 'react';
-import { interpolate, useCurrentFrame } from 'remotion';
 import { THEME } from '../../theme';
 
 interface PlaceholderBoxProps {
   width: number | string;
   height: number | string;
   variant?: 'card' | 'outline' | 'dashed' | 'pill' | 'number';
-  accent?: 'blue' | 'coral' | 'neutral';
+  accent?: 'blue' | 'coral' | 'neutral' | 'emerald';
   pulse?: boolean;
   glow?: boolean;
   cornerMarks?: boolean;
@@ -19,47 +18,31 @@ export const PlaceholderBox: React.FC<PlaceholderBoxProps> = ({
   height,
   variant = 'card',
   accent = 'blue',
-  pulse = false,
-  glow = false,
-  cornerMarks = false,
   children,
   style = {},
 }) => {
-  const frame = useCurrentFrame();
-
-  const accentColor =
+  const accentBorder =
     accent === 'coral'
-      ? THEME.colors.warmCoral
+      ? 'rgba(249, 115, 22, 0.4)'
+      : accent === 'emerald'
+      ? 'rgba(16, 185, 129, 0.4)'
       : accent === 'neutral'
-      ? 'rgba(255, 255, 255, 0.4)'
-      : THEME.colors.electricBlue;
-
-  const accentGlow =
-    accent === 'coral'
-      ? THEME.colors.warmCoralGlow
-      : THEME.colors.electricBlueGlow;
-
-  const pulseOpacity = pulse
-    ? interpolate(Math.sin(frame * 0.1), [-1, 1], [0.65, 1])
-    : 1;
-
-  const pulseScale = pulse
-    ? interpolate(Math.sin(frame * 0.1), [-1, 1], [0.99, 1.01])
-    : 1;
+      ? 'rgba(255, 255, 255, 0.08)'
+      : 'rgba(56, 189, 248, 0.3)';
 
   const getBorder = () => {
-    if (variant === 'dashed') return `3px dashed ${accentColor}`;
-    if (variant === 'outline') return `3px solid ${accentColor}`;
-    return `2px solid ${accentColor}55`;
+    if (variant === 'dashed') return `1px dashed ${accentBorder}`;
+    if (variant === 'outline') return `1px solid ${accentBorder}`;
+    return `1px solid ${accentBorder}`;
   };
 
   const getBackground = () => {
     if (variant === 'outline' || variant === 'dashed') return 'transparent';
-    if (variant === 'number') return 'rgba(19, 34, 56, 0.85)';
-    return 'rgba(19, 34, 56, 0.7)';
+    if (variant === 'pill') return 'rgba(17, 24, 38, 0.85)';
+    return 'rgba(21, 29, 46, 0.8)';
   };
 
-  const borderRadius = variant === 'pill' ? 9999 : 16;
+  const borderRadius = variant === 'pill' ? 9999 : 14;
 
   return (
     <div
@@ -70,12 +53,8 @@ export const PlaceholderBox: React.FC<PlaceholderBoxProps> = ({
         borderRadius,
         border: getBorder(),
         backgroundColor: getBackground(),
-        backdropFilter: 'blur(12px)',
-        boxShadow: glow
-          ? `0 0 35px ${accentGlow}, inset 0 0 20px ${accentGlow}`
-          : '0 12px 32px rgba(0, 0, 0, 0.35)',
-        opacity: pulseOpacity,
-        transform: `scale(${pulseScale})`,
+        backdropFilter: 'blur(16px)',
+        boxShadow: '0 8px 30px rgba(0, 0, 0, 0.35)',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
@@ -84,66 +63,19 @@ export const PlaceholderBox: React.FC<PlaceholderBoxProps> = ({
         ...style,
       }}
     >
-      {/* Corner Registration Marks (Technical Aesthetic) */}
-      {cornerMarks && (
-        <>
-          <div
-            style={{
-              position: 'absolute',
-              top: 6,
-              left: 6,
-              width: 12,
-              height: 12,
-              borderTop: `2px solid ${accentColor}`,
-              borderLeft: `2px solid ${accentColor}`,
-            }}
-          />
-          <div
-            style={{
-              position: 'absolute',
-              top: 6,
-              right: 6,
-              width: 12,
-              height: 12,
-              borderTop: `2px solid ${accentColor}`,
-              borderRight: `2px solid ${accentColor}`,
-            }}
-          />
-          <div
-            style={{
-              position: 'absolute',
-              bottom: 6,
-              left: 6,
-              width: 12,
-              height: 12,
-              borderBottom: `2px solid ${accentColor}`,
-              borderLeft: `2px solid ${accentColor}`,
-            }}
-          />
-          <div
-            style={{
-              position: 'absolute',
-              bottom: 6,
-              right: 6,
-              width: 12,
-              height: 12,
-              borderBottom: `2px solid ${accentColor}`,
-              borderRight: `2px solid ${accentColor}`,
-            }}
-          />
-        </>
-      )}
-
-      {/* Internal placeholder line / wireframe bar if no children */}
+      {/* Internal clean technical placeholder bar if no custom content */}
       {!children && (
         <div
           style={{
-            width: '60%',
-            height: '18%',
-            minHeight: 8,
-            maxHeight: 18,
-            borderRadius: 6,
-            background: `linear-gradient(90deg, ${accentColor}22 0%, ${accentColor}55 50%, ${accentColor}22 100%)`,
+            width: '65%',
+            height: '14%',
+            minHeight: 6,
+            maxHeight: 12,
+            borderRadius: 4,
+            backgroundColor:
+              accent === 'coral'
+                ? 'rgba(249, 115, 22, 0.25)'
+                : 'rgba(56, 189, 248, 0.25)',
           }}
         />
       )}

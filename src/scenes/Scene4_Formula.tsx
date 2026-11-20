@@ -2,36 +2,31 @@ import React from 'react';
 import { interpolate, useCurrentFrame, Easing } from 'remotion';
 import { THEME } from '../theme';
 import { BackgroundGrid } from '../components/common/BackgroundGrid';
-import { PlaceholderBox } from '../components/common/PlaceholderBox';
 import { BellCurve } from '../components/common/BellCurve';
 
 export const Scene4_Formula: React.FC = () => {
   const frame = useCurrentFrame();
 
-  // Entrance of each formula term
-  const termPosteriorEntrance = interpolate(frame, [30, 90], [0, 1], {
+  // Sequential term reveals
+  const term1 = interpolate(frame, [20, 60], [0, 1], {
     extrapolateLeft: 'clamp',
     extrapolateRight: 'clamp',
     easing: Easing.bezier(0.16, 1, 0.3, 1),
   });
 
-  const termLikelihoodEntrance = interpolate(frame, [80, 140], [0, 1], {
+  const term2 = interpolate(frame, [70, 110], [0, 1], {
     extrapolateLeft: 'clamp',
     extrapolateRight: 'clamp',
     easing: Easing.bezier(0.16, 1, 0.3, 1),
   });
 
-  const termPriorEntrance = interpolate(frame, [130, 190], [0, 1], {
+  const term3 = interpolate(frame, [120, 160], [0, 1], {
     extrapolateLeft: 'clamp',
     extrapolateRight: 'clamp',
     easing: Easing.bezier(0.16, 1, 0.3, 1),
   });
 
-  // Spark stream animation flowing between terms
-  const sparkPhase = (frame * 0.08) % 1;
-
-  // Synthesis curve emergence at the bottom
-  const synthesisEntrance = interpolate(frame, [220, 320], [0, 1], {
+  const synthesisEntrance = interpolate(frame, [200, 260], [0, 1], {
     extrapolateLeft: 'clamp',
     extrapolateRight: 'clamp',
     easing: Easing.bezier(0.16, 1, 0.3, 1),
@@ -46,7 +41,7 @@ export const Scene4_Formula: React.FC = () => {
         overflow: 'hidden',
       }}
     >
-      <BackgroundGrid intensity={1.1} />
+      <BackgroundGrid intensity={1} />
 
       <div
         style={{
@@ -60,175 +55,161 @@ export const Scene4_Formula: React.FC = () => {
           boxSizing: 'border-box',
         }}
       >
-        {/* Top Header Placeholder: Formula Header */}
-        <div style={{ marginBottom: 70 }}>
-          <PlaceholderBox width={500} height={60} variant="pill" accent="blue" glow>
-            <div style={{ width: '60%', height: 18, backgroundColor: THEME.colors.electricBlue, borderRadius: 6 }} />
-          </PlaceholderBox>
+        {/* Top Header */}
+        <div style={{ textAlign: 'center', marginBottom: 50 }}>
+          <div style={{ fontSize: 13, fontFamily: 'JetBrains Mono, monospace', color: THEME.colors.textMuted, letterSpacing: 2 }}>
+            SECTION 04 // MATHEMATICAL BLUEPRINT
+          </div>
+          <div style={{ fontSize: 36, fontWeight: 700, color: THEME.colors.textPrimary, letterSpacing: -0.5, marginTop: 6 }}>
+            Формула байесовского взвешивания
+          </div>
         </div>
 
-        {/* THE ANIMATED FORMULA CONTAINER: [ ] ∝ [ ] × [ ] */}
+        {/* ELEGANT MATHEMATICAL EQUATION CARD: POSTERIOR ∝ LIKELIHOOD × PRIOR */}
         <div
           style={{
             display: 'flex',
             alignItems: 'center',
-            justifyContent: 'center',
-            gap: 40,
-            marginBottom: 80,
+            gap: 28,
+            padding: '36px 64px',
+            borderRadius: 20,
+            backgroundColor: 'rgba(21, 29, 46, 0.85)',
+            border: '1px solid rgba(255, 255, 255, 0.1)',
+            boxShadow: '0 25px 60px rgba(0, 0, 0, 0.5)',
+            marginBottom: 50,
           }}
         >
-          {/* TERM 1: POSTERIOR P(rating | data) */}
+          {/* TERM 1: POSTERIOR */}
           <div
             style={{
-              opacity: termPosteriorEntrance,
-              transform: `scale(${termPosteriorEntrance})`,
+              opacity: term1,
+              transform: `scale(${0.95 + term1 * 0.05})`,
               display: 'flex',
               flexDirection: 'column',
               alignItems: 'center',
-              gap: 16,
             }}
           >
-            <PlaceholderBox width={420} height={130} variant="card" accent="blue" glow pulse cornerMarks>
-              <div style={{ display: 'flex', gap: 14, alignItems: 'center' }}>
-                <div style={{ width: 140, height: 26, backgroundColor: THEME.colors.electricBlue, borderRadius: 6 }} />
-                <div style={{ width: 4, height: 32, backgroundColor: 'rgba(255,255,255,0.4)' }} />
-                <div style={{ width: 110, height: 26, backgroundColor: 'rgba(78, 168, 222, 0.5)', borderRadius: 6 }} />
-              </div>
-            </PlaceholderBox>
-            <PlaceholderBox width={180} height={32} variant="pill" accent="neutral" />
+            <div style={{ fontSize: 12, fontFamily: 'JetBrains Mono, monospace', color: THEME.colors.cobalt, marginBottom: 8 }}>
+              НОВЫЙ РЕЙТИНГ
+            </div>
+            <div
+              style={{
+                fontSize: 34,
+                fontWeight: 700,
+                color: THEME.colors.cobalt,
+                fontFamily: 'JetBrains Mono, monospace',
+                padding: '12px 24px',
+                borderRadius: 10,
+                backgroundColor: 'rgba(56, 189, 248, 0.1)',
+                border: '1px solid rgba(56, 189, 248, 0.3)',
+              }}
+            >
+              P(θ | D)
+            </div>
           </div>
 
-          {/* SYMBOL: ∝ (PROPORTIONAL TO) */}
-          <div
-            style={{
-              fontSize: 90,
-              color: THEME.colors.white,
-              fontWeight: 300,
-              fontFamily: 'serif',
-              textShadow: `0 0 20px ${THEME.colors.electricBlueGlow}`,
-              padding: '0 10px',
-            }}
-          >
+          <div style={{ fontSize: 38, color: THEME.colors.textMuted, fontWeight: 300, margin: '0 8px' }}>
             ∝
           </div>
 
-          {/* TERM 2: LIKELIHOOD P(data | rating) */}
+          {/* TERM 2: LIKELIHOOD */}
           <div
             style={{
-              opacity: termLikelihoodEntrance,
-              transform: `scale(${termLikelihoodEntrance})`,
+              opacity: term2,
+              transform: `scale(${0.95 + term2 * 0.05})`,
               display: 'flex',
               flexDirection: 'column',
               alignItems: 'center',
-              gap: 16,
             }}
           >
-            <PlaceholderBox width={420} height={130} variant="card" accent="coral" glow cornerMarks>
-              <div style={{ display: 'flex', gap: 14, alignItems: 'center' }}>
-                <div style={{ width: 110, height: 26, backgroundColor: THEME.colors.warmCoral, borderRadius: 6 }} />
-                <div style={{ width: 4, height: 32, backgroundColor: 'rgba(255,255,255,0.4)' }} />
-                <div style={{ width: 140, height: 26, backgroundColor: 'rgba(255, 123, 84, 0.5)', borderRadius: 6 }} />
-              </div>
-            </PlaceholderBox>
-            <PlaceholderBox width={180} height={32} variant="pill" accent="coral" />
+            <div style={{ fontSize: 12, fontFamily: 'JetBrains Mono, monospace', color: THEME.colors.amber, marginBottom: 8 }}>
+              СВЕЖИЕ ГОЛОСА
+            </div>
+            <div
+              style={{
+                fontSize: 34,
+                fontWeight: 700,
+                color: THEME.colors.amber,
+                fontFamily: 'JetBrains Mono, monospace',
+                padding: '12px 24px',
+                borderRadius: 10,
+                backgroundColor: 'rgba(249, 115, 22, 0.1)',
+                border: '1px solid rgba(249, 115, 22, 0.3)',
+              }}
+            >
+              P(D | θ)
+            </div>
           </div>
 
-          {/* SYMBOL: × (MULTIPLY) */}
-          <div
-            style={{
-              fontSize: 70,
-              color: THEME.colors.white,
-              fontWeight: 400,
-              fontFamily: 'sans-serif',
-              padding: '0 10px',
-            }}
-          >
+          <div style={{ fontSize: 32, color: THEME.colors.textMuted, fontWeight: 300, margin: '0 8px' }}>
             ×
           </div>
 
-          {/* TERM 3: PRIOR P(rating) */}
+          {/* TERM 3: PRIOR */}
           <div
             style={{
-              opacity: termPriorEntrance,
-              transform: `scale(${termPriorEntrance})`,
+              opacity: term3,
+              transform: `scale(${0.95 + term3 * 0.05})`,
               display: 'flex',
               flexDirection: 'column',
               alignItems: 'center',
-              gap: 16,
             }}
           >
-            <PlaceholderBox width={360} height={130} variant="card" accent="blue" cornerMarks>
-              <div style={{ width: 180, height: 26, backgroundColor: THEME.colors.electricBlue, borderRadius: 6 }} />
-            </PlaceholderBox>
-            <PlaceholderBox width={160} height={32} variant="pill" accent="neutral" />
+            <div style={{ fontSize: 12, fontFamily: 'JetBrains Mono, monospace', color: THEME.colors.textSecondary, marginBottom: 8 }}>
+              ИСТОРИЧЕСКИЙ ОПЫТ
+            </div>
+            <div
+              style={{
+                fontSize: 34,
+                fontWeight: 700,
+                color: THEME.colors.textPrimary,
+                fontFamily: 'JetBrains Mono, monospace',
+                padding: '12px 24px',
+                borderRadius: 10,
+                backgroundColor: 'rgba(255, 255, 255, 0.05)',
+                border: '1px solid rgba(255, 255, 255, 0.15)',
+              }}
+            >
+              P(θ)
+            </div>
           </div>
         </div>
 
-        {/* CONNECTING SPARKS & CONVERGENCE INTO RESULTING CURVE */}
+        {/* BOTTOM SYNTHESIS: COMBINED GAUSSIAN UPDATE */}
         <div
           style={{
-            position: 'relative',
-            width: 1200,
-            height: 380,
             opacity: synthesisEntrance,
-            transform: `scale(${synthesisEntrance})`,
+            transform: `translateY(${(1 - synthesisEntrance) * 20}px)`,
+            width: '100%',
+            maxWidth: 1600,
+            borderRadius: 18,
+            backgroundColor: 'rgba(21, 29, 46, 0.75)',
+            border: '1px solid rgba(255, 255, 255, 0.08)',
+            padding: '28px 48px',
             display: 'flex',
-            justifyContent: 'center',
             alignItems: 'center',
+            justifyContent: 'space-between',
           }}
         >
-          {/* Animated SVG Stream Lines converging */}
-          <svg
-            width="100%"
-            height="100%"
-            viewBox="0 0 1200 380"
-            style={{ position: 'absolute', inset: 0, overflow: 'visible' }}
-          >
-            {/* Left flowing stream (from Prior) */}
-            <path
-              d="M 200 0 C 200 120, 500 140, 600 160"
-              fill="none"
-              stroke={THEME.colors.electricBlue}
-              strokeWidth="3"
-              strokeDasharray="8 8"
-              strokeDashoffset={-frame * 3}
-              opacity={0.6}
-            />
-            {/* Right flowing stream (from Likelihood) */}
-            <path
-              d="M 1000 0 C 1000 120, 700 140, 600 160"
-              fill="none"
-              stroke={THEME.colors.warmCoral}
-              strokeWidth="3"
-              strokeDasharray="8 8"
-              strokeDashoffset={-frame * 3}
-              opacity={0.6}
-            />
-          </svg>
-
-          {/* The Resulting Bell Curve Display */}
-          <div
-            style={{
-              width: 900,
-              height: 340,
-              borderRadius: 24,
-              backgroundColor: 'rgba(19, 34, 56, 0.9)',
-              border: `2px solid ${THEME.colors.electricBlue}`,
-              boxShadow: `0 0 50px ${THEME.colors.electricBlueGlow}`,
-              padding: 20,
-              boxSizing: 'border-box',
-            }}
-          >
-            <BellCurve
-              width={860}
-              height={300}
-              mean={0.55}
-              stdDev={0.11}
-              color={THEME.colors.electricBlue}
-              showFill
-              showConfidenceInterval
-            />
+          <div style={{ maxWidth: 500 }}>
+            <div style={{ fontSize: 18, fontWeight: 700, color: THEME.colors.textPrimary }}>
+              Суть формулы простыми словами:
+            </div>
+            <div style={{ fontSize: 14, color: THEME.colors.textSecondary, marginTop: 8, lineHeight: 1.6 }}>
+              Чем больше поступает новых проверенных голосов, тем сильнее формула смещает оценку в сторону реальных наблюдений. При малом числе голосов — удерживает стабильный априорный ориентир.
+            </div>
           </div>
+
+          <BellCurve
+            width={750}
+            height={220}
+            mean={0.56}
+            stdDev={0.11}
+            color={THEME.colors.cobalt}
+            priorOutline={{ mean: 0.48, stdDev: 0.22 }}
+            showConfidenceInterval
+            label="Пунктир = Априор | Синий = Обновленный апостериор"
+          />
         </div>
       </div>
     </div>

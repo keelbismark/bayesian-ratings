@@ -2,55 +2,48 @@ import React, { useMemo } from 'react';
 import { interpolate, useCurrentFrame, Easing } from 'remotion';
 import { THEME } from '../theme';
 import { BackgroundGrid } from '../components/common/BackgroundGrid';
-import { PlaceholderBox } from '../components/common/PlaceholderBox';
 
 export const Scene2_TwoTraps: React.FC = () => {
   const frame = useCurrentFrame();
 
-  // High-frequency jittery noise curve for left trap
+  // Smooth continuous scrolling noise waveform
   const leftNoisePath = useMemo(() => {
-    const pointsCount = 40;
+    const pointsCount = 80;
     const width = 1100;
-    const height = 400;
+    const height = 360;
     return Array.from({ length: pointsCount })
       .map((_, i) => {
         const x = (i / (pointsCount - 1)) * width;
-        // high frequency erratic swings
-        const jitter = Math.sin(i * 1.8 + (frame * 0.2)) * 60 + Math.cos(i * 3.4) * 35;
-        const y = height / 2 + jitter;
+        const scrollT = (i * 0.3) + (frame * 0.05);
+        const noise = Math.sin(scrollT * 1.1) * 45 + Math.sin(scrollT * 2.3) * 25 + Math.cos(scrollT * 0.4) * 30;
+        const y = height / 2 + noise;
         return `${i === 0 ? 'M' : 'L'} ${x.toFixed(1)} ${y.toFixed(1)}`;
       })
       .join(' ');
   }, [frame]);
 
-  // Inertia line for right trap: flat, delayed response
+  // Inertia line for right trap
   const rightInertiaPath = useMemo(() => {
     const width = 1100;
-    const height = 400;
-    return `M 0 ${height * 0.6} L ${width * 0.7} ${height * 0.6} L ${width} ${height * 0.58}`;
+    const height = 360;
+    return `M 0 ${height * 0.55} L ${width * 0.75} ${height * 0.55} L ${width} ${height * 0.52}`;
   }, []);
 
-  // Flashing alert on the right
-  const alertBlink = interpolate(Math.sin(frame * 0.3), [-1, 1], [0.2, 1]);
-
-  // Left & Right Cross (✗) appearance
-  const crossOpacity = interpolate(frame, [300, 360], [0, 1], {
-    extrapolateLeft: 'clamp',
-    extrapolateRight: 'clamp',
-  });
+  // Alert beacon
+  const alertBlink = interpolate(Math.sin((frame * Math.PI * 2) / 60), [-1, 1], [0.3, 1]);
 
   // Center scale entrance in the second half
-  const scaleEntrance = interpolate(frame, [450, 570], [0, 1], {
+  const scaleEntrance = interpolate(frame, [450, 560], [0, 1], {
     extrapolateLeft: 'clamp',
     extrapolateRight: 'clamp',
     easing: Easing.bezier(0.16, 1, 0.3, 1),
   });
 
-  // Scale oscillation settling into balance
+  // Scale oscillation settling into equilibrium
   const scaleTilt = interpolate(
     Math.sin((frame - 450) * 0.08) * Math.exp(-(frame - 450) / 250),
     [-1, 1],
-    [-18, 18]
+    [-14, 14]
   );
 
   return (
@@ -62,174 +55,184 @@ export const Scene2_TwoTraps: React.FC = () => {
         overflow: 'hidden',
       }}
     >
-      <BackgroundGrid intensity={1.0} />
+      <BackgroundGrid intensity={1} />
 
-      {/* Split Screen Container */}
+      {/* Main Container */}
       <div
         style={{
           position: 'absolute',
           inset: 0,
-          display: 'grid',
-          gridTemplateColumns: '1fr 1fr',
-          gap: 60,
-          padding: 80,
+          display: 'flex',
+          flexDirection: 'column',
+          padding: '60px 100px',
           boxSizing: 'border-box',
         }}
       >
-        {/* LEFT TRAP: OVER-REACTING TO NOISE */}
-        <div
-          style={{
-            position: 'relative',
-            borderRadius: 24,
-            backgroundColor: 'rgba(15, 29, 48, 0.6)',
-            border: `2px solid rgba(255, 123, 84, 0.35)`,
-            padding: 48,
-            display: 'flex',
-            flexDirection: 'column',
-            justifyContent: 'space-between',
-          }}
-        >
-          {/* Header Placeholder: "NOISE / REACT" */}
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-            <PlaceholderBox width={260} height={48} variant="pill" accent="coral" glow />
-            <PlaceholderBox width={120} height={40} variant="card" accent="coral" />
+        {/* Top Editorial Scene Header */}
+        <div style={{ textAlign: 'center', marginBottom: 40 }}>
+          <div style={{ fontSize: 13, fontFamily: 'JetBrains Mono, monospace', color: THEME.colors.textMuted, letterSpacing: 2 }}>
+            SECTION 02 // METHODOLOGICAL DILEMMA
           </div>
-
-          {/* Jittery Chart Display */}
-          <div style={{ position: 'relative', height: 420, margin: '20px 0' }}>
-            <svg width="100%" height="100%" viewBox="0 0 1100 400" style={{ overflow: 'visible' }}>
-              <path
-                d={leftNoisePath}
-                fill="none"
-                stroke={THEME.colors.warmCoral}
-                strokeWidth="4"
-                filter="drop-shadow(0 0 10px rgba(255, 123, 84, 0.5))"
-              />
-            </svg>
-          </div>
-
-          {/* Hovering Hand / Pointer above big "TRUST" Button */}
-          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 24 }}>
-            {/* Vector Hover Pointer */}
-            <div
-              style={{
-                width: 36,
-                height: 36,
-                transform: `translateY(${Math.sin(frame * 0.15) * 8}px)`,
-                display: 'flex',
-                justifyContent: 'center',
-              }}
-            >
-              <svg width="36" height="36" viewBox="0 0 24 24" fill="none">
-                <path
-                  d="M12 2v14M12 16l-4-4M12 16l4-4"
-                  stroke={THEME.colors.warmCoral}
-                  strokeWidth="3"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-              </svg>
-            </div>
-
-            {/* Big "TRUST" Button Placeholder */}
-            <PlaceholderBox width={380} height={76} variant="card" accent="coral" glow pulse>
-              <div style={{ width: '45%', height: 16, backgroundColor: THEME.colors.warmCoral, borderRadius: 4 }} />
-            </PlaceholderBox>
-
-            {/* Error Cross (✗) */}
-            <div
-              style={{
-                fontSize: 84,
-                color: THEME.colors.warmCoral,
-                fontWeight: 900,
-                opacity: crossOpacity,
-                textShadow: `0 0 25px ${THEME.colors.warmCoralGlow}`,
-                lineHeight: 1,
-              }}
-            >
-              ✗
-            </div>
+          <div style={{ fontSize: 36, fontWeight: 700, color: THEME.colors.textPrimary, letterSpacing: -0.5, marginTop: 6 }}>
+            Две ловушки оценки данных в прямом эфире
           </div>
         </div>
 
-        {/* RIGHT TRAP: COMPLETE INERTIA / IGNORING */}
+        {/* Split Screen Cards */}
         <div
           style={{
-            position: 'relative',
-            borderRadius: 24,
-            backgroundColor: 'rgba(15, 29, 48, 0.6)',
-            border: `2px solid rgba(108, 130, 153, 0.35)`,
-            padding: 48,
-            display: 'flex',
-            flexDirection: 'column',
-            justifyContent: 'space-between',
+            flex: 1,
+            display: 'grid',
+            gridTemplateColumns: '1fr 1fr',
+            gap: 50,
           }}
         >
-          {/* Header Placeholder: "IGNORE / INERTIA" */}
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-            <PlaceholderBox width={260} height={48} variant="pill" accent="neutral" />
-            <PlaceholderBox width={120} height={40} variant="card" accent="neutral" />
-          </div>
+          {/* TRAP 1: OVER-REACTION TO EARLY NOISE */}
+          <div
+            style={{
+              borderRadius: 18,
+              backgroundColor: 'rgba(21, 29, 46, 0.75)',
+              border: '1px solid rgba(249, 115, 22, 0.3)',
+              padding: 44,
+              display: 'flex',
+              flexDirection: 'column',
+              justifyContent: 'space-between',
+              boxShadow: '0 20px 50px rgba(0,0,0,0.4)',
+            }}
+          >
+            <div>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                <span
+                  style={{
+                    padding: '6px 14px',
+                    borderRadius: 6,
+                    backgroundColor: 'rgba(249, 115, 22, 0.12)',
+                    color: THEME.colors.amber,
+                    fontFamily: 'JetBrains Mono, monospace',
+                    fontSize: 13,
+                    fontWeight: 600,
+                  }}
+                >
+                  ЛОВУШКА 1: ПАНИКА НА ШУМЕ
+                </span>
+                <span style={{ fontSize: 28, color: THEME.colors.amber, fontWeight: 800 }}>✗</span>
+              </div>
+              <div style={{ fontSize: 24, fontWeight: 700, color: THEME.colors.textPrimary, marginTop: 16 }}>
+                Слепо верить первым 5 оценкам
+              </div>
+              <div style={{ fontSize: 15, color: THEME.colors.textSecondary, marginTop: 8, lineHeight: 1.5 }}>
+                Случайный всплеск или 1 хейтер мгновенно обрушивает рейтинг стрима. Ошибка сверхчувствительности.
+              </div>
+            </div>
 
-          {/* Stagnant Lagging Chart Display */}
-          <div style={{ position: 'relative', height: 420, margin: '20px 0' }}>
-            <svg width="100%" height="100%" viewBox="0 0 1100 400" style={{ overflow: 'visible' }}>
-              <path
-                d={rightInertiaPath}
-                fill="none"
-                stroke={THEME.colors.textMuted}
-                strokeWidth="4"
-                strokeDasharray="10 10"
-              />
-              {/* Blinking missed update beacon */}
-              <circle
-                cx={770}
-                cy={240}
-                r={16}
-                fill={THEME.colors.warmCoral}
-                opacity={alertBlink}
-                filter="drop-shadow(0 0 16px #FF7B54)"
-              />
-            </svg>
-          </div>
-
-          {/* "IGNORE" Button & Blinking Notification */}
-          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 24 }}>
-            {/* Minimalist abstract eye-closed / shield vector icon (No human face!) */}
-            <div style={{ opacity: alertBlink }}>
-              <svg width="40" height="40" viewBox="0 0 24 24" fill="none">
+            {/* Noisy Oscillation Path */}
+            <div style={{ position: 'relative', height: 360, margin: '20px 0' }}>
+              <svg width="100%" height="100%" viewBox="0 0 1100 360" style={{ overflow: 'visible' }}>
+                <line x1="0" y1="180" x2="1100" y2="180" stroke="rgba(255,255,255,0.08)" strokeDasharray="4 4" />
                 <path
-                  d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"
-                  stroke={THEME.colors.textMuted}
-                  strokeWidth="2"
+                  d={leftNoisePath}
+                  fill="none"
+                  stroke={THEME.colors.amber}
+                  strokeWidth="2.5"
+                  strokeLinecap="round"
                 />
-                <path d="M4 4l16 16" stroke={THEME.colors.warmCoral} strokeWidth="2.5" />
               </svg>
             </div>
 
-            {/* "IGNORE" Button Placeholder */}
-            <PlaceholderBox width={380} height={76} variant="card" accent="neutral">
-              <div style={{ width: '45%', height: 16, backgroundColor: THEME.colors.textMuted, borderRadius: 4 }} />
-            </PlaceholderBox>
-
-            {/* Error Cross (✗) */}
             <div
               style={{
-                fontSize: 84,
-                color: THEME.colors.warmCoral,
-                fontWeight: 900,
-                opacity: crossOpacity,
-                textShadow: `0 0 25px ${THEME.colors.warmCoralGlow}`,
-                lineHeight: 1,
+                padding: '16px 24px',
+                borderRadius: 10,
+                backgroundColor: 'rgba(249, 115, 22, 0.08)',
+                border: '1px solid rgba(249, 115, 22, 0.2)',
+                fontSize: 14,
+                fontFamily: 'JetBrains Mono, monospace',
+                color: THEME.colors.amber,
+                textAlign: 'center',
               }}
             >
-              ✗
+              РИСК: ЛОЖНЫЕ ТРЕВОГИ И РЕЗКИЕ СКАЧКИ
+            </div>
+          </div>
+
+          {/* TRAP 2: COMPLETE INERTIA */}
+          <div
+            style={{
+              borderRadius: 18,
+              backgroundColor: 'rgba(21, 29, 46, 0.75)',
+              border: '1px solid rgba(255, 255, 255, 0.1)',
+              padding: 44,
+              display: 'flex',
+              flexDirection: 'column',
+              justifyContent: 'space-between',
+              boxShadow: '0 20px 50px rgba(0,0,0,0.4)',
+            }}
+          >
+            <div>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                <span
+                  style={{
+                    padding: '6px 14px',
+                    borderRadius: 6,
+                    backgroundColor: 'rgba(255, 255, 255, 0.05)',
+                    color: THEME.colors.textMuted,
+                    fontFamily: 'JetBrains Mono, monospace',
+                    fontSize: 13,
+                    fontWeight: 600,
+                  }}
+                >
+                  ЛОВУШКА 2: ИНЕРЦИЯ И ЗАПОЗДАНИЕ
+                </span>
+                <span style={{ fontSize: 28, color: THEME.colors.textMuted, fontWeight: 800 }}>✗</span>
+              </div>
+              <div style={{ fontSize: 24, fontWeight: 700, color: THEME.colors.textPrimary, marginTop: 16 }}>
+                Игнорировать свежие сигналы
+              </div>
+              <div style={{ fontSize: 15, color: THEME.colors.textSecondary, marginTop: 8, lineHeight: 1.5 }}>
+                Ждать тысячи голосов, удерживая старый рейтинг. Система «засыпает» и не реагирует на реальные сбои эфира.
+              </div>
+            </div>
+
+            {/* Flat Inactive Path with Alert Beacon */}
+            <div style={{ position: 'relative', height: 360, margin: '20px 0' }}>
+              <svg width="100%" height="100%" viewBox="0 0 1100 360" style={{ overflow: 'visible' }}>
+                <line x1="0" y1="180" x2="1100" y2="180" stroke="rgba(255,255,255,0.08)" strokeDasharray="4 4" />
+                <path
+                  d={rightInertiaPath}
+                  fill="none"
+                  stroke={THEME.colors.textMuted}
+                  strokeWidth="2.5"
+                  strokeDasharray="8 8"
+                />
+                <circle
+                  cx={825}
+                  cy={190}
+                  r={8}
+                  fill={THEME.colors.amber}
+                  opacity={alertBlink}
+                />
+              </svg>
+            </div>
+
+            <div
+              style={{
+                padding: '16px 24px',
+                borderRadius: 10,
+                backgroundColor: 'rgba(255, 255, 255, 0.04)',
+                border: '1px solid rgba(255, 255, 255, 0.08)',
+                fontSize: 14,
+                fontFamily: 'JetBrains Mono, monospace',
+                color: THEME.colors.textMuted,
+                textAlign: 'center',
+              }}
+            >
+              РИСК: ЗАПОЗДАЛАЯ РЕАКЦИЯ И ПОТЕРЯ СИГНАЛА
             </div>
           </div>
         </div>
       </div>
 
-      {/* CENTER EMERGENCE: THE BALANCED SCALE (WEIGHT OLD + NEW) */}
+      {/* CENTER DIALOGUE: THE BAYESIAN RESOLUTION */}
       {frame >= 450 && (
         <div
           style={{
@@ -237,53 +240,91 @@ export const Scene2_TwoTraps: React.FC = () => {
             top: '50%',
             left: '50%',
             transform: `translate(-50%, -50%) scale(${scaleEntrance})`,
-            width: 880,
-            height: 620,
-            borderRadius: 32,
-            backgroundColor: 'rgba(13, 27, 42, 0.95)',
-            border: `3px solid ${THEME.colors.electricBlue}`,
-            boxShadow: `0 30px 100px rgba(0, 0, 0, 0.8), 0 0 50px ${THEME.colors.electricBlueGlow}`,
-            padding: 40,
+            width: 920,
+            height: 600,
+            borderRadius: 24,
+            backgroundColor: '#0E1422',
+            border: '1px solid rgba(56, 189, 248, 0.4)',
+            boxShadow: '0 30px 90px rgba(0, 0, 0, 0.85)',
+            padding: 44,
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
             justifyContent: 'space-between',
-            backdropFilter: 'blur(24px)',
+            backdropFilter: 'blur(30px)',
             zIndex: 30,
+            boxSizing: 'border-box',
           }}
         >
-          {/* Header Placeholder: "WEIGHT OLD + NEW" */}
-          <PlaceholderBox width={520} height={56} variant="pill" accent="blue" glow pulse>
-            <div style={{ width: '60%', height: 18, backgroundColor: THEME.colors.electricBlue, borderRadius: 6 }} />
-          </PlaceholderBox>
+          <div style={{ textAlign: 'center' }}>
+            <span
+              style={{
+                padding: '4px 14px',
+                borderRadius: 6,
+                backgroundColor: 'rgba(56, 189, 248, 0.12)',
+                color: THEME.colors.cobalt,
+                fontSize: 12,
+                fontFamily: 'JetBrains Mono, monospace',
+                fontWeight: 600,
+              }}
+            >
+              РЕШЕНИЕ: БАЙЕСОВСКИЙ БАЛАНС
+            </span>
+            <div style={{ fontSize: 24, fontWeight: 700, color: THEME.colors.textPrimary, marginTop: 8 }}>
+              Взвешивание: Априорный опыт + Поток данных
+            </div>
+          </div>
 
-          {/* Animated Balance Beam Scale */}
-          <div style={{ position: 'relative', width: 650, height: 260, margin: '20px 0' }}>
-            <svg width="650" height="260" viewBox="0 0 650 260" style={{ overflow: 'visible' }}>
+          {/* Minimalist Vector Balance Scale */}
+          <div style={{ position: 'relative', width: 600, height: 240 }}>
+            <svg width="600" height="240" viewBox="0 0 600 240" style={{ overflow: 'visible' }}>
               {/* Stand */}
-              <line x1="325" y1="50" x2="325" y2="240" stroke={THEME.colors.white} strokeWidth="6" />
-              <path d="M 270 240 L 380 240" stroke={THEME.colors.white} strokeWidth="6" strokeLinecap="round" />
-              {/* Fulcrum Pivot */}
-              <circle cx="325" cy="50" r="10" fill={THEME.colors.electricBlue} />
+              <line x1="300" y1="40" x2="300" y2="210" stroke="rgba(255,255,255,0.4)" strokeWidth="3" />
+              <line x1="240" y1="210" x2="360" y2="210" stroke="rgba(255,255,255,0.4)" strokeWidth="3" strokeLinecap="round" />
+              <circle cx="300" cy="40" r="6" fill={THEME.colors.cobalt} />
 
               {/* Tilting Beam */}
-              <g transform={`rotate(${scaleTilt}, 325, 50)`}>
-                <line x1="100" y1="50" x2="550" y2="50" stroke={THEME.colors.electricBlue} strokeWidth="6" />
-                {/* Left Pan (Old Prior) */}
-                <line x1="130" y1="50" x2="130" y2="120" stroke="rgba(255,255,255,0.4)" strokeWidth="3" />
-                <path d="M 70 120 Q 130 150 190 120 Z" fill={THEME.colors.electricBlueSubtle} stroke={THEME.colors.electricBlue} strokeWidth="3" />
-                {/* Right Pan (New Likelihood) */}
-                <line x1="520" y1="50" x2="520" y2="120" stroke="rgba(255,255,255,0.4)" strokeWidth="3" />
-                <path d="M 460 120 Q 520 150 580 120 Z" fill={THEME.colors.warmCoralSubtle} stroke={THEME.colors.warmCoral} strokeWidth="3" />
+              <g transform={`rotate(${scaleTilt}, 300, 40)`}>
+                <line x1="80" y1="40" x2="520" y2="40" stroke={THEME.colors.cobalt} strokeWidth="3" />
+                {/* Left Pan (Prior) */}
+                <line x1="120" y1="40" x2="120" y2="100" stroke="rgba(255,255,255,0.3)" strokeWidth="1.5" />
+                <path d="M 60 100 Q 120 125 180 100 Z" fill="rgba(56, 189, 248, 0.15)" stroke={THEME.colors.cobalt} strokeWidth="1.5" />
+                {/* Right Pan (Data) */}
+                <line x1="480" y1="40" x2="480" y2="100" stroke="rgba(255,255,255,0.3)" strokeWidth="1.5" />
+                <path d="M 420 100 Q 480 125 540 100 Z" fill="rgba(249, 115, 22, 0.15)" stroke={THEME.colors.amber} strokeWidth="1.5" />
               </g>
             </svg>
           </div>
 
-          {/* Bottom Balanced Card Placeholder */}
-          <div style={{ display: 'flex', gap: 30, width: '100%', justifyContent: 'center' }}>
-            <PlaceholderBox width={260} height={70} variant="card" accent="blue" />
-            <div style={{ fontSize: 40, color: THEME.colors.white, fontWeight: 700, alignSelf: 'center' }}>+</div>
-            <PlaceholderBox width={260} height={70} variant="card" accent="coral" />
+          {/* Bottom Mathematical Sum Formula */}
+          <div style={{ display: 'flex', gap: 20, alignItems: 'center' }}>
+            <div
+              style={{
+                padding: '12px 24px',
+                borderRadius: 10,
+                backgroundColor: 'rgba(56, 189, 248, 0.08)',
+                border: '1px solid rgba(56, 189, 248, 0.25)',
+                fontFamily: 'JetBrains Mono, monospace',
+                fontSize: 14,
+                color: THEME.colors.cobalt,
+              }}
+            >
+              АПРИОРНЫЙ ВЕС (СТАРЫЙ)
+            </div>
+            <span style={{ fontSize: 24, color: THEME.colors.textMuted, fontWeight: 700 }}>+</span>
+            <div
+              style={{
+                padding: '12px 24px',
+                borderRadius: 10,
+                backgroundColor: 'rgba(249, 115, 22, 0.08)',
+                border: '1px solid rgba(249, 115, 22, 0.25)',
+                fontFamily: 'JetBrains Mono, monospace',
+                fontSize: 14,
+                color: THEME.colors.amber,
+              }}
+            >
+              ТЕКУЩИЕ ДАННЫЕ (НОВЫЙ)
+            </div>
           </div>
         </div>
       )}

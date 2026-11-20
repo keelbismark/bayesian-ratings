@@ -7,8 +7,8 @@ import { PlaceholderBox } from '../components/common/PlaceholderBox';
 export const Scene1_LiveBroadcast: React.FC = () => {
   const frame = useCurrentFrame();
 
-  // Smooth camera zoom-in over 40 seconds
-  const cameraScale = interpolate(frame, [0, 1200], [1.0, 1.12], {
+  // Subtle cinematic zoom over 40 seconds
+  const cameraScale = interpolate(frame, [0, 1200], [1.0, 1.05], {
     easing: Easing.bezier(0.25, 0.1, 0.25, 1),
     extrapolateRight: 'clamp',
   });
@@ -18,40 +18,42 @@ export const Scene1_LiveBroadcast: React.FC = () => {
     extrapolateRight: 'clamp',
   });
 
-  // Engagement curve dynamic wave growth
-  const curvePoints = useMemo(() => {
-    return Array.from({ length: 24 }).map((_, i) => {
-      const x = (i / 23) * 1600;
-      const baseGrowth = Math.pow(i / 23, 0.85);
-      const wave = Math.sin(i * 0.7) * 45;
-      const y = 500 - (baseGrowth * 340 + wave);
-      return { x, y };
+  // High-precision engagement curve data
+  const fullCurveData = useMemo(() => {
+    const pointsCount = 180;
+    const pts = Array.from({ length: pointsCount }).map((_, i) => {
+      const t = i / (pointsCount - 1);
+      const x = t * 1600;
+      const baseGrowth = Math.pow(t, 0.85);
+      const wave = Math.sin(t * 14) * 28;
+      const y = 460 - (baseGrowth * 300 + wave);
+      return { x, y, t };
     });
+    const d = pts.reduce((acc, pt, idx) => (idx === 0 ? `M ${pt.x.toFixed(1)} ${pt.y.toFixed(1)}` : `${acc} L ${pt.x.toFixed(1)} ${pt.y.toFixed(1)}`), '');
+    let len = 0;
+    for (let i = 1; i < pts.length; i++) {
+      const dx = pts[i].x - pts[i - 1].x;
+      const dy = pts[i].y - pts[i - 1].y;
+      len += Math.sqrt(dx * dx + dy * dy);
+    }
+    return { pts, d, len };
   }, []);
 
   // Curve draw progression
   const curveProgress = interpolate(frame, [60, 900], [0, 1], {
     extrapolateLeft: 'clamp',
     extrapolateRight: 'clamp',
-    easing: Easing.bezier(0.16, 1, 0.3, 1),
+    easing: Easing.bezier(0.2, 0.8, 0.2, 1),
   });
 
-  const visibleCurveLength = Math.max(2, Math.floor(curvePoints.length * curveProgress));
-  const activeCurvePoints = curvePoints.slice(0, visibleCurveLength);
+  const dotX = curveProgress * 1600;
+  const dotBaseGrowth = Math.pow(curveProgress, 0.85);
+  const dotWave = Math.sin(curveProgress * 14) * 28;
+  const dotY = 460 - (dotBaseGrowth * 300 + dotWave);
 
-  const curvePath = activeCurvePoints.reduce((acc, pt, idx) => {
-    return idx === 0 ? `M ${pt.x} ${pt.y}` : `${acc} L ${pt.x} ${pt.y}`;
-  }, '');
-
-  // Pulsing live indicator
-  const livePulse = interpolate(Math.sin((frame * Math.PI * 2) / 25), [-1, 1], [0.8, 1.2]);
-
-  // Question mark glow and floating animation
-  const questionFloat = interpolate(Math.sin(frame * 0.06), [-1, 1], [-12, 12]);
-  const questionOpacity = interpolate(frame, [150, 240], [0, 1], {
-    extrapolateLeft: 'clamp',
-    extrapolateRight: 'clamp',
-  });
+  // Timecode calculation
+  const seconds = Math.floor(frame / 30);
+  const timecode = `00:${String(seconds).padStart(2, '0')}:00`;
 
   return (
     <div
@@ -64,25 +66,25 @@ export const Scene1_LiveBroadcast: React.FC = () => {
         transformOrigin: 'center center',
       }}
     >
-      <BackgroundGrid intensity={1.1} />
+      <BackgroundGrid intensity={1} />
 
-      {/* Main Broadcast Monitor Frame */}
+      {/* Main Studio Analytics Console (Stripe / Bloomberg Terminal Aesthetic) */}
       <div
         style={{
           position: 'absolute',
           top: '50%',
           left: '50%',
           transform: 'translate(-50%, -50%)',
-          width: 2400,
-          height: 1400,
-          borderRadius: 24,
-          backgroundColor: 'rgba(15, 29, 48, 0.75)',
-          border: `3px solid rgba(78, 168, 222, 0.35)`,
-          boxShadow: '0 24px 80px rgba(0, 0, 0, 0.6), 0 0 40px rgba(78, 168, 222, 0.15)',
+          width: 2500,
+          height: 1420,
+          borderRadius: 20,
+          backgroundColor: 'rgba(17, 23, 38, 0.85)',
+          border: '1px solid rgba(255, 255, 255, 0.08)',
+          boxShadow: '0 30px 80px rgba(0, 0, 0, 0.6)',
           backdropFilter: 'blur(20px)',
           display: 'flex',
           flexDirection: 'column',
-          padding: 48,
+          padding: 56,
           boxSizing: 'border-box',
         }}
       >
@@ -92,180 +94,273 @@ export const Scene1_LiveBroadcast: React.FC = () => {
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'space-between',
-            borderBottom: '2px solid rgba(255, 255, 255, 0.08)',
-            paddingBottom: 24,
+            borderBottom: '1px solid rgba(255, 255, 255, 0.08)',
+            paddingBottom: 28,
           }}
         >
           {/* LIVE ● В ЭФИРЕ Badge */}
-          <div
-            style={{
-              display: 'flex',
-              alignItems: 'center',
-              gap: 16,
-              padding: '10px 24px',
-              borderRadius: 9999,
-              backgroundColor: 'rgba(255, 123, 84, 0.15)',
-              border: `2px solid ${THEME.colors.warmCoral}`,
-              boxShadow: `0 0 24px ${THEME.colors.warmCoralGlow}`,
-            }}
-          >
+          <div style={{ display: 'flex', alignItems: 'center', gap: 24 }}>
             <div
               style={{
-                width: 14,
-                height: 14,
-                borderRadius: '50%',
-                backgroundColor: THEME.colors.warmCoral,
-                transform: `scale(${livePulse})`,
-                boxShadow: `0 0 12px ${THEME.colors.warmCoral}`,
-              }}
-            />
-            <span
-              style={{
-                color: THEME.colors.white,
-                fontSize: 22,
-                fontWeight: 700,
-                letterSpacing: 3,
-                fontFamily: 'system-ui, sans-serif',
+                display: 'flex',
+                alignItems: 'center',
+                gap: 12,
+                padding: '8px 20px',
+                borderRadius: 9999,
+                backgroundColor: 'rgba(249, 115, 22, 0.1)',
+                border: '1px solid rgba(249, 115, 22, 0.35)',
               }}
             >
-              LIVE ● В ЭФИРЕ
-            </span>
+              <div
+                style={{
+                  width: 10,
+                  height: 10,
+                  borderRadius: '50%',
+                  backgroundColor: THEME.colors.amber,
+                }}
+              />
+              <span
+                style={{
+                  color: THEME.colors.textPrimary,
+                  fontSize: 16,
+                  fontWeight: 700,
+                  letterSpacing: 2,
+                  fontFamily: 'Inter, system-ui, sans-serif',
+                }}
+              >
+                LIVE ● В ЭФИРЕ
+              </span>
+            </div>
+
+            <div
+              style={{
+                fontSize: 14,
+                fontFamily: 'JetBrains Mono, monospace',
+                color: THEME.colors.textMuted,
+                letterSpacing: 1,
+              }}
+            >
+              STREAM TELEMETRY // TIMECODE: <span style={{ color: THEME.colors.cobalt }}>{timecode}</span>
+            </div>
           </div>
 
-          {/* Broadcast Studio Status Placeholders */}
-          <div style={{ display: 'flex', gap: 20 }}>
-            <PlaceholderBox width={140} height={42} variant="pill" accent="neutral" />
-            <PlaceholderBox width={100} height={42} variant="pill" accent="neutral" />
+          {/* Metric Status Badges */}
+          <div style={{ display: 'flex', gap: 16 }}>
+            <div
+              style={{
+                padding: '8px 18px',
+                borderRadius: 8,
+                backgroundColor: 'rgba(255, 255, 255, 0.03)',
+                border: '1px solid rgba(255, 255, 255, 0.06)',
+                fontSize: 13,
+                fontFamily: 'JetBrains Mono, monospace',
+                color: THEME.colors.textSecondary,
+              }}
+            >
+              METRICS: <span style={{ color: THEME.colors.textPrimary }}>REAL-TIME VOTE INGEST</span>
+            </div>
+            <div
+              style={{
+                padding: '8px 18px',
+                borderRadius: 8,
+                backgroundColor: 'rgba(56, 189, 248, 0.08)',
+                border: '1px solid rgba(56, 189, 248, 0.2)',
+                fontSize: 13,
+                fontFamily: 'JetBrains Mono, monospace',
+                color: THEME.colors.cobalt,
+              }}
+            >
+              MODEL: BAYESIAN UPDATER
+            </div>
           </div>
         </div>
 
-        {/* Center Display: Curve & Glowing Question Mark */}
+        {/* Center Display: Curve & Editorial Metric Hierarchy */}
         <div
           style={{
             flex: 1,
             position: 'relative',
             display: 'flex',
-            alignItems: 'center',
+            flexDirection: 'column',
             justifyContent: 'center',
-            margin: '30px 0',
+            margin: '20px 0',
           }}
         >
-          {/* Real-time Engagement Curve */}
-          <svg
-            width="100%"
-            height="100%"
-            viewBox="0 0 1600 600"
-            style={{ position: 'absolute', inset: 0, overflow: 'visible' }}
-          >
-            <defs>
-              <linearGradient id="curve-gradient" x1="0%" y1="0%" x2="0%" y2="100%">
-                <stop offset="0%" stopColor={THEME.colors.electricBlue} stopOpacity="0.4" />
-                <stop offset="100%" stopColor={THEME.colors.electricBlue} stopOpacity="0.0" />
-              </linearGradient>
-            </defs>
-
-            {/* Grid references inside monitor */}
-            <line x1="0" y1="500" x2="1600" y2="500" stroke="rgba(255,255,255,0.1)" strokeWidth="2" />
-            <line x1="0" y1="350" x2="1600" y2="350" stroke="rgba(255,255,255,0.05)" strokeDasharray="6 6" />
-            <line x1="0" y1="200" x2="1600" y2="200" stroke="rgba(255,255,255,0.05)" strokeDasharray="6 6" />
-
-            {/* Curve path */}
-            {curvePath && (
-              <>
-                <path
-                  d={`${curvePath} L ${activeCurvePoints[activeCurvePoints.length - 1].x} 500 L 0 500 Z`}
-                  fill="url(#curve-gradient)"
-                />
-                <path
-                  d={curvePath}
-                  fill="none"
-                  stroke={THEME.colors.electricBlue}
-                  strokeWidth="5"
-                  strokeLinecap="round"
-                />
-                {/* Leading pulse head */}
-                <circle
-                  cx={activeCurvePoints[activeCurvePoints.length - 1].x}
-                  cy={activeCurvePoints[activeCurvePoints.length - 1].y}
-                  r={9}
-                  fill={THEME.colors.white}
-                  stroke={THEME.colors.electricBlue}
-                  strokeWidth="4"
-                  filter="drop-shadow(0 0 12px #4EA8DE)"
-                />
-              </>
-            )}
-          </svg>
-
-          {/* Large Glowing Question Mark over Counters */}
-          <div
-            style={{
-              position: 'absolute',
-              top: '18%',
-              display: 'flex',
-              flexDirection: 'column',
-              alignItems: 'center',
-              transform: `translateY(${questionFloat}px)`,
-              opacity: questionOpacity,
-              zIndex: 10,
-            }}
-          >
-            <div
-              style={{
-                fontSize: 160,
-                fontWeight: 900,
-                color: THEME.colors.white,
-                lineHeight: 1,
-                fontFamily: 'system-ui, sans-serif',
-                textShadow: `0 0 35px ${THEME.colors.electricBlue}, 0 0 70px ${THEME.colors.electricBlueGlow}`,
-              }}
-            >
-              ?
+          {/* Main Visual Heading (Editorial) */}
+          <div style={{ position: 'absolute', top: 10, left: 10, zIndex: 5 }}>
+            <div style={{ fontSize: 13, fontFamily: 'JetBrains Mono, monospace', color: THEME.colors.textMuted, letterSpacing: 2 }}>
+              RATINGS CONVERGENCE TRAJECTORY
+            </div>
+            <div style={{ fontSize: 32, fontWeight: 700, color: THEME.colors.textPrimary, letterSpacing: -0.5, marginTop: 4 }}>
+              Оценка рейтинга в прямом эфире
             </div>
           </div>
 
-          {/* Numeric Counters (in the form of sleek empty placeholder cards) */}
+          {/* Real-time Engagement Curve */}
+          <div style={{ width: '100%', height: 500, position: 'relative' }}>
+            <svg
+              width="100%"
+              height="100%"
+              viewBox="0 0 1600 500"
+              style={{ position: 'absolute', inset: 0, overflow: 'visible' }}
+            >
+              <defs>
+                <linearGradient id="editorial-curve-gradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                  <stop offset="0%" stopColor={THEME.colors.cobalt} stopOpacity="0.15" />
+                  <stop offset="100%" stopColor={THEME.colors.cobalt} stopOpacity="0.0" />
+                </linearGradient>
+                <clipPath id="editorial-curve-clip">
+                  <rect x="0" y="0" width={dotX} height="500" />
+                </clipPath>
+              </defs>
+
+              {/* Horizontal Reference Lines */}
+              <line x1="0" y1="460" x2="1600" y2="460" stroke="rgba(255,255,255,0.08)" strokeWidth="1" />
+              <line x1="0" y1="310" x2="1600" y2="310" stroke="rgba(255,255,255,0.04)" strokeDasharray="4 4" strokeWidth="1" />
+              <line x1="0" y1="160" x2="1600" y2="160" stroke="rgba(255,255,255,0.04)" strokeDasharray="4 4" strokeWidth="1" />
+
+              {/* Curve path */}
+              {curveProgress > 0 && (
+                <>
+                  <path
+                    d={`${fullCurveData.d} L 1600 460 L 0 460 Z`}
+                    fill="url(#editorial-curve-gradient)"
+                    clipPath="url(#editorial-curve-clip)"
+                  />
+                  <path
+                    d={fullCurveData.d}
+                    fill="none"
+                    stroke={THEME.colors.cobalt}
+                    strokeWidth="2.5"
+                    strokeLinecap="round"
+                    strokeDasharray={fullCurveData.len}
+                    strokeDashoffset={fullCurveData.len * (1 - curveProgress)}
+                  />
+                  {/* Leading pointer dot */}
+                  <circle
+                    cx={dotX}
+                    cy={dotY}
+                    r={6}
+                    fill={THEME.colors.textPrimary}
+                    stroke={THEME.colors.cobalt}
+                    strokeWidth="2.5"
+                  />
+                </>
+              )}
+            </svg>
+          </div>
+
+          {/* High-End Metric Cards (Clean Data, No Slop) */}
           <div
             style={{
-              position: 'absolute',
-              bottom: 20,
-              width: '100%',
               display: 'flex',
-              justifyContent: 'center',
-              gap: 40,
+              gap: 32,
+              justifyContent: 'space-between',
+              marginTop: 30,
             }}
           >
-            <PlaceholderBox width={340} height={110} variant="card" cornerMarks glow pulse>
-              <div style={{ width: '70%', height: 22, backgroundColor: 'rgba(78, 168, 222, 0.3)', borderRadius: 6 }} />
-            </PlaceholderBox>
-            <PlaceholderBox width={340} height={110} variant="card" cornerMarks glow pulse>
-              <div style={{ width: '55%', height: 22, backgroundColor: 'rgba(78, 168, 222, 0.3)', borderRadius: 6 }} />
-            </PlaceholderBox>
-            <PlaceholderBox width={340} height={110} variant="card" cornerMarks glow pulse>
-              <div style={{ width: '80%', height: 22, backgroundColor: 'rgba(78, 168, 222, 0.3)', borderRadius: 6 }} />
-            </PlaceholderBox>
+            {/* Card 1: Raw Rating Average */}
+            <div
+              style={{
+                flex: 1,
+                padding: '24px 32px',
+                borderRadius: 14,
+                backgroundColor: 'rgba(21, 29, 46, 0.6)',
+                border: '1px solid rgba(255, 255, 255, 0.08)',
+              }}
+            >
+              <div style={{ fontSize: 13, fontFamily: 'JetBrains Mono, monospace', color: THEME.colors.textMuted }}>
+                RAW SAMPLE MEAN // ВЫБОРКА
+              </div>
+              <div style={{ display: 'flex', alignItems: 'baseline', gap: 12, marginTop: 8 }}>
+                <span style={{ fontSize: 44, fontWeight: 700, color: THEME.colors.textPrimary, fontFamily: 'Inter, sans-serif' }}>
+                  ★ 4.85
+                </span>
+                <span style={{ fontSize: 14, color: THEME.colors.amber, fontFamily: 'JetBrains Mono, monospace' }}>
+                  [ВЫСОКИЙ ШУМ]
+                </span>
+              </div>
+              <div style={{ width: '100%', height: 4, borderRadius: 2, backgroundColor: 'rgba(255,255,255,0.06)', marginTop: 14 }}>
+                <div style={{ width: '85%', height: '100%', backgroundColor: THEME.colors.amber, borderRadius: 2 }} />
+              </div>
+            </div>
+
+            {/* Card 2: Sample Size Volume */}
+            <div
+              style={{
+                flex: 1,
+                padding: '24px 32px',
+                borderRadius: 14,
+                backgroundColor: 'rgba(21, 29, 46, 0.6)',
+                border: '1px solid rgba(255, 255, 255, 0.08)',
+              }}
+            >
+              <div style={{ fontSize: 13, fontFamily: 'JetBrains Mono, monospace', color: THEME.colors.textMuted }}>
+                INCOMING VOTES // ЧИСЛО ГОЛОСОВ
+              </div>
+              <div style={{ display: 'flex', alignItems: 'baseline', gap: 12, marginTop: 8 }}>
+                <span style={{ fontSize: 44, fontWeight: 700, color: THEME.colors.textPrimary, fontFamily: 'JetBrains Mono, monospace' }}>
+                  {Math.floor(curveProgress * 3420)}
+                </span>
+                <span style={{ fontSize: 14, color: THEME.colors.textSecondary, fontFamily: 'JetBrains Mono, monospace' }}>
+                  голосов
+                </span>
+              </div>
+              <div style={{ width: '100%', height: 4, borderRadius: 2, backgroundColor: 'rgba(255,255,255,0.06)', marginTop: 14 }}>
+                <div style={{ width: `${curveProgress * 100}%`, height: '100%', backgroundColor: THEME.colors.cobalt, borderRadius: 2 }} />
+              </div>
+            </div>
+
+            {/* Card 3: Bayesian Robust Posterior */}
+            <div
+              style={{
+                flex: 1,
+                padding: '24px 32px',
+                borderRadius: 14,
+                backgroundColor: 'rgba(21, 29, 46, 0.6)',
+                border: '1px solid rgba(56, 189, 248, 0.3)',
+              }}
+            >
+              <div style={{ fontSize: 13, fontFamily: 'JetBrains Mono, monospace', color: THEME.colors.cobalt }}>
+                BAYESIAN ESTIMATE // ИСТИННЫЙ РЕЙТИНГ
+              </div>
+              <div style={{ display: 'flex', alignItems: 'baseline', gap: 12, marginTop: 8 }}>
+                <span style={{ fontSize: 44, fontWeight: 700, color: THEME.colors.cobalt, fontFamily: 'Inter, sans-serif' }}>
+                  ★ 4.62
+                </span>
+                <span style={{ fontSize: 14, color: THEME.colors.textSecondary, fontFamily: 'JetBrains Mono, monospace' }}>
+                  ±0.12 (95% CI)
+                </span>
+              </div>
+              <div style={{ width: '100%', height: 4, borderRadius: 2, backgroundColor: 'rgba(255,255,255,0.06)', marginTop: 14 }}>
+                <div style={{ width: '65%', height: '100%', backgroundColor: THEME.colors.cobalt, borderRadius: 2 }} />
+              </div>
+            </div>
           </div>
         </div>
 
-        {/* Bottom Horizontal Timeline Filling Second by Second */}
+        {/* Bottom Horizontal Timeline */}
         <div style={{ marginTop: 10 }}>
           <div
             style={{
               display: 'flex',
               justifyContent: 'space-between',
-              marginBottom: 10,
-              opacity: 0.6,
+              marginBottom: 8,
+              fontSize: 12,
+              fontFamily: 'JetBrains Mono, monospace',
+              color: THEME.colors.textMuted,
             }}
           >
-            <PlaceholderBox width={80} height={16} variant="pill" accent="neutral" />
-            <PlaceholderBox width={80} height={16} variant="pill" accent="neutral" />
+            <span>START 00:00</span>
+            <span>LIVE SESSION PROGRESS: {Math.round(timelineProgress * 100)}%</span>
+            <span>END 05:00</span>
           </div>
           <div
             style={{
               width: '100%',
-              height: 12,
-              borderRadius: 6,
-              backgroundColor: 'rgba(255, 255, 255, 0.1)',
+              height: 4,
+              borderRadius: 2,
+              backgroundColor: 'rgba(255, 255, 255, 0.08)',
               overflow: 'hidden',
             }}
           >
@@ -273,8 +368,7 @@ export const Scene1_LiveBroadcast: React.FC = () => {
               style={{
                 width: `${timelineProgress * 100}%`,
                 height: '100%',
-                backgroundColor: THEME.colors.electricBlue,
-                boxShadow: `0 0 16px ${THEME.colors.electricBlue}`,
+                backgroundColor: THEME.colors.cobalt,
               }}
             />
           </div>

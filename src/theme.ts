@@ -1,18 +1,27 @@
 export const THEME = {
   colors: {
-    bg: '#0D1B2A',
-    bgCard: '#132238',
-    bgCardHighlight: '#1B2E4B',
-    electricBlue: '#4EA8DE',
-    electricBlueGlow: 'rgba(78, 168, 222, 0.4)',
-    electricBlueSubtle: 'rgba(78, 168, 222, 0.15)',
-    warmCoral: '#FF7B54',
-    warmCoralGlow: 'rgba(255, 123, 84, 0.4)',
-    warmCoralSubtle: 'rgba(255, 123, 84, 0.15)',
-    gridLine: 'rgba(255, 255, 255, 0.04)',
-    wireframe: 'rgba(78, 168, 222, 0.5)',
-    textMuted: '#6C8299',
-    white: '#FFFFFF',
+    // High-end Editorial Data Design Palette (Stripe / Bloomberg / 3Blue1Brown)
+    bg: '#0A0E17', // Deep obsidian slate
+    bgElevated: '#111726', // Subtle elevated surface
+    bgCard: '#151D2E', // Crisp matte card background
+    border: 'rgba(255, 255, 255, 0.08)',
+    borderSubtle: 'rgba(255, 255, 255, 0.04)',
+    borderActive: 'rgba(56, 189, 248, 0.4)',
+    
+    // Semantic Accents (Matte, no neon bloom)
+    cobalt: '#38BDF8', // Precision Sky Blue for Bayesian models & posterior
+    cobaltSubtle: 'rgba(56, 189, 248, 0.12)',
+    amber: '#F97316', // Warm Amber / Orange for raw noisy observations & alerts
+    amberSubtle: 'rgba(249, 115, 22, 0.12)',
+    emerald: '#10B981', // Muted green for validated convergence
+    
+    // Typography & Ink
+    textPrimary: '#F8FAFC', // Slate 50
+    textSecondary: '#94A3B8', // Slate 400
+    textMuted: '#64748B', // Slate 500
+    textDim: '#334155', // Slate 700
+    
+    gridDot: 'rgba(255, 255, 255, 0.05)',
   },
   dimensions: {
     width: 3840,

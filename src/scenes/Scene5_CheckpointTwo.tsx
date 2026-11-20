@@ -1,41 +1,21 @@
-import React, { useMemo } from 'react';
+import React from 'react';
 import { interpolate, useCurrentFrame, Easing } from 'remotion';
 import { THEME } from '../theme';
 import { BackgroundGrid } from '../components/common/BackgroundGrid';
-import { PlaceholderBox } from '../components/common/PlaceholderBox';
 import { WaitingFrame } from '../components/common/WaitingFrame';
+import { BellCurve } from '../components/common/BellCurve';
 
 export const Scene5_CheckpointTwo: React.FC = () => {
   const frame = useCurrentFrame();
 
   const isPausedCheckpoint = frame < 150;
 
-  // Particle simulation for chaotic noisy stream (left)
-  const noisyParticles = useMemo(() => {
-    return Array.from({ length: 30 }).map((_, i) => ({
-      id: i,
-      offset: (i * 37) % 100,
-      jitterX: Math.sin(i * 1.5) * 60,
-      jitterY: Math.cos(i * 2.3) * 40,
-      speed: 0.8 + (i % 4) * 0.4,
-    }));
-  }, []);
-
-  // Particle simulation for dense stable stream (right)
-  const denseParticles = useMemo(() => {
-    return Array.from({ length: 45 }).map((_, i) => ({
-      id: i,
-      offset: (i * 23) % 100,
-      speed: 1.2 + (i % 3) * 0.2,
-    }));
-  }, []);
-
-  // Output needle deflection (heavily influenced by the dense stream, barely by noise)
-  const needleAngle = interpolate(
-    Math.sin(frame * 0.05),
-    [-1, 1],
-    [12, 28] // biased towards informative stream
-  );
+  // Comparison animation progression
+  const comparisonEntrance = interpolate(frame, [150, 210], [0, 1], {
+    extrapolateLeft: 'clamp',
+    extrapolateRight: 'clamp',
+    easing: Easing.bezier(0.16, 1, 0.3, 1),
+  });
 
   return (
     <div
@@ -46,10 +26,15 @@ export const Scene5_CheckpointTwo: React.FC = () => {
         overflow: 'hidden',
       }}
     >
-      <BackgroundGrid intensity={1.1} />
+      <BackgroundGrid intensity={1} />
 
       {/* 5-second Interactive Checkpoint 2 */}
-      {isPausedCheckpoint && <WaitingFrame durationInFrames={150} />}
+      {isPausedCheckpoint && (
+        <WaitingFrame
+          durationInFrames={150}
+          title="КОНТРОЛЬНАЯ ТОЧКА 2 // СКОЛЬКО ГОЛОСОВ НУЖНО, ЧТОБЫ ПЕРЕВЕСИТЬ АПРИОРНЫЙ ОПЫТ?"
+        />
+      )}
 
       <div
         style={{
@@ -63,177 +48,131 @@ export const Scene5_CheckpointTwo: React.FC = () => {
           boxSizing: 'border-box',
         }}
       >
-        {/* Top Header Placeholder: Checkpoint 2 / Automatic Weighing */}
-        <div style={{ marginBottom: 40, display: 'flex', gap: 30, alignItems: 'center' }}>
-          <PlaceholderBox width={500} height={56} variant="pill" accent="blue" glow>
-            <div style={{ width: '55%', height: 16, backgroundColor: THEME.colors.electricBlue, borderRadius: 4 }} />
-          </PlaceholderBox>
+        {/* Top Header */}
+        <div style={{ textAlign: 'center', marginBottom: 40 }}>
+          <div style={{ fontSize: 13, fontFamily: 'JetBrains Mono, monospace', color: THEME.colors.textMuted, letterSpacing: 2 }}>
+            SECTION 05 // EVIDENCE WEIGHT & SAMPLE SCALE
+          </div>
+          <div style={{ fontSize: 36, fontWeight: 700, color: THEME.colors.textPrimary, letterSpacing: -0.5, marginTop: 6 }}>
+            Автоматическое взвешивание объёма данных
+          </div>
         </div>
 
-        {/* Top Stream Labels */}
+        {/* 2 Scenarios Split Screen: N = 10 vs N = 10,000 */}
         <div
           style={{
+            opacity: comparisonEntrance,
+            transform: `translateY(${(1 - comparisonEntrance) * 20}px)`,
             width: '100%',
             maxWidth: 2200,
-            display: 'flex',
-            justifyContent: 'space-between',
-            marginBottom: 20,
-            padding: '0 80px',
-            boxSizing: 'border-box',
+            display: 'grid',
+            gridTemplateColumns: '1fr 1fr',
+            gap: 40,
           }}
         >
-          {/* Left: Chaotic Noise Box */}
-          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 12 }}>
-            <PlaceholderBox width={340} height={60} variant="card" accent="coral" glow>
-              <div style={{ width: '50%', height: 16, backgroundColor: THEME.colors.warmCoral, borderRadius: 4 }} />
-            </PlaceholderBox>
-            <div style={{ width: 120, height: 10, backgroundColor: 'rgba(255, 123, 84, 0.3)', borderRadius: 5 }} />
-          </div>
-
-          {/* Right: Dense Informative Box */}
-          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 12 }}>
-            <PlaceholderBox width={340} height={60} variant="card" accent="blue" glow>
-              <div style={{ width: '65%', height: 16, backgroundColor: THEME.colors.electricBlue, borderRadius: 4 }} />
-            </PlaceholderBox>
-            <div style={{ width: 120, height: 10, backgroundColor: 'rgba(78, 168, 222, 0.3)', borderRadius: 5 }} />
-          </div>
-        </div>
-
-        {/* THE GLOWING FUNNEL AND FLOWING PARTICLES */}
-        <div
-          style={{
-            position: 'relative',
-            width: 1400,
-            height: 700,
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center',
-          }}
-        >
-          {/* SVG Vector Funnel */}
-          <svg
-            width="1400"
-            height="700"
-            viewBox="0 0 1400 700"
-            style={{ position: 'absolute', inset: 0, overflow: 'visible' }}
-          >
-            <defs>
-              <linearGradient id="funnel-grad" x1="0%" y1="0%" x2="0%" y2="100%">
-                <stop offset="0%" stopColor="rgba(78, 168, 222, 0.3)" />
-                <stop offset="60%" stopColor="rgba(78, 168, 222, 0.15)" />
-                <stop offset="100%" stopColor="rgba(78, 168, 222, 0.4)" />
-              </linearGradient>
-            </defs>
-
-            {/* Funnel Outline */}
-            <path
-              d="M 250 80 L 580 420 L 580 620 L 820 620 L 820 420 L 1150 80"
-              fill="url(#funnel-grad)"
-              stroke={THEME.colors.electricBlue}
-              strokeWidth="4"
-              strokeLinejoin="round"
-              filter="drop-shadow(0 0 25px rgba(78, 168, 222, 0.4))"
-            />
-
-            {/* Stream guide tracks */}
-            <path
-              d="M 280 80 Q 450 300 650 480"
-              fill="none"
-              stroke="rgba(255, 123, 84, 0.25)"
-              strokeWidth="2"
-              strokeDasharray="6 6"
-            />
-            <path
-              d="M 1120 80 Q 950 300 750 480"
-              fill="none"
-              stroke="rgba(78, 168, 222, 0.35)"
-              strokeWidth="3"
-              strokeDasharray="6 6"
-            />
-
-            {/* Chaotic Noise Particles (Left stream - dissipated) */}
-            {noisyParticles.map((p) => {
-              const flowT = ((frame * p.speed + p.offset) % 100) / 100;
-              // Noise particles scatter and lose energy near funnel
-              const curX = 280 + flowT * 320 + p.jitterX * (1 - flowT);
-              const curY = 80 + flowT * 340 + p.jitterY * (1 - flowT);
-              const opacity = flowT > 0.75 ? (1 - flowT) * 4 : 0.8;
-
-              return (
-                <circle
-                  key={`noise-${p.id}`}
-                  cx={curX}
-                  cy={curY}
-                  r={3.5}
-                  fill={THEME.colors.warmCoral}
-                  opacity={opacity}
-                  filter="drop-shadow(0 0 6px rgba(255,123,84,0.6))"
-                />
-              );
-            })}
-
-            {/* Dense Stable Particles (Right stream - passes through) */}
-            {denseParticles.map((p) => {
-              const flowT = ((frame * p.speed + p.offset) % 100) / 100;
-              // Dense stream stays tight along curve into the neck
-              const curX = 1120 - flowT * 400 + Math.sin(flowT * Math.PI) * 15;
-              const curY = 80 + flowT * 500;
-              return (
-                <circle
-                  key={`dense-${p.id}`}
-                  cx={curX}
-                  cy={curY}
-                  r={5}
-                  fill={THEME.colors.electricBlue}
-                  opacity={0.9}
-                  filter="drop-shadow(0 0 8px #4EA8DE)"
-                />
-              );
-            })}
-
-            {/* Output Gauge at Funnel Neck */}
-            <circle cx="700" cy="540" r="45" fill="rgba(13, 27, 42, 0.9)" stroke={THEME.colors.electricBlue} strokeWidth="3" />
-            <line
-              x1="700"
-              y1="540"
-              x2={700 + Math.sin((needleAngle * Math.PI) / 180) * 35}
-              y2={540 - Math.cos((needleAngle * Math.PI) / 180) * 35}
-              stroke={THEME.colors.electricBlue}
-              strokeWidth="4"
-              strokeLinecap="round"
-            />
-          </svg>
-        </div>
-
-        {/* Bottom Badge: "MATH CALCULATES AUTOMATICALLY" */}
-        <div style={{ marginTop: 30, display: 'flex', alignItems: 'center', gap: 20 }}>
-          {/* Vector gear / calculation icon */}
+          {/* SCENARIO A: SMALL SAMPLE N = 10 */}
           <div
             style={{
-              width: 52,
-              height: 52,
-              borderRadius: 14,
-              backgroundColor: 'rgba(78, 168, 222, 0.15)',
-              border: `2px solid ${THEME.colors.electricBlue}`,
+              borderRadius: 18,
+              backgroundColor: 'rgba(21, 29, 46, 0.8)',
+              border: '1px solid rgba(249, 115, 22, 0.3)',
+              padding: 36,
               display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              transform: `rotate(${frame * 1.5}deg)`,
+              flexDirection: 'column',
+              boxShadow: '0 20px 40px rgba(0,0,0,0.4)',
             }}
           >
-            <svg width="28" height="28" viewBox="0 0 24 24" fill="none">
-              <circle cx="12" cy="12" r="3" stroke={THEME.colors.electricBlue} strokeWidth="2" />
-              <path
-                d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"
-                stroke={THEME.colors.electricBlue}
-                strokeWidth="2"
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+              <span
+                style={{
+                  fontSize: 12,
+                  fontFamily: 'JetBrains Mono, monospace',
+                  padding: '4px 10px',
+                  borderRadius: 4,
+                  backgroundColor: 'rgba(249, 115, 22, 0.1)',
+                  color: THEME.colors.amber,
+                  fontWeight: 600,
+                }}
+              >
+                СЦЕНАРИЙ А // МАЛАЯ ВЫБОРКА
+              </span>
+              <span style={{ fontSize: 14, fontFamily: 'JetBrains Mono, monospace', color: THEME.colors.amber, fontWeight: 700 }}>
+                N = 10 ГОЛОСОВ
+              </span>
+            </div>
+
+            <div style={{ fontSize: 20, fontWeight: 700, color: THEME.colors.textPrimary, marginTop: 14 }}>
+              Доминирует априорная оценка (85%)
+            </div>
+            <div style={{ fontSize: 14, color: THEME.colors.textSecondary, marginTop: 6, lineHeight: 1.5 }}>
+              Случайные 10 оценок не могут разрушить репутацию трансляции. Система страхует от локального троллинга и скачков.
+            </div>
+
+            <div style={{ marginTop: 24, display: 'flex', justifyContent: 'center' }}>
+              <BellCurve
+                width={700}
+                height={240}
+                mean={0.52}
+                stdDev={0.21}
+                color={THEME.colors.amber}
+                priorOutline={{ mean: 0.5, stdDev: 0.22 }}
+                showConfidenceInterval
+                label="Широкий доверительный интервал // Вес данных мал"
               />
-            </svg>
+            </div>
           </div>
 
-          <PlaceholderBox width={460} height={56} variant="card" accent="blue" glow cornerMarks>
-            <div style={{ width: '70%', height: 16, backgroundColor: THEME.colors.electricBlue, borderRadius: 4 }} />
-          </PlaceholderBox>
+          {/* SCENARIO B: LARGE SAMPLE N = 10,000 */}
+          <div
+            style={{
+              borderRadius: 18,
+              backgroundColor: 'rgba(21, 29, 46, 0.8)',
+              border: '1px solid rgba(56, 189, 248, 0.4)',
+              padding: 36,
+              display: 'flex',
+              flexDirection: 'column',
+              boxShadow: '0 20px 40px rgba(0,0,0,0.4)',
+            }}
+          >
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+              <span
+                style={{
+                  fontSize: 12,
+                  fontFamily: 'JetBrains Mono, monospace',
+                  padding: '4px 10px',
+                  borderRadius: 4,
+                  backgroundColor: 'rgba(56, 189, 248, 0.12)',
+                  color: THEME.colors.cobalt,
+                  fontWeight: 600,
+                }}
+              >
+                СЦЕНАРИЙ Б // МАССОВЫЙ ЭФИР
+              </span>
+              <span style={{ fontSize: 14, fontFamily: 'JetBrains Mono, monospace', color: THEME.colors.cobalt, fontWeight: 700 }}>
+                N = 10 000 ГОЛОСОВ
+              </span>
+            </div>
+
+            <div style={{ fontSize: 20, fontWeight: 700, color: THEME.colors.textPrimary, marginTop: 14 }}>
+              Доминируют свежие данные (98%)
+            </div>
+            <div style={{ fontSize: 14, color: THEME.colors.textSecondary, marginTop: 6, lineHeight: 1.5 }}>
+              Огромная масса наблюдений сжимает неопределённость до минимума. Рейтинг точно следует за мнением многотысячной аудитории.
+            </div>
+
+            <div style={{ marginTop: 24, display: 'flex', justifyContent: 'center' }}>
+              <BellCurve
+                width={700}
+                height={240}
+                mean={0.68}
+                stdDev={0.06}
+                color={THEME.colors.cobalt}
+                priorOutline={{ mean: 0.5, stdDev: 0.22 }}
+                showConfidenceInterval
+                label="Узкий доверительный интервал // Максимальная точность"
+              />
+            </div>
+          </div>
         </div>
       </div>
     </div>

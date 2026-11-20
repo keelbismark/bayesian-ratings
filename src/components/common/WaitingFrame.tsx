@@ -9,6 +9,7 @@ interface WaitingFrameProps {
 
 export const WaitingFrame: React.FC<WaitingFrameProps> = ({
   durationInFrames = 150,
+  title = 'ИНТЕРАКТИВНАЯ ПАУЗА ДЛЯ РАЗМЫШЛЕНИЯ',
 }) => {
   const frame = useCurrentFrame();
 
@@ -16,7 +17,7 @@ export const WaitingFrame: React.FC<WaitingFrameProps> = ({
     return null;
   }
 
-  // Smooth fade-in and fade-out of the waiting frame
+  // Smooth fade-in and fade-out
   const opacity = interpolate(
     frame,
     [0, 15, durationInFrames - 15, durationInFrames],
@@ -24,17 +25,12 @@ export const WaitingFrame: React.FC<WaitingFrameProps> = ({
     { extrapolateLeft: 'clamp', extrapolateRight: 'clamp' }
   );
 
-  // Gentle pulsing glow
-  const pulse = interpolate(
-    Math.sin((frame * Math.PI * 2) / 30),
-    [-1, 1],
-    [0.75, 1.1]
-  );
-
-  // Progress of the 5-second checkpoint (0 to 1)
-  const progress = interpolate(frame, [0, durationInFrames], [0, 1], {
+  // Remaining progress (1 to 0)
+  const remaining = interpolate(frame, [0, durationInFrames], [1, 0], {
     extrapolateRight: 'clamp',
   });
+
+  const secondsLeft = Math.max(1, Math.ceil(((durationInFrames - frame) / 30)));
 
   return (
     <div
@@ -46,19 +42,18 @@ export const WaitingFrame: React.FC<WaitingFrameProps> = ({
         opacity,
       }}
     >
-      {/* Outer pulsing checkpoint boundary */}
+      {/* Precision hairline frame around canvas */}
       <div
         style={{
           position: 'absolute',
-          inset: 32,
-          borderRadius: 28,
-          border: `3px solid ${THEME.colors.electricBlue}`,
-          boxShadow: `0 0 ${40 * pulse}px ${THEME.colors.electricBlueGlow}, inset 0 0 ${30 * pulse}px ${THEME.colors.electricBlueSubtle}`,
-          transition: 'box-shadow 0.1s ease',
+          inset: 36,
+          borderRadius: 20,
+          border: '1px solid rgba(56, 189, 248, 0.3)',
+          boxShadow: 'inset 0 0 40px rgba(0, 0, 0, 0.4)',
         }}
       />
 
-      {/* Top indicator badge: Interactive checkpoint placeholder */}
+      {/* Top Editorial Status Pill */}
       <div
         style={{
           position: 'absolute',
@@ -67,71 +62,71 @@ export const WaitingFrame: React.FC<WaitingFrameProps> = ({
           transform: 'translateX(-50%)',
           display: 'flex',
           alignItems: 'center',
-          gap: 16,
-          padding: '12px 28px',
+          gap: 18,
+          padding: '10px 24px',
           borderRadius: 9999,
-          backgroundColor: 'rgba(13, 27, 42, 0.9)',
-          border: `2px solid ${THEME.colors.electricBlue}`,
-          boxShadow: `0 0 24px ${THEME.colors.electricBlueGlow}`,
+          backgroundColor: '#0F1626',
+          border: '1px solid rgba(255, 255, 255, 0.12)',
+          boxShadow: '0 8px 30px rgba(0, 0, 0, 0.5)',
+          fontFamily: 'Inter, system-ui, sans-serif',
         }}
       >
-        {/* Pulsing indicator dot */}
+        {/* Pulsing subtle dot */}
         <div
           style={{
-            width: 14,
-            height: 14,
+            width: 8,
+            height: 8,
             borderRadius: '50%',
-            backgroundColor: THEME.colors.warmCoral,
-            boxShadow: `0 0 16px ${THEME.colors.warmCoralGlow}`,
-            transform: `scale(${pulse})`,
+            backgroundColor: THEME.colors.amber,
           }}
         />
 
-        {/* 5-sec progress bar pill */}
+        <span
+          style={{
+            fontSize: 14,
+            fontWeight: 600,
+            letterSpacing: 2,
+            color: THEME.colors.textPrimary,
+            textTransform: 'uppercase',
+          }}
+        >
+          {title}
+        </span>
+
+        {/* Seconds countdown badge */}
+        <span
+          style={{
+            fontSize: 13,
+            fontWeight: 700,
+            color: THEME.colors.cobalt,
+            fontFamily: 'JetBrains Mono, monospace',
+            padding: '2px 8px',
+            borderRadius: 6,
+            backgroundColor: 'rgba(56, 189, 248, 0.12)',
+            border: '1px solid rgba(56, 189, 248, 0.25)',
+          }}
+        >
+          0{secondsLeft}s
+        </span>
+
+        {/* Progress line */}
         <div
           style={{
-            width: 160,
-            height: 8,
-            borderRadius: 4,
-            backgroundColor: 'rgba(255, 255, 255, 0.15)',
+            width: 100,
+            height: 4,
+            borderRadius: 2,
+            backgroundColor: 'rgba(255, 255, 255, 0.1)',
             overflow: 'hidden',
           }}
         >
           <div
             style={{
-              width: `${(1 - progress) * 100}%`,
+              width: `${remaining * 100}%`,
               height: '100%',
-              backgroundColor: THEME.colors.electricBlue,
-              boxShadow: `0 0 10px ${THEME.colors.electricBlue}`,
+              backgroundColor: THEME.colors.cobalt,
             }}
           />
         </div>
-      </div>
-
-      {/* Corner bracket accents */}
-      <div
-        style={{
-          position: 'absolute',
-          bottom: 56,
-          right: 56,
-          display: 'flex',
-          alignItems: 'center',
-          gap: 12,
-          padding: '10px 20px',
-          borderRadius: 12,
-          backgroundColor: 'rgba(13, 27, 42, 0.8)',
-          border: `1.5px solid ${THEME.colors.electricBlueSubtle}`,
-        }}
-      >
-        <div
-          style={{
-            width: 100,
-            height: 12,
-            borderRadius: 6,
-            background: `linear-gradient(90deg, ${THEME.colors.electricBlue} 0%, transparent 100%)`,
-            opacity: 0.7,
-          }}
-        />
       </div>
     </div>
   );

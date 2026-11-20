@@ -4,38 +4,41 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Байесовское обновление для оценки рейтингов в прямом эфире</title>
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎬</text></svg>">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📊</text></svg>">
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
   <style>
     body {
-      background-color: #0D1B2A;
-      color: #E2E8F0;
+      background-color: #0A0E17;
+      color: #F8FAFC;
       font-family: 'Inter', system-ui, sans-serif;
     }
-    .player-shadow {
-      box-shadow: 0 0 50px rgba(78, 168, 222, 0.25), 0 25px 60px rgba(0, 0, 0, 0.8);
+    .player-frame {
+      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.7), 0 0 0 1px rgba(255, 255, 255, 0.08);
     }
   </style>
 </head>
-<body class="min-h-screen flex flex-col items-center justify-between p-4 sm:p-8 antialiased selection:bg-[#4EA8DE] selection:text-[#0D1B2A]">
+<body class="min-h-screen flex flex-col items-center justify-between p-4 sm:p-8 antialiased selection:bg-[#38BDF8] selection:text-[#0A0E17]">
 
-  <!-- COMPACT HEADER -->
-  <header class="w-full max-w-5xl text-center space-y-2 pt-2 pb-6">
-    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#132238] border border-[#4EA8DE]/30 text-xs font-mono text-[#4EA8DE]">
-      <span class="w-2 h-2 rounded-full bg-[#FF7B54] animate-pulse"></span>
-      16:9 • 4K Motion Design • Байесовские сети
+  <!-- EDITORIAL HEADER -->
+  <header class="w-full max-w-5xl text-center space-y-3 pt-2 pb-6">
+    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-[#111726] border border-white/10 text-xs font-mono text-[#38BDF8]">
+      <span class="w-2 h-2 rounded-full bg-[#F97316]"></span>
+      EDITORIAL MOTION DESIGN • 1080P • 05:00 MIN
     </div>
     <h1 class="text-xl sm:text-3xl font-bold text-white tracking-tight">
       Байесовское обновление для оценки рейтингов в прямом эфире
     </h1>
+    <p class="text-xs sm:text-sm text-slate-400 font-mono">
+      Математическая модель фильтрации шума и взвешивания оценок в реальном времени
+    </p>
   </header>
 
   <!-- MAIN VIDEO PLAYER -->
   <main class="w-full max-w-5xl flex flex-col items-center space-y-6">
-    <div class="w-full aspect-video rounded-2xl overflow-hidden border border-[#4EA8DE]/40 bg-black player-shadow relative group">
+    <div class="w-full aspect-video rounded-xl overflow-hidden bg-black player-frame relative group">
       <video
         id="mainVideo"
         controls
@@ -45,37 +48,37 @@
         poster="scene1.png"
         class="w-full h-full object-contain bg-black"
       >
-        <source src="bayesian_5min.mp4?v=final5min" type="video/mp4" />
-        <source src="video.mp4?v=final5min" type="video/mp4" />
+        <source src="bayesian_5min.mp4?v=editorial_v3" type="video/mp4" />
+        <source src="video.mp4?v=editorial_v3" type="video/mp4" />
         Ваш браузер не поддерживает встроенное видео.
       </video>
     </div>
 
     <!-- STATUS & DOWNLOAD BUTTONS -->
-    <div class="w-full flex flex-col items-center gap-3 pt-2">
-      <div id="videoInfo" class="text-xs font-mono text-slate-300 bg-[#132238] px-3.5 py-1.5 rounded-lg border border-[#4EA8DE]/30">
-        ⏱ Хронометраж: <span id="durationDisplay" class="text-[#4EA8DE] font-semibold">05:00 мин</span> (9000 кадров • 30 fps)
+    <div class="w-full flex flex-col items-center gap-4 pt-2">
+      <div id="videoInfo" class="text-xs font-mono text-slate-400 bg-[#111726] px-4 py-2 rounded-lg border border-white/10">
+        ⏱ Хронометраж: <span id="durationDisplay" class="text-[#38BDF8] font-semibold">05:00 мин</span> • 9000 кадров • 30 fps
       </div>
 
       <div class="flex flex-wrap items-center justify-center gap-4">
         <!-- Download Video MP4 -->
         <a
           id="downloadVideoBtn"
-          href="bayesian_5min.mp4?v=final5min"
+          href="bayesian_5min.mp4?v=editorial_v3"
           download="bayesian_ratings_5min.mp4"
-          class="inline-flex items-center gap-2.5 px-6 py-3.5 rounded-xl font-semibold text-sm bg-[#4EA8DE] text-[#0D1B2A] hover:bg-[#4EA8DE]/90 transition shadow-[0_0_25px_rgba(78,168,222,0.4)]"
+          class="inline-flex items-center gap-2.5 px-6 py-3 rounded-lg font-semibold text-sm bg-[#38BDF8] text-[#0A0E17] hover:bg-[#38BDF8]/90 transition"
         >
           <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
           </svg>
-          Скачать полное видео 5:00 (MP4, 50 MB)
+          Скачать видео (MP4, 5:00)
         </a>
 
         <!-- Download Audio MP3 -->
         <a
           href="ambient.mp3"
           download="bayesian_ambient_soundtrack.mp3"
-          class="inline-flex items-center gap-2 px-5 py-3.5 rounded-xl font-medium text-sm bg-[#132238] hover:bg-[#1B2E4B] border border-[#FF7B54]/40 text-[#FF7B54] transition"
+          class="inline-flex items-center gap-2 px-5 py-3 rounded-lg font-medium text-sm bg-[#111726] hover:bg-[#162033] border border-white/10 text-slate-300 transition"
         >
           <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2z" />
@@ -84,6 +87,96 @@
         </a>
       </div>
     </div>
+
+    <!-- KEY EDITORIAL FRAMES SHOWCASE -->
+    <section class="w-full max-w-5xl pt-10 space-y-4">
+      <div class="flex items-center justify-between border-b border-white/10 pb-3">
+        <div class="space-y-1">
+          <div class="text-xs font-mono text-[#38BDF8] uppercase tracking-wider">Preview Gallery</div>
+          <h2 class="text-lg sm:text-xl font-bold text-white tracking-tight">Ключевые кадры нового оформления</h2>
+        </div>
+        <div class="text-xs font-mono text-slate-400">7 ключевых сцен</div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-5 pt-2">
+        <!-- Frame 1 -->
+        <div class="rounded-xl overflow-hidden bg-[#111726] border border-white/10 group shadow-lg">
+          <div class="aspect-video relative overflow-hidden bg-black">
+            <img src="frame_scene1.png" alt="Сцена 1: Пульт управления" class="w-full h-full object-cover group-hover:scale-105 transition duration-300" />
+          </div>
+          <div class="p-4 space-y-1">
+            <div class="text-xs font-mono text-[#38BDF8]">СЦЕНА 01 (00:00 - 00:40)</div>
+            <div class="text-sm font-semibold text-white">Пульт аналитики прямого эфира и траектория сходимости</div>
+          </div>
+        </div>
+
+        <!-- Frame 2 -->
+        <div class="rounded-xl overflow-hidden bg-[#111726] border border-white/10 group shadow-lg">
+          <div class="aspect-video relative overflow-hidden bg-black">
+            <img src="frame_scene2.png" alt="Сцена 2: Две ловушки" class="w-full h-full object-cover group-hover:scale-105 transition duration-300" />
+          </div>
+          <div class="p-4 space-y-1">
+            <div class="text-xs font-mono text-[#F97316]">СЦЕНА 02 (00:40 - 01:20)</div>
+            <div class="text-sm font-semibold text-white">Две ловушки: паника на шуме против слепой инерции</div>
+          </div>
+        </div>
+
+        <!-- Frame 3 -->
+        <div class="rounded-xl overflow-hidden bg-[#111726] border border-white/10 group shadow-lg">
+          <div class="aspect-video relative overflow-hidden bg-black">
+            <img src="frame_scene3.png" alt="Сцена 3: Три шага" class="w-full h-full object-cover group-hover:scale-105 transition duration-300" />
+          </div>
+          <div class="p-4 space-y-1">
+            <div class="text-xs font-mono text-[#38BDF8]">СЦЕНА 03 (01:20 - 02:00)</div>
+            <div class="text-sm font-semibold text-white">Три шага: Априор → Правдоподобие → Апостериор</div>
+          </div>
+        </div>
+
+        <!-- Frame 4 -->
+        <div class="rounded-xl overflow-hidden bg-[#111726] border border-white/10 group shadow-lg">
+          <div class="aspect-video relative overflow-hidden bg-black">
+            <img src="frame_scene4.png" alt="Сцена 4: Формула" class="w-full h-full object-cover group-hover:scale-105 transition duration-300" />
+          </div>
+          <div class="p-4 space-y-1">
+            <div class="text-xs font-mono text-[#38BDF8]">СЦЕНА 04 (02:00 - 02:35)</div>
+            <div class="text-sm font-semibold text-white">Математическая формула байесовского взвешивания</div>
+          </div>
+        </div>
+
+        <!-- Frame 5 -->
+        <div class="rounded-xl overflow-hidden bg-[#111726] border border-white/10 group shadow-lg">
+          <div class="aspect-video relative overflow-hidden bg-black">
+            <img src="frame_scene5.png" alt="Сцена 5: Масштаб выборки" class="w-full h-full object-cover group-hover:scale-105 transition duration-300" />
+          </div>
+          <div class="p-4 space-y-1">
+            <div class="text-xs font-mono text-[#38BDF8]">СЦЕНА 05 (02:35 - 03:00)</div>
+            <div class="text-sm font-semibold text-white">Автоматическое взвешивание: N = 10 против N = 10 000</div>
+          </div>
+        </div>
+
+        <!-- Frame 7 -->
+        <div class="rounded-xl overflow-hidden bg-[#111726] border border-white/10 group shadow-lg">
+          <div class="aspect-video relative overflow-hidden bg-black">
+            <img src="frame_scene7.png" alt="Сцена 7: Практика" class="w-full h-full object-cover group-hover:scale-105 transition duration-300" />
+          </div>
+          <div class="p-4 space-y-1">
+            <div class="text-xs font-mono text-[#38BDF8]">СЦЕНА 07 (03:45 - 04:30)</div>
+            <div class="text-sm font-semibold text-white">Практический результат: стабильный коридор рейтинга</div>
+          </div>
+        </div>
+
+        <!-- Frame 8 -->
+        <div class="rounded-xl overflow-hidden bg-[#111726] border border-white/10 group shadow-lg md:col-span-2">
+          <div class="aspect-video relative overflow-hidden bg-black max-h-[380px]">
+            <img src="frame_scene8.png" alt="Сцена 8: Финал" class="w-full h-full object-cover group-hover:scale-105 transition duration-300" />
+          </div>
+          <div class="p-4 space-y-1">
+            <div class="text-xs font-mono text-[#38BDF8]">СЦЕНА 08 (04:30 - 05:00)</div>
+            <div class="text-sm font-semibold text-white">Итоговое заключение и титры создателей</div>
+          </div>
+        </div>
+      </div>
+    </section>
   </main>
 
   <!-- FOOTER CREDITS -->
@@ -91,11 +184,11 @@
     <div class="text-xs font-mono uppercase tracking-wider text-slate-400">Над проектом работали</div>
     <div class="text-sm font-semibold text-white flex flex-wrap justify-center gap-4">
       <span>Голомидова Женя</span>
-      <span class="text-[#4EA8DE]">•</span>
+      <span class="text-[#38BDF8]">•</span>
       <span>Селиванов Илья</span>
-      <span class="text-[#4EA8DE]">•</span>
+      <span class="text-[#38BDF8]">•</span>
       <span>Константин Толов</span>
-      <span class="text-[#4EA8DE]">•</span>
+      <span class="text-[#38BDF8]">•</span>
       <span>Фураев Никита</span>
     </div>
   </footer>
